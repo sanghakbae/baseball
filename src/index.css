@@ -223,9 +223,7 @@ tbody tr.is-lee .sticky, tbody tr.is-lee .sticky2 { background: #2a2a1f; }
 .p-avg-val { font-size: 30px; font-weight: 800; font-variant-numeric: tabular-nums; }
 .left .p-avg-val { color: var(--lee); }
 .right .p-avg-val { color: var(--opp); }
-.p-avg-lbl { font-size: 10px; letter-spacing: 1px; color: var(--muted); }
-.p-slash { font-size: 11px; font-variant-numeric: tabular-nums; display: flex; flex-direction: column; gap: 2px; }
-.p-slash-lbl { font-size: 9px; color: var(--muted); }
+.p-slash { font-size: 11px; font-variant-numeric: tabular-nums; }
 
 /* ---- stat rows ---- */
 .stat-rows { background: var(--bg-soft); border: 1px solid var(--border); border-radius: 7px; padding: 4px 5px; }
