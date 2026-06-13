@@ -239,6 +239,7 @@ tbody tr.is-lee .sticky, tbody tr.is-lee .sticky2 { background: #2a2a1f; }
 .stat-label { color: var(--muted); font-size: 10.5px; }
 .val { font-variant-numeric: tabular-nums; font-weight: 600; font-size: 13px; }
 .val.win { color: var(--win); }
+.stat-rk { font-size: 9px; font-weight: 600; color: var(--lee); margin-left: 3px; vertical-align: middle; }
 .val.win::after { content: '▲'; font-size: 7px; margin-left: 3px; vertical-align: middle; }
 
 /* ---- 이정후 코스별 핫/콜드존 ---- */

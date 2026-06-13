@@ -76,8 +76,7 @@ export default function App() {
 /* ---------- 방문자 수 (Firestore 저장·실시간) ---------- */
 function Visitors() {
   const count = useVisitors()
-  const n = count == null ? 0 : count
-  const text = String(n).padStart(5, '0').replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+  const text = count == null ? '—' : count.toLocaleString()
   return (
     <span className="visitors" title="누적 방문자 수">
       👁 {text}
@@ -283,10 +282,26 @@ function Leaderboard({ players, season }) {
 }
 
 /* ---------- 이정후 비교 탭 ---------- */
+// (N위) 배지를 붙일 스탯 — 높을수록 좋은 항목 (AVG는 '타율 순위' 행과 중복이라 제외)
+const RANKED_STATS = ['R', 'H', 'B2', 'B3', 'HR', 'RBI', 'SB', 'BB', 'OBP', 'SLG', 'OPS']
+
 function Compare({ players }) {
   const lee = players.find(isLee)
   const top5 = players.filter((p) => p !== lee).slice(0, 5)
   const [oppId, setOppId] = useState(top5[0]?.id)
+
+  // 스탯별 MLB 순위(전체 규정타자 기준, 내림차순) — 선수ID → 순위
+  const ranks = useMemo(() => {
+    const map = {}
+    for (const key of RANKED_STATS) {
+      const sorted = [...players].sort((x, y) => (y[key] ?? -Infinity) - (x[key] ?? -Infinity))
+      const m = {}
+      sorted.forEach((p, i) => { m[p.id] = i + 1 })
+      map[key] = m
+    }
+    return map
+  }, [players])
+
   const opponent = useMemo(
     () => top5.find((p) => p.id === oppId) ?? top5[0],
     [oppId, top5],
@@ -324,7 +339,14 @@ function Compare({ players }) {
             <span>{opponent.name}</span>
           </div>
           {STAT_KEYS.map((s) => (
-            <StatRow key={s.key} s={s} a={lee[s.key]} b={opponent[s.key]} />
+            <StatRow
+              key={s.key}
+              s={s}
+              a={lee[s.key]}
+              b={opponent[s.key]}
+              aRank={ranks[s.key]?.[lee.id]}
+              bRank={ranks[s.key]?.[opponent.id]}
+            />
           ))}
         </div>
       </div>
@@ -340,11 +362,9 @@ function PlayerColumn({ player, side }) {
       <p className="p-meta">{player.team}{player.pos ? ` · ${player.pos}` : ''}</p>
       <div className="p-avg">
         <span className="p-avg-val">{avg3(player.AVG)}</span>
-        <span className="p-avg-lbl">AVG</span>
       </div>
       <div className="p-slash">
         {avg3(player.OBP)} / {avg3(player.SLG)} / {avg3(player.OPS)}
-        <span className="p-slash-lbl">OBP / SLG / OPS</span>
       </div>
     </div>
   )
@@ -591,17 +611,18 @@ function LeeZone({ players, season }) {
   )
 }
 
-function StatRow({ s, a, b }) {
+function StatRow({ s, a, b, aRank, bRank }) {
   const compare = HIGHER_IS_BETTER.includes(s.key)
     ? (a > b ? 'left' : b > a ? 'right' : 'tie')
     : s.key === 'SO'
       ? (a < b ? 'left' : b < a ? 'right' : 'tie')
       : 'none'
+  const badge = (rank) => (rank && rank <= 10 ? <small className="stat-rk">({rank}위)</small> : null)
   return (
     <div className="stat-row">
-      <span className={`val ${compare === 'left' ? 'win' : ''}`}>{fmt(s.key, a)}</span>
+      <span className={`val ${compare === 'left' ? 'win' : ''}`}>{fmt(s.key, a)}{badge(aRank)}</span>
       <span className="stat-label">{s.label}</span>
-      <span className={`val ${compare === 'right' ? 'win' : ''}`}>{fmt(s.key, b)}</span>
+      <span className={`val ${compare === 'right' ? 'win' : ''}`}>{fmt(s.key, b)}{badge(bRank)}</span>
     </div>
   )
 }
