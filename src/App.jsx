@@ -244,13 +244,13 @@ function Compare({ players }) {
   return (
     <section className="card-section">
       <div className="opponent-picker">
-        {top5.map((p) => (
+        {top5.map((p, i) => (
           <button
             key={p.id}
             className={`chip ${p.id === opponent.id ? 'active' : ''}`}
             onClick={() => setOppId(p.id)}
           >
-            <span className="chip-rank">{p.rank}위</span>
+            <span className="chip-rank">{i + 1}위</span>
             <span className="chip-name">{p.name}</span>
             <span className="chip-avg">{avg3(p.AVG)}</span>
           </button>
