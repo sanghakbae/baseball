@@ -115,7 +115,7 @@ html, body {
 .sec-title { margin: 0 0 3px; font-size: 16px; }
 .sec-desc { color: var(--muted); margin: 0 0 10px; font-size: 10.5px; line-height: 1.4; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .empty { color: var(--muted); text-align: center; padding: 40px 10px; font-size: 13px; line-height: 1.6; }
-.empty code { background: var(--bg-soft); padding: 2px 6px; border-radius: 5px; }
+.empty code { background: var(--bg-soft); padding: 2px 6px; border-radius: 3px; }
 
 /* ---- prediction list ---- */
 .pred-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 5px; }
@@ -126,7 +126,7 @@ html, body {
   gap: 8px;
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 11px;
+  border-radius: 6px;
   padding: 4px 10px;
 }
 .pred-row.is-lee { border-color: var(--lee); background: rgba(246, 196, 69, 0.09); }
@@ -147,7 +147,7 @@ html, body {
 .pred-detail b { color: var(--text); }
 
 /* ---- rank chart ---- */
-.rank-chart { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 6px 8px 2px; margin-bottom: 12px; }
+.rank-chart { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 6px 8px 2px; margin-bottom: 12px; }
 .rank-chart.empty-chart { padding: 16px 12px; text-align: center; color: var(--muted); font-size: 12px; }
 .ch-axis { fill: var(--muted); font-size: 8px; }
 .ch-name { font-size: 8.5px; font-weight: 700; }
@@ -157,7 +157,7 @@ html, body {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   border: 1px solid var(--border);
-  border-radius: 14px;
+  border-radius: 7px;
 }
 table { border-collapse: collapse; width: 100%; font-size: 11.5px; }
 th, td { padding: 5px 6px; text-align: center; white-space: nowrap; font-variant-numeric: tabular-nums; }
@@ -183,7 +183,7 @@ tbody tr.is-lee .sticky, tbody tr.is-lee .sticky2 { background: #2a2a1f; }
   padding: 7px 4px;
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 11px;
+  border-radius: 6px;
   color: var(--text);
   cursor: pointer;
   transition: all 0.15s ease;
@@ -202,7 +202,7 @@ tbody tr.is-lee .sticky, tbody tr.is-lee .sticky2 { background: #2a2a1f; }
 .player-card {
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 14px;
+  border-radius: 7px;
   padding: 6px 8px;
   text-align: center;
   position: relative;
@@ -228,13 +228,13 @@ tbody tr.is-lee .sticky, tbody tr.is-lee .sticky2 { background: #2a2a1f; }
 .p-slash-lbl { font-size: 9px; color: var(--muted); }
 
 /* ---- stat rows ---- */
-.stat-rows { background: var(--bg-soft); border: 1px solid var(--border); border-radius: 14px; padding: 4px 5px; }
+.stat-rows { background: var(--bg-soft); border: 1px solid var(--border); border-radius: 7px; padding: 4px 5px; }
 .stat-head, .stat-row { display: grid; grid-template-columns: 1fr 1.1fr 1fr; align-items: center; text-align: center; }
 .stat-head { padding: 4px 4px 6px; font-weight: 700; font-size: 12px; border-bottom: 1px solid var(--border); margin-bottom: 2px; }
 .stat-head span:first-child { color: var(--lee); }
 .stat-head span:last-child { color: var(--opp); }
 .stat-label-head { color: var(--muted); font-size: 10px; }
-.stat-row { padding: 3px 4px; border-radius: 7px; }
+.stat-row { padding: 3px 4px; border-radius: 4px; }
 .stat-row:nth-child(odd) { background: rgba(255, 255, 255, 0.02); }
 .stat-label { color: var(--muted); font-size: 10.5px; }
 .val { font-variant-numeric: tabular-nums; font-weight: 600; font-size: 13px; }
@@ -244,7 +244,7 @@ tbody tr.is-lee .sticky, tbody tr.is-lee .sticky2 { background: #2a2a1f; }
 /* ---- 이정후 코스별 핫/콜드존 ---- */
 .metric-toggle { display: flex; gap: 6px; margin-bottom: 16px; }
 .mt {
-  flex: 1; padding: 7px; border-radius: 10px;
+  flex: 1; padding: 7px; border-radius: 5px;
   border: 1px solid var(--border); background: var(--card);
   color: var(--muted); font-size: 12px; font-weight: 600; cursor: pointer;
 }
@@ -274,14 +274,14 @@ tbody tr.is-lee .sticky, tbody tr.is-lee .sticky2 { background: #2a2a1f; }
   grid-template-rows: repeat(3, 1fr);
   gap: 3px;
   border: 2px solid rgba(255, 255, 255, 0.35);
-  border-radius: 6px;
+  border-radius: 3px;
   padding: 3px;
   aspect-ratio: 1 / 1;
 }
 .zcell {
   position: relative;
   display: flex; align-items: center; justify-content: center;
-  border-radius: 5px;
+  border-radius: 3px;
   font-variant-numeric: tabular-nums;
   min-height: 40px;
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -292,13 +292,52 @@ tbody tr.is-lee .sticky, tbody tr.is-lee .sticky2 { background: #2a2a1f; }
 .zmark { position: absolute; top: 1px; right: 2px; font-size: 11px; }
 
 .zone-summary { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.zs-col { background: var(--bg-soft); border: 1px solid var(--border); border-radius: 12px; padding: 10px 12px; }
+.zs-col { background: var(--bg-soft); border: 1px solid var(--border); border-radius: 6px; padding: 10px 12px; }
 .zs-col h3 { margin: 0 0 8px; font-size: 13px; }
 .zs-col.strong h3 { color: #ff6b6b; }
 .zs-col.weak h3 { color: #6ba8ff; }
 .zs-row { display: flex; justify-content: space-between; font-size: 12px; padding: 3px 0; color: var(--muted); }
 .zs-row b { color: var(--text); font-variant-numeric: tabular-nums; }
 .empty-mini { color: var(--muted); font-size: 12px; margin: 0; }
+
+/* ---- 응원 게시판 ---- */
+.cheer-form { display: flex; gap: 6px; margin-bottom: 10px; }
+.cheer-input {
+  flex: 1; min-width: 0;
+  background: var(--card); border: 1px solid var(--border); border-radius: 5px;
+  color: var(--text); font-size: 13px; padding: 7px 10px;
+}
+.cheer-input:focus { outline: none; border-color: var(--opp); }
+.cheer-input::placeholder { color: var(--muted); }
+.cheer-send {
+  flex: 0 0 auto; border: none; border-radius: 5px;
+  background: var(--opp); color: #06101f; font-weight: 700; font-size: 13px;
+  padding: 0 13px; cursor: pointer;
+}
+.cheer-send:disabled { opacity: 0.45; cursor: default; }
+.cheer-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 5px; }
+.cheer-empty { color: var(--muted); text-align: center; padding: 20px; font-size: 13px; }
+.cheer-item {
+  display: flex; align-items: center; gap: 9px;
+  background: var(--card); border: 1px solid var(--border); border-radius: 5px;
+  padding: 6px 10px;
+}
+.cheer-time {
+  flex: 0 0 auto; font-size: 10px; color: var(--muted);
+  background: var(--bg-soft); border: 1px solid var(--border);
+  padding: 2px 7px; border-radius: 999px; white-space: nowrap;
+}
+.cheer-text {
+  margin: 0; flex: 1; min-width: 0; font-size: 13.5px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.pager { display: flex; flex-wrap: wrap; gap: 5px; justify-content: center; margin-top: 12px; }
+.pg {
+  min-width: 28px; height: 28px; padding: 0 6px;
+  border: 1px solid var(--border); background: var(--card);
+  color: var(--muted); font-size: 12px; font-weight: 600; border-radius: 4px; cursor: pointer;
+}
+.pg.active { background: var(--opp); border-color: var(--opp); color: #06101f; }
 
 /* ---- footer ---- */
 .foot { margin-top: 14px; text-align: center; color: var(--muted); font-size: 10px; line-height: 1.6; opacity: 0.7; }

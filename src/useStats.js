@@ -1,28 +1,26 @@
 import { useEffect, useRef, useState } from 'react'
+import { collection, doc, limit, onSnapshot, orderBy, query, setDoc } from 'firebase/firestore'
 import { lee, top5 } from './data.js'
 import { fetchQualifiedBatters, fetchTeamGamesPlayed } from './lib/mlb.js'
+import { db } from './firebase.js'
 
 const LIVE_INTERVAL_MS = 60_000 // 실시간 폴링 주기 (경기 중 갱신)
-const HISTORY_KEY = 'baseball-rank-history-v1'
-const HISTORY_MAX = 240 // 최대 기록 포인트 수
+const HISTORY_MAX = 180 // 차트에 읽어올 최대 스냅샷 수
 const HISTORY_TRACK = 12 // 기록할 상위 선수 수
-const DEDUPE_MS = 45_000 // 직전 기록과 너무 가까우면 스킵
 
-function loadHistory() {
-  try {
-    const raw = localStorage.getItem(HISTORY_KEY)
-    const arr = raw ? JSON.parse(raw) : []
-    return Array.isArray(arr) ? arr : []
-  } catch { return [] }
+// 분 단위 문서 ID (같은 분의 기록은 같은 문서로 합쳐져 중복 방지)
+function minuteId(ms) {
+  const d = new Date(ms)
+  const p = (n) => String(n).padStart(2, '0')
+  return `${d.getUTCFullYear()}${p(d.getUTCMonth() + 1)}${p(d.getUTCDate())}${p(d.getUTCHours())}${p(d.getUTCMinutes())}`
 }
 
-// players(타율 내림차순, rank 부여됨) → 히스토리 포인트
+// players(타율 내림차순, rank 부여됨) → 순위 스냅샷 포인트
 function toPoint(players, isoTs) {
   const top = players.slice(0, HISTORY_TRACK)
   return {
     t: Date.parse(isoTs) || Date.now(),
-    r: Object.fromEntries(top.map((p) => [p.id, p.rank])),
-    a: Object.fromEntries(top.map((p) => [p.id, p.AVG])),
+    r: Object.fromEntries(top.map((p) => [String(p.id), p.rank])),
   }
 }
 
@@ -62,23 +60,42 @@ export function useStats() {
   const [live, setLive] = useState(false) // 실시간 폴링 활성 여부
   const [refreshing, setRefreshing] = useState(false)
   const [refreshedAt, setRefreshedAt] = useState(null)
-  const [history, setHistory] = useState(loadHistory) // 순위 변동 기록
+  const [history, setHistory] = useState([]) // Firestore 순위 변동 스냅샷
+  const lastMinuteRef = useRef(null)
 
   const seasonRef = useRef(2026)
   const workerRef = useRef(null)
   const timerRef = useRef(null)
   const busyRef = useRef(false)
 
-  // 새 포인트를 기록에 추가 (직전과 너무 가까우면 스킵, 최대 길이 제한, localStorage 저장)
+  // 순위 스냅샷을 Firestore에 기록 (분당 1회, 같은 분은 같은 문서로 합쳐짐)
   function pushHistory(point) {
-    setHistory((prev) => {
-      const last = prev[prev.length - 1]
-      if (last && point.t - last.t < DEDUPE_MS) return prev
-      const next = [...prev, point].slice(-HISTORY_MAX)
-      try { localStorage.setItem(HISTORY_KEY, JSON.stringify(next)) } catch {}
-      return next
-    })
+    const id = minuteId(point.t)
+    if (lastMinuteRef.current === id) return // 같은 분 중복 쓰기 방지
+    lastMinuteRef.current = id
+    setDoc(doc(db, 'rankSnapshots', id), point, { merge: true })
+      .catch((e) => console.warn('순위 스냅샷 저장 실패:', e.message))
   }
+
+  // Firestore 순위 스냅샷 실시간 구독 → 차트용 history
+  useEffect(() => {
+    let unsub
+    try {
+      const q = query(collection(db, 'rankSnapshots'), orderBy('t', 'desc'), limit(HISTORY_MAX))
+      unsub = onSnapshot(
+        q,
+        (snap) => {
+          const pts = snap.docs.map((d) => d.data()).filter((p) => p && p.t && p.r)
+          pts.sort((a, b) => a.t - b.t)
+          setHistory(pts)
+        },
+        (e) => console.warn('순위 스냅샷 구독 실패:', e.message),
+      )
+    } catch (e) {
+      console.warn('순위 스냅샷 구독 비활성:', e.message)
+    }
+    return () => unsub && unsub()
+  }, [])
 
   useEffect(() => {
     let alive = true

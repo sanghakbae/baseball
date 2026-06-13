@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react'
 import { doc, onSnapshot, setDoc, increment } from 'firebase/firestore'
 import { db } from './firebase.js'
 
-const SESSION_KEY = 'baseball-visited'
+// 페이지 로드(새로고침)당 1회만 증가. 모듈 플래그로 StrictMode 중복 호출 방지.
+let countedThisLoad = false
 
 // Firestore meta/visitors 문서에 방문자 수를 누적·구독한다.
-// 세션당 1회만 증가(새로고침으로 중복 카운트 방지).
 export function useVisitors() {
   const [count, setCount] = useState(null)
 
@@ -13,8 +13,8 @@ export function useVisitors() {
     let unsub
     try {
       const ref = doc(db, 'meta', 'visitors')
-      if (!sessionStorage.getItem(SESSION_KEY)) {
-        sessionStorage.setItem(SESSION_KEY, '1')
+      if (!countedThisLoad) {
+        countedThisLoad = true
         setDoc(
           ref,
           { count: increment(1), updatedAt: new Date().toISOString() },

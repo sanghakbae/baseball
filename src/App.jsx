@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useStats } from './useStats.js'
 import { useVisitors } from './useVisitors.js'
+import { useCheers } from './useCheers.js'
 import { STAT_KEYS, HIGHER_IS_BETTER } from './data.js'
 
 const avg3 = (v) => (v == null ? '—' : v.toFixed(3).replace(/^0/, ''))
@@ -17,11 +18,18 @@ const TABS = [
   { id: 'board', label: '📊 랭킹' },
   { id: 'compare', label: '⚔️ 비교' },
   { id: 'zone', label: '🎯 이정후' },
+  { id: 'cheer', label: '📣 응원' },
 ]
+const TAB_KEY = 'baseball-tab'
 
 export default function App() {
   const { data, loading, isFallback, live, refreshing, refreshedAt, history } = useStats()
-  const [tab, setTab] = useState('predict')
+  // 새로고침해도 마지막으로 보던 탭 유지
+  const [tab, setTab] = useState(() => {
+    const saved = localStorage.getItem(TAB_KEY)
+    return TABS.some((t) => t.id === saved) ? saved : 'predict'
+  })
+  useEffect(() => { localStorage.setItem(TAB_KEY, tab) }, [tab])
 
   if (loading) return <div className="page loading">데이터 불러오는 중…</div>
 
@@ -35,7 +43,7 @@ export default function App() {
   return (
     <div className="page">
       <header className="hero">
-        <h1>누가 <span className="hl">타율왕</span>이 될까?</h1>
+        <h1>2026년 누가 <span className="hl">타격왕</span>이 될까?</h1>
         <p className="updated">
           <span className={`live-dot ${live ? 'on' : ''} ${refreshing ? 'pulse' : ''}`} />
           {live ? 'LIVE' : '대기'} · {updated}
@@ -60,6 +68,7 @@ export default function App() {
       {tab === 'board' && <Leaderboard players={data.players} history={history} />}
       {tab === 'compare' && <Compare players={data.players} />}
       {tab === 'zone' && <LeeZone players={data.players} season={data.season} />}
+      {tab === 'cheer' && <CheerBoard />}
     </div>
   )
 }
@@ -67,7 +76,8 @@ export default function App() {
 /* ---------- 방문자 수 (Firestore 저장·실시간) ---------- */
 function Visitors() {
   const count = useVisitors()
-  const text = count == null ? '0000' : String(count).padStart(4, '0')
+  const n = count == null ? 0 : count
+  const text = String(n).padStart(5, '0').replace(/\B(?=(\d{3})+(?!\d))/g, ',')
   return (
     <span className="visitors" title="누적 방문자 수">
       👁 {text}
@@ -292,6 +302,90 @@ function PlayerColumn({ player, side }) {
         <span className="p-slash-lbl">OBP / SLG / OPS</span>
       </div>
     </div>
+  )
+}
+
+/* ---------- 익명 응원 게시판 탭 ---------- */
+function timeAgo(createdAt) {
+  const ms = createdAt?.toMillis ? createdAt.toMillis() : null
+  if (!ms) return '방금'
+  const s = Math.floor((Date.now() - ms) / 1000)
+  if (s < 60) return '방금'
+  if (s < 3600) return `${Math.floor(s / 60)}분 전`
+  if (s < 86400) return `${Math.floor(s / 3600)}시간 전`
+  return `${Math.floor(s / 86400)}일 전`
+}
+
+const CHEER_PAGE_SIZE = 20
+
+function CheerBoard() {
+  const { cheers, post, error } = useCheers()
+  const [text, setText] = useState('')
+  const [sending, setSending] = useState(false)
+  const [page, setPage] = useState(0)
+
+  const pageCount = Math.max(1, Math.ceil(cheers.length / CHEER_PAGE_SIZE))
+  const safePage = Math.min(page, pageCount - 1)
+  const shown = cheers.slice(safePage * CHEER_PAGE_SIZE, safePage * CHEER_PAGE_SIZE + CHEER_PAGE_SIZE)
+
+  const submit = async (e) => {
+    e.preventDefault()
+    if (!text.trim() || sending) return
+    setSending(true)
+    try {
+      await post(text)
+      setText('')
+    } catch (err) {
+      console.warn('응원 작성 실패:', err.message)
+    } finally {
+      setSending(false)
+    }
+  }
+
+  return (
+    <section className="card-section">
+      <h2 className="sec-title">📣 이정후 응원 게시판</h2>
+      <p className="sec-desc">익명으로 응원 메시지를 남겨보세요 · 실시간</p>
+
+      <form className="cheer-form" onSubmit={submit}>
+        <input
+          className="cheer-input"
+          value={text}
+          maxLength={200}
+          placeholder="이정후 화이팅! 👏"
+          onChange={(e) => setText(e.target.value)}
+        />
+        <button className="cheer-send" type="submit" disabled={!text.trim() || sending}>
+          {sending ? '…' : '응원'}
+        </button>
+      </form>
+
+      {error && <p className="empty-mini">⚠️ 게시판 연결 실패 (Firestore 규칙 확인)</p>}
+
+      <ul className="cheer-list">
+        {cheers.length === 0 && <li className="cheer-empty">첫 응원을 남겨주세요! 🙌</li>}
+        {shown.map((c) => (
+          <li key={c.id} className="cheer-item">
+            <span className="cheer-time">{timeAgo(c.createdAt)}</span>
+            <p className="cheer-text">{c.text}</p>
+          </li>
+        ))}
+      </ul>
+
+      {pageCount > 1 && (
+        <div className="pager">
+          {Array.from({ length: pageCount }, (_, i) => (
+            <button
+              key={i}
+              className={`pg ${i === safePage ? 'active' : ''}`}
+              onClick={() => setPage(i)}
+            >
+              {i + 1}
+            </button>
+          ))}
+        </div>
+      )}
+    </section>
   )
 }
 

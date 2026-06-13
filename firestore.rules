@@ -1,15 +1,31 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    // 기본: 누구나 읽기 가능, 쓰기는 금지(수집기는 Admin SDK로 규칙 우회)
+
+    // 방문자 카운터: 클라이언트가 증가시킬 수 있도록 허용
+    match /meta/visitors {
+      allow read, write: if true;
+    }
+
+    // 순위 변동 스냅샷: 클라이언트가 분 단위로 기록(같은 분=같은 문서로 합쳐짐)
+    match /rankSnapshots/{id} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // 익명 응원 게시판: 누구나 읽기, 생성만 가능(수정/삭제 불가). 내용 길이 제한.
+    match /cheers/{id} {
+      allow read: if true;
+      allow create: if request.resource.data.text is string
+                    && request.resource.data.text.size() > 0
+                    && request.resource.data.text.size() <= 200;
+      allow update, delete: if false;
+    }
+
+    // 그 외: 읽기만 허용(수집기는 Admin SDK로 규칙 우회)
     match /{document=**} {
       allow read: if true;
       allow write: if false;
-    }
-    // 방문자 카운터: 클라이언트가 증가시킬 수 있도록 읽기/쓰기 허용
-    // (간단한 집계용. 악용 시 App Check 또는 Cloud Function으로 보호 권장)
-    match /meta/visitors {
-      allow read, write: if true;
     }
   }
 }
