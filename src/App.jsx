@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useStats } from './useStats.js'
+import { useVisitors } from './useVisitors.js'
 import { STAT_KEYS, HIGHER_IS_BETTER } from './data.js'
 
 const avg3 = (v) => (v == null ? '—' : v.toFixed(3).replace(/^0/, ''))
@@ -19,7 +20,7 @@ const TABS = [
 ]
 
 export default function App() {
-  const { data, loading, isFallback, live, refreshing, refreshedAt } = useStats()
+  const { data, loading, isFallback, live, refreshing, refreshedAt, history } = useStats()
   const [tab, setTab] = useState('predict')
 
   if (loading) return <div className="page loading">데이터 불러오는 중…</div>
@@ -57,16 +58,20 @@ export default function App() {
       </nav>
 
       {tab === 'predict' && <Predict data={data} />}
-      {tab === 'board' && <Leaderboard players={data.players} />}
+      {tab === 'board' && <Leaderboard players={data.players} history={history} />}
       {tab === 'compare' && <Compare players={data.players} />}
       {tab === 'zone' && <LeeZone players={data.players} season={data.season} />}
-
-      <footer className="foot">
-        데이터 출처: <a href="https://www.mlb.com/stats/batting-average" target="_blank" rel="noreferrer">MLB.com</a>
-        {' / '}<a href="https://statsapi.mlb.com" target="_blank" rel="noreferrer">MLB Stats API</a>
-        {' · '}리그 평균 타율 {avg3(data.leagueMean)}
-      </footer>
     </div>
+  )
+}
+
+/* ---------- 방문자 수 (Firestore 저장·실시간) ---------- */
+function Visitors() {
+  const count = useVisitors()
+  return (
+    <span className="visitors" title="누적 방문자 수">
+      👁 {count == null ? '—' : count.toLocaleString()}
+    </span>
   )
 }
 
@@ -86,7 +91,10 @@ function Predict({ data }) {
   const maxP = Math.max(...preds.map((p) => p.pWinTitle))
   return (
     <section className="card-section">
-      <h2 className="sec-title">시즌 종료 타율 1위 확률</h2>
+      <div className="sec-head">
+        <h2 className="sec-title">시즌 종료 타율 1위 확률</h2>
+        <Visitors />
+      </div>
       <p className="sec-desc">평균회귀 실력 추정 + 잔여 타석 2만 회 시뮬레이션 결과</p>
       <ol className="pred-list">
         {preds.slice(0, 10).map((p, i) => (
@@ -108,20 +116,88 @@ function Predict({ data }) {
           </li>
         ))}
       </ol>
-      <p className="method">
-        <b>방법</b>: 진짜 실력 p ~ Beta(사후분포)에서 추출 → 잔여타석 안타를 이항분포로 모사 →
-        최종 타율 계산 → 1위 빈도 집계. 잔여 경기는 팀 소화 경기수(162 기준)로 추정.
-      </p>
     </section>
   )
 }
 
 /* ---------- 리더보드 탭 ---------- */
-function Leaderboard({ players }) {
+const CHART_COLORS = ['#4aa8ff', '#34d399', '#f472b6', '#a78bfa', '#fb923c', '#22d3ee']
+
+function RankChart({ history, players }) {
+  if (!history || history.length < 2) {
+    return (
+      <div className="rank-chart empty-chart">
+        📈 순위 변동 기록 수집 중… 60초마다 갱신 ({history?.length || 0}개 기록)
+      </div>
+    )
+  }
+
+  // 추적 대상: 현재 상위 6명 + 이정후
+  const lee = players.find(isLee)
+  const tracked = players.slice(0, 6)
+  if (lee && !tracked.includes(lee)) tracked.push(lee)
+
+  const W = 320, H = 150
+  const padL = 18, padR = 56, padT = 10, padB = 18
+  const n = history.length
+  const maxRank = Math.max(
+    6,
+    ...history.flatMap((h) => tracked.map((p) => h.r[p.id]).filter((v) => v != null)),
+  )
+  const x = (i) => padL + (n === 1 ? 0 : (i / (n - 1)) * (W - padL - padR))
+  const y = (rank) => padT + ((rank - 1) / (maxRank - 1)) * (H - padT - padB)
+
+  const t0 = new Date(history[0].t).toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' })
+  const t1 = new Date(history[n - 1].t).toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' })
+
+  return (
+    <div className="rank-chart">
+      <svg viewBox={`0 0 ${W} ${H}`} width="100%" preserveAspectRatio="xMidYMid meet">
+        {/* 가로 기준선 (순위 1,2,3…) */}
+        {Array.from({ length: maxRank }, (_, k) => k + 1).map((rank) => (
+          <g key={rank}>
+            <line x1={padL} y1={y(rank)} x2={W - padR} y2={y(rank)} stroke="#263350" strokeWidth="0.5" />
+            <text x={padL - 4} y={y(rank) + 3} textAnchor="end" className="ch-axis">{rank}</text>
+          </g>
+        ))}
+        {/* 선수별 순위 추이 */}
+        {tracked.map((p, idx) => {
+          const lee = isLee(p)
+          const color = lee ? '#f6c445' : CHART_COLORS[idx % CHART_COLORS.length]
+          const pts = history
+            .map((h, i) => (h.r[p.id] != null ? `${x(i)},${y(h.r[p.id])}` : null))
+            .filter(Boolean)
+            .join(' ')
+          const lastRank = history[n - 1].r[p.id]
+          return (
+            <g key={p.id}>
+              <polyline points={pts} fill="none" stroke={color} strokeWidth={lee ? 2.4 : 1.4}
+                strokeLinejoin="round" strokeLinecap="round" opacity={lee ? 1 : 0.9} />
+              {lastRank != null && (
+                <>
+                  <circle cx={x(n - 1)} cy={y(lastRank)} r={lee ? 3 : 2.2} fill={color} />
+                  <text x={x(n - 1) + 5} y={y(lastRank) + 3} className="ch-name" fill={color}>
+                    {p.name.split(' ').slice(-1)[0]}
+                  </text>
+                </>
+              )}
+            </g>
+          )
+        })}
+        <text x={padL} y={H - 4} className="ch-axis">{t0}</text>
+        <text x={W - padR} y={H - 4} textAnchor="end" className="ch-axis">{t1}</text>
+      </svg>
+    </div>
+  )
+}
+
+function Leaderboard({ players, history }) {
   const cols = STAT_KEYS.filter((s) => !['rank'].includes(s.key))
   return (
     <section className="card-section">
       <h2 className="sec-title">현재 타율 랭킹</h2>
+      <p className="sec-desc">실시간 순위 변동 · 상위 6명 + 이정후</p>
+      <RankChart history={history} players={players} />
       <div className="table-wrap">
         <table>
           <thead>
@@ -233,6 +309,32 @@ const METRICS = [
   { key: 'sluggingPercentage', label: '장타율' },
 ]
 
+// 지표별 절대 기준선 [파랑(낮음), 흰색(중립), 빨강(높음)]
+// 타율은 3할(.300) 넘으면 빨강, .250 중립, .200 이하 파랑
+const HEAT_ANCHOR = {
+  // 타율: 1할(.100)~2할5푼(.250) 파랑, 2할6푼(.260)~ 빨강. 피벗 ≈ .255
+  battingAverage: [0.1, 0.255, 0.36],
+  onBasePlusSlugging: [0.6, 0.73, 0.85],
+  sluggingPercentage: [0.33, 0.4, 0.47],
+}
+// 값 → t(0~1). 기준선 기반 절대 스케일.
+function heatT(n, metric) {
+  if (n == null) return null
+  const [lo, mid, hi] = HEAT_ANCHOR[metric] || HEAT_ANCHOR.battingAverage
+  if (n <= mid) return Math.max(0, (0.5 * (n - lo)) / (mid - lo))
+  return Math.min(1, 0.5 + (0.5 * (n - mid)) / (hi - mid))
+}
+// t(0~1) → 파랑 → 흰색 → 빨강 연속 그라데이션
+function heatRGB(t) {
+  const lerp = (a, b, f) => a.map((v, i) => Math.round(v + (b[i] - v) * f))
+  const blue = [46, 104, 210], mid = [232, 234, 238], red = [214, 41, 52]
+  return t < 0.5 ? lerp(blue, mid, t / 0.5) : lerp(mid, red, (t - 0.5) / 0.5)
+}
+// 배경 밝기에 따라 가독성 좋은 글자색
+function textOn([r, g, b]) {
+  return 0.299 * r + 0.587 * g + 0.114 * b > 150 ? '#0c1424' : '#f3f6fc'
+}
+
 function LeeZone({ players, season }) {
   const lee = players.find(isLee)
   const playerId = lee?.id || 808982
@@ -283,19 +385,26 @@ function LeeZone({ players, season }) {
   const inner = entries.filter((e) => innerCodes.includes(e.code) && e.n != null)
   const best = inner.slice().sort((a, b) => b.n - a.n)[0]
   const worst = inner.slice().sort((a, b) => a.n - b.n)[0]
+  // 절대 기준선 기반 색상 (3할 넘으면 빨강)
+  const tOf = (n) => heatT(n, metric)
   const strong = entries.filter((e) => e.temp === 'hot' || e.temp === 'warm').sort((a, b) => b.n - a.n)
   const weak = entries.filter((e) => e.temp === 'cold' || e.temp === 'cool').sort((a, b) => a.n - b.n)
   const fmtV = (v) => (v == null ? '—' : metric === 'battingAverage' ? String(v) : String(v))
 
   const Cell = ({ code, outer, pos }) => {
     const z = cell(code)
+    const t = tOf(num(z.value))
+    const rgb = t == null ? null : heatRGB(t)
     const isBest = best && code === best.code
     const isWorst = worst && code === worst.code
     return (
-      <div className={`zcell ${outer ? 'outer' : ''} ${pos || ''}`} style={{ background: z.color || 'transparent' }}>
+      <div
+        className={`zcell ${outer ? 'outer' : ''} ${pos || ''}`}
+        style={{ background: rgb ? `rgb(${rgb.join(',')})` : 'transparent' }}
+      >
         {isBest && <span className="zmark">🔥</span>}
         {isWorst && <span className="zmark">❄️</span>}
-        <span className="zval">{fmtV(z.value)}</span>
+        <span className="zval" style={{ color: rgb ? textOn(rgb) : 'var(--muted)' }}>{fmtV(z.value)}</span>
       </div>
     )
   }

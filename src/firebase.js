@@ -2,6 +2,7 @@
 // 웹 config 값은 공개되어도 되는 값이며, 필요 시 VITE_FIREBASE_* 환경변수로 덮어쓴다.
 import { initializeApp } from 'firebase/app'
 import { getAnalytics, isSupported } from 'firebase/analytics'
+import { getFirestore } from 'firebase/firestore'
 
 const env = import.meta.env
 
@@ -16,6 +17,7 @@ export const firebaseConfig = {
 }
 
 export const app = initializeApp(firebaseConfig)
+export const db = getFirestore(app)
 
 // Analytics 는 브라우저 + 지원 환경에서만 (로컬/SSR 안전 가드)
 export let analytics = null

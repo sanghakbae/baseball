@@ -3,6 +3,28 @@ import { lee, top5 } from './data.js'
 import { fetchQualifiedBatters, fetchTeamGamesPlayed } from './lib/mlb.js'
 
 const LIVE_INTERVAL_MS = 60_000 // 실시간 폴링 주기 (경기 중 갱신)
+const HISTORY_KEY = 'baseball-rank-history-v1'
+const HISTORY_MAX = 240 // 최대 기록 포인트 수
+const HISTORY_TRACK = 12 // 기록할 상위 선수 수
+const DEDUPE_MS = 45_000 // 직전 기록과 너무 가까우면 스킵
+
+function loadHistory() {
+  try {
+    const raw = localStorage.getItem(HISTORY_KEY)
+    const arr = raw ? JSON.parse(raw) : []
+    return Array.isArray(arr) ? arr : []
+  } catch { return [] }
+}
+
+// players(타율 내림차순, rank 부여됨) → 히스토리 포인트
+function toPoint(players, isoTs) {
+  const top = players.slice(0, HISTORY_TRACK)
+  return {
+    t: Date.parse(isoTs) || Date.now(),
+    r: Object.fromEntries(top.map((p) => [p.id, p.rank])),
+    a: Object.fromEntries(top.map((p) => [p.id, p.AVG])),
+  }
+}
 
 // 정적 폴백 payload — 네트워크 실패 시
 const FALLBACK = {
@@ -40,11 +62,23 @@ export function useStats() {
   const [live, setLive] = useState(false) // 실시간 폴링 활성 여부
   const [refreshing, setRefreshing] = useState(false)
   const [refreshedAt, setRefreshedAt] = useState(null)
+  const [history, setHistory] = useState(loadHistory) // 순위 변동 기록
 
   const seasonRef = useRef(2026)
   const workerRef = useRef(null)
   const timerRef = useRef(null)
   const busyRef = useRef(false)
+
+  // 새 포인트를 기록에 추가 (직전과 너무 가까우면 스킵, 최대 길이 제한, localStorage 저장)
+  function pushHistory(point) {
+    setHistory((prev) => {
+      const last = prev[prev.length - 1]
+      if (last && point.t - last.t < DEDUPE_MS) return prev
+      const next = [...prev, point].slice(-HISTORY_MAX)
+      try { localStorage.setItem(HISTORY_KEY, JSON.stringify(next)) } catch {}
+      return next
+    })
+  }
 
   useEffect(() => {
     let alive = true
@@ -92,6 +126,7 @@ export function useStats() {
         setRefreshedAt(now)
         setLive(true)
         setIsFallback(false)
+        pushHistory(toPoint(players, now))
         // 예측 재계산 (워커). 워커 없으면 직전 예측 유지.
         if (workerRef.current) {
           workerRef.current.postMessage({ players, teamGP, season, sims: 12000 })
@@ -149,5 +184,5 @@ export function useStats() {
     }
   }, [])
 
-  return { data, loading, isFallback, live, refreshing, refreshedAt }
+  return { data, loading, isFallback, live, refreshing, refreshedAt, history }
 }
