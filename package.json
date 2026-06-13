@@ -1,0 +1,22 @@
+{
+  "name": "baseball-batting-compare",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "fetch": "node scripts/fetch-stats.mjs"
+  },
+  "dependencies": {
+    "firebase": "^11.1.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "firebase-admin": "^13.0.2",
+    "vite": "^6.0.7"
+  }
+}
