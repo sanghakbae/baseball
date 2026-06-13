@@ -68,9 +68,10 @@ export default function App() {
 /* ---------- 방문자 수 (Firestore 저장·실시간) ---------- */
 function Visitors() {
   const count = useVisitors()
+  const text = count == null ? '0000' : String(count).padStart(4, '0')
   return (
     <span className="visitors" title="누적 방문자 수">
-      👁 {count == null ? '—' : count.toLocaleString()}
+      👁 {text}
     </span>
   )
 }
