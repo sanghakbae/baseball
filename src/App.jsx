@@ -35,7 +35,6 @@ export default function App() {
   return (
     <div className="page">
       <header className="hero">
-        <p className="eyebrow">{data.season} MLB · 타율왕 예측 시스템</p>
         <h1>누가 <span className="hl">타율왕</span>이 될까?</h1>
         <p className="updated">
           <span className={`live-dot ${live ? 'on' : ''} ${refreshing ? 'pulse' : ''}`} />
