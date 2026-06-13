@@ -23,7 +23,7 @@ const TABS = [
 const TAB_KEY = 'baseball-tab'
 
 export default function App() {
-  const { data, loading, isFallback, live, refreshing, refreshedAt, history } = useStats()
+  const { data, loading, isFallback, live, refreshing, refreshedAt } = useStats()
   // 새로고침해도 마지막으로 보던 탭 유지
   const [tab, setTab] = useState(() => {
     const saved = localStorage.getItem(TAB_KEY)
@@ -65,7 +65,7 @@ export default function App() {
       </nav>
 
       {tab === 'predict' && <Predict data={data} />}
-      {tab === 'board' && <Leaderboard players={data.players} history={history} />}
+      {tab === 'board' && <Leaderboard players={data.players} season={data.season} />}
       {tab === 'compare' && <Compare players={data.players} />}
       {tab === 'zone' && <LeeZone players={data.players} season={data.season} />}
       {tab === 'cheer' && <CheerBoard />}
@@ -133,81 +133,126 @@ function Predict({ data }) {
 /* ---------- 리더보드 탭 ---------- */
 const CHART_COLORS = ['#4aa8ff', '#34d399', '#f472b6', '#a78bfa', '#fb923c', '#22d3ee']
 
-function RankChart({ history, players }) {
-  if (!history || history.length < 2) {
-    return (
-      <div className="rank-chart empty-chart">
-        📈 순위 변동 기록 수집 중… 60초마다 갱신 ({history?.length || 0}개 기록)
-      </div>
-    )
+const FORM_GAMES = 10 // 최근 N경기
+
+// 최근 10경기 동안의 누적 타율 추이 (각 선수 gameLog 기반)
+function FormChart({ players, season }) {
+  const tracked = useMemo(() => {
+    const lee = players.find(isLee)
+    const t = players.slice(0, 6)
+    if (lee && !t.includes(lee)) t.push(lee)
+    return t
+  }, [players])
+  const ids = tracked.map((p) => p.id).join(',')
+
+  const [series, setSeries] = useState(null)
+  const [status, setStatus] = useState('loading')
+
+  useEffect(() => {
+    let alive = true
+    setStatus('loading')
+    Promise.all(
+      tracked.map(async (p) => {
+        try {
+          const url =
+            `https://statsapi.mlb.com/api/v1/people/${p.id}/stats` +
+            `?stats=gameLog&season=${season}&group=hitting&gameType=R`
+          const r = await fetch(url, { cache: 'no-store' })
+          const d = await r.json()
+          const splits = (d.stats?.[0]?.splits ?? []).slice()
+          splits.sort((a, b) => (a.date < b.date ? -1 : 1)) // 날짜 오름차순
+          // 시즌 누적 타율 추이
+          let h = 0, ab = 0
+          const cum = splits.map((s) => {
+            h += s.stat.hits; ab += s.stat.atBats
+            return ab ? h / ab : 0
+          })
+          return { id: p.id, name: p.name, rank: p.rank, vals: cum.slice(-FORM_GAMES) }
+        } catch {
+          return { id: p.id, name: p.name, rank: p.rank, vals: [] }
+        }
+      }),
+    ).then((res) => { if (alive) { setSeries(res); setStatus('ok') } })
+    return () => { alive = false }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ids, season])
+
+  if (status === 'loading') {
+    return <div className="rank-chart empty-chart">📈 최근 {FORM_GAMES}경기 타율 불러오는 중…</div>
+  }
+  const valid = (series ?? []).filter((s) => s.vals.length >= 2)
+  if (!valid.length) {
+    return <div className="rank-chart empty-chart">최근 경기 데이터를 불러오지 못했습니다.</div>
   }
 
-  // 추적 대상: 현재 상위 6명 + 이정후
-  const lee = players.find(isLee)
-  const tracked = players.slice(0, 6)
-  if (lee && !tracked.includes(lee)) tracked.push(lee)
-
   const W = 320, H = 150
-  const padL = 18, padR = 56, padT = 10, padB = 18
-  const n = history.length
-  const maxRank = Math.max(
-    6,
-    ...history.flatMap((h) => tracked.map((p) => h.r[p.id]).filter((v) => v != null)),
-  )
-  const x = (i) => padL + (n === 1 ? 0 : (i / (n - 1)) * (W - padL - padR))
-  const y = (rank) => padT + ((rank - 1) / (maxRank - 1)) * (H - padT - padB)
+  const padL = 30, padR = 56, padT = 10, padB = 18
+  const N = Math.min(FORM_GAMES, Math.max(...valid.map((s) => s.vals.length)))
+  const allVals = valid.flatMap((s) => s.vals)
+  let minV = Math.min(...allVals), maxV = Math.max(...allVals)
+  if (maxV === minV) { maxV += 0.005; minV -= 0.005 }
+  const pad = (maxV - minV) * 0.12
+  minV -= pad; maxV += pad
 
-  const t0 = new Date(history[0].t).toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' })
-  const t1 = new Date(history[n - 1].t).toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' })
+  const x = (i) => padL + (N <= 1 ? 0 : (i / (N - 1)) * (W - padL - padR))
+  const y = (v) => padT + (1 - (v - minV) / (maxV - minV)) * (H - padT - padB)
+  const fmtAvg = (v) => v.toFixed(3).replace(/^0/, '')
+
+  // y축 눈금 3개
+  const ticks = [minV + (maxV - minV) * 0.1, (minV + maxV) / 2, maxV - (maxV - minV) * 0.1]
+
+  // 우측 이름 라벨 충돌 방지: y 정렬 후 최소 간격 확보
+  const labels = valid.map((s, idx) => ({
+    name: s.name.split(' ').slice(-1)[0],
+    color: isLee(s) ? '#f6c445' : CHART_COLORS[idx % CHART_COLORS.length],
+    yReal: y(s.vals[s.vals.length - 1]),
+  }))
+  labels.sort((a, b) => a.yReal - b.yReal)
+  const GAP = 9
+  labels.forEach((l, i) => {
+    l.yLab = i === 0 ? l.yReal : Math.max(l.yReal, labels[i - 1].yLab + GAP)
+  })
 
   return (
     <div className="rank-chart">
       <svg viewBox={`0 0 ${W} ${H}`} width="100%" preserveAspectRatio="xMidYMid meet">
-        {/* 가로 기준선 (순위 1,2,3…) */}
-        {Array.from({ length: maxRank }, (_, k) => k + 1).map((rank) => (
-          <g key={rank}>
-            <line x1={padL} y1={y(rank)} x2={W - padR} y2={y(rank)} stroke="#263350" strokeWidth="0.5" />
-            <text x={padL - 4} y={y(rank) + 3} textAnchor="end" className="ch-axis">{rank}</text>
+        {ticks.map((tv, i) => (
+          <g key={i}>
+            <line x1={padL} y1={y(tv)} x2={W - padR} y2={y(tv)} stroke="#263350" strokeWidth="0.5" />
+            <text x={padL - 4} y={y(tv) + 3} textAnchor="end" className="ch-axis">{fmtAvg(tv)}</text>
           </g>
         ))}
-        {/* 선수별 순위 추이 */}
-        {tracked.map((p, idx) => {
-          const lee = isLee(p)
+        {valid.map((s, idx) => {
+          const lee = isLee(s)
           const color = lee ? '#f6c445' : CHART_COLORS[idx % CHART_COLORS.length]
-          const pts = history
-            .map((h, i) => (h.r[p.id] != null ? `${x(i)},${y(h.r[p.id])}` : null))
-            .filter(Boolean)
-            .join(' ')
-          const lastRank = history[n - 1].r[p.id]
+          const off = N - s.vals.length // 경기 수가 적으면 오른쪽 정렬
+          const pts = s.vals.map((v, k) => `${x(off + k)},${y(v)}`).join(' ')
+          const last = s.vals[s.vals.length - 1]
           return (
-            <g key={p.id}>
+            <g key={s.id}>
               <polyline points={pts} fill="none" stroke={color} strokeWidth={lee ? 2.4 : 1.4}
-                strokeLinejoin="round" strokeLinecap="round" opacity={lee ? 1 : 0.9} />
-              {lastRank != null && (
-                <>
-                  <circle cx={x(n - 1)} cy={y(lastRank)} r={lee ? 3 : 2.2} fill={color} />
-                  <text x={x(n - 1) + 5} y={y(lastRank) + 3} className="ch-name" fill={color}>
-                    {p.name.split(' ').slice(-1)[0]}
-                  </text>
-                </>
-              )}
+                strokeLinejoin="round" strokeLinecap="round" opacity={lee ? 1 : 0.85} />
+              <circle cx={x(N - 1)} cy={y(last)} r={lee ? 3 : 2.2} fill={color} />
             </g>
           )
         })}
-        <text x={padL} y={H - 4} className="ch-axis">{t0}</text>
-        <text x={W - padR} y={H - 4} textAnchor="end" className="ch-axis">{t1}</text>
+        {labels.map((l, i) => (
+          <text key={i} x={x(N - 1) + 5} y={l.yLab + 3} className="ch-name" fill={l.color}>{l.name}</text>
+        ))}
+        <text x={padL} y={H - 4} className="ch-axis">{FORM_GAMES}경기 전</text>
+        <text x={W - padR} y={H - 4} textAnchor="end" className="ch-axis">최근</text>
       </svg>
     </div>
   )
 }
 
-function Leaderboard({ players, history }) {
+function Leaderboard({ players, season }) {
   const cols = STAT_KEYS.filter((s) => !['rank'].includes(s.key))
   return (
     <section className="card-section">
       <h2 className="sec-title">현재 타율 랭킹</h2>
-      <p className="sec-desc">실시간 순위 변동 · 상위 6명 + 이정후</p>
-      <RankChart history={history} players={players} />
+      <p className="sec-desc">최근 {FORM_GAMES}경기 누적 타율 추이 · 상위 6명</p>
+      <FormChart players={players} season={season} />
       <div className="table-wrap">
         <table>
           <thead>
