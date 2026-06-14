@@ -91,7 +91,10 @@ function Stats({ onLogout, email }) {
       uniqIp: new Set(visits.map((v) => v.ip).filter(Boolean)).size,
       byCountry: tally(visits.map((v) => v.country || '미상')).slice(0, 8),
       byRegion: tally(visits.map((v) => [...new Set([v.city, v.region].filter(Boolean))].join(', ') || '미상')).slice(0, 8),
-      byRef: tally(visits.map((v) => refHost(v.ref))).slice(0, 8),
+      byRef: tally(
+        visits.map((v) => refHost(v.ref))
+          .filter((h) => h !== 'localhost' && h !== '127.0.0.1'),
+      ).slice(0, 8),
       byDay: tally(visits.map((v) => dayKey(v.ts))).sort((a, b) => (a[0] < b[0] ? 1 : -1)).slice(0, 10),
       recent: visits.slice(0, 60),
     }
