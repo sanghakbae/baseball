@@ -13,6 +13,14 @@ service cloud.firestore {
       allow write: if true;
     }
 
+    // 방문 로그(IP·위치·유입경로): 생성은 누구나, 읽기는 관리자 계정만(개인정보 보호)
+    match /visits/{id} {
+      allow create: if true;
+      allow read: if request.auth != null
+                  && request.auth.token.email == 'totoriverce@baseball-93c5d.firebaseapp.com';
+      allow update, delete: if false;
+    }
+
     // 익명 응원 게시판: 누구나 읽기, 생성만 가능(수정/삭제 불가). 내용 길이 제한.
     match /cheers/{id} {
       allow read: if true;

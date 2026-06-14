@@ -3,6 +3,7 @@
 import { initializeApp } from 'firebase/app'
 import { getAnalytics, isSupported } from 'firebase/analytics'
 import { getFirestore } from 'firebase/firestore'
+import { getAuth } from 'firebase/auth'
 
 const env = import.meta.env
 
@@ -18,6 +19,7 @@ export const firebaseConfig = {
 
 export const app = initializeApp(firebaseConfig)
 export const db = getFirestore(app)
+export const auth = getAuth(app)
 
 // Analytics 는 브라우저 + 지원 환경에서만 (로컬/SSR 안전 가드)
 export let analytics = null

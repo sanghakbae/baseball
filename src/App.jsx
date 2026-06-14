@@ -13,6 +13,25 @@ const fmt = (k, v) => {
   return def?.fmt ? def.fmt(v) : v
 }
 
+// MLB 선수 사진 / 팀 로고
+const headshot = (id) => `https://midfield.mlbstatic.com/v1/people/${id}/spots/120`
+const teamLogo = (teamId) => (teamId ? `https://www.mlbstatic.com/team-logos/${teamId}.svg` : null)
+const hideOnError = (e) => { e.currentTarget.style.visibility = 'hidden' }
+
+// 공유 버튼 (Web Share → iPhone에서 카톡 등 공유 시트, 미지원 시 링크 복사)
+function ShareButton() {
+  const [copied, setCopied] = useState(false)
+  const share = async () => {
+    const data = { title: '2026 누가 타격왕이 될까?', text: '이정후 타율왕 예측 · 실시간 톱10 · 응원하기', url: 'https://baseball.sanghak.kr/' }
+    if (navigator.share) {
+      try { await navigator.share(data) } catch { /* 취소 무시 */ }
+    } else {
+      try { await navigator.clipboard.writeText(data.url); setCopied(true); setTimeout(() => setCopied(false), 1500) } catch {}
+    }
+  }
+  return <button className="share-btn" onClick={share}>{copied ? '복사됨!' : '🔗 공유'}</button>
+}
+
 // 올스타 투표 기간 (미정 시 대략치 — 실제 일정 확정되면 수정) · 한국시간 기준
 const ASG_VOTE_START = '2026-06-01'
 const ASG_VOTE_END = '2026-07-03'
@@ -57,6 +76,7 @@ export default function App() {
           {isFallback && <span className="badge-warn"> · 정적 폴백</span>}
           {' · '}규정타석 {data.qualifiedCount}명
         </p>
+        <ShareButton />
       </header>
 
       <nav className="tabs">
@@ -127,6 +147,32 @@ function Visitors() {
   )
 }
 
+/* ---------- 이정후 타율왕 시나리오 계산기 ---------- */
+function ScenarioCard({ players }) {
+  const lee = players.find(isLee)
+  const leader = players[0]
+  if (!lee || !leader) return null
+  if (isLee(leader)) {
+    return (
+      <div className="scenario hot">
+        🏆 이정후 현재 <b>타율 1위</b>! ({avg3(lee.AVG)}) 이 자리를 지키면 타격왕입니다.
+      </div>
+    )
+  }
+  const L = leader.AVG
+  const gap = (L - lee.AVG)
+  // (H+n)/(AB+n) > L 를 만족하는 최소 연속 안타 n
+  let n = Math.ceil((L * lee.AB - lee.H) / (1 - L))
+  if (n < 1) n = 1
+  return (
+    <div className="scenario">
+      🎯 <b>1위까지 {gap.toFixed(3).replace(/^0/, '')} 차</b> ·
+      {' '}1위 {leader.name} {avg3(L)} vs 이정후 {avg3(lee.AVG)}
+      <span className="scenario-hl">앞으로 {n}타수 연속 안타면 역전</span>
+    </div>
+  )
+}
+
 /* ---------- 예측 탭 ---------- */
 function Predict({ data }) {
   const preds = data.predictions ?? []
@@ -148,6 +194,7 @@ function Predict({ data }) {
         <Visitors />
       </div>
       <p className="sec-desc">평균회귀 실력 추정 + 잔여 타석 2만 회 시뮬레이션 결과</p>
+      <ScenarioCard players={data.players} />
       <ol className="pred-list">
         {preds.slice(0, 10).map((p, i) => (
           <li key={p.id} className={`pred-row ${isLee(p) ? 'is-lee' : ''}`}>
@@ -350,7 +397,7 @@ function LiveTop10({ players }) {
         const teamGames = {}
         for (const dt of sd.dates ?? []) for (const g of dt.games ?? []) {
           const mk = (oppName, isHome) => ({
-            date: dt.date, gamePk: g.gamePk,
+            date: dt.date, gamePk: g.gamePk, gameDate: g.gameDate,
             state: g.status?.abstractGameState, detailed: g.status?.detailedState, oppName, isHome,
           })
           const h = g.teams?.home?.team, a = g.teams?.away?.team
@@ -418,6 +465,7 @@ function LiveTop10({ players }) {
           return (
             <li key={p.id} className={`live-row ${isLee(p) ? 'is-lee' : ''}`}>
               <span className="live-rank">{p.rank}</span>
+              <img className="live-photo" src={headshot(p.id)} alt="" loading="lazy" onError={hideOnError} />
               <div className="live-main">
                 <div className="live-top">
                   <span className="live-name">{p.name} <span className="live-team">{p.team}</span></span>
@@ -434,7 +482,7 @@ function LiveTop10({ players }) {
                         {g.date?.slice(5).replace('-', '/')} {g.isHome ? 'vs' : '@'} {abbr(g.oppName)}
                       </span>
                       {g.state === 'Preview' ? (
-                        <span className="live-line">경기 예정</span>
+                        <span className="live-line">{startTimeLabel(g.gameDate)}</span>
                       ) : bat ? (
                         <span className="live-line">
                           {bat.atBats ?? 0}타수 {bat.hits ?? 0}안타
@@ -462,6 +510,15 @@ function LiveTop10({ players }) {
 function abbr(name) {
   if (!name) return ''
   return name.split(' ').slice(-1)[0]
+}
+
+// 경기 예정 시작 시각 라벨 (한국시간)
+function startTimeLabel(gameDate) {
+  if (!gameDate) return '경기 예정'
+  const t = new Date(gameDate).toLocaleTimeString('ko-KR', {
+    timeZone: 'Asia/Seoul', hour: '2-digit', minute: '2-digit',
+  })
+  return `경기 예정 · ${t} 시작`
 }
 
 /* ---------- 이정후 비교 탭 ---------- */
@@ -540,8 +597,13 @@ function Compare({ players }) {
 function PlayerColumn({ player, side }) {
   return (
     <div className={`player-card ${side}`}>
+      <img className="p-photo" src={headshot(player.id)} alt="" loading="lazy" onError={hideOnError} />
       <span className="rank-pill">{player.rank}위</span>
       <h2 className="p-name">{player.name}</h2>
+      <p className="p-team">
+        <img className="p-logo" src={teamLogo(player.teamId)} alt="" onError={hideOnError} />
+        {player.team}
+      </p>
       <div className="p-avg">
         <span className="p-avg-val">{avg3(player.AVG)}</span>
       </div>
