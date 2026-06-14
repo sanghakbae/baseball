@@ -93,9 +93,9 @@ html, body {
   border: none;
   background: none;
   color: var(--muted);
-  font-size: 12px;
+  font-size: 10.5px;
   font-weight: 600;
-  padding: 7px 4px;
+  padding: 7px 2px;
   cursor: pointer;
   height: var(--nav-h);
   transition: color 0.15s ease;
@@ -147,7 +147,7 @@ html, body {
 .pred-detail b { color: var(--text); }
 
 /* ---- rank chart ---- */
-.rank-chart { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 6px 8px 2px; margin-bottom: 12px; }
+.rank-chart { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 3px 6px; margin-bottom: 10px; }
 .rank-chart.empty-chart { padding: 16px 12px; text-align: center; color: var(--muted); font-size: 12px; }
 .ch-axis { fill: var(--muted); font-size: 8px; }
 .ch-name { font-size: 8.5px; font-weight: 700; }
@@ -298,6 +298,26 @@ tbody tr.is-lee .sticky, tbody tr.is-lee .sticky2 { background: #2a2a1f; }
 .zs-row { display: flex; justify-content: space-between; font-size: 12px; padding: 3px 0; color: var(--muted); }
 .zs-row b { color: var(--text); font-variant-numeric: tabular-nums; }
 .empty-mini { color: var(--muted); font-size: 12px; margin: 0; }
+
+/* ---- 톱10 실시간 성적 ---- */
+.live-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 5px; }
+.live-row {
+  display: grid; grid-template-columns: 22px 1fr; align-items: center; gap: 9px;
+  background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 7px 11px;
+}
+.live-row.is-lee { border-color: var(--lee); background: rgba(246, 196, 69, 0.09); }
+.live-rank { font-size: 14px; font-weight: 800; color: var(--muted); text-align: center; }
+.live-row.is-lee .live-rank { color: var(--lee); }
+.live-main { min-width: 0; }
+.live-top { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+.live-name { font-weight: 700; font-size: 13.5px; }
+.live-team { font-size: 10.5px; color: var(--muted); font-weight: 500; }
+.live-avg { font-size: 14px; font-weight: 800; font-variant-numeric: tabular-nums; color: var(--opp); }
+.live-row.is-lee .live-avg { color: var(--lee); }
+.live-game { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 8px; margin-top: 3px; font-size: 11px; color: var(--muted); }
+.live-badge { color: var(--win); font-weight: 700; font-size: 9.5px; }
+.live-date { color: var(--muted); }
+.live-line { color: var(--text); }
 
 /* ---- 응원 게시판 ---- */
 .cheer-form { display: flex; gap: 6px; margin-bottom: 10px; }

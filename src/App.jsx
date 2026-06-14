@@ -16,6 +16,7 @@ const fmt = (k, v) => {
 const TABS = [
   { id: 'predict', label: '🔮 예측' },
   { id: 'board', label: '📊 랭킹' },
+  { id: 'live', label: '🔥 톱10' },
   { id: 'compare', label: '⚔️ 비교' },
   { id: 'zone', label: '🎯 이정후' },
   { id: 'cheer', label: '📣 응원' },
@@ -66,6 +67,7 @@ export default function App() {
 
       {tab === 'predict' && <Predict data={data} />}
       {tab === 'board' && <Leaderboard players={data.players} season={data.season} />}
+      {tab === 'live' && <LiveTop10 players={data.players} season={data.season} />}
       {tab === 'compare' && <Compare players={data.players} />}
       {tab === 'zone' && <LeeZone players={data.players} season={data.season} />}
       {tab === 'cheer' && <CheerBoard />}
@@ -184,8 +186,8 @@ function FormChart({ players, season }) {
     return <div className="rank-chart empty-chart">최근 경기 데이터를 불러오지 못했습니다.</div>
   }
 
-  const W = 320, H = 150
-  const padL = 30, padR = 56, padT = 10, padB = 18
+  const W = 320, H = 120
+  const padL = 30, padR = 56, padT = 8, padB = 8
   const N = Math.min(FORM_GAMES, Math.max(...valid.map((s) => s.vals.length)))
   const allVals = valid.flatMap((s) => s.vals)
   let minV = Math.min(...allVals), maxV = Math.max(...allVals)
@@ -238,8 +240,6 @@ function FormChart({ players, season }) {
         {labels.map((l, i) => (
           <text key={i} x={x(N - 1) + 5} y={l.yLab + 3} className="ch-name" fill={l.color}>{l.name}</text>
         ))}
-        <text x={padL} y={H - 4} className="ch-axis">{FORM_GAMES}경기 전</text>
-        <text x={W - padR} y={H - 4} textAnchor="end" className="ch-axis">최근</text>
       </svg>
     </div>
   )
@@ -279,6 +279,91 @@ function Leaderboard({ players, season }) {
       </div>
     </section>
   )
+}
+
+/* ---------- 톱10 실시간 성적 탭 ---------- */
+const LIVE_TOP10_MS = 90_000
+
+function LiveTop10({ players, season }) {
+  const top10 = useMemo(() => players.slice(0, 10), [players])
+  const ids = top10.map((p) => p.id).join(',')
+  const [games, setGames] = useState({})
+  const [status, setStatus] = useState('loading')
+
+  useEffect(() => {
+    let alive = true
+    const load = async () => {
+      const entries = await Promise.all(
+        top10.map(async (p) => {
+          try {
+            const url =
+              `https://statsapi.mlb.com/api/v1/people/${p.id}/stats` +
+              `?stats=gameLog&season=${season}&group=hitting&gameType=R`
+            const d = await (await fetch(url, { cache: 'no-store' })).json()
+            const splits = (d.stats?.[0]?.splits ?? []).slice().sort((a, b) => (a.date < b.date ? -1 : 1))
+            return [p.id, splits[splits.length - 1] ?? null]
+          } catch { return [p.id, null] }
+        }),
+      )
+      if (alive) { setGames(Object.fromEntries(entries)); setStatus('ok') }
+    }
+    setStatus('loading')
+    load()
+    const t = setInterval(load, LIVE_TOP10_MS)
+    return () => { alive = false; clearInterval(t) }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ids, season])
+
+  const today = new Date().toLocaleDateString('en-CA') // YYYY-MM-DD (로컬)
+
+  return (
+    <section className="card-section">
+      <h2 className="sec-title">🔥 타율 톱10 실시간 성적</h2>
+      <p className="sec-desc">상위 10명의 최근 경기 기록 · 90초마다 갱신</p>
+      <ul className="live-list">
+        {top10.map((p) => {
+          const g = games[p.id]
+          const st = g?.stat
+          const isToday = g?.date === today
+          return (
+            <li key={p.id} className={`live-row ${isLee(p) ? 'is-lee' : ''}`}>
+              <span className="live-rank">{p.rank}</span>
+              <div className="live-main">
+                <div className="live-top">
+                  <span className="live-name">{p.name} <span className="live-team">{p.team}</span></span>
+                  <span className="live-avg">{avg3(p.AVG)}</span>
+                </div>
+                <div className="live-game">
+                  {g ? (
+                    <>
+                      {isToday && <span className="live-badge">● LIVE</span>}
+                      <span className="live-date">
+                        {g.date?.slice(5).replace('-', '/')} {g.isHome ? 'vs' : '@'} {abbr(g.opponent?.name)}
+                      </span>
+                      <span className="live-line">
+                        {st?.atBats ?? 0}타수 {st?.hits ?? 0}안타
+                        {st?.homeRuns > 0 && ` · ${st.homeRuns}홈런`}
+                        {st?.rbi > 0 && ` · ${st.rbi}타점`}
+                        {st?.stolenBases > 0 && ` · ${st.stolenBases}도루`}
+                      </span>
+                    </>
+                  ) : (
+                    <span className="live-date">{status === 'loading' ? '불러오는 중…' : '경기 기록 없음'}</span>
+                  )}
+                </div>
+              </div>
+            </li>
+          )
+        })}
+      </ul>
+    </section>
+  )
+}
+
+// 팀 풀네임 → 짧은 약칭(마지막 단어)
+function abbr(name) {
+  if (!name) return ''
+  return name.split(' ').slice(-1)[0]
 }
 
 /* ---------- 이정후 비교 탭 ---------- */
