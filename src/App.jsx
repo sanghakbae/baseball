@@ -13,10 +13,16 @@ const fmt = (k, v) => {
   return def?.fmt ? def.fmt(v) : v
 }
 
+// 올스타 투표 기간 (미정 시 대략치 — 실제 일정 확정되면 수정) · 한국시간 기준
+const ASG_VOTE_START = '2026-06-01'
+const ASG_VOTE_END = '2026-07-03'
+const ASG_BALLOT_URL = 'https://www.mlb.com/all-star/ballot'
+const ASG_DISMISS_KEY = 'baseball-asg-dismissed'
+
 const TABS = [
   { id: 'predict', label: '🔮 예측' },
   { id: 'board', label: '📊 랭킹' },
-  { id: 'live', label: '🔥 톱10' },
+  { id: 'live', label: '🔴 Live' },
   { id: 'compare', label: '⚔️ 비교' },
   { id: 'zone', label: '🎯 이정후' },
   { id: 'cheer', label: '📣 응원' },
@@ -71,6 +77,41 @@ export default function App() {
       {tab === 'compare' && <Compare players={data.players} />}
       {tab === 'zone' && <LeeZone players={data.players} season={data.season} />}
       {tab === 'cheer' && <CheerBoard />}
+
+      <AllStarModal />
+    </div>
+  )
+}
+
+/* ---------- 올스타 투표 모달 ---------- */
+function AllStarModal() {
+  const today = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Seoul' })
+  const inPeriod = today >= ASG_VOTE_START && today <= ASG_VOTE_END
+  const [open, setOpen] = useState(() => {
+    if (!inPeriod) return false
+    try { return localStorage.getItem(ASG_DISMISS_KEY) !== today } catch { return true }
+  })
+
+  if (!inPeriod || !open) return null
+
+  const close = () => {
+    try { localStorage.setItem(ASG_DISMISS_KEY, today) } catch {}
+    setOpen(false)
+  }
+
+  return (
+    <div className="modal-overlay" onClick={close}>
+      <div className="modal" onClick={(e) => e.stopPropagation()}>
+        <div className="modal-emoji">⭐</div>
+        <h2 className="modal-title">2026 MLB 올스타 투표</h2>
+        <p className="modal-desc">
+          지금은 올스타 투표 기간! <b className="hl">이정후</b>를 올스타로 보냅시다 🇰🇷
+        </p>
+        <a className="modal-btn" href={ASG_BALLOT_URL} target="_blank" rel="noreferrer" onClick={close}>
+          이정후 투표하러 가기 →
+        </a>
+        <button className="modal-later" onClick={close}>오늘은 그만 보기</button>
+      </div>
     </div>
   )
 }
@@ -284,54 +325,79 @@ function Leaderboard({ players, season }) {
 /* ---------- 톱10 실시간 성적 탭 ---------- */
 const LIVE_TOP10_MS = 90_000
 
-function LiveTop10({ players, season }) {
+function LiveTop10({ players }) {
   const top10 = useMemo(() => players.slice(0, 10), [players])
   const ids = top10.map((p) => p.id).join(',')
-  const [games, setGames] = useState({})
+  const teamIds = top10.map((p) => p.teamId).join(',')
+  const [info, setInfo] = useState({ teamGame: {}, box: {} })
   const [status, setStatus] = useState('loading')
+
+  // MLB 경기는 미국 동부시간(ET) 기준 → 오늘 일정도 ET로
+  const today = new Date().toLocaleDateString('en-CA', { timeZone: 'America/New_York' })
 
   useEffect(() => {
     let alive = true
     const load = async () => {
-      const entries = await Promise.all(
-        top10.map(async (p) => {
+      try {
+        const sd = await (await fetch(
+          `https://statsapi.mlb.com/api/v1/schedule?sportId=1&date=${today}`, { cache: 'no-store' },
+        )).json()
+        const teamGame = {}
+        for (const dt of sd.dates ?? []) for (const g of dt.games ?? []) {
+          const base = { gamePk: g.gamePk, state: g.status?.abstractGameState, detailed: g.status?.detailedState }
+          const h = g.teams?.home?.team, a = g.teams?.away?.team
+          if (h) teamGame[h.id] = { ...base, oppName: a?.name, isHome: true }
+          if (a) teamGame[a.id] = { ...base, oppName: h?.name, isHome: false }
+        }
+        // 톱10 선수 팀의 경기 박스스코어(중복 제거)
+        const pks = [...new Set(top10.map((p) => teamGame[p.teamId]?.gamePk).filter(Boolean))]
+        const box = {}
+        await Promise.all(pks.map(async (pk) => {
           try {
-            const url =
-              `https://statsapi.mlb.com/api/v1/people/${p.id}/stats` +
-              `?stats=gameLog&season=${season}&group=hitting&gameType=R`
-            const d = await (await fetch(url, { cache: 'no-store' })).json()
-            const splits = (d.stats?.[0]?.splits ?? []).slice().sort((a, b) => (a.date < b.date ? -1 : 1))
-            return [p.id, splits[splits.length - 1] ?? null]
-          } catch { return [p.id, null] }
-        }),
-      )
-      if (alive) { setGames(Object.fromEntries(entries)); setStatus('ok') }
+            box[pk] = await (await fetch(
+              `https://statsapi.mlb.com/api/v1/game/${pk}/boxscore`, { cache: 'no-store' },
+            )).json()
+          } catch { /* 개별 실패 무시 */ }
+        }))
+        if (alive) { setInfo({ teamGame, box }); setStatus('ok') }
+      } catch {
+        if (alive) setStatus('error')
+      }
     }
     setStatus('loading')
     load()
     const t = setInterval(load, LIVE_TOP10_MS)
     return () => { alive = false; clearInterval(t) }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ids, season])
+  }, [ids, teamIds, today])
 
-  const today = new Date().toLocaleDateString('en-CA') // YYYY-MM-DD (로컬)
-  // 최신 경기일(가장 최근 24시간) 기준 — 날짜가 섞이지 않게 그날 경기만 표시
-  const dates = Object.values(games).map((g) => g?.date).filter(Boolean)
-  const latestDate = dates.length ? dates.slice().sort().slice(-1)[0] : null
-  const isLiveDay = latestDate === today
+  // 선수의 오늘 경기 정보 + 박스스코어 타격 라인
+  const gameOf = (p) => {
+    const tg = info.teamGame[p.teamId]
+    if (!tg) return null
+    const bx = info.box[tg.gamePk]
+    let bat = null
+    if (bx) {
+      for (const side of ['home', 'away']) {
+        const pl = bx.teams?.[side]?.players?.[`ID${p.id}`]
+        if (pl) { bat = pl.stats?.batting ?? null; break }
+      }
+    }
+    return { ...tg, bat }
+  }
+
+  const anyLive = top10.some((p) => info.teamGame[p.teamId]?.state === 'Live')
 
   return (
     <section className="card-section">
-      <h2 className="sec-title">🔥 타율 톱10 실시간 성적</h2>
+      <h2 className="sec-title">🔴 타율 톱10 실시간 성적</h2>
       <p className="sec-desc">
-        {latestDate ? `${latestDate.slice(5).replace('-', '/')} 경기 기준` : '최근 경기 기준'}
-        {isLiveDay && ' · LIVE'} · 90초 갱신
+        {today.slice(5).replace('-', '/')} 경기(미국시간){anyLive ? ' · LIVE' : ''} · 90초 갱신
       </p>
       <ul className="live-list">
         {top10.map((p) => {
-          const g = games[p.id]
-          const fresh = g && g.date === latestDate // 최신 경기일에 출전한 선수만
-          const st = fresh ? g.stat : null
+          const g = gameOf(p)
+          const bat = g?.bat
           return (
             <li key={p.id} className={`live-row ${isLee(p) ? 'is-lee' : ''}`}>
               <span className="live-rank">{p.rank}</span>
@@ -341,21 +407,27 @@ function LiveTop10({ players, season }) {
                   <span className="live-avg">{avg3(p.AVG)}</span>
                 </div>
                 <div className="live-game">
-                  {fresh ? (
-                    <>
-                      {isLiveDay && <span className="live-badge">● LIVE</span>}
-                      <span className="live-date">
-                        {g.isHome ? 'vs' : '@'} {abbr(g.opponent?.name)}
-                      </span>
-                      <span className="live-line">
-                        {st?.atBats ?? 0}타수 {st?.hits ?? 0}안타
-                        {st?.homeRuns > 0 && ` · ${st.homeRuns}홈런`}
-                        {st?.rbi > 0 && ` · ${st.rbi}타점`}
-                        {st?.stolenBases > 0 && ` · ${st.stolenBases}도루`}
-                      </span>
-                    </>
+                  {!g ? (
+                    <span className="live-line">{status === 'loading' ? '불러오는 중…' : '오늘 경기 없음 · -'}</span>
                   ) : (
-                    <span className="live-line">{status === 'loading' ? '불러오는 중…' : '경기 없음 · -'}</span>
+                    <>
+                      {g.state === 'Live' && <span className="live-badge">● LIVE</span>}
+                      {g.state === 'Final' && <span className="live-fin">종료</span>}
+                      <span className="live-date">{g.isHome ? 'vs' : '@'} {abbr(g.oppName)}</span>
+                      {g.state === 'Preview' ? (
+                        <span className="live-line">경기 예정</span>
+                      ) : bat ? (
+                        <span className="live-line">
+                          {bat.atBats ?? 0}타수 {bat.hits ?? 0}안타
+                          {bat.homeRuns > 0 && ` · ${bat.homeRuns}홈런`}
+                          {bat.rbi > 0 && ` · ${bat.rbi}타점`}
+                          {bat.baseOnBalls > 0 && ` · ${bat.baseOnBalls}볼넷`}
+                          {bat.stolenBases > 0 && ` · ${bat.stolenBases}도루`}
+                        </span>
+                      ) : (
+                        <span className="live-line">결장 · -</span>
+                      )}
+                    </>
                   )}
                 </div>
               </div>

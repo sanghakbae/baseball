@@ -299,6 +299,35 @@ tbody tr.is-lee .sticky, tbody tr.is-lee .sticky2 { background: #2a2a1f; }
 .zs-row b { color: var(--text); font-variant-numeric: tabular-nums; }
 .empty-mini { color: var(--muted); font-size: 12px; margin: 0; }
 
+/* ---- 올스타 투표 모달 ---- */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 100;
+  background: rgba(6, 12, 24, 0.72);
+  backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px;
+  animation: fade 0.2s ease;
+}
+.modal {
+  width: 100%; max-width: 320px;
+  background: var(--card); border: 1px solid var(--border);
+  border-top: 3px solid var(--lee);
+  border-radius: 12px; padding: 22px 20px; text-align: center;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+}
+.modal-emoji { font-size: 36px; line-height: 1; }
+.modal-title { font-size: 18px; margin: 10px 0 6px; }
+.modal-desc { font-size: 13px; color: var(--muted); line-height: 1.6; margin: 0 0 16px; }
+.modal-btn {
+  display: block; width: 100%; box-sizing: border-box;
+  background: var(--lee); color: #1a1304; font-weight: 800; font-size: 15px;
+  padding: 12px; border-radius: 8px; text-decoration: none;
+}
+.modal-later {
+  margin-top: 10px; background: none; border: none;
+  color: var(--muted); font-size: 12px; cursor: pointer;
+}
+
 /* ---- 톱10 실시간 성적 ---- */
 .live-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 5px; }
 .live-row {
@@ -316,6 +345,7 @@ tbody tr.is-lee .sticky, tbody tr.is-lee .sticky2 { background: #2a2a1f; }
 .live-row.is-lee .live-avg { color: var(--lee); }
 .live-game { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 8px; margin-top: 3px; font-size: 11px; color: var(--muted); }
 .live-badge { color: var(--win); font-weight: 700; font-size: 9.5px; }
+.live-fin { color: var(--muted); font-weight: 700; font-size: 9.5px; border: 1px solid var(--border); border-radius: 4px; padding: 0 4px; }
 .live-date { color: var(--muted); }
 .live-line { color: var(--text); }
 
