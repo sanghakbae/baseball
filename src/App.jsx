@@ -58,7 +58,17 @@ export default function App() {
   })
   useEffect(() => { localStorage.setItem(TAB_KEY, tab) }, [tab])
 
+  // 다크/라이트 테마
+  const [theme, setTheme] = useState(() => {
+    try { return localStorage.getItem('baseball-theme') || 'dark' } catch { return 'dark' }
+  })
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme
+    try { localStorage.setItem('baseball-theme', theme) } catch {}
+  }, [theme])
+
   if (loading) return <div className="page loading">데이터 불러오는 중…</div>
+  const toggleTheme = () => setTheme((t) => (t === 'dark' ? 'light' : 'dark'))
 
   const stamp = refreshedAt || data.updatedAt
   const updated = stamp
@@ -70,6 +80,9 @@ export default function App() {
   return (
     <div className="page">
       <header className="hero">
+        <button className="theme-btn" onClick={toggleTheme} title="테마 전환">
+          {theme === 'dark' ? '☀️' : '🌙'}
+        </button>
         <h1>2026년 누가 <span className="hl">타격왕</span>이 될까?</h1>
         <p className="updated">
           <span className={`live-dot ${live ? 'on' : ''} ${refreshing ? 'pulse' : ''}`} />

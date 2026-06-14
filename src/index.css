@@ -13,6 +13,19 @@
     'Malgun Gothic', system-ui, sans-serif;
 }
 
+/* 라이트 테마 */
+:root[data-theme="light"] {
+  --bg: #f3f6fc;
+  --bg-soft: #e8edf7;
+  --card: #ffffff;
+  --border: #d6dce9;
+  --text: #1b2333;
+  --muted: #5d6880;
+  --lee: #b07d09;
+  --opp: #1f6fd0;
+  --win: #149b66;
+}
+
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
 /* 문서 자체를 고정 → iOS Safari 고무줄/드래그 스크롤 차단 */
@@ -53,6 +66,17 @@ html, body {
   color: var(--muted); font-size: 15px;
 }
 
+/* 라이트 테마 — 하드코딩 배경 보정 */
+:root[data-theme="light"] .page {
+  background: radial-gradient(600px 340px at 50% -8%, #dbe5f6 0%, var(--bg) 55%);
+}
+:root[data-theme="light"] .tabs {
+  background: rgba(255, 255, 255, 0.92);
+}
+:root[data-theme="light"] .modal-overlay { background: rgba(20, 30, 50, 0.45); }
+:root[data-theme="light"] .modal-btn { color: #fff; }
+:root[data-theme="light"] .zval { text-shadow: none; }
+
 /* ---- hero ---- */
 .hero { text-align: center; margin-bottom: 6px; position: relative; }
 .eyebrow {
@@ -63,6 +87,11 @@ html, body {
 .hl { color: var(--lee); }
 .sub { color: var(--muted); font-size: 13px; line-height: 1.55; margin: 0 auto; max-width: 340px; }
 .updated { font-size: 10.5px; color: var(--muted); margin-top: 4px; display: inline-flex; align-items: center; gap: 5px; }
+.theme-btn {
+  position: absolute; top: 0; left: 0; margin: 0;
+  background: var(--card); border: 1px solid var(--border);
+  font-size: 12px; padding: 3px 8px; border-radius: 999px; cursor: pointer; line-height: 1;
+}
 .share-btn {
   position: absolute; top: 0; right: 0; margin: 0;
   background: var(--card); border: 1px solid var(--border);

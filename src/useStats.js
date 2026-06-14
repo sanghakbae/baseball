@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { lee, top5 } from './data.js'
-import { attachCareer, fetchQualifiedBatters, fetchTeamGamesPlayed } from './lib/mlb.js'
+import { attachCareer, fetchQualifiedBatters, fetchTeamGamesPlayed, fetchXBA } from './lib/mlb.js'
 
 const LIVE_INTERVAL_MS = 60_000 // 실시간 폴링 주기 (경기 중 갱신)
 
@@ -80,6 +80,8 @@ export function useStats() {
         players.sort((a, b) => b.AVG - a.AVG)
         players.forEach((p, i) => { p.rank = i + 1 })
         const withCareer = await attachCareer(players) // 통산 타율 prior (세션 캐시)
+        const xba = await fetchXBA(season) // xBA(세션 캐시) 병합
+        for (const p of withCareer) { if (xba[p.id] != null) p.xBA = xba[p.id] }
         if (!alive) return
         const now = new Date().toISOString()
         setData((prev) => ({

@@ -78,6 +78,8 @@ export function buildPredictions(players, teamGP, opts = {}) {
     if (p.careerAB > 0 && p.careerHits != null) {
       center = (p.careerHits + leagueMean * PRIOR_CAREER_K) / (p.careerAB + PRIOR_CAREER_K)
     }
+    // Statcast 기대타율(xBA)이 있으면 진짜 실력 신호로 블렌딩(현재 시즌 가중)
+    if (p.xBA != null) center = 0.45 * center + 0.55 * p.xBA
     const a0 = center * REGRESSION_AB
     const b0 = (1 - center) * REGRESSION_AB
     const alpha = a0 + p.H

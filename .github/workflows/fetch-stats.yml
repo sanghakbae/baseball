@@ -31,14 +31,20 @@ jobs:
           FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
         run: npm run fetch
 
+      - name: Generate OG card (current numbers)
+        run: |
+          sudo apt-get update && sudo apt-get install -y fonts-nanum
+          python3 -m pip install --quiet pillow
+          python3 scripts/make-og.py
+
       - name: Commit published snapshot
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add public/data/latest.json
+          git add public/data/latest.json public/og.png
           if git diff --staged --quiet; then
             echo "변경 없음 — 커밋 생략"
           else
-            git commit -m "data: hourly stats update [skip ci]"
+            git commit -m "data: hourly stats + OG card update"
             git push
           fi

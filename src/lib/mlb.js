@@ -78,6 +78,49 @@ export async function attachCareer(players) {
   return players.map((p) => ({ ...p, ...(_careerCache[p.id] || {}) }))
 }
 
+// CSV 한 줄 파싱(따옴표 안 콤마 처리)
+function parseCsvLine(line) {
+  const out = []
+  let cur = '', q = false
+  for (let i = 0; i < line.length; i++) {
+    const ch = line[i]
+    if (q) {
+      if (ch === '"') { if (line[i + 1] === '"') { cur += '"'; i++ } else q = false }
+      else cur += ch
+    } else if (ch === '"') q = true
+    else if (ch === ',') { out.push(cur); cur = '' }
+    else cur += ch
+  }
+  out.push(cur)
+  return out
+}
+
+// Statcast 기대 타율(xBA = est_ba) — 선수ID → xBA. CORS 허용됨. 세션 캐시.
+let _xbaCache = null
+export async function fetchXBA(season) {
+  if (_xbaCache) return _xbaCache
+  const map = {}
+  try {
+    const url = `https://baseballsavant.mlb.com/leaderboard/expected_statistics?type=batter&year=${season}&min=q&csv=true`
+    const text = await (await fetch(url, { cache: 'no-store' })).text()
+    const lines = text.trim().split('\n')
+    const header = parseCsvLine(lines[0].replace(/^﻿/, ''))
+    const idIdx = header.indexOf('player_id')
+    const xbaIdx = header.indexOf('est_ba')
+    if (idIdx >= 0 && xbaIdx >= 0) {
+      for (let i = 1; i < lines.length; i++) {
+        const c = parseCsvLine(lines[i])
+        const id = Number(c[idIdx]); const xba = Number(c[xbaIdx])
+        if (id && !Number.isNaN(xba)) map[id] = xba
+      }
+    }
+  } catch (e) {
+    console.warn('xBA 조회 실패:', e.message)
+  }
+  _xbaCache = map
+  return map
+}
+
 export async function fetchTeamGamesPlayed(season) {
   const url = `${API}/standings?leagueId=103,104&season=${season}&standingsTypes=regularSeason`
   const data = await getJson(url)
@@ -99,6 +142,8 @@ export async function buildPayload(season, opts = {}) {
   players.sort((a, b) => b.AVG - a.AVG)
   players.forEach((p, i) => { p.rank = i + 1 })
   const withCareer = await attachCareer(players) // 통산 타율 prior 부착
+  const xba = await fetchXBA(season) // Statcast 기대타율(xBA)
+  for (const p of withCareer) { if (xba[p.id] != null) p.xBA = xba[p.id] }
 
   const { leagueMean, predictions } = buildPredictions(withCareer, teamGP, {
     scheduleGames: SCHEDULE_GAMES,
