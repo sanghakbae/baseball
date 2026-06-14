@@ -329,28 +329,45 @@ function LiveTop10({ players }) {
   const top10 = useMemo(() => players.slice(0, 10), [players])
   const ids = top10.map((p) => p.id).join(',')
   const teamIds = top10.map((p) => p.teamId).join(',')
-  const [info, setInfo] = useState({ teamGame: {}, box: {} })
+  const [info, setInfo] = useState({ chosen: {}, box: {} })
   const [status, setStatus] = useState('loading')
 
-  // MLB 경기는 미국 동부시간(ET) 기준 → 오늘 일정도 ET로
+  // MLB 경기는 미국 동부시간(ET) 기준
   const today = new Date().toLocaleDateString('en-CA', { timeZone: 'America/New_York' })
 
   useEffect(() => {
     let alive = true
     const load = async () => {
       try {
+        // 어제~오늘(ET) 일정 — 새 경기가 시작되기 전까진 직전 경기 결과를 유지하기 위해
+        const yd = new Date(`${today}T12:00:00Z`)
+        yd.setUTCDate(yd.getUTCDate() - 1)
+        const yesterday = yd.toISOString().slice(0, 10)
         const sd = await (await fetch(
-          `https://statsapi.mlb.com/api/v1/schedule?sportId=1&date=${today}`, { cache: 'no-store' },
+          `https://statsapi.mlb.com/api/v1/schedule?sportId=1&startDate=${yesterday}&endDate=${today}`,
+          { cache: 'no-store' },
         )).json()
-        const teamGame = {}
+        const teamGames = {}
         for (const dt of sd.dates ?? []) for (const g of dt.games ?? []) {
-          const base = { gamePk: g.gamePk, state: g.status?.abstractGameState, detailed: g.status?.detailedState }
+          const mk = (oppName, isHome) => ({
+            date: dt.date, gamePk: g.gamePk,
+            state: g.status?.abstractGameState, detailed: g.status?.detailedState, oppName, isHome,
+          })
           const h = g.teams?.home?.team, a = g.teams?.away?.team
-          if (h) teamGame[h.id] = { ...base, oppName: a?.name, isHome: true }
-          if (a) teamGame[a.id] = { ...base, oppName: h?.name, isHome: false }
+          if (h) (teamGames[h.id] = teamGames[h.id] || []).push(mk(a?.name, true))
+          if (a) (teamGames[a.id] = teamGames[a.id] || []).push(mk(h?.name, false))
         }
-        // 톱10 선수 팀의 경기 박스스코어(중복 제거)
-        const pks = [...new Set(top10.map((p) => teamGame[p.teamId]?.gamePk).filter(Boolean))]
+        // 팀별 '현재/최근' 경기: 진행 중 > 가장 최근 완료 > 예정
+        const chosen = {}
+        for (const [tid, list] of Object.entries(teamGames)) {
+          const desc = list.slice().sort((x, z) => (x.date < z.date ? 1 : -1))
+          chosen[tid] = desc.find((g) => g.state === 'Live')
+            || desc.find((g) => g.state === 'Final') || desc[0]
+        }
+        // 시작된 경기만 박스스코어 조회
+        const pks = [...new Set(
+          top10.map((p) => chosen[p.teamId]).filter((g) => g && g.state !== 'Preview').map((g) => g.gamePk),
+        )]
         const box = {}
         await Promise.all(pks.map(async (pk) => {
           try {
@@ -359,7 +376,7 @@ function LiveTop10({ players }) {
             )).json()
           } catch { /* 개별 실패 무시 */ }
         }))
-        if (alive) { setInfo({ teamGame, box }); setStatus('ok') }
+        if (alive) { setInfo({ chosen, box }); setStatus('ok') }
       } catch {
         if (alive) setStatus('error')
       }
@@ -371,11 +388,11 @@ function LiveTop10({ players }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ids, teamIds, today])
 
-  // 선수의 오늘 경기 정보 + 박스스코어 타격 라인
+  // 선수의 현재/최근 경기 + 박스스코어 타격 라인
   const gameOf = (p) => {
-    const tg = info.teamGame[p.teamId]
-    if (!tg) return null
-    const bx = info.box[tg.gamePk]
+    const g = info.chosen[p.teamId]
+    if (!g) return null
+    const bx = info.box[g.gamePk]
     let bat = null
     if (bx) {
       for (const side of ['home', 'away']) {
@@ -383,16 +400,16 @@ function LiveTop10({ players }) {
         if (pl) { bat = pl.stats?.batting ?? null; break }
       }
     }
-    return { ...tg, bat }
+    return { ...g, bat }
   }
 
-  const anyLive = top10.some((p) => info.teamGame[p.teamId]?.state === 'Live')
+  const anyLive = top10.some((p) => info.chosen[p.teamId]?.state === 'Live')
 
   return (
     <section className="card-section">
       <h2 className="sec-title">🔴 타율 톱10 실시간 성적</h2>
       <p className="sec-desc">
-        {today.slice(5).replace('-', '/')} 경기(미국시간){anyLive ? ' · LIVE' : ''} · 90초 갱신
+        미국시간 기준 · 현재/최근 경기{anyLive ? ' · LIVE' : ''} · 90초 갱신
       </p>
       <ul className="live-list">
         {top10.map((p) => {
@@ -413,7 +430,9 @@ function LiveTop10({ players }) {
                     <>
                       {g.state === 'Live' && <span className="live-badge">● LIVE</span>}
                       {g.state === 'Final' && <span className="live-fin">종료</span>}
-                      <span className="live-date">{g.isHome ? 'vs' : '@'} {abbr(g.oppName)}</span>
+                      <span className="live-date">
+                        {g.date?.slice(5).replace('-', '/')} {g.isHome ? 'vs' : '@'} {abbr(g.oppName)}
+                      </span>
                       {g.state === 'Preview' ? (
                         <span className="live-line">경기 예정</span>
                       ) : bat ? (
