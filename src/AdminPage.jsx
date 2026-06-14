@@ -26,7 +26,7 @@ function Login() {
   const submit = async (e) => {
     e.preventDefault()
     setErr(''); setBusy(true)
-    const email = id.includes('@') ? id : `${id}@${ADMIN_DOMAIN}`
+    const email = id.includes('@') ? id.trim() : `${id.trim()}@${ADMIN_DOMAIN}`
     try {
       await signInWithEmailAndPassword(auth, email, pw)
     } catch (e2) {
@@ -43,7 +43,7 @@ function Login() {
       <form className="admin-login" onSubmit={submit}>
         <div className="admin-emoji">🔒</div>
         <h1 className="admin-h1">관리자 로그인</h1>
-        <input className="admin-input" placeholder="아이디" value={id}
+        <input className="admin-input" type="email" placeholder="이메일 (totoriverce@gmail.com)" value={id}
           autoCapitalize="off" autoCorrect="off" onChange={(e) => setId(e.target.value)} />
         <input className="admin-input" type="password" placeholder="비밀번호" value={pw}
           onChange={(e) => setPw(e.target.value)} />
@@ -90,7 +90,7 @@ function Stats({ onLogout, email }) {
       total: visits.length,
       uniqIp: new Set(visits.map((v) => v.ip).filter(Boolean)).size,
       byCountry: tally(visits.map((v) => v.country || '미상')).slice(0, 8),
-      byRegion: tally(visits.map((v) => [v.city, v.region].filter(Boolean).join(', ') || '미상')).slice(0, 8),
+      byRegion: tally(visits.map((v) => [...new Set([v.city, v.region].filter(Boolean))].join(', ') || '미상')).slice(0, 8),
       byRef: tally(visits.map((v) => refHost(v.ref))).slice(0, 8),
       byDay: tally(visits.map((v) => dayKey(v.ts))).sort((a, b) => (a[0] < b[0] ? 1 : -1)).slice(0, 10),
       recent: visits.slice(0, 60),
