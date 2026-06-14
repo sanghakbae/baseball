@@ -348,7 +348,7 @@ function LiveTop10({ players, season }) {
                       </span>
                     </>
                   ) : (
-                    <span className="live-date">{status === 'loading' ? '불러오는 중…' : '경기 기록 없음'}</span>
+                    <span className="live-line">{status === 'loading' ? '불러오는 중…' : '-'}</span>
                   )}
                 </div>
               </div>
@@ -444,12 +444,8 @@ function PlayerColumn({ player, side }) {
     <div className={`player-card ${side}`}>
       <span className="rank-pill">{player.rank}위</span>
       <h2 className="p-name">{player.name}</h2>
-      <p className="p-meta">{player.team}{player.pos ? ` · ${player.pos}` : ''}</p>
       <div className="p-avg">
         <span className="p-avg-val">{avg3(player.AVG)}</span>
-      </div>
-      <div className="p-slash">
-        {avg3(player.OBP)} / {avg3(player.SLG)} / {avg3(player.OPS)}
       </div>
     </div>
   )
