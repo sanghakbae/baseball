@@ -8,6 +8,8 @@ import { STAT_KEYS, HIGHER_IS_BETTER } from './data.js'
 const avg3 = (v) => (v == null ? '—' : v.toFixed(3).replace(/^0/, ''))
 const pct = (v) => `${(v * 100).toFixed(1)}%`
 const isLee = (p) => p?.name === '이정후' || p?.name === 'Jung Hoo Lee'
+const systemTheme = () =>
+  (typeof window !== 'undefined' && window.matchMedia?.('(prefers-color-scheme: light)').matches ? 'light' : 'dark')
 
 const fmt = (k, v) => {
   const def = STAT_KEYS.find((s) => s.key === k)
@@ -58,17 +60,31 @@ export default function App() {
   })
   useEffect(() => { localStorage.setItem(TAB_KEY, tab) }, [tab])
 
-  // 다크/라이트 테마
+  // 다크/라이트 테마 — 저장된 수동 선택이 없으면 시스템 설정을 따름
   const [theme, setTheme] = useState(() => {
-    try { return localStorage.getItem('baseball-theme') || 'dark' } catch { return 'dark' }
+    try { const s = localStorage.getItem('baseball-theme'); if (s === 'dark' || s === 'light') return s } catch {}
+    return systemTheme()
   })
+  useEffect(() => { document.documentElement.dataset.theme = theme }, [theme])
+  // 시스템 설정 변경에 실시간 반응(수동 선택이 없을 때만)
   useEffect(() => {
-    document.documentElement.dataset.theme = theme
-    try { localStorage.setItem('baseball-theme', theme) } catch {}
-  }, [theme])
+    const mq = window.matchMedia?.('(prefers-color-scheme: light)')
+    if (!mq) return
+    const onChange = () => {
+      let saved = null
+      try { saved = localStorage.getItem('baseball-theme') } catch {}
+      if (saved !== 'dark' && saved !== 'light') setTheme(systemTheme())
+    }
+    mq.addEventListener?.('change', onChange)
+    return () => mq.removeEventListener?.('change', onChange)
+  }, [])
 
   if (loading) return <div className="page loading">데이터 불러오는 중…</div>
-  const toggleTheme = () => setTheme((t) => (t === 'dark' ? 'light' : 'dark'))
+  const toggleTheme = () => setTheme((t) => {
+    const n = t === 'dark' ? 'light' : 'dark'
+    try { localStorage.setItem('baseball-theme', n) } catch {}
+    return n
+  })
 
   const stamp = refreshedAt || data.updatedAt
   const updated = stamp
