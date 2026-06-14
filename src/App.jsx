@@ -315,16 +315,23 @@ function LiveTop10({ players, season }) {
   }, [ids, season])
 
   const today = new Date().toLocaleDateString('en-CA') // YYYY-MM-DD (로컬)
+  // 최신 경기일(가장 최근 24시간) 기준 — 날짜가 섞이지 않게 그날 경기만 표시
+  const dates = Object.values(games).map((g) => g?.date).filter(Boolean)
+  const latestDate = dates.length ? dates.slice().sort().slice(-1)[0] : null
+  const isLiveDay = latestDate === today
 
   return (
     <section className="card-section">
       <h2 className="sec-title">🔥 타율 톱10 실시간 성적</h2>
-      <p className="sec-desc">상위 10명의 최근 경기 기록 · 90초마다 갱신</p>
+      <p className="sec-desc">
+        {latestDate ? `${latestDate.slice(5).replace('-', '/')} 경기 기준` : '최근 경기 기준'}
+        {isLiveDay && ' · LIVE'} · 90초 갱신
+      </p>
       <ul className="live-list">
         {top10.map((p) => {
           const g = games[p.id]
-          const st = g?.stat
-          const isToday = g?.date === today
+          const fresh = g && g.date === latestDate // 최신 경기일에 출전한 선수만
+          const st = fresh ? g.stat : null
           return (
             <li key={p.id} className={`live-row ${isLee(p) ? 'is-lee' : ''}`}>
               <span className="live-rank">{p.rank}</span>
@@ -334,11 +341,11 @@ function LiveTop10({ players, season }) {
                   <span className="live-avg">{avg3(p.AVG)}</span>
                 </div>
                 <div className="live-game">
-                  {g ? (
+                  {fresh ? (
                     <>
-                      {isToday && <span className="live-badge">● LIVE</span>}
+                      {isLiveDay && <span className="live-badge">● LIVE</span>}
                       <span className="live-date">
-                        {g.date?.slice(5).replace('-', '/')} {g.isHome ? 'vs' : '@'} {abbr(g.opponent?.name)}
+                        {g.isHome ? 'vs' : '@'} {abbr(g.opponent?.name)}
                       </span>
                       <span className="live-line">
                         {st?.atBats ?? 0}타수 {st?.hits ?? 0}안타
@@ -348,7 +355,7 @@ function LiveTop10({ players, season }) {
                       </span>
                     </>
                   ) : (
-                    <span className="live-line">{status === 'loading' ? '불러오는 중…' : '-'}</span>
+                    <span className="live-line">{status === 'loading' ? '불러오는 중…' : '경기 없음 · -'}</span>
                   )}
                 </div>
               </div>
