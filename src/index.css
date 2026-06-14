@@ -422,7 +422,38 @@ tbody tr.is-lee .sticky, tbody tr.is-lee .sticky2 { background: #2a2a1f; }
 .live-date { color: var(--muted); }
 .live-line { color: var(--text); }
 
+/* ---- 타율왕 예측 투표 ---- */
+.vote-card { margin-top: 16px; background: var(--bg-soft); border: 1px solid var(--border); border-radius: 7px; padding: 12px; }
+.vote-title { margin: 0 0 10px; font-size: 14px; }
+.vote-opts { display: flex; gap: 6px; flex-wrap: wrap; }
+.vote-opt {
+  flex: 1 1 0; min-width: 60px;
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  background: var(--card); border: 1px solid var(--border); border-radius: 6px;
+  padding: 8px 4px; color: var(--text); font-size: 11px; font-weight: 600; cursor: pointer;
+}
+.vote-opt:active { border-color: var(--opp); }
+.vote-photo { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; background: var(--card); }
+.vote-result { display: flex; flex-direction: column; gap: 6px; }
+.vote-row { display: grid; grid-template-columns: 1fr 2fr auto; align-items: center; gap: 8px; font-size: 12px; }
+.vote-row.mine .vote-name { color: var(--lee); font-weight: 700; }
+.vote-name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.vote-bar { background: var(--card); border-radius: 999px; height: 8px; overflow: hidden; }
+.vote-bar span { display: block; height: 100%; background: linear-gradient(90deg, var(--opp), var(--win)); border-radius: 999px; }
+.vote-row.mine .vote-bar span { background: linear-gradient(90deg, var(--lee), #ffb347); }
+.vote-pct { color: var(--muted); font-variant-numeric: tabular-nums; min-width: 30px; text-align: right; }
+.vote-total { margin: 6px 0 0; font-size: 11px; color: var(--muted); text-align: center; }
+
+/* ---- 경쟁 격차 그래프 ---- */
+.gap-wrap { margin-bottom: 12px; }
+.gap-title { margin: 0 0 5px; font-size: 11.5px; color: var(--muted); }
+
 /* ---- 응원 게시판 ---- */
+.cheer-sort { display: flex; gap: 4px; }
+.cheer-sort button { background: var(--card); border: 1px solid var(--border); color: var(--muted); font-size: 11px; padding: 3px 9px; border-radius: 999px; cursor: pointer; }
+.cheer-sort button.on { background: var(--opp); border-color: var(--opp); color: #06101f; font-weight: 700; }
+.cheer-like { flex: 0 0 auto; background: none; border: 1px solid var(--border); border-radius: 999px; color: var(--muted); font-size: 11px; padding: 2px 8px; cursor: pointer; white-space: nowrap; }
+.cheer-like.liked { color: #ff6b8a; border-color: #ff6b8a; }
 .cheer-form { display: flex; gap: 6px; margin-bottom: 10px; }
 .cheer-input {
   flex: 1; min-width: 0;

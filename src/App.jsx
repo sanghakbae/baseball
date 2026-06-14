@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { useStats } from './useStats.js'
 import { useVisitors } from './useVisitors.js'
 import { useCheers } from './useCheers.js'
+import { useVote } from './useVote.js'
 import { STAT_KEYS, HIGHER_IS_BETTER } from './data.js'
 
 const avg3 = (v) => (v == null ? '—' : v.toFixed(3).replace(/^0/, ''))
@@ -195,6 +196,7 @@ function Predict({ data }) {
       </div>
       <p className="sec-desc">평균회귀 실력 추정 + 잔여 타석 2만 회 시뮬레이션 결과</p>
       <ScenarioCard players={data.players} />
+      <GapChart players={data.players} season={data.season} />
       <ol className="pred-list">
         {preds.slice(0, 10).map((p, i) => (
           <li key={p.id} className={`pred-row ${isLee(p) ? 'is-lee' : ''}`}>
@@ -215,7 +217,63 @@ function Predict({ data }) {
           </li>
         ))}
       </ol>
+
+      <VoteCard players={data.players} />
     </section>
+  )
+}
+
+/* ---------- 1위 vs 이정후 경쟁 격차 그래프 ---------- */
+function GapChart({ players, season }) {
+  const lee = players.find(isLee)
+  const leader = players[0]
+  if (!lee || !leader || isLee(leader)) return null
+  return (
+    <div className="gap-wrap">
+      <p className="gap-title">📉 최근 10경기 · 1위({abbr2(leader.name)}) vs 이정후 추이</p>
+      <FormChart players={players} season={season} picks={[leader, lee]} />
+    </div>
+  )
+}
+const abbr2 = (name) => (name ? name.split(' ').slice(-1)[0] : '')
+
+/* ---------- 타율왕 예측 투표 ---------- */
+function VoteCard({ players }) {
+  const { counts, voted, vote } = useVote()
+  const cands = players.slice(0, 5)
+  const total = counts ? Object.values(counts).reduce((a, b) => a + (b || 0), 0) : 0
+
+  return (
+    <div className="vote-card">
+      <h3 className="vote-title">🗳️ 당신의 예상 타율왕은?</h3>
+      {!voted ? (
+        <div className="vote-opts">
+          {cands.map((p) => (
+            <button key={p.id} className="vote-opt" onClick={() => vote(p.id)}>
+              <img className="vote-photo" src={headshot(p.id)} alt="" loading="lazy" onError={hideOnError} />
+              <span>{p.name}</span>
+            </button>
+          ))}
+        </div>
+      ) : (
+        <div className="vote-result">
+          {cands
+            .map((p) => ({ p, n: counts?.[String(p.id)] || 0 }))
+            .sort((a, b) => b.n - a.n)
+            .map(({ p, n }) => {
+              const pctv = total ? Math.round((n / total) * 100) : 0
+              return (
+                <div key={p.id} className={`vote-row ${String(p.id) === voted ? 'mine' : ''}`}>
+                  <span className="vote-name">{p.name}{String(p.id) === voted && ' ✓'}</span>
+                  <span className="vote-bar"><span style={{ width: `${pctv}%` }} /></span>
+                  <span className="vote-pct">{pctv}%</span>
+                </div>
+              )
+            })}
+          <p className="vote-total">총 {total.toLocaleString()}표 · 투표 완료</p>
+        </div>
+      )}
+    </div>
   )
 }
 
@@ -225,13 +283,14 @@ const CHART_COLORS = ['#4aa8ff', '#34d399', '#f472b6', '#a78bfa', '#fb923c', '#2
 const FORM_GAMES = 10 // 최근 N경기
 
 // 최근 10경기 동안의 누적 타율 추이 (각 선수 gameLog 기반)
-function FormChart({ players, season }) {
+function FormChart({ players, season, picks }) {
   const tracked = useMemo(() => {
+    if (picks) return picks.filter(Boolean)
     const lee = players.find(isLee)
     const t = players.slice(0, 6)
     if (lee && !t.includes(lee)) t.push(lee)
     return t
-  }, [players])
+  }, [players, picks])
   const ids = tracked.map((p) => p.id).join(',')
 
   const [series, setSeries] = useState(null)
@@ -624,15 +683,25 @@ function timeAgo(createdAt) {
 
 const CHEER_PAGE_SIZE = 20
 
+const LIKED_KEY = 'baseball-liked'
+const loadLiked = () => { try { return new Set(JSON.parse(localStorage.getItem(LIKED_KEY) || '[]')) } catch { return new Set() } }
+
 function CheerBoard() {
-  const { cheers, post, error } = useCheers()
+  const { cheers, post, like, error } = useCheers()
   const [text, setText] = useState('')
   const [sending, setSending] = useState(false)
   const [page, setPage] = useState(0)
+  const [sort, setSort] = useState('new') // new | hot
+  const [liked, setLiked] = useState(loadLiked)
 
-  const pageCount = Math.max(1, Math.ceil(cheers.length / CHEER_PAGE_SIZE))
+  const sorted = useMemo(() => {
+    if (sort === 'hot') return [...cheers].sort((a, b) => (b.likes || 0) - (a.likes || 0))
+    return cheers
+  }, [cheers, sort])
+
+  const pageCount = Math.max(1, Math.ceil(sorted.length / CHEER_PAGE_SIZE))
   const safePage = Math.min(page, pageCount - 1)
-  const shown = cheers.slice(safePage * CHEER_PAGE_SIZE, safePage * CHEER_PAGE_SIZE + CHEER_PAGE_SIZE)
+  const shown = sorted.slice(safePage * CHEER_PAGE_SIZE, safePage * CHEER_PAGE_SIZE + CHEER_PAGE_SIZE)
 
   const submit = async (e) => {
     e.preventDefault()
@@ -648,9 +717,22 @@ function CheerBoard() {
     }
   }
 
+  const onLike = (id) => {
+    if (liked.has(id)) return
+    const next = new Set(liked); next.add(id); setLiked(next)
+    try { localStorage.setItem(LIKED_KEY, JSON.stringify([...next])) } catch {}
+    like(id)
+  }
+
   return (
     <section className="card-section">
-      <h2 className="sec-title">📣 이정후 응원 게시판</h2>
+      <div className="sec-head">
+        <h2 className="sec-title">📣 이정후 응원 게시판</h2>
+        <div className="cheer-sort">
+          <button className={sort === 'new' ? 'on' : ''} onClick={() => setSort('new')}>최신</button>
+          <button className={sort === 'hot' ? 'on' : ''} onClick={() => setSort('hot')}>인기</button>
+        </div>
+      </div>
       <p className="sec-desc">익명으로 응원 메시지를 남겨보세요 · 실시간</p>
 
       <form className="cheer-form" onSubmit={submit}>
@@ -674,6 +756,13 @@ function CheerBoard() {
           <li key={c.id} className="cheer-item">
             <span className="cheer-time">{timeAgo(c.createdAt)}</span>
             <p className="cheer-text">{c.text}</p>
+            <button
+              className={`cheer-like ${liked.has(c.id) ? 'liked' : ''}`}
+              onClick={() => onLike(c.id)}
+              disabled={liked.has(c.id)}
+            >
+              ♥ {c.likes || 0}
+            </button>
           </li>
         ))}
       </ul>

@@ -13,6 +13,11 @@ service cloud.firestore {
       allow write: if true;
     }
 
+    // 타율왕 예측 투표: 집계 카운터(클라이언트 증가 허용)
+    match /meta/votes {
+      allow read, write: if true;
+    }
+
     // 방문 로그(IP·위치·유입경로): 생성은 누구나, 읽기는 관리자 계정만(개인정보 보호)
     match /visits/{id} {
       allow create: if true;
@@ -24,13 +29,15 @@ service cloud.firestore {
       allow update, delete: if false;
     }
 
-    // 익명 응원 게시판: 누구나 읽기, 생성만 가능(수정/삭제 불가). 내용 길이 제한.
+    // 익명 응원 게시판: 누구나 읽기, 생성 가능. 수정은 좋아요(likes)만 허용.
     match /cheers/{id} {
       allow read: if true;
       allow create: if request.resource.data.text is string
                     && request.resource.data.text.size() > 0
                     && request.resource.data.text.size() <= 200;
-      allow update, delete: if false;
+      allow update: if request.resource.data.text == resource.data.text
+                    && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['likes']);
+      allow delete: if false;
     }
 
     // 그 외: 읽기만 허용(수집기는 Admin SDK로 규칙 우회)

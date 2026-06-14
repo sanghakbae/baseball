@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import {
-  addDoc, collection, limit, onSnapshot, orderBy, query, serverTimestamp,
+  addDoc, collection, doc, increment, limit, onSnapshot, orderBy, query, serverTimestamp, updateDoc,
 } from 'firebase/firestore'
 import { db } from './firebase.js'
 
@@ -33,5 +33,13 @@ export function useCheers() {
     })
   }
 
-  return { cheers, post, error }
+  const like = async (id) => {
+    try {
+      await updateDoc(doc(db, 'cheers', id), { likes: increment(1) })
+    } catch (e) {
+      console.warn('좋아요 실패:', e.message)
+    }
+  }
+
+  return { cheers, post, like, error }
 }
