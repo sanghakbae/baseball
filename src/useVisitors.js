@@ -14,16 +14,16 @@ async function logVisit() {
   } catch { /* 무시 */ }
   try {
     let geo = {}
+    // 1) IPv4 먼저 확보 (실패해도 위치 조회는 계속)
+    try { geo.ip = (await (await fetch('https://api4.ipify.org?format=json')).json()).ip } catch {}
+    // 2) 위치 조회 (geojs: CORS·무료). IPv4가 있으면 그 IP로, 없으면 접속 IP로
     try {
-      const r = await fetch('https://ipapi.co/json/')
-      if (r.ok) {
-        const j = await r.json()
-        if (!j.error) geo = { ip: j.ip, city: j.city, region: j.region, country: j.country_name }
-      }
-    } catch { /* geo 실패 시 IP만 */ }
-    if (!geo.ip) {
-      try { geo.ip = (await (await fetch('https://api.ipify.org?format=json')).json()).ip } catch {}
-    }
+      const url = geo.ip
+        ? `https://get.geojs.io/v1/ip/geo/${geo.ip}.json`
+        : 'https://get.geojs.io/v1/ip/geo.json'
+      const g = await (await fetch(url)).json()
+      geo = { ip: geo.ip || g.ip, city: g.city, region: g.region, country: g.country }
+    } catch { /* 위치 실패 시 IP만 기록 */ }
     await addDoc(collection(db, 'visits'), {
       ip: geo.ip || 'unknown',
       city: geo.city || null,
