@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { lee, top5 } from './data.js'
-import { fetchQualifiedBatters, fetchTeamGamesPlayed } from './lib/mlb.js'
+import { attachCareer, fetchQualifiedBatters, fetchTeamGamesPlayed } from './lib/mlb.js'
 
 const LIVE_INTERVAL_MS = 60_000 // 실시간 폴링 주기 (경기 중 갱신)
 
@@ -79,14 +79,15 @@ export function useStats() {
         ])
         players.sort((a, b) => b.AVG - a.AVG)
         players.forEach((p, i) => { p.rank = i + 1 })
+        const withCareer = await attachCareer(players) // 통산 타율 prior (세션 캐시)
         if (!alive) return
         const now = new Date().toISOString()
         setData((prev) => ({
           ...(prev ?? {}),
           updatedAt: now,
           season,
-          qualifiedCount: players.length,
-          players,
+          qualifiedCount: withCareer.length,
+          players: withCareer,
           teamGP,
         }))
         setRefreshedAt(now)
@@ -94,7 +95,7 @@ export function useStats() {
         setIsFallback(false)
         // 예측 재계산 (워커). 워커 없으면 직전 예측 유지.
         if (workerRef.current) {
-          workerRef.current.postMessage({ players, teamGP, season, sims: 12000 })
+          workerRef.current.postMessage({ players: withCareer, teamGP, season, sims: 12000 })
         }
       } catch (err) {
         console.warn('실시간 갱신 실패:', err.message)

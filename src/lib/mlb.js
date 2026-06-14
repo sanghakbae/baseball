@@ -48,6 +48,36 @@ export async function fetchQualifiedBatters(season) {
   })
 }
 
+// 통산 타율 캐시 (시즌 중 거의 안 변하므로 세션당 1회 조회)
+const _careerCache = {}
+const chunk = (arr, n) => {
+  const out = []
+  for (let i = 0; i < arr.length; i += n) out.push(arr.slice(i, i + n))
+  return out
+}
+
+// 선수들에게 통산 타율(careerAVG/careerAB/careerHits)을 붙인다. 미조회 ID만 일괄 요청.
+export async function attachCareer(players) {
+  const missing = [...new Set(players.map((p) => p.id).filter((id) => !(id in _careerCache)))]
+  const hydrate = encodeURIComponent('stats(group=[hitting],type=[career])')
+  for (const ids of chunk(missing, 100)) {
+    try {
+      const d = await getJson(`${API}/people?personIds=${ids.join(',')}&hydrate=${hydrate}`)
+      for (const per of d.people ?? []) {
+        let st = null
+        for (const blk of per.stats ?? []) for (const sp of blk.splits ?? []) st = sp.stat
+        _careerCache[per.id] = st
+          ? { careerAVG: Number(st.avg), careerAB: st.atBats, careerHits: st.hits }
+          : {}
+      }
+    } catch (e) {
+      console.warn('통산 스탯 조회 실패:', e.message)
+    }
+    for (const id of ids) if (!(id in _careerCache)) _careerCache[id] = {} // 재요청 방지
+  }
+  return players.map((p) => ({ ...p, ...(_careerCache[p.id] || {}) }))
+}
+
 export async function fetchTeamGamesPlayed(season) {
   const url = `${API}/standings?leagueId=103,104&season=${season}&standingsTypes=regularSeason`
   const data = await getJson(url)
@@ -68,8 +98,9 @@ export async function buildPayload(season, opts = {}) {
   ])
   players.sort((a, b) => b.AVG - a.AVG)
   players.forEach((p, i) => { p.rank = i + 1 })
+  const withCareer = await attachCareer(players) // 통산 타율 prior 부착
 
-  const { leagueMean, predictions } = buildPredictions(players, teamGP, {
+  const { leagueMean, predictions } = buildPredictions(withCareer, teamGP, {
     scheduleGames: SCHEDULE_GAMES,
     season,
     ...opts,
@@ -78,10 +109,10 @@ export async function buildPayload(season, opts = {}) {
   return {
     updatedAt: new Date().toISOString(),
     season,
-    qualifiedCount: players.length,
+    qualifiedCount: withCareer.length,
     leagueMean,
     scheduleGames: SCHEDULE_GAMES,
-    players,
+    players: withCareer,
     predictions,
     teamGP, // 클라이언트가 워커에서 재계산할 때 재사용
   }

@@ -62,23 +62,29 @@ export function buildPredictions(players, teamGP, opts = {}) {
   const seed = (opts.season ?? 2026) ^ 0x9e3779b1
   const gp = (id) => (teamGP instanceof Map ? teamGP.get(id) : teamGP?.[id])
 
+  const PRIOR_CAREER_K = opts.priorCareerK ?? 150 // 통산표본을 리그평균으로 회귀시키는 강도
+
   let sumH = 0, sumAB = 0
   for (const p of players) { sumH += p.H; sumAB += p.AB }
   const leagueMean = sumH / sumAB
-
-  const a0 = leagueMean * REGRESSION_AB
-  const b0 = (1 - leagueMean) * REGRESSION_AB
 
   const model = players.map((p) => {
     const teamGames = gp(p.teamId) ?? p.G
     const teamRemaining = Math.max(0, SCHEDULE_GAMES - teamGames)
     const abPerGame = p.G > 0 ? p.AB / p.G : 0
     const remAB = Math.round(abPerGame * teamRemaining)
+    // 사전분포 중심: 개인 통산타율을 리그평균으로 회귀(통산 표본 적으면 리그평균에 수렴)
+    let center = leagueMean
+    if (p.careerAB > 0 && p.careerHits != null) {
+      center = (p.careerHits + leagueMean * PRIOR_CAREER_K) / (p.careerAB + PRIOR_CAREER_K)
+    }
+    const a0 = center * REGRESSION_AB
+    const b0 = (1 - center) * REGRESSION_AB
     const alpha = a0 + p.H
     const beta = b0 + (p.AB - p.H)
     const pMean = alpha / (alpha + beta)
     const projAVG = (p.H + remAB * pMean) / (p.AB + remAB)
-    return { ...p, remAB, alpha, beta, pMean, projAVG, teamRemaining }
+    return { ...p, remAB, alpha, beta, pMean, projAVG, teamRemaining, priorCenter: center }
   })
 
   const candidates = model
