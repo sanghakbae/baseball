@@ -120,14 +120,14 @@ export default function App() {
       </header>
 
       {isDesktop ? (
-        // PC: 랭킹은 전체너비 한 행, 나머지 5개는 3열
+        // PC 대시보드: 1행(예측+랭킹), 2행(톱10·코스별·비교), 3행(응원)
         <div className="dashboard">
-          <Leaderboard players={data.players} season={data.season} className="dash-wide" />
-          <Predict data={data} />
-          <LiveTop10 players={data.players} season={data.season} />
-          <Compare players={data.players} />
-          <LeeZone players={data.players} season={data.season} />
-          <CheerBoard />
+          <div className="dash-item d-predict"><Predict data={data} /></div>
+          <div className="dash-item d-rank"><Leaderboard players={data.players} season={data.season} /></div>
+          <div className="dash-item d-live"><LiveTop10 players={data.players} season={data.season} /></div>
+          <div className="dash-item d-zone"><LeeZone players={data.players} season={data.season} /></div>
+          <div className="dash-item d-compare"><Compare players={data.players} /></div>
+          <div className="dash-item d-cheer"><CheerBoard /></div>
         </div>
       ) : (
         // 모바일: 탭 + 하단 네비

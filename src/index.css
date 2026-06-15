@@ -74,26 +74,28 @@ html, body {
 .page--wide .hero { margin-bottom: 18px; }
 .page--wide .hero h1 { font-size: 26px; }
 .dashboard {
-  column-count: 3; /* PC: 한 행에 3개씩 */
-  column-gap: 18px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  align-items: start;
 }
-.dashboard > .card-section {
-  break-inside: avoid;
-  margin-bottom: 18px;
-  display: block;
+.dashboard > .dash-item {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 10px;
   padding: 16px;
+  min-width: 0;
 }
-/* 전체너비 한 행 (랭킹): 작은 그래프(위) + 전체너비 표(아래, 스크롤 없음) */
-.dashboard > .dash-wide {
-  column-span: all;
-  margin-bottom: 18px;
-}
-.dash-wide > .rank-chart { max-width: 460px; }
-.dash-wide > .table-wrap { width: 100%; }
-.dash-wide .admin-table, .dash-wide table { width: 100%; }
+/* 1행: 예측(좌) + 랭킹(우, 2칸) / 2행: 톱10·코스별·비교 / 3행: 응원(전체) */
+.d-predict { grid-area: 1 / 1 / 2 / 2; }
+.d-rank    { grid-area: 1 / 2 / 2 / 4; }
+.d-live    { grid-area: 2 / 1 / 3 / 2; }
+.d-zone    { grid-area: 2 / 2 / 3 / 3; }
+.d-compare { grid-area: 2 / 3 / 3 / 4; }
+.d-cheer   { grid-area: 3 / 1 / 4 / 4; }
+/* 랭킹 그래프: 패널 폭 100% 반응형 */
+.d-rank .rank-chart { max-width: none; width: 100%; }
+.d-rank .table-wrap, .d-rank table { width: 100%; }
 
 /* 라이트 테마 — 하드코딩 배경 보정 */
 :root[data-theme="light"] .page {
