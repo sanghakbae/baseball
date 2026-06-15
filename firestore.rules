@@ -23,6 +23,16 @@ service cloud.firestore {
       allow read, write: if true;
     }
 
+    // 알려진 유입처(referrer) 집합 — 새 유입처 알림 판단용
+    match /meta/refSources {
+      allow read, write: if true;
+    }
+
+    // 이정후 경기 알림 dedup (경기당 1회)
+    match /meta/leeGameAlert {
+      allow read, write: if true;
+    }
+
     // 방문 로그(IP·위치·유입경로): 생성은 누구나, 읽기는 관리자 계정만(개인정보 보호)
     match /visits/{id} {
       allow create: if true;
