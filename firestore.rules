@@ -7,6 +7,11 @@ service cloud.firestore {
       allow read, write: if true;
     }
 
+    // sanghak.kr 대시보드 방문자 카운터(별도 문서)
+    match /meta/visitors-sanghak {
+      allow read, write: if true;
+    }
+
     // 순위 변동 스냅샷: 클라이언트가 분 단위로 기록(같은 분=같은 문서로 합쳐짐)
     match /rankSnapshots/{id} {
       allow read: if true;
