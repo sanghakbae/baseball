@@ -66,6 +66,35 @@ html, body {
   color: var(--muted); font-size: 15px;
 }
 
+/* PC 대시보드 — 6섹션 다단 배치 */
+.page--wide {
+  max-width: 1180px;
+  padding: calc(env(safe-area-inset-top) + 16px) 24px 40px;
+}
+.page--wide .hero { margin-bottom: 18px; }
+.page--wide .hero h1 { font-size: 26px; }
+.dashboard {
+  column-count: 3; /* PC: 한 행에 3개씩 */
+  column-gap: 18px;
+}
+.dashboard > .card-section {
+  break-inside: avoid;
+  margin-bottom: 18px;
+  display: block;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+}
+/* 전체너비 한 행 (랭킹): 작은 그래프(위) + 전체너비 표(아래, 스크롤 없음) */
+.dashboard > .dash-wide {
+  column-span: all;
+  margin-bottom: 18px;
+}
+.dash-wide > .rank-chart { max-width: 460px; }
+.dash-wide > .table-wrap { width: 100%; }
+.dash-wide .admin-table, .dash-wide table { width: 100%; }
+
 /* 라이트 테마 — 하드코딩 배경 보정 */
 :root[data-theme="light"] .page {
   background: radial-gradient(600px 340px at 50% -8%, #dbe5f6 0%, var(--bg) 55%);
@@ -356,8 +385,10 @@ tbody tr.is-lee .sticky, tbody tr.is-lee .sticky2 { background: #2a2a1f; }
 /* ---- 관리자 페이지 ---- */
 .admin-wrap {
   max-width: 720px; margin: 0 auto;
-  min-height: 100dvh; padding: 20px 16px 40px;
+  height: 100vh; height: 100dvh; /* 뷰포트 높이 고정 → 내부 스크롤(body가 잠겨 있어도 스크롤됨) */
+  padding: 20px 16px 40px;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 .admin-msg { color: var(--muted); text-align: center; padding: 40px; }
 .admin-login {
@@ -397,7 +428,10 @@ tbody tr.is-lee .sticky, tbody tr.is-lee .sticky2 { background: #2a2a1f; }
 .admin-table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px; }
 .admin-table { width: 100%; border-collapse: collapse; font-size: 11.5px; }
 .admin-table th, .admin-table td { padding: 7px 9px; text-align: left; white-space: nowrap; border-bottom: 1px solid var(--border); }
-.admin-table th { background: var(--bg-soft); color: var(--muted); }
+.admin-table th { background: var(--bg-soft); color: var(--muted); font-weight: 600; }
+.admin-table .ta-r { text-align: right; font-variant-numeric: tabular-nums; }
+.admin-table .ta-muted { color: var(--muted); }
+.admin-block .admin-table td:first-child { width: 100%; }
 
 /* ---- 올스타 투표 모달 ---- */
 .modal-overlay {

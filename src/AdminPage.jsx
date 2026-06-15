@@ -118,10 +118,10 @@ function Stats({ onLogout, email }) {
             <div className="admin-card"><span className="ac-num">{agg.uniqIp.toLocaleString()}</span><span className="ac-lbl">고유 IP</span></div>
           </div>
 
-          <Block title="유입 경로" rows={agg.byRef} />
-          <Block title="국가" rows={agg.byCountry} />
-          <Block title="지역" rows={agg.byRegion} />
-          <Block title="일자별 방문" rows={agg.byDay} />
+          <Block title="유입 경로" rows={agg.byRef} label="경로" />
+          <Block title="국가" rows={agg.byCountry} label="국가" />
+          <Block title="지역" rows={agg.byRegion} label="지역" />
+          <Block title="일자별 방문" rows={agg.byDay} label="날짜" />
 
           <h2 className="admin-sec">최근 방문 {agg.recent.length}건</h2>
           <div className="admin-table-wrap">
@@ -149,19 +149,29 @@ function Stats({ onLogout, email }) {
   )
 }
 
-function Block({ title, rows }) {
-  const max = Math.max(1, ...rows.map((r) => r[1]))
+function Block({ title, rows, label = '항목' }) {
+  const total = rows.reduce((a, [, n]) => a + n, 0)
   return (
     <section className="admin-block">
       <h2 className="admin-sec">{title}</h2>
-      {rows.length === 0 && <p className="admin-msg">데이터 없음</p>}
-      {rows.map(([k, n]) => (
-        <div key={k} className="admin-row">
-          <span className="ar-key">{k}</span>
-          <span className="ar-bar"><span style={{ width: `${(n / max) * 100}%` }} /></span>
-          <span className="ar-num">{n}</span>
+      {rows.length === 0 ? (
+        <p className="admin-msg">데이터 없음</p>
+      ) : (
+        <div className="admin-table-wrap">
+          <table className="admin-table">
+            <thead><tr><th>{label}</th><th className="ta-r">건수</th><th className="ta-r">비율</th></tr></thead>
+            <tbody>
+              {rows.map(([k, n]) => (
+                <tr key={k}>
+                  <td>{k}</td>
+                  <td className="ta-r">{n}</td>
+                  <td className="ta-r ta-muted">{total ? Math.round((n / total) * 100) : 0}%</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
-      ))}
+      )}
     </section>
   )
 }

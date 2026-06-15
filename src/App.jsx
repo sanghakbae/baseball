@@ -79,6 +79,16 @@ export default function App() {
     return () => mq.removeEventListener?.('change', onChange)
   }, [])
 
+  // PC 너비면 대시보드(6섹션 한 화면), 모바일이면 탭
+  const [isDesktop, setIsDesktop] = useState(() => window.matchMedia?.('(min-width: 960px)').matches ?? false)
+  useEffect(() => {
+    const mq = window.matchMedia?.('(min-width: 960px)')
+    if (!mq) return
+    const on = () => setIsDesktop(mq.matches)
+    mq.addEventListener?.('change', on)
+    return () => mq.removeEventListener?.('change', on)
+  }, [])
+
   if (loading) return <div className="page loading">데이터 불러오는 중…</div>
   const toggleTheme = () => setTheme((t) => {
     const n = t === 'dark' ? 'light' : 'dark'
@@ -94,7 +104,7 @@ export default function App() {
     : '정적 샘플'
 
   return (
-    <div className="page">
+    <div className={`page ${isDesktop ? 'page--wide' : ''}`}>
       <header className="hero">
         <button className="theme-btn" onClick={toggleTheme} title="테마 전환">
           {theme === 'dark' ? '☀️' : '🌙'}
@@ -109,24 +119,39 @@ export default function App() {
         <ShareButton />
       </header>
 
-      <nav className="tabs">
-        {TABS.map((t) => (
-          <button
-            key={t.id}
-            className={`tab ${tab === t.id ? 'active' : ''}`}
-            onClick={() => setTab(t.id)}
-          >
-            {t.label}
-          </button>
-        ))}
-      </nav>
+      {isDesktop ? (
+        // PC: 랭킹은 전체너비 한 행, 나머지 5개는 3열
+        <div className="dashboard">
+          <Leaderboard players={data.players} season={data.season} className="dash-wide" />
+          <Predict data={data} />
+          <LiveTop10 players={data.players} season={data.season} />
+          <Compare players={data.players} />
+          <LeeZone players={data.players} season={data.season} />
+          <CheerBoard />
+        </div>
+      ) : (
+        // 모바일: 탭 + 하단 네비
+        <>
+          <nav className="tabs">
+            {TABS.map((t) => (
+              <button
+                key={t.id}
+                className={`tab ${tab === t.id ? 'active' : ''}`}
+                onClick={() => setTab(t.id)}
+              >
+                {t.label}
+              </button>
+            ))}
+          </nav>
 
-      {tab === 'predict' && <Predict data={data} />}
-      {tab === 'board' && <Leaderboard players={data.players} season={data.season} />}
-      {tab === 'live' && <LiveTop10 players={data.players} season={data.season} />}
-      {tab === 'compare' && <Compare players={data.players} />}
-      {tab === 'zone' && <LeeZone players={data.players} season={data.season} />}
-      {tab === 'cheer' && <CheerBoard />}
+          {tab === 'predict' && <Predict data={data} />}
+          {tab === 'board' && <Leaderboard players={data.players} season={data.season} />}
+          {tab === 'live' && <LiveTop10 players={data.players} season={data.season} />}
+          {tab === 'compare' && <Compare players={data.players} />}
+          {tab === 'zone' && <LeeZone players={data.players} season={data.season} />}
+          {tab === 'cheer' && <CheerBoard />}
+        </>
+      )}
 
       <AllStarModal />
     </div>
@@ -395,7 +420,7 @@ function FormChart({ players, season, picks }) {
       <svg viewBox={`0 0 ${W} ${H}`} width="100%" preserveAspectRatio="xMidYMid meet">
         {ticks.map((tv, i) => (
           <g key={i}>
-            <line x1={padL} y1={y(tv)} x2={W - padR} y2={y(tv)} stroke="#263350" strokeWidth="0.5" />
+            <line x1={padL} y1={y(tv)} x2={W - padR} y2={y(tv)} stroke="var(--border)" strokeWidth="0.5" />
             <text x={padL - 4} y={y(tv) + 3} textAnchor="end" className="ch-axis">{fmtAvg(tv)}</text>
           </g>
         ))}
@@ -421,10 +446,10 @@ function FormChart({ players, season, picks }) {
   )
 }
 
-function Leaderboard({ players, season }) {
+function Leaderboard({ players, season, className = '' }) {
   const cols = STAT_KEYS.filter((s) => !['rank'].includes(s.key))
   return (
-    <section className="card-section">
+    <section className={`card-section ${className}`}>
       <h2 className="sec-title">현재 타율 랭킹</h2>
       <p className="sec-desc">최근 {FORM_GAMES}경기 누적 타율 추이 · 상위 6명</p>
       <FormChart players={players} season={season} />
