@@ -116,6 +116,7 @@ export default function App() {
           {isFallback && <span className="badge-warn"> · 정적 폴백</span>}
           {' · '}규정타석 {data.qualifiedCount}명
         </p>
+        <div className="hero-meta"><Visitors /></div>
         <ShareButton />
       </header>
 
@@ -197,7 +198,7 @@ function Visitors() {
   const text = count == null ? '—' : count.toLocaleString()
   return (
     <span className="visitors" title="누적 방문자 수">
-      👁 {text}
+      👥 {text}
     </span>
   )
 }
@@ -244,10 +245,7 @@ function Predict({ data }) {
   const maxP = Math.max(...preds.map((p) => p.pWinTitle))
   return (
     <section className="card-section">
-      <div className="sec-head">
-        <h2 className="sec-title">시즌 종료 타율 1위 확률</h2>
-        <Visitors />
-      </div>
+      <h2 className="sec-title">시즌 종료 타율 1위 확률</h2>
       <p className="sec-desc">평균회귀 실력 추정 + 잔여 타석 2만 회 시뮬레이션 결과</p>
       <ScenarioCard players={data.players} />
       <GapChart players={data.players} season={data.season} />

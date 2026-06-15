@@ -118,6 +118,7 @@ html, body {
 .hl { color: var(--lee); }
 .sub { color: var(--muted); font-size: 13px; line-height: 1.55; margin: 0 auto; max-width: 340px; }
 .updated { font-size: 10.5px; color: var(--muted); margin-top: 4px; display: inline-flex; align-items: center; gap: 5px; }
+.hero-meta { margin-top: 6px; }
 .theme-btn {
   position: absolute; top: 0; left: 0; margin: 0;
   background: var(--card); border: 1px solid var(--border);
