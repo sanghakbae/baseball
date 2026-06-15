@@ -86,13 +86,13 @@ html, body {
   padding: 16px;
   min-width: 0;
 }
-/* 1행: 예측(좌) + 랭킹(우, 2칸) / 2행: 톱10·코스별·비교 / 3행: 응원(전체) */
-.d-predict { grid-area: 1 / 1 / 2 / 2; }
+/* 좌: 예측(2행 높이) / 우: 랭킹→응원 / 하단행: 톱10·코스별·비교 */
+.d-predict { grid-area: 1 / 1 / 3 / 2; }
 .d-rank    { grid-area: 1 / 2 / 2 / 4; }
-.d-live    { grid-area: 2 / 1 / 3 / 2; }
-.d-zone    { grid-area: 2 / 2 / 3 / 3; }
-.d-compare { grid-area: 2 / 3 / 3 / 4; }
-.d-cheer   { grid-area: 3 / 1 / 4 / 4; }
+.d-cheer   { grid-area: 2 / 2 / 3 / 4; }
+.d-live    { grid-area: 3 / 1 / 4 / 2; }
+.d-zone    { grid-area: 3 / 2 / 4 / 3; }
+.d-compare { grid-area: 3 / 3 / 4 / 4; }
 /* 랭킹 그래프: 패널 폭 100% 반응형 */
 .d-rank .rank-chart { max-width: none; width: 100%; }
 .d-rank .table-wrap, .d-rank table { width: 100%; }
