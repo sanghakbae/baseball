@@ -21,16 +21,23 @@ const headshot = (id) => `https://midfield.mlbstatic.com/v1/people/${id}/spots/1
 const teamLogo = (teamId) => (teamId ? `https://www.mlbstatic.com/team-logos/${teamId}.svg` : null)
 const hideOnError = (e) => { e.currentTarget.style.visibility = 'hidden' }
 
-// 공유 버튼 (Web Share → iPhone에서 카톡 등 공유 시트, 미지원 시 링크 복사)
+// 공유 버튼 — 누르면 홍보 문구를 클립보드에 복사
+const SHARE_TEXT = '2026 MLB 타율왕 누가 될까? ⚾\n이정후 실시간 순위·예측·응원 게시판\nhttps://baseball.sanghak.kr\n재미로 만들어봤어요 ㅎㅎ'
+async function copyText(text) {
+  try { await navigator.clipboard.writeText(text); return true } catch {}
+  try {
+    const ta = document.createElement('textarea')
+    ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0'
+    document.body.appendChild(ta); ta.focus(); ta.select()
+    const ok = document.execCommand('copy'); document.body.removeChild(ta); return ok
+  } catch { return false }
+}
 function ShareButton() {
   const [copied, setCopied] = useState(false)
   const share = async () => {
-    const data = { title: '2026 누가 타격왕이 될까?', text: '이정후 타율왕 예측 · 실시간 톱10 · 응원하기', url: 'https://baseball.sanghak.kr/' }
-    if (navigator.share) {
-      try { await navigator.share(data) } catch { /* 취소 무시 */ }
-    } else {
-      try { await navigator.clipboard.writeText(data.url); setCopied(true); setTimeout(() => setCopied(false), 1500) } catch {}
-    }
+    const ok = await copyText(SHARE_TEXT)
+    if (ok) { setCopied(true); setTimeout(() => setCopied(false), 1800) }
+    else if (navigator.share) { try { await navigator.share({ text: SHARE_TEXT }) } catch {} }
   }
   return <button className="share-btn" onClick={share}>{copied ? '복사됨!' : '🔗 공유'}</button>
 }
@@ -198,7 +205,7 @@ function Visitors() {
   const text = count == null ? '—' : count.toLocaleString()
   return (
     <span className="visitors" title="누적 방문자 수">
-      👥 {text}
+      방문 <b>{text}</b>
     </span>
   )
 }
