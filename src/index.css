@@ -68,8 +68,8 @@ html, body {
 
 /* PC 대시보드 — 6섹션 다단 배치 */
 .page--wide {
-  max-width: 1180px;
-  padding: calc(env(safe-area-inset-top) + 16px) 24px 40px;
+  max-width: 1560px;
+  padding: calc(env(safe-area-inset-top) + 16px) 28px 40px;
 }
 .page--wide .hero { margin-bottom: 18px; }
 .page--wide .hero h1 { font-size: 26px; }
