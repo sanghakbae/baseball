@@ -1,20 +1,47 @@
 import { useEffect, useMemo, useState } from 'react'
 import { onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth'
-import { collection, getDocs, limit, orderBy, query } from 'firebase/firestore'
+import { collection, deleteDoc, doc, getDocs, limit, onSnapshot, orderBy, query } from 'firebase/firestore'
 import { auth, db } from './firebase.js'
 
 // 아이디 'totoriverce' → 내부 이메일로 매핑 (Firebase Auth는 이메일 기반)
 const ADMIN_DOMAIN = 'baseball-93c5d.firebaseapp.com'
 
+const ADMIN_TABS = [
+  { id: 'stats', label: '📊 방문자 통계' },
+  { id: 'cheers', label: '📣 응원 관리' },
+]
+
 export default function AdminPage() {
   const [user, setUser] = useState(null)
   const [ready, setReady] = useState(false)
+  const [tab, setTab] = useState('stats')
 
   useEffect(() => onAuthStateChanged(auth, (u) => { setUser(u); setReady(true) }), [])
 
   if (!ready) return <div className="admin-wrap"><p className="admin-msg">로딩…</p></div>
   if (!user) return <Login />
-  return <Stats onLogout={() => signOut(auth)} email={user.email} />
+
+  return (
+    <div className="admin-wrap">
+      <div className="admin-head">
+        <h1 className="admin-h1">🔧 관리자</h1>
+        <button className="admin-logout" onClick={() => signOut(auth)}>로그아웃</button>
+      </div>
+      <p className="admin-sub">{user.email}</p>
+
+      {tab === 'stats' && <Stats />}
+      {tab === 'cheers' && <CheerAdmin />}
+
+      <nav className="admin-nav">
+        {ADMIN_TABS.map((t) => (
+          <button key={t.id} className={`admin-navbtn ${tab === t.id ? 'active' : ''}`} onClick={() => setTab(t.id)}>
+            {t.label}
+          </button>
+        ))}
+        <button className="admin-navbtn" onClick={() => { window.location.hash = '' }}>← 사이트</button>
+      </nav>
+    </div>
+  )
 }
 
 function Login() {
@@ -69,7 +96,7 @@ const dayKey = (ts) => {
   return d ? d.toLocaleDateString('ko-KR', { timeZone: 'Asia/Seoul' }) : '?'
 }
 
-function Stats({ onLogout, email }) {
+function Stats() {
   const [visits, setVisits] = useState(null)
   const [err, setErr] = useState('')
 
@@ -101,14 +128,8 @@ function Stats({ onLogout, email }) {
   }, [visits])
 
   return (
-    <div className="admin-wrap admin-dash">
-      <div className="admin-head">
-        <h1 className="admin-h1">📊 방문자 통계</h1>
-        <button className="admin-logout" onClick={onLogout}>로그아웃</button>
-      </div>
-      <p className="admin-sub">{email}</p>
-
-      {err && <p className="admin-err">{err} <button className="admin-link" onClick={onLogout}>로그아웃</button></p>}
+    <div className="admin-dash">
+      {err && <p className="admin-err">{err}</p>}
       {!err && !agg && <p className="admin-msg">불러오는 중…</p>}
 
       {agg && (
@@ -145,6 +166,57 @@ function Stats({ onLogout, email }) {
           </div>
         </>
       )}
+    </div>
+  )
+}
+
+// 응원 관리 — 글 목록 + 삭제
+function CheerAdmin() {
+  const [cheers, setCheers] = useState(null)
+  const [err, setErr] = useState('')
+  const [busy, setBusy] = useState(null)
+
+  useEffect(() => {
+    const q = query(collection(db, 'cheers'), orderBy('createdAt', 'desc'), limit(300))
+    const unsub = onSnapshot(
+      q,
+      (snap) => setCheers(snap.docs.map((d) => ({ id: d.id, ...d.data() }))),
+      (e) => setErr(e.message),
+    )
+    return () => unsub()
+  }, [])
+
+  const remove = async (id) => {
+    if (!window.confirm('이 응원 글을 삭제할까요?')) return
+    setBusy(id)
+    try { await deleteDoc(doc(db, 'cheers', id)) }
+    catch (e) { setErr('삭제 실패: ' + e.message) }
+    finally { setBusy(null) }
+  }
+
+  if (err) return <p className="admin-err">{err}</p>
+  if (!cheers) return <p className="admin-msg">불러오는 중…</p>
+
+  return (
+    <div className="admin-dash">
+      <p className="admin-sub">총 {cheers.length}개 · 부적절한 글을 삭제할 수 있습니다</p>
+      <ul className="adm-cheer-list">
+        {cheers.length === 0 && <li className="admin-msg">응원 글이 없습니다</li>}
+        {cheers.map((c) => (
+          <li key={c.id} className="adm-cheer">
+            <div className="adm-cheer-main">
+              <p className="adm-cheer-text">{c.text}</p>
+              <span className="adm-cheer-meta">
+                {tsDate(c.createdAt)?.toLocaleString('ko-KR', { timeZone: 'Asia/Seoul', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }) || '방금'}
+                {' · ♥ '}{c.likes || 0}
+              </span>
+            </div>
+            <button className="adm-del" disabled={busy === c.id} onClick={() => remove(c.id)}>
+              {busy === c.id ? '…' : '삭제'}
+            </button>
+          </li>
+        ))}
+      </ul>
     </div>
   )
 }

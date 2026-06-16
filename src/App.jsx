@@ -161,6 +161,10 @@ export default function App() {
         </>
       )}
 
+      <div className="admin-access">
+        <button onClick={() => { window.location.hash = 'admin' }}>🔧 관리자</button>
+      </div>
+
       <AllStarModal />
     </div>
   )

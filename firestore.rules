@@ -52,7 +52,11 @@ service cloud.firestore {
                     && request.resource.data.text.size() <= 200;
       allow update: if request.resource.data.text == resource.data.text
                     && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['likes']);
-      allow delete: if false;
+      allow delete: if request.auth != null
+                    && request.auth.token.email in [
+                         'totoriverce@gmail.com',
+                         'totoriverce@baseball-93c5d.firebaseapp.com'
+                       ];
     }
 
     // 그 외: 읽기만 허용(수집기는 Admin SDK로 규칙 우회)
