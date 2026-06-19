@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-19T19:21:29.777Z",
+  "updatedAt": "2026-06-19T20:58:53.412Z",
   "season": 2026,
   "qualifiedCount": 158,
   "leagueMean": 0.255,
@@ -789,6 +789,35 @@
       "xBA": 0.26
     },
     {
+      "id": 691718,
+      "name": "Pete Crow-Armstrong",
+      "team": "CHC",
+      "teamId": 112,
+      "teamName": "Cubs",
+      "pos": "CF",
+      "G": 76,
+      "AB": 286,
+      "PA": 324,
+      "R": 46,
+      "H": 81,
+      "B2": 12,
+      "B3": 4,
+      "HR": 15,
+      "RBI": 38,
+      "SB": 18,
+      "BB": 27,
+      "SO": 80,
+      "AVG": 0.283,
+      "OBP": 0.359,
+      "SLG": 0.51,
+      "OPS": 0.869,
+      "rank": 28,
+      "careerAVG": 0.249,
+      "careerAB": 1263,
+      "careerHits": 315,
+      "xBA": 0.262
+    },
+    {
       "id": 669477,
       "name": "Casey Schmitt",
       "team": "SF",
@@ -811,7 +840,7 @@
       "OBP": 0.313,
       "SLG": 0.509,
       "OPS": 0.822,
-      "rank": 28,
+      "rank": 29,
       "careerAVG": 0.243,
       "careerAB": 937,
       "careerHits": 228,
@@ -840,7 +869,7 @@
       "OBP": 0.4,
       "SLG": 0.472,
       "OPS": 0.872,
-      "rank": 29,
+      "rank": 30,
       "careerAVG": 0.272,
       "careerAB": 3829,
       "careerHits": 1042,
@@ -869,7 +898,7 @@
       "OBP": 0.39,
       "SLG": 0.429,
       "OPS": 0.819,
-      "rank": 30,
+      "rank": 31,
       "careerAVG": 0.282,
       "careerAB": 266,
       "careerHits": 75,
@@ -898,7 +927,7 @@
       "OBP": 0.345,
       "SLG": 0.482,
       "OPS": 0.827,
-      "rank": 31,
+      "rank": 32,
       "careerAVG": 0.27,
       "careerAB": 1691,
       "careerHits": 457,
@@ -927,40 +956,11 @@
       "OBP": 0.357,
       "SLG": 0.406,
       "OPS": 0.763,
-      "rank": 32,
+      "rank": 33,
       "careerAVG": 0.247,
       "careerAB": 2542,
       "careerHits": 629,
       "xBA": 0.231
-    },
-    {
-      "id": 691718,
-      "name": "Pete Crow-Armstrong",
-      "team": "CHC",
-      "teamId": 112,
-      "teamName": "Cubs",
-      "pos": "CF",
-      "G": 76,
-      "AB": 285,
-      "PA": 322,
-      "R": 46,
-      "H": 80,
-      "B2": 12,
-      "B3": 4,
-      "HR": 15,
-      "RBI": 37,
-      "SB": 17,
-      "BB": 26,
-      "SO": 80,
-      "AVG": 0.281,
-      "OBP": 0.355,
-      "SLG": 0.509,
-      "OPS": 0.864,
-      "rank": 33,
-      "careerAVG": 0.249,
-      "careerAB": 1262,
-      "careerHits": 314,
-      "xBA": 0.262
     },
     {
       "id": 687462,
@@ -1195,35 +1195,6 @@
       "xBA": 0.233
     },
     {
-      "id": 665489,
-      "name": "Vladimir Guerrero Jr.",
-      "team": "TOR",
-      "teamId": 141,
-      "teamName": "Blue Jays",
-      "pos": "1B",
-      "G": 72,
-      "AB": 260,
-      "PA": 302,
-      "R": 40,
-      "H": 72,
-      "B2": 12,
-      "B3": 0,
-      "HR": 4,
-      "RBI": 30,
-      "SB": 5,
-      "BB": 34,
-      "SO": 31,
-      "AVG": 0.277,
-      "OBP": 0.364,
-      "SLG": 0.369,
-      "OPS": 0.733,
-      "rank": 42,
-      "careerAVG": 0.288,
-      "careerAB": 3994,
-      "careerHits": 1149,
-      "xBA": 0.292
-    },
-    {
       "id": 621566,
       "name": "Matt Olson",
       "team": "ATL",
@@ -1246,11 +1217,40 @@
       "OBP": 0.346,
       "SLG": 0.552,
       "OPS": 0.898,
-      "rank": 43,
+      "rank": 42,
       "careerAVG": 0.258,
       "careerAB": 4782,
       "careerHits": 1234,
       "xBA": 0.261
+    },
+    {
+      "id": 665489,
+      "name": "Vladimir Guerrero Jr.",
+      "team": "TOR",
+      "teamId": 141,
+      "teamName": "Blue Jays",
+      "pos": "1B",
+      "G": 72,
+      "AB": 261,
+      "PA": 303,
+      "R": 40,
+      "H": 72,
+      "B2": 12,
+      "B3": 0,
+      "HR": 4,
+      "RBI": 30,
+      "SB": 5,
+      "BB": 34,
+      "SO": 31,
+      "AVG": 0.276,
+      "OBP": 0.363,
+      "SLG": 0.368,
+      "OPS": 0.731,
+      "rank": 43,
+      "careerAVG": 0.288,
+      "careerAB": 3995,
+      "careerHits": 1149,
+      "xBA": 0.292
     },
     {
       "id": 669127,
@@ -1579,25 +1579,25 @@
       "teamName": "Cubs",
       "pos": "RF",
       "G": 61,
-      "AB": 220,
-      "PA": 251,
-      "R": 34,
-      "H": 59,
+      "AB": 223,
+      "PA": 255,
+      "R": 35,
+      "H": 60,
       "B2": 10,
       "B3": 0,
       "HR": 10,
       "RBI": 31,
       "SB": 0,
-      "BB": 27,
+      "BB": 28,
       "SO": 66,
-      "AVG": 0.268,
-      "OBP": 0.355,
-      "SLG": 0.45,
+      "AVG": 0.269,
+      "OBP": 0.357,
+      "SLG": 0.448,
       "OPS": 0.805,
       "rank": 55,
       "careerAVG": 0.269,
-      "careerAB": 2215,
-      "careerHits": 595,
+      "careerAB": 2218,
+      "careerHits": 596,
       "xBA": 0.258
     },
     {
@@ -2268,35 +2268,6 @@
       "xBA": 0.235
     },
     {
-      "id": 608324,
-      "name": "Alex Bregman",
-      "team": "CHC",
-      "teamId": 112,
-      "teamName": "Cubs",
-      "pos": "3B",
-      "G": 75,
-      "AB": 293,
-      "PA": 339,
-      "R": 35,
-      "H": 74,
-      "B2": 10,
-      "B3": 1,
-      "HR": 6,
-      "RBI": 24,
-      "SB": 2,
-      "BB": 38,
-      "SO": 55,
-      "AVG": 0.253,
-      "OBP": 0.345,
-      "SLG": 0.355,
-      "OPS": 0.7,
-      "rank": 79,
-      "careerAVG": 0.271,
-      "careerAB": 4883,
-      "careerHits": 1324,
-      "xBA": 0.246
-    },
-    {
       "id": 807712,
       "name": "Luke Keaschall",
       "team": "MIN",
@@ -2319,7 +2290,7 @@
       "OBP": 0.335,
       "SLG": 0.333,
       "OPS": 0.668,
-      "rank": 80,
+      "rank": 79,
       "careerAVG": 0.273,
       "careerAB": 428,
       "careerHits": 117,
@@ -2348,7 +2319,7 @@
       "OBP": 0.337,
       "SLG": 0.4,
       "OPS": 0.737,
-      "rank": 81,
+      "rank": 80,
       "careerAVG": 0.241,
       "careerAB": 4437,
       "careerHits": 1069,
@@ -2377,7 +2348,7 @@
       "OBP": 0.349,
       "SLG": 0.456,
       "OPS": 0.805,
-      "rank": 82,
+      "rank": 81,
       "careerAVG": 0.252,
       "careerAB": 329,
       "careerHits": 83,
@@ -2406,7 +2377,7 @@
       "OBP": 0.373,
       "SLG": 0.421,
       "OPS": 0.794,
-      "rank": 83,
+      "rank": 82,
       "careerAVG": 0.287,
       "careerAB": 3351,
       "careerHits": 962,
@@ -2435,7 +2406,7 @@
       "OBP": 0.322,
       "SLG": 0.536,
       "OPS": 0.858,
-      "rank": 84,
+      "rank": 83,
       "careerAVG": 0.249,
       "careerAB": 1084,
       "careerHits": 270,
@@ -2464,11 +2435,40 @@
       "OBP": 0.295,
       "SLG": 0.372,
       "OPS": 0.667,
-      "rank": 85,
+      "rank": 84,
       "careerAVG": 0.29,
       "careerAB": 3379,
       "careerHits": 980,
       "xBA": 0.286
+    },
+    {
+      "id": 608324,
+      "name": "Alex Bregman",
+      "team": "CHC",
+      "teamId": 112,
+      "teamName": "Cubs",
+      "pos": "3B",
+      "G": 75,
+      "AB": 296,
+      "PA": 342,
+      "R": 35,
+      "H": 74,
+      "B2": 10,
+      "B3": 1,
+      "HR": 6,
+      "RBI": 25,
+      "SB": 2,
+      "BB": 38,
+      "SO": 55,
+      "AVG": 0.25,
+      "OBP": 0.342,
+      "SLG": 0.351,
+      "OPS": 0.693,
+      "rank": 85,
+      "careerAVG": 0.271,
+      "careerAB": 4886,
+      "careerHits": 1324,
+      "xBA": 0.246
     },
     {
       "id": 665019,
@@ -2710,25 +2710,25 @@
       "teamName": "Cubs",
       "pos": "1B",
       "G": 75,
-      "AB": 268,
-      "PA": 328,
+      "AB": 271,
+      "PA": 332,
       "R": 31,
-      "H": 66,
+      "H": 67,
       "B2": 13,
       "B3": 2,
       "HR": 8,
       "RBI": 42,
       "SB": 2,
-      "BB": 50,
+      "BB": 51,
       "SO": 74,
-      "AVG": 0.246,
-      "OBP": 0.375,
+      "AVG": 0.247,
+      "OBP": 0.377,
       "SLG": 0.399,
-      "OPS": 0.774,
+      "OPS": 0.776,
       "rank": 94,
       "careerAVG": 0.249,
-      "careerAB": 1360,
-      "careerHits": 338,
+      "careerAB": 1363,
+      "careerHits": 339,
       "xBA": 0.239
     },
     {
@@ -3254,6 +3254,35 @@
       "xBA": 0.255
     },
     {
+      "id": 663538,
+      "name": "Nico Hoerner",
+      "team": "CHC",
+      "teamId": 112,
+      "teamName": "Cubs",
+      "pos": "2B",
+      "G": 74,
+      "AB": 297,
+      "PA": 336,
+      "R": 28,
+      "H": 70,
+      "B2": 16,
+      "B3": 0,
+      "HR": 4,
+      "RBI": 34,
+      "SB": 12,
+      "BB": 31,
+      "SO": 25,
+      "AVG": 0.236,
+      "OBP": 0.313,
+      "SLG": 0.33,
+      "OPS": 0.643,
+      "rank": 113,
+      "careerAVG": 0.277,
+      "careerAB": 2913,
+      "careerHits": 808,
+      "xBA": 0.29
+    },
+    {
       "id": 571448,
       "name": "Nolan Arenado",
       "team": "AZ",
@@ -3276,7 +3305,7 @@
       "OBP": 0.313,
       "SLG": 0.389,
       "OPS": 0.702,
-      "rank": 113,
+      "rank": 114,
       "careerAVG": 0.281,
       "careerAB": 7041,
       "careerHits": 1976,
@@ -3305,7 +3334,7 @@
       "OBP": 0.309,
       "SLG": 0.318,
       "OPS": 0.627,
-      "rank": 114,
+      "rank": 115,
       "careerAVG": 0.28,
       "careerAB": 3462,
       "careerHits": 971,
@@ -3334,40 +3363,11 @@
       "OBP": 0.332,
       "SLG": 0.47,
       "OPS": 0.802,
-      "rank": 115,
+      "rank": 116,
       "careerAVG": 0.247,
       "careerAB": 1139,
       "careerHits": 281,
       "xBA": 0.243
-    },
-    {
-      "id": 663538,
-      "name": "Nico Hoerner",
-      "team": "CHC",
-      "teamId": 112,
-      "teamName": "Cubs",
-      "pos": "2B",
-      "G": 74,
-      "AB": 294,
-      "PA": 333,
-      "R": 27,
-      "H": 69,
-      "B2": 16,
-      "B3": 0,
-      "HR": 4,
-      "RBI": 34,
-      "SB": 12,
-      "BB": 31,
-      "SO": 25,
-      "AVG": 0.235,
-      "OBP": 0.312,
-      "SLG": 0.33,
-      "OPS": 0.642,
-      "rank": 116,
-      "careerAVG": 0.277,
-      "careerAB": 2910,
-      "careerHits": 807,
-      "xBA": 0.29
     },
     {
       "id": 696285,
@@ -3515,35 +3515,6 @@
       "xBA": 0.258
     },
     {
-      "id": 665926,
-      "name": "Andrés Giménez",
-      "team": "TOR",
-      "teamId": 141,
-      "teamName": "Blue Jays",
-      "pos": "SS",
-      "G": 72,
-      "AB": 237,
-      "PA": 256,
-      "R": 21,
-      "H": 55,
-      "B2": 11,
-      "B3": 1,
-      "HR": 7,
-      "RBI": 33,
-      "SB": 10,
-      "BB": 8,
-      "SO": 51,
-      "AVG": 0.232,
-      "OBP": 0.275,
-      "SLG": 0.376,
-      "OPS": 0.651,
-      "rank": 122,
-      "careerAVG": 0.251,
-      "careerAB": 2503,
-      "careerHits": 629,
-      "xBA": 0.223
-    },
-    {
       "id": 664761,
       "name": "Alec Bohm",
       "team": "PHI",
@@ -3566,7 +3537,7 @@
       "OBP": 0.283,
       "SLG": 0.375,
       "OPS": 0.658,
-      "rank": 123,
+      "rank": 122,
       "careerAVG": 0.275,
       "careerAB": 2961,
       "careerHits": 813,
@@ -3595,40 +3566,40 @@
       "OBP": 0.325,
       "SLG": 0.516,
       "OPS": 0.841,
-      "rank": 124,
+      "rank": 123,
       "careerAVG": 0.235,
       "careerAB": 511,
       "careerHits": 120,
       "xBA": 0.223
     },
     {
-      "id": 672960,
-      "name": "Kazuma Okamoto",
+      "id": 665926,
+      "name": "Andrés Giménez",
       "team": "TOR",
       "teamId": 141,
       "teamName": "Blue Jays",
-      "pos": "3B",
-      "G": 74,
-      "AB": 266,
-      "PA": 300,
-      "R": 36,
-      "H": 61,
-      "B2": 10,
-      "B3": 0,
-      "HR": 15,
-      "RBI": 42,
-      "SB": 0,
-      "BB": 29,
-      "SO": 98,
-      "AVG": 0.229,
-      "OBP": 0.31,
-      "SLG": 0.436,
-      "OPS": 0.746,
-      "rank": 125,
-      "careerAVG": 0.229,
-      "careerAB": 266,
-      "careerHits": 61,
-      "xBA": 0.217
+      "pos": "SS",
+      "G": 72,
+      "AB": 239,
+      "PA": 258,
+      "R": 21,
+      "H": 55,
+      "B2": 11,
+      "B3": 1,
+      "HR": 7,
+      "RBI": 33,
+      "SB": 10,
+      "BB": 8,
+      "SO": 51,
+      "AVG": 0.23,
+      "OBP": 0.272,
+      "SLG": 0.372,
+      "OPS": 0.644,
+      "rank": 124,
+      "careerAVG": 0.251,
+      "careerAB": 2505,
+      "careerHits": 629,
+      "xBA": 0.223
     },
     {
       "id": 642715,
@@ -3653,7 +3624,7 @@
       "OBP": 0.274,
       "SLG": 0.434,
       "OPS": 0.708,
-      "rank": 126,
+      "rank": 125,
       "careerAVG": 0.243,
       "careerAB": 4106,
       "careerHits": 999,
@@ -3682,11 +3653,69 @@
       "OBP": 0.316,
       "SLG": 0.404,
       "OPS": 0.72,
-      "rank": 127,
+      "rank": 126,
       "careerAVG": 0.245,
       "careerAB": 2359,
       "careerHits": 579,
       "xBA": 0.214
+    },
+    {
+      "id": 664023,
+      "name": "Ian Happ",
+      "team": "CHC",
+      "teamId": 112,
+      "teamName": "Cubs",
+      "pos": "LF",
+      "G": 72,
+      "AB": 272,
+      "PA": 318,
+      "R": 51,
+      "H": 62,
+      "B2": 14,
+      "B3": 2,
+      "HR": 16,
+      "RBI": 37,
+      "SB": 4,
+      "BB": 42,
+      "SO": 100,
+      "AVG": 0.228,
+      "OBP": 0.336,
+      "SLG": 0.471,
+      "OPS": 0.807,
+      "rank": 127,
+      "careerAVG": 0.246,
+      "careerAB": 4117,
+      "careerHits": 1012,
+      "xBA": 0.206
+    },
+    {
+      "id": 672960,
+      "name": "Kazuma Okamoto",
+      "team": "TOR",
+      "teamId": 141,
+      "teamName": "Blue Jays",
+      "pos": "3B",
+      "G": 74,
+      "AB": 268,
+      "PA": 302,
+      "R": 36,
+      "H": 61,
+      "B2": 10,
+      "B3": 0,
+      "HR": 15,
+      "RBI": 42,
+      "SB": 0,
+      "BB": 29,
+      "SO": 99,
+      "AVG": 0.228,
+      "OBP": 0.308,
+      "SLG": 0.433,
+      "OPS": 0.741,
+      "rank": 128,
+      "careerAVG": 0.228,
+      "careerAB": 268,
+      "careerHits": 61,
+      "xBA": 0.217
     },
     {
       "id": 593428,
@@ -3711,7 +3740,7 @@
       "OBP": 0.307,
       "SLG": 0.342,
       "OPS": 0.649,
-      "rank": 128,
+      "rank": 129,
       "careerAVG": 0.285,
       "careerAB": 6592,
       "careerHits": 1877,
@@ -3740,7 +3769,7 @@
       "OBP": 0.315,
       "SLG": 0.441,
       "OPS": 0.756,
-      "rank": 129,
+      "rank": 130,
       "careerAVG": 0.235,
       "careerAB": 2004,
       "careerHits": 471,
@@ -3769,7 +3798,7 @@
       "OBP": 0.283,
       "SLG": 0.362,
       "OPS": 0.645,
-      "rank": 130,
+      "rank": 131,
       "careerAVG": 0.252,
       "careerAB": 6636,
       "careerHits": 1674,
@@ -3798,7 +3827,7 @@
       "OBP": 0.326,
       "SLG": 0.443,
       "OPS": 0.769,
-      "rank": 131,
+      "rank": 132,
       "careerAVG": 0.243,
       "careerAB": 1622,
       "careerHits": 394,
@@ -3827,11 +3856,40 @@
       "OBP": 0.309,
       "SLG": 0.35,
       "OPS": 0.659,
-      "rank": 132,
+      "rank": 133,
       "careerAVG": 0.26,
       "careerAB": 1860,
       "careerHits": 484,
       "xBA": 0.246
+    },
+    {
+      "id": 543807,
+      "name": "George Springer",
+      "team": "TOR",
+      "teamId": 141,
+      "teamName": "Blue Jays",
+      "pos": "DH",
+      "G": 54,
+      "AB": 205,
+      "PA": 237,
+      "R": 23,
+      "H": 46,
+      "B2": 11,
+      "B3": 0,
+      "HR": 8,
+      "RBI": 21,
+      "SB": 6,
+      "BB": 25,
+      "SO": 43,
+      "AVG": 0.224,
+      "OBP": 0.316,
+      "SLG": 0.395,
+      "OPS": 0.711,
+      "rank": 134,
+      "careerAVG": 0.265,
+      "careerAB": 5760,
+      "careerHits": 1526,
+      "xBA": 0.224
     },
     {
       "id": 683083,
@@ -3856,7 +3914,7 @@
       "OBP": 0.312,
       "SLG": 0.267,
       "OPS": 0.579,
-      "rank": 133,
+      "rank": 135,
       "careerAVG": 0.229,
       "careerAB": 349,
       "careerHits": 80,
@@ -3885,40 +3943,11 @@
       "OBP": 0.304,
       "SLG": 0.363,
       "OPS": 0.667,
-      "rank": 134,
+      "rank": 136,
       "careerAVG": 0.231,
       "careerAB": 692,
       "careerHits": 160,
       "xBA": 0.25
-    },
-    {
-      "id": 664023,
-      "name": "Ian Happ",
-      "team": "CHC",
-      "teamId": 112,
-      "teamName": "Cubs",
-      "pos": "LF",
-      "G": 72,
-      "AB": 269,
-      "PA": 315,
-      "R": 49,
-      "H": 60,
-      "B2": 14,
-      "B3": 2,
-      "HR": 16,
-      "RBI": 37,
-      "SB": 4,
-      "BB": 42,
-      "SO": 100,
-      "AVG": 0.223,
-      "OBP": 0.333,
-      "SLG": 0.468,
-      "OPS": 0.801,
-      "rank": 135,
-      "careerAVG": 0.246,
-      "careerAB": 4114,
-      "careerHits": 1010,
-      "xBA": 0.206
     },
     {
       "id": 607208,
@@ -3943,7 +3972,7 @@
       "OBP": 0.276,
       "SLG": 0.334,
       "OPS": 0.61,
-      "rank": 136,
+      "rank": 137,
       "careerAVG": 0.293,
       "careerAB": 5453,
       "careerHits": 1597,
@@ -3972,7 +4001,7 @@
       "OBP": 0.292,
       "SLG": 0.416,
       "OPS": 0.708,
-      "rank": 137,
+      "rank": 138,
       "careerAVG": 0.263,
       "careerAB": 2193,
       "careerHits": 577,
@@ -4001,7 +4030,7 @@
       "OBP": 0.298,
       "SLG": 0.312,
       "OPS": 0.61,
-      "rank": 138,
+      "rank": 139,
       "careerAVG": 0.23,
       "careerAB": 1158,
       "careerHits": 266,
@@ -4030,7 +4059,7 @@
       "OBP": 0.351,
       "SLG": 0.394,
       "OPS": 0.745,
-      "rank": 139,
+      "rank": 140,
       "careerAVG": 0.247,
       "careerAB": 3572,
       "careerHits": 882,
@@ -4059,40 +4088,11 @@
       "OBP": 0.336,
       "SLG": 0.308,
       "OPS": 0.644,
-      "rank": 140,
+      "rank": 141,
       "careerAVG": 0.245,
       "careerAB": 597,
       "careerHits": 146,
       "xBA": 0.228
-    },
-    {
-      "id": 543807,
-      "name": "George Springer",
-      "team": "TOR",
-      "teamId": 141,
-      "teamName": "Blue Jays",
-      "pos": "DH",
-      "G": 54,
-      "AB": 204,
-      "PA": 236,
-      "R": 22,
-      "H": 45,
-      "B2": 11,
-      "B3": 0,
-      "HR": 7,
-      "RBI": 20,
-      "SB": 6,
-      "BB": 25,
-      "SO": 43,
-      "AVG": 0.221,
-      "OBP": 0.313,
-      "SLG": 0.377,
-      "OPS": 0.69,
-      "rank": 141,
-      "careerAVG": 0.265,
-      "careerAB": 5759,
-      "careerHits": 1525,
-      "xBA": 0.224
     },
     {
       "id": 624585,
@@ -4508,24 +4508,24 @@
       "teamName": "Cubs",
       "pos": "SS",
       "G": 72,
-      "AB": 235,
-      "PA": 274,
-      "R": 41,
+      "AB": 236,
+      "PA": 277,
+      "R": 42,
       "H": 42,
       "B2": 7,
       "B3": 1,
       "HR": 8,
-      "RBI": 30,
-      "SB": 8,
-      "BB": 34,
+      "RBI": 31,
+      "SB": 9,
+      "BB": 36,
       "SO": 66,
-      "AVG": 0.179,
-      "OBP": 0.282,
-      "SLG": 0.319,
-      "OPS": 0.601,
+      "AVG": 0.178,
+      "OBP": 0.286,
+      "SLG": 0.318,
+      "OPS": 0.604,
       "rank": 156,
       "careerAVG": 0.247,
-      "careerAB": 4967,
+      "careerAB": 4968,
       "careerHits": 1228,
       "xBA": 0.185
     },
@@ -4605,7 +4605,7 @@
         0.301,
         0.349
       ],
-      "pWinTitle": 0.2123
+      "pWinTitle": 0.2122
     },
     {
       "id": 672640,
@@ -4623,7 +4623,7 @@
         0.301,
         0.346
       ],
-      "pWinTitle": 0.2032
+      "pWinTitle": 0.2051
     },
     {
       "id": 650333,
@@ -4641,7 +4641,7 @@
         0.298,
         0.342
       ],
-      "pWinTitle": 0.14305
+      "pWinTitle": 0.1425
     },
     {
       "id": 808982,
@@ -4659,7 +4659,7 @@
         0.298,
         0.344
       ],
-      "pWinTitle": 0.13945
+      "pWinTitle": 0.13935
     },
     {
       "id": 650490,
@@ -4677,7 +4677,7 @@
         0.285,
         0.333
       ],
-      "pWinTitle": 0.06145
+      "pWinTitle": 0.0604
     },
     {
       "id": 669016,
@@ -4695,7 +4695,7 @@
         0.281,
         0.331
       ],
-      "pWinTitle": 0.04265
+      "pWinTitle": 0.04365
     },
     {
       "id": 687859,
@@ -4713,7 +4713,7 @@
         0.282,
         0.331
       ],
-      "pWinTitle": 0.04165
+      "pWinTitle": 0.0416
     },
     {
       "id": 671739,
@@ -4749,7 +4749,7 @@
         0.274,
         0.323
       ],
-      "pWinTitle": 0.0232
+      "pWinTitle": 0.02305
     },
     {
       "id": 686948,
@@ -4767,7 +4767,7 @@
         0.271,
         0.322
       ],
-      "pWinTitle": 0.01975
+      "pWinTitle": 0.02005
     },
     {
       "id": 673962,
@@ -4785,7 +4785,7 @@
         0.273,
         0.321
       ],
-      "pWinTitle": 0.01075
+      "pWinTitle": 0.0105
     },
     {
       "id": 660271,
@@ -4803,7 +4803,7 @@
         0.273,
         0.315
       ],
-      "pWinTitle": 0.00935
+      "pWinTitle": 0.0092
     },
     {
       "id": 677951,
@@ -4821,7 +4821,7 @@
         0.273,
         0.319
       ],
-      "pWinTitle": 0.0086
+      "pWinTitle": 0.00835
     },
     {
       "id": 693304,
@@ -4839,7 +4839,7 @@
         0.266,
         0.314
       ],
-      "pWinTitle": 0.0056
+      "pWinTitle": 0.0055
     },
     {
       "id": 661388,
@@ -4857,25 +4857,7 @@
         0.266,
         0.31
       ],
-      "pWinTitle": 0.00415
-    },
-    {
-      "id": 700250,
-      "name": "Ben Rice",
-      "team": "NYY",
-      "pos": "1B",
-      "currentAVG": 0.291,
-      "H": 73,
-      "AB": 251,
-      "remAB": 329,
-      "teamRemaining": 89,
-      "trueTalent": 0.282,
-      "projAVG": 0.286,
-      "ci80": [
-        0.264,
-        0.309
-      ],
-      "pWinTitle": 0.00345
+      "pWinTitle": 0.004
     },
     {
       "id": 669364,
@@ -4892,6 +4874,24 @@
       "ci80": [
         0.264,
         0.31
+      ],
+      "pWinTitle": 0.00355
+    },
+    {
+      "id": 700250,
+      "name": "Ben Rice",
+      "team": "NYY",
+      "pos": "1B",
+      "currentAVG": 0.291,
+      "H": 73,
+      "AB": 251,
+      "remAB": 329,
+      "teamRemaining": 89,
+      "trueTalent": 0.282,
+      "projAVG": 0.286,
+      "ci80": [
+        0.264,
+        0.309
       ],
       "pWinTitle": 0.00335
     },
@@ -4911,7 +4911,7 @@
         0.266,
         0.305
       ],
-      "pWinTitle": 0.0033
+      "pWinTitle": 0.00315
     },
     {
       "id": 682985,
@@ -4929,7 +4929,7 @@
         0.266,
         0.31
       ],
-      "pWinTitle": 0.00285
+      "pWinTitle": 0.0029
     },
     {
       "id": 575929,
@@ -4947,7 +4947,7 @@
         0.26,
         0.306
       ],
-      "pWinTitle": 0.00275
+      "pWinTitle": 0.0027
     },
     {
       "id": 691023,
@@ -4965,25 +4965,7 @@
         0.267,
         0.311
       ],
-      "pWinTitle": 0.00255
-    },
-    {
-      "id": 668227,
-      "name": "Randy Arozarena",
-      "team": "SEA",
-      "pos": "LF",
-      "currentAVG": 0.291,
-      "H": 76,
-      "AB": 261,
-      "remAB": 316,
-      "teamRemaining": 86,
-      "trueTalent": 0.279,
-      "projAVG": 0.285,
-      "ci80": [
-        0.262,
-        0.307
-      ],
-      "pWinTitle": 0.00245
+      "pWinTitle": 0.00265
     },
     {
       "id": 656811,
@@ -5001,25 +4983,25 @@
         0.257,
         0.305
       ],
-      "pWinTitle": 0.0024
+      "pWinTitle": 0.00235
     },
     {
-      "id": 676475,
-      "name": "Alec Burleson",
-      "team": "STL",
-      "pos": "1B",
-      "currentAVG": 0.282,
-      "H": 80,
-      "AB": 284,
-      "remAB": 351,
-      "teamRemaining": 89,
-      "trueTalent": 0.282,
-      "projAVG": 0.282,
+      "id": 668227,
+      "name": "Randy Arozarena",
+      "team": "SEA",
+      "pos": "LF",
+      "currentAVG": 0.291,
+      "H": 76,
+      "AB": 261,
+      "remAB": 316,
+      "teamRemaining": 86,
+      "trueTalent": 0.279,
+      "projAVG": 0.285,
       "ci80": [
-        0.26,
-        0.302
+        0.262,
+        0.307
       ],
-      "pWinTitle": 0.0017
+      "pWinTitle": 0.0023
     },
     {
       "id": 676391,
@@ -5037,7 +5019,7 @@
         0.266,
         0.308
       ],
-      "pWinTitle": 0.00145
+      "pWinTitle": 0.00155
     },
     {
       "id": 665487,
@@ -5062,18 +5044,36 @@
       "name": "Vladimir Guerrero Jr.",
       "team": "TOR",
       "pos": "1B",
-      "currentAVG": 0.277,
+      "currentAVG": 0.276,
       "H": 72,
-      "AB": 260,
-      "remAB": 314,
+      "AB": 261,
+      "remAB": 315,
       "teamRemaining": 87,
       "trueTalent": 0.282,
-      "projAVG": 0.28,
+      "projAVG": 0.279,
       "ci80": [
-        0.256,
-        0.303
+        0.257,
+        0.304
       ],
       "pWinTitle": 0.0013
+    },
+    {
+      "id": 805808,
+      "name": "Kevin McGonigle",
+      "team": "DET",
+      "pos": "SS",
+      "currentAVG": 0.282,
+      "H": 75,
+      "AB": 266,
+      "remAB": 330,
+      "teamRemaining": 88,
+      "trueTalent": 0.277,
+      "projAVG": 0.279,
+      "ci80": [
+        0.257,
+        0.3
+      ],
+      "pWinTitle": 0.00125
     },
     {
       "id": 518692,
@@ -5091,23 +5091,23 @@
         0.258,
         0.303
       ],
-      "pWinTitle": 0.00125
+      "pWinTitle": 0.0012
     },
     {
-      "id": 805808,
-      "name": "Kevin McGonigle",
-      "team": "DET",
-      "pos": "SS",
-      "currentAVG": 0.282,
-      "H": 75,
-      "AB": 266,
-      "remAB": 330,
-      "teamRemaining": 88,
-      "trueTalent": 0.277,
+      "id": 668804,
+      "name": "Bryan Reynolds",
+      "team": "PIT",
+      "pos": "LF",
+      "currentAVG": 0.283,
+      "H": 76,
+      "AB": 269,
+      "remAB": 312,
+      "teamRemaining": 87,
+      "trueTalent": 0.276,
       "projAVG": 0.279,
       "ci80": [
-        0.253,
-        0.302
+        0.255,
+        0.301
       ],
       "pWinTitle": 0.00115
     },
@@ -5130,20 +5130,20 @@
       "pWinTitle": 0.00105
     },
     {
-      "id": 678882,
-      "name": "Ceddanne Rafaela",
-      "team": "BOS",
-      "pos": "CF",
-      "currentAVG": 0.287,
-      "H": 72,
-      "AB": 251,
-      "remAB": 327,
-      "teamRemaining": 90,
-      "trueTalent": 0.27,
-      "projAVG": 0.277,
+      "id": 676475,
+      "name": "Alec Burleson",
+      "team": "STL",
+      "pos": "1B",
+      "currentAVG": 0.282,
+      "H": 80,
+      "AB": 284,
+      "remAB": 351,
+      "teamRemaining": 89,
+      "trueTalent": 0.282,
+      "projAVG": 0.282,
       "ci80": [
-        0.256,
-        0.301
+        0.26,
+        0.302
       ],
       "pWinTitle": 0.001
     },
@@ -5166,6 +5166,24 @@
       "pWinTitle": 0.00095
     },
     {
+      "id": 678882,
+      "name": "Ceddanne Rafaela",
+      "team": "BOS",
+      "pos": "CF",
+      "currentAVG": 0.287,
+      "H": 72,
+      "AB": 251,
+      "remAB": 327,
+      "teamRemaining": 90,
+      "trueTalent": 0.27,
+      "projAVG": 0.277,
+      "ci80": [
+        0.256,
+        0.301
+      ],
+      "pWinTitle": 0.0009
+    },
+    {
       "id": 682829,
       "name": "Elly De La Cruz",
       "team": "CIN",
@@ -5182,24 +5200,6 @@
         0.301
       ],
       "pWinTitle": 0.0009
-    },
-    {
-      "id": 668804,
-      "name": "Bryan Reynolds",
-      "team": "PIT",
-      "pos": "LF",
-      "currentAVG": 0.283,
-      "H": 76,
-      "AB": 269,
-      "remAB": 312,
-      "teamRemaining": 87,
-      "trueTalent": 0.276,
-      "projAVG": 0.279,
-      "ci80": [
-        0.258,
-        0.301
-      ],
-      "pWinTitle": 0.00085
     },
     {
       "id": 682928,
@@ -5238,6 +5238,24 @@
       "pWinTitle": 0.00075
     },
     {
+      "id": 691718,
+      "name": "Pete Crow-Armstrong",
+      "team": "CHC",
+      "pos": "CF",
+      "currentAVG": 0.283,
+      "H": 81,
+      "AB": 286,
+      "remAB": 327,
+      "teamRemaining": 87,
+      "trueTalent": 0.272,
+      "projAVG": 0.277,
+      "ci80": [
+        0.256,
+        0.299
+      ],
+      "pWinTitle": 0.0006
+    },
+    {
       "id": 641355,
       "name": "Cody Bellinger",
       "team": "NYY",
@@ -5256,6 +5274,24 @@
       "pWinTitle": 0.0006
     },
     {
+      "id": 695578,
+      "name": "James Wood",
+      "team": "WSH",
+      "pos": "RF",
+      "currentAVG": 0.277,
+      "H": 79,
+      "AB": 285,
+      "remAB": 331,
+      "teamRemaining": 87,
+      "trueTalent": 0.275,
+      "projAVG": 0.276,
+      "ci80": [
+        0.256,
+        0.299
+      ],
+      "pWinTitle": 0.00035
+    },
+    {
       "id": 666018,
       "name": "Jonathan Aranda",
       "team": "TB",
@@ -5271,23 +5307,23 @@
         0.252,
         0.298
       ],
-      "pWinTitle": 0.0004
+      "pWinTitle": 0.00035
     },
     {
-      "id": 681198,
-      "name": "TJ Rumfield",
-      "team": "COL",
-      "pos": "1B",
-      "currentAVG": 0.275,
-      "H": 70,
-      "AB": 255,
-      "remAB": 308,
+      "id": 669127,
+      "name": "Shea Langeliers",
+      "team": "ATH",
+      "pos": "C",
+      "currentAVG": 0.276,
+      "H": 78,
+      "AB": 283,
+      "remAB": 362,
       "teamRemaining": 87,
-      "trueTalent": 0.267,
-      "projAVG": 0.27,
+      "trueTalent": 0.271,
+      "projAVG": 0.273,
       "ci80": [
-        0.247,
-        0.293
+        0.251,
+        0.295
       ],
       "pWinTitle": 0.00035
     },
@@ -5310,76 +5346,40 @@
       "pWinTitle": 0.00035
     },
     {
-      "id": 695578,
-      "name": "James Wood",
-      "team": "WSH",
-      "pos": "RF",
-      "currentAVG": 0.277,
-      "H": 79,
-      "AB": 285,
-      "remAB": 331,
+      "id": 681198,
+      "name": "TJ Rumfield",
+      "team": "COL",
+      "pos": "1B",
+      "currentAVG": 0.275,
+      "H": 70,
+      "AB": 255,
+      "remAB": 308,
       "teamRemaining": 87,
-      "trueTalent": 0.275,
-      "projAVG": 0.276,
+      "trueTalent": 0.267,
+      "projAVG": 0.27,
       "ci80": [
-        0.256,
-        0.299
-      ],
-      "pWinTitle": 0.0003
-    },
-    {
-      "id": 669127,
-      "name": "Shea Langeliers",
-      "team": "ATH",
-      "pos": "C",
-      "currentAVG": 0.276,
-      "H": 78,
-      "AB": 283,
-      "remAB": 362,
-      "teamRemaining": 87,
-      "trueTalent": 0.271,
-      "projAVG": 0.273,
-      "ci80": [
-        0.251,
-        0.295
-      ],
-      "pWinTitle": 0.0003
-    },
-    {
-      "id": 691406,
-      "name": "Junior Caminero",
-      "team": "TB",
-      "pos": "3B",
-      "currentAVG": 0.272,
-      "H": 73,
-      "AB": 268,
-      "remAB": 343,
-      "teamRemaining": 91,
-      "trueTalent": 0.27,
-      "projAVG": 0.271,
-      "ci80": [
-        0.249,
+        0.247,
         0.293
       ],
       "pWinTitle": 0.0003
     },
     {
-      "id": 691718,
-      "name": "Pete Crow-Armstrong",
-      "team": "CHC",
-      "pos": "CF",
+      "id": 650489,
+      "name": "Willi Castro",
+      "team": "COL",
+      "pos": "2B",
       "currentAVG": 0.281,
-      "H": 80,
-      "AB": 285,
-      "remAB": 326,
+      "H": 61,
+      "AB": 217,
+      "remAB": 300,
       "teamRemaining": 87,
-      "trueTalent": 0.271,
-      "projAVG": 0.275,
+      "trueTalent": 0.261,
+      "projAVG": 0.269,
       "ci80": [
-        0.254,
-        0.298
+        0.244,
+        0.294
       ],
-      "pWinTitle": 0.00025
+      "pWinTitle": 0.0003
     },
     {
       "id": 681624,
@@ -5400,17 +5400,35 @@
       "pWinTitle": 0.00025
     },
     {
-      "id": 650489,
-      "name": "Willi Castro",
-      "team": "COL",
-      "pos": "2B",
-      "currentAVG": 0.281,
-      "H": 61,
-      "AB": 217,
-      "remAB": 300,
+      "id": 691406,
+      "name": "Junior Caminero",
+      "team": "TB",
+      "pos": "3B",
+      "currentAVG": 0.272,
+      "H": 73,
+      "AB": 268,
+      "remAB": 343,
+      "teamRemaining": 91,
+      "trueTalent": 0.27,
+      "projAVG": 0.271,
+      "ci80": [
+        0.249,
+        0.293
+      ],
+      "pWinTitle": 0.00025
+    },
+    {
+      "id": 673548,
+      "name": "Seiya Suzuki",
+      "team": "CHC",
+      "pos": "RF",
+      "currentAVG": 0.269,
+      "H": 60,
+      "AB": 223,
+      "remAB": 318,
       "teamRemaining": 87,
-      "trueTalent": 0.261,
-      "projAVG": 0.269,
+      "trueTalent": 0.266,
+      "projAVG": 0.267,
       "ci80": [
         0.246,
         0.292
@@ -5466,46 +5484,10 @@
       "trueTalent": 0.269,
       "projAVG": 0.272,
       "ci80": [
-        0.252,
-        0.296
+        0.249,
+        0.294
       ],
-      "pWinTitle": 0.0002
-    },
-    {
-      "id": 673548,
-      "name": "Seiya Suzuki",
-      "team": "CHC",
-      "pos": "RF",
-      "currentAVG": 0.268,
-      "H": 59,
-      "AB": 220,
-      "remAB": 314,
-      "teamRemaining": 87,
-      "trueTalent": 0.265,
-      "projAVG": 0.267,
-      "ci80": [
-        0.245,
-        0.29
-      ],
-      "pWinTitle": 0.0002
-    },
-    {
-      "id": 660670,
-      "name": "Ronald Acuña Jr.",
-      "team": "ATL",
-      "pos": "RF",
-      "currentAVG": 0.251,
-      "H": 49,
-      "AB": 195,
-      "remAB": 327,
-      "teamRemaining": 89,
-      "trueTalent": 0.26,
-      "projAVG": 0.256,
-      "ci80": [
-        0.232,
-        0.282
-      ],
-      "pWinTitle": 0.0002
+      "pWinTitle": 0.00015
     },
     {
       "id": 805367,
@@ -5598,6 +5580,24 @@
       "pWinTitle": 0.0001
     },
     {
+      "id": 800050,
+      "name": "Chase DeLauter",
+      "team": "CLE",
+      "pos": "RF",
+      "currentAVG": 0.263,
+      "H": 63,
+      "AB": 240,
+      "remAB": 316,
+      "teamRemaining": 87,
+      "trueTalent": 0.266,
+      "projAVG": 0.264,
+      "ci80": [
+        0.241,
+        0.291
+      ],
+      "pWinTitle": 0.0001
+    },
+    {
       "id": 677587,
       "name": "Brayan Rocchio",
       "team": "CLE",
@@ -5648,42 +5648,6 @@
       "ci80": [
         0.246,
         0.283
-      ],
-      "pWinTitle": 0.00005
-    },
-    {
-      "id": 802139,
-      "name": "JJ Wetherholt",
-      "team": "STL",
-      "pos": "2B",
-      "currentAVG": 0.266,
-      "H": 71,
-      "AB": 267,
-      "remAB": 344,
-      "teamRemaining": 89,
-      "trueTalent": 0.264,
-      "projAVG": 0.265,
-      "ci80": [
-        0.242,
-        0.285
-      ],
-      "pWinTitle": 0.00005
-    },
-    {
-      "id": 800050,
-      "name": "Chase DeLauter",
-      "team": "CLE",
-      "pos": "RF",
-      "currentAVG": 0.263,
-      "H": 63,
-      "AB": 240,
-      "remAB": 316,
-      "teamRemaining": 87,
-      "trueTalent": 0.266,
-      "projAVG": 0.264,
-      "ci80": [
-        0.241,
-        0.291
       ],
       "pWinTitle": 0.00005
     },
@@ -5812,6 +5776,42 @@
         0.283
       ],
       "pWinTitle": 0.00005
+    },
+    {
+      "id": 701398,
+      "name": "Sal Stewart",
+      "team": "CIN",
+      "pos": "1B",
+      "currentAVG": 0.252,
+      "H": 69,
+      "AB": 274,
+      "remAB": 334,
+      "teamRemaining": 89,
+      "trueTalent": 0.254,
+      "projAVG": 0.253,
+      "ci80": [
+        0.232,
+        0.271
+      ],
+      "pWinTitle": 0.00005
+    },
+    {
+      "id": 802139,
+      "name": "JJ Wetherholt",
+      "team": "STL",
+      "pos": "2B",
+      "currentAVG": 0.266,
+      "H": 71,
+      "AB": 267,
+      "remAB": 344,
+      "teamRemaining": 89,
+      "trueTalent": 0.264,
+      "projAVG": 0.265,
+      "ci80": [
+        0.242,
+        0.285
+      ],
+      "pWinTitle": 0
     },
     {
       "id": 621439,
@@ -5971,7 +5971,7 @@
       "projAVG": 0.258,
       "ci80": [
         0.236,
-        0.279
+        0.277
       ],
       "pWinTitle": 0
     },
@@ -5994,6 +5994,24 @@
       "pWinTitle": 0
     },
     {
+      "id": 660670,
+      "name": "Ronald Acuña Jr.",
+      "team": "ATL",
+      "pos": "RF",
+      "currentAVG": 0.251,
+      "H": 49,
+      "AB": 195,
+      "remAB": 327,
+      "teamRemaining": 89,
+      "trueTalent": 0.26,
+      "projAVG": 0.256,
+      "ci80": [
+        0.23,
+        0.284
+      ],
+      "pWinTitle": 0
+    },
+    {
       "id": 547180,
       "name": "Bryce Harper",
       "team": "PHI",
@@ -6012,24 +6030,6 @@
       "pWinTitle": 0
     },
     {
-      "id": 608324,
-      "name": "Alex Bregman",
-      "team": "CHC",
-      "pos": "3B",
-      "currentAVG": 0.253,
-      "H": 74,
-      "AB": 293,
-      "remAB": 340,
-      "teamRemaining": 87,
-      "trueTalent": 0.254,
-      "projAVG": 0.254,
-      "ci80": [
-        0.232,
-        0.273
-      ],
-      "pWinTitle": 0
-    },
-    {
       "id": 621493,
       "name": "Taylor Ward",
       "team": "BAL",
@@ -6044,24 +6044,6 @@
       "ci80": [
         0.23,
         0.274
-      ],
-      "pWinTitle": 0
-    },
-    {
-      "id": 701398,
-      "name": "Sal Stewart",
-      "team": "CIN",
-      "pos": "1B",
-      "currentAVG": 0.252,
-      "H": 69,
-      "AB": 274,
-      "remAB": 334,
-      "teamRemaining": 89,
-      "trueTalent": 0.254,
-      "projAVG": 0.253,
-      "ci80": [
-        0.229,
-        0.276
       ],
       "pWinTitle": 0
     },
@@ -6102,6 +6084,24 @@
       "pWinTitle": 0
     },
     {
+      "id": 608324,
+      "name": "Alex Bregman",
+      "team": "CHC",
+      "pos": "3B",
+      "currentAVG": 0.25,
+      "H": 74,
+      "AB": 296,
+      "remAB": 343,
+      "teamRemaining": 87,
+      "trueTalent": 0.253,
+      "projAVG": 0.252,
+      "ci80": [
+        0.23,
+        0.272
+      ],
+      "pWinTitle": 0
+    },
+    {
       "id": 807712,
       "name": "Luke Keaschall",
       "team": "MIN",
@@ -6114,8 +6114,8 @@
       "trueTalent": 0.25,
       "projAVG": 0.251,
       "ci80": [
-        0.23,
-        0.277
+        0.228,
+        0.274
       ],
       "pWinTitle": 0
     },
@@ -6222,7 +6222,7 @@
       "trueTalent": 0.246,
       "projAVG": 0.248,
       "ci80": [
-        0.227,
+        0.229,
         0.269
       ],
       "pWinTitle": 0
@@ -6276,8 +6276,8 @@
       "trueTalent": 0.242,
       "projAVG": 0.247,
       "ci80": [
-        0.225,
-        0.266
+        0.227,
+        0.271
       ],
       "pWinTitle": 0
     },
@@ -6322,15 +6322,15 @@
       "name": "Michael Busch",
       "team": "CHC",
       "pos": "1B",
-      "currentAVG": 0.246,
-      "H": 66,
-      "AB": 268,
-      "remAB": 311,
+      "currentAVG": 0.247,
+      "H": 67,
+      "AB": 271,
+      "remAB": 314,
       "teamRemaining": 87,
-      "trueTalent": 0.245,
+      "trueTalent": 0.246,
       "projAVG": 0.246,
       "ci80": [
-        0.226,
+        0.227,
         0.268
       ],
       "pWinTitle": 0
@@ -6390,6 +6390,24 @@
       "pWinTitle": 0
     },
     {
+      "id": 663538,
+      "name": "Nico Hoerner",
+      "team": "CHC",
+      "pos": "2B",
+      "currentAVG": 0.236,
+      "H": 70,
+      "AB": 297,
+      "remAB": 349,
+      "teamRemaining": 87,
+      "trueTalent": 0.255,
+      "projAVG": 0.246,
+      "ci80": [
+        0.224,
+        0.268
+      ],
+      "pWinTitle": 0
+    },
+    {
       "id": 572233,
       "name": "Christian Walker",
       "team": "HOU",
@@ -6439,24 +6457,6 @@
       "projAVG": 0.245,
       "ci80": [
         0.22,
-        0.269
-      ],
-      "pWinTitle": 0
-    },
-    {
-      "id": 663538,
-      "name": "Nico Hoerner",
-      "team": "CHC",
-      "pos": "2B",
-      "currentAVG": 0.235,
-      "H": 69,
-      "AB": 294,
-      "remAB": 346,
-      "teamRemaining": 87,
-      "trueTalent": 0.255,
-      "projAVG": 0.245,
-      "ci80": [
-        0.225,
         0.269
       ],
       "pWinTitle": 0
@@ -6619,7 +6619,7 @@
       "projAVG": 0.24,
       "ci80": [
         0.216,
-        0.263
+        0.261
       ],
       "pWinTitle": 0
     },
@@ -6690,8 +6690,8 @@
       "trueTalent": 0.243,
       "projAVG": 0.238,
       "ci80": [
-        0.217,
-        0.262
+        0.215,
+        0.26
       ],
       "pWinTitle": 0
     },
@@ -6726,8 +6726,8 @@
       "trueTalent": 0.239,
       "projAVG": 0.237,
       "ci80": [
-        0.214,
-        0.257
+        0.216,
+        0.261
       ],
       "pWinTitle": 0
     },
@@ -6762,8 +6762,8 @@
       "trueTalent": 0.243,
       "projAVG": 0.236,
       "ci80": [
-        0.212,
-        0.261
+        0.214,
+        0.257
       ],
       "pWinTitle": 0
     },
@@ -6808,16 +6808,16 @@
       "name": "Andrés Giménez",
       "team": "TOR",
       "pos": "SS",
-      "currentAVG": 0.232,
+      "currentAVG": 0.23,
       "H": 55,
-      "AB": 237,
-      "remAB": 286,
+      "AB": 239,
+      "remAB": 289,
       "teamRemaining": 87,
-      "trueTalent": 0.234,
-      "projAVG": 0.233,
+      "trueTalent": 0.233,
+      "projAVG": 0.232,
       "ci80": [
         0.21,
-        0.254
+        0.252
       ],
       "pWinTitle": 0
     },
@@ -6834,8 +6834,8 @@
       "trueTalent": 0.239,
       "projAVG": 0.232,
       "ci80": [
-        0.212,
-        0.253
+        0.215,
+        0.255
       ],
       "pWinTitle": 0
     },
@@ -6870,8 +6870,8 @@
       "trueTalent": 0.238,
       "projAVG": 0.231,
       "ci80": [
-        0.211,
-        0.254
+        0.208,
+        0.248
       ],
       "pWinTitle": 0
     },
@@ -6889,7 +6889,7 @@
       "projAVG": 0.23,
       "ci80": [
         0.21,
-        0.25
+        0.253
       ],
       "pWinTitle": 0
     },
@@ -6906,8 +6906,26 @@
       "trueTalent": 0.23,
       "projAVG": 0.23,
       "ci80": [
-        0.211,
+        0.214,
         0.25
+      ],
+      "pWinTitle": 0
+    },
+    {
+      "id": 543807,
+      "name": "George Springer",
+      "team": "TOR",
+      "pos": "DH",
+      "currentAVG": 0.224,
+      "H": 46,
+      "AB": 205,
+      "remAB": 330,
+      "teamRemaining": 87,
+      "trueTalent": 0.233,
+      "projAVG": 0.23,
+      "ci80": [
+        0.206,
+        0.254
       ],
       "pWinTitle": 0
     },
@@ -6925,24 +6943,6 @@
       "projAVG": 0.23,
       "ci80": [
         0.206,
-        0.254
-      ],
-      "pWinTitle": 0
-    },
-    {
-      "id": 672960,
-      "name": "Kazuma Okamoto",
-      "team": "TOR",
-      "pos": "3B",
-      "currentAVG": 0.229,
-      "H": 61,
-      "AB": 266,
-      "remAB": 313,
-      "teamRemaining": 87,
-      "trueTalent": 0.228,
-      "projAVG": 0.229,
-      "ci80": [
-        0.212,
         0.25
       ],
       "pWinTitle": 0
@@ -6961,7 +6961,7 @@
       "projAVG": 0.229,
       "ci80": [
         0.206,
-        0.25
+        0.252
       ],
       "pWinTitle": 0
     },
@@ -6978,8 +6978,8 @@
       "trueTalent": 0.228,
       "projAVG": 0.228,
       "ci80": [
-        0.206,
-        0.25
+        0.208,
+        0.248
       ],
       "pWinTitle": 0
     },
@@ -6997,7 +6997,7 @@
       "projAVG": 0.228,
       "ci80": [
         0.208,
-        0.25
+        0.252
       ],
       "pWinTitle": 0
     },
@@ -7014,26 +7014,44 @@
       "trueTalent": 0.232,
       "projAVG": 0.228,
       "ci80": [
-        0.206,
+        0.208,
         0.245
       ],
       "pWinTitle": 0
     },
     {
-      "id": 543807,
-      "name": "George Springer",
-      "team": "TOR",
-      "pos": "DH",
-      "currentAVG": 0.221,
-      "H": 45,
-      "AB": 204,
+      "id": 664023,
+      "name": "Ian Happ",
+      "team": "CHC",
+      "pos": "LF",
+      "currentAVG": 0.228,
+      "H": 62,
+      "AB": 272,
       "remAB": 329,
       "teamRemaining": 87,
-      "trueTalent": 0.231,
+      "trueTalent": 0.226,
       "projAVG": 0.227,
       "ci80": [
-        0.205,
-        0.251
+        0.206,
+        0.248
+      ],
+      "pWinTitle": 0
+    },
+    {
+      "id": 672960,
+      "name": "Kazuma Okamoto",
+      "team": "TOR",
+      "pos": "3B",
+      "currentAVG": 0.228,
+      "H": 61,
+      "AB": 268,
+      "remAB": 315,
+      "teamRemaining": 87,
+      "trueTalent": 0.227,
+      "projAVG": 0.227,
+      "ci80": [
+        0.206,
+        0.25
       ],
       "pWinTitle": 0
     },
@@ -7050,7 +7068,7 @@
       "trueTalent": 0.224,
       "projAVG": 0.225,
       "ci80": [
-        0.208,
+        0.205,
         0.246
       ],
       "pWinTitle": 0
@@ -7068,7 +7086,7 @@
       "trueTalent": 0.226,
       "projAVG": 0.225,
       "ci80": [
-        0.202,
+        0.204,
         0.251
       ],
       "pWinTitle": 0
@@ -7087,7 +7105,7 @@
       "projAVG": 0.225,
       "ci80": [
         0.202,
-        0.246
+        0.248
       ],
       "pWinTitle": 0
     },
@@ -7110,24 +7128,6 @@
       "pWinTitle": 0
     },
     {
-      "id": 664023,
-      "name": "Ian Happ",
-      "team": "CHC",
-      "pos": "LF",
-      "currentAVG": 0.223,
-      "H": 60,
-      "AB": 269,
-      "remAB": 325,
-      "teamRemaining": 87,
-      "trueTalent": 0.223,
-      "projAVG": 0.223,
-      "ci80": [
-        0.205,
-        0.246
-      ],
-      "pWinTitle": 0
-    },
-    {
       "id": 683146,
       "name": "Brett Baty",
       "team": "NYM",
@@ -7141,7 +7141,7 @@
       "projAVG": 0.223,
       "ci80": [
         0.201,
-        0.244
+        0.246
       ],
       "pWinTitle": 0
     },
@@ -7402,16 +7402,16 @@
       "name": "Dansby Swanson",
       "team": "CHC",
       "pos": "SS",
-      "currentAVG": 0.179,
+      "currentAVG": 0.178,
       "H": 42,
-      "AB": 235,
-      "remAB": 284,
+      "AB": 236,
+      "remAB": 285,
       "teamRemaining": 87,
-      "trueTalent": 0.195,
+      "trueTalent": 0.194,
       "projAVG": 0.187,
       "ci80": [
-        0.166,
-        0.208
+        0.167,
+        0.207
       ],
       "pWinTitle": 0
     },
