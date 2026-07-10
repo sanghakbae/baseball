@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-10T21:48:16.673Z",
+  "updatedAt": "2026-07-10T22:46:56.683Z",
   "season": 2026,
   "qualifiedCount": 151,
   "leagueMean": 0.257,
@@ -215,7 +215,7 @@
       "teamId": 143,
       "teamName": "Phillies",
       "pos": "LF",
-      "G": 89,
+      "G": 90,
       "AB": 329,
       "PA": 351,
       "R": 50,
@@ -563,7 +563,7 @@
       "teamId": 116,
       "teamName": "Tigers",
       "pos": "LF",
-      "G": 92,
+      "G": 93,
       "AB": 336,
       "PA": 388,
       "R": 46,
@@ -679,7 +679,7 @@
       "teamId": 116,
       "teamName": "Tigers",
       "pos": "SS",
-      "G": 90,
+      "G": 91,
       "AB": 338,
       "PA": 400,
       "R": 57,
@@ -1920,35 +1920,6 @@
       "xBA": 0.272
     },
     {
-      "id": 547180,
-      "name": "Bryce Harper",
-      "team": "PHI",
-      "teamId": 143,
-      "teamName": "Phillies",
-      "pos": "1B",
-      "G": 94,
-      "AB": 330,
-      "PA": 395,
-      "R": 57,
-      "H": 86,
-      "B2": 16,
-      "B3": 2,
-      "HR": 20,
-      "RBI": 57,
-      "SB": 5,
-      "BB": 59,
-      "SO": 81,
-      "AVG": 0.261,
-      "OBP": 0.367,
-      "SLG": 0.503,
-      "OPS": 0.87,
-      "rank": 67,
-      "careerAVG": 0.279,
-      "careerAB": 6765,
-      "careerHits": 1887,
-      "xBA": 0.281
-    },
-    {
       "id": 691720,
       "name": "Kyle Karros",
       "team": "COL",
@@ -1971,7 +1942,7 @@
       "OBP": 0.361,
       "SLG": 0.434,
       "OPS": 0.795,
-      "rank": 68,
+      "rank": 67,
       "careerAVG": 0.249,
       "careerAB": 402,
       "careerHits": 100,
@@ -2000,11 +1971,40 @@
       "OBP": 0.33,
       "SLG": 0.421,
       "OPS": 0.751,
-      "rank": 69,
+      "rank": 68,
       "careerAVG": 0.257,
       "careerAB": 1190,
       "careerHits": 306,
       "xBA": 0.255
+    },
+    {
+      "id": 547180,
+      "name": "Bryce Harper",
+      "team": "PHI",
+      "teamId": 143,
+      "teamName": "Phillies",
+      "pos": "1B",
+      "G": 95,
+      "AB": 331,
+      "PA": 396,
+      "R": 57,
+      "H": 86,
+      "B2": 16,
+      "B3": 2,
+      "HR": 20,
+      "RBI": 57,
+      "SB": 5,
+      "BB": 59,
+      "SO": 81,
+      "AVG": 0.26,
+      "OBP": 0.366,
+      "SLG": 0.502,
+      "OPS": 0.868,
+      "rank": 69,
+      "careerAVG": 0.279,
+      "careerAB": 6766,
+      "careerHits": 1887,
+      "xBA": 0.281
     },
     {
       "id": 677594,
@@ -2245,9 +2245,9 @@
       "teamId": 143,
       "teamName": "Phillies",
       "pos": "DH",
-      "G": 90,
+      "G": 91,
       "AB": 338,
-      "PA": 401,
+      "PA": 402,
       "R": 57,
       "H": 86,
       "B2": 9,
@@ -2255,12 +2255,12 @@
       "HR": 32,
       "RBI": 58,
       "SB": 2,
-      "BB": 58,
+      "BB": 59,
       "SO": 140,
       "AVG": 0.254,
-      "OBP": 0.369,
+      "OBP": 0.371,
       "SLG": 0.571,
-      "OPS": 0.94,
+      "OPS": 0.942,
       "rank": 78,
       "careerAVG": 0.233,
       "careerAB": 4882,
@@ -2883,7 +2883,7 @@
       "teamId": 143,
       "teamName": "Phillies",
       "pos": "2B",
-      "G": 88,
+      "G": 89,
       "AB": 310,
       "PA": 341,
       "R": 36,
@@ -3167,35 +3167,6 @@
       "xBA": 0.286
     },
     {
-      "id": 607208,
-      "name": "Trea Turner",
-      "team": "PHI",
-      "teamId": 143,
-      "teamName": "Phillies",
-      "pos": "SS",
-      "G": 91,
-      "AB": 376,
-      "PA": 402,
-      "R": 62,
-      "H": 90,
-      "B2": 16,
-      "B3": 0,
-      "HR": 10,
-      "RBI": 32,
-      "SB": 16,
-      "BB": 23,
-      "SO": 90,
-      "AVG": 0.239,
-      "OBP": 0.286,
-      "SLG": 0.362,
-      "OPS": 0.648,
-      "rank": 110,
-      "careerAVG": 0.293,
-      "careerAB": 5533,
-      "careerHits": 1621,
-      "xBA": 0.241
-    },
-    {
       "id": 608070,
       "name": "José Ramírez",
       "team": "CLE",
@@ -3218,11 +3189,40 @@
       "OBP": 0.339,
       "SLG": 0.418,
       "OPS": 0.757,
-      "rank": 111,
+      "rank": 110,
       "careerAVG": 0.278,
       "careerAB": 6238,
       "careerHits": 1732,
       "xBA": 0.282
+    },
+    {
+      "id": 607208,
+      "name": "Trea Turner",
+      "team": "PHI",
+      "teamId": 143,
+      "teamName": "Phillies",
+      "pos": "SS",
+      "G": 92,
+      "AB": 377,
+      "PA": 403,
+      "R": 62,
+      "H": 90,
+      "B2": 16,
+      "B3": 0,
+      "HR": 10,
+      "RBI": 32,
+      "SB": 16,
+      "BB": 23,
+      "SO": 90,
+      "AVG": 0.239,
+      "OBP": 0.285,
+      "SLG": 0.361,
+      "OPS": 0.646,
+      "rank": 111,
+      "careerAVG": 0.293,
+      "careerAB": 5534,
+      "careerHits": 1621,
+      "xBA": 0.241
     },
     {
       "id": 678246,
@@ -3811,7 +3811,7 @@
       "teamId": 143,
       "teamName": "Phillies",
       "pos": "3B",
-      "G": 89,
+      "G": 90,
       "AB": 327,
       "PA": 361,
       "R": 30,
@@ -4072,7 +4072,7 @@
       "teamId": 116,
       "teamName": "Tigers",
       "pos": "1B",
-      "G": 92,
+      "G": 93,
       "AB": 311,
       "PA": 360,
       "R": 37,
@@ -4402,7 +4402,7 @@
         0.317,
         0.358
       ],
-      "pWinTitle": 0.55345
+      "pWinTitle": 0.5531
     },
     {
       "id": 650333,
@@ -4420,7 +4420,7 @@
         0.303,
         0.34
       ],
-      "pWinTitle": 0.1413
+      "pWinTitle": 0.14155
     },
     {
       "id": 650490,
@@ -4438,7 +4438,7 @@
         0.298,
         0.339
       ],
-      "pWinTitle": 0.13195
+      "pWinTitle": 0.1316
     },
     {
       "id": 670541,
@@ -4456,7 +4456,7 @@
         0.29,
         0.329
       ],
-      "pWinTitle": 0.0406
+      "pWinTitle": 0.04075
     },
     {
       "id": 687859,
@@ -4474,7 +4474,7 @@
         0.278,
         0.326
       ],
-      "pWinTitle": 0.02095
+      "pWinTitle": 0.021
     },
     {
       "id": 808982,
@@ -4492,7 +4492,7 @@
         0.284,
         0.324
       ],
-      "pWinTitle": 0.0209
+      "pWinTitle": 0.02065
     },
     {
       "id": 693304,
@@ -4510,7 +4510,7 @@
         0.287,
         0.324
       ],
-      "pWinTitle": 0.01835
+      "pWinTitle": 0.01855
     },
     {
       "id": 671739,
@@ -4528,7 +4528,7 @@
         0.283,
         0.324
       ],
-      "pWinTitle": 0.0146
+      "pWinTitle": 0.01455
     },
     {
       "id": 669016,
@@ -4538,15 +4538,15 @@
       "currentAVG": 0.307,
       "H": 101,
       "AB": 329,
-      "remAB": 251,
+      "remAB": 249,
       "teamRemaining": 68,
       "trueTalent": 0.294,
       "projAVG": 0.301,
       "ci80": [
-        0.281,
-        0.321
+        0.282,
+        0.32
       ],
-      "pWinTitle": 0.0109
+      "pWinTitle": 0.0111
     },
     {
       "id": 665742,
@@ -4564,7 +4564,7 @@
         0.276,
         0.32
       ],
-      "pWinTitle": 0.0108
+      "pWinTitle": 0.01075
     },
     {
       "id": 518692,
@@ -4600,7 +4600,7 @@
         0.279,
         0.316
       ],
-      "pWinTitle": 0.00485
+      "pWinTitle": 0.00495
     },
     {
       "id": 803011,
@@ -4618,7 +4618,7 @@
         0.264,
         0.308
       ],
-      "pWinTitle": 0.0042
+      "pWinTitle": 0.00415
     },
     {
       "id": 673962,
@@ -4636,7 +4636,7 @@
         0.277,
         0.312
       ],
-      "pWinTitle": 0.00355
+      "pWinTitle": 0.00365
     },
     {
       "id": 671277,
@@ -4654,7 +4654,7 @@
         0.267,
         0.313
       ],
-      "pWinTitle": 0.00285
+      "pWinTitle": 0.0029
     },
     {
       "id": 676391,
@@ -4711,24 +4711,6 @@
       "pWinTitle": 0.00145
     },
     {
-      "id": 677951,
-      "name": "Bobby Witt Jr.",
-      "team": "KC",
-      "pos": "SS",
-      "currentAVG": 0.288,
-      "H": 100,
-      "AB": 347,
-      "remAB": 268,
-      "teamRemaining": 68,
-      "trueTalent": 0.293,
-      "projAVG": 0.29,
-      "ci80": [
-        0.268,
-        0.309
-      ],
-      "pWinTitle": 0.00135
-    },
-    {
       "id": 660271,
       "name": "Shohei Ohtani",
       "team": "LAD",
@@ -4742,6 +4724,24 @@
       "projAVG": 0.289,
       "ci80": [
         0.271,
+        0.309
+      ],
+      "pWinTitle": 0.0014
+    },
+    {
+      "id": 677951,
+      "name": "Bobby Witt Jr.",
+      "team": "KC",
+      "pos": "SS",
+      "currentAVG": 0.288,
+      "H": 100,
+      "AB": 347,
+      "remAB": 268,
+      "teamRemaining": 68,
+      "trueTalent": 0.293,
+      "projAVG": 0.29,
+      "ci80": [
+        0.268,
         0.309
       ],
       "pWinTitle": 0.00135
@@ -4772,7 +4772,7 @@
       "currentAVG": 0.289,
       "H": 97,
       "AB": 336,
-      "remAB": 252,
+      "remAB": 249,
       "teamRemaining": 69,
       "trueTalent": 0.28,
       "projAVG": 0.285,
@@ -4790,13 +4790,13 @@
       "currentAVG": 0.287,
       "H": 97,
       "AB": 338,
-      "remAB": 259,
+      "remAB": 256,
       "teamRemaining": 69,
       "trueTalent": 0.283,
       "projAVG": 0.285,
       "ci80": [
         0.266,
-        0.302
+        0.301
       ],
       "pWinTitle": 0.00075
     },
@@ -5143,24 +5143,6 @@
       "pWinTitle": 0.00005
     },
     {
-      "id": 672580,
-      "name": "Maikel Garcia",
-      "team": "KC",
-      "pos": "3B",
-      "currentAVG": 0.261,
-      "H": 70,
-      "AB": 268,
-      "remAB": 264,
-      "teamRemaining": 68,
-      "trueTalent": 0.264,
-      "projAVG": 0.263,
-      "ci80": [
-        0.242,
-        0.288
-      ],
-      "pWinTitle": 0.00005
-    },
-    {
       "id": 686948,
       "name": "Drake Baldwin",
       "team": "ATL",
@@ -5467,24 +5449,6 @@
       "pWinTitle": 0
     },
     {
-      "id": 547180,
-      "name": "Bryce Harper",
-      "team": "PHI",
-      "pos": "1B",
-      "currentAVG": 0.261,
-      "H": 86,
-      "AB": 330,
-      "remAB": 239,
-      "teamRemaining": 68,
-      "trueTalent": 0.268,
-      "projAVG": 0.264,
-      "ci80": [
-        0.246,
-        0.283
-      ],
-      "pWinTitle": 0
-    },
-    {
       "id": 641343,
       "name": "Jake Bauers",
       "team": "MIL",
@@ -5516,6 +5480,42 @@
       "projAVG": 0.263,
       "ci80": [
         0.246,
+        0.28
+      ],
+      "pWinTitle": 0
+    },
+    {
+      "id": 672580,
+      "name": "Maikel Garcia",
+      "team": "KC",
+      "pos": "3B",
+      "currentAVG": 0.261,
+      "H": 70,
+      "AB": 268,
+      "remAB": 264,
+      "teamRemaining": 68,
+      "trueTalent": 0.264,
+      "projAVG": 0.263,
+      "ci80": [
+        0.242,
+        0.288
+      ],
+      "pWinTitle": 0
+    },
+    {
+      "id": 547180,
+      "name": "Bryce Harper",
+      "team": "PHI",
+      "pos": "1B",
+      "currentAVG": 0.26,
+      "H": 86,
+      "AB": 331,
+      "remAB": 237,
+      "teamRemaining": 68,
+      "trueTalent": 0.267,
+      "projAVG": 0.263,
+      "ci80": [
+        0.243,
         0.28
       ],
       "pWinTitle": 0
@@ -5659,8 +5659,8 @@
       "trueTalent": 0.259,
       "projAVG": 0.26,
       "ci80": [
-        0.241,
-        0.276
+        0.242,
+        0.28
       ],
       "pWinTitle": 0
     },
@@ -5696,7 +5696,7 @@
       "projAVG": 0.259,
       "ci80": [
         0.24,
-        0.281
+        0.279
       ],
       "pWinTitle": 0
     },
@@ -5852,12 +5852,12 @@
       "currentAVG": 0.254,
       "H": 86,
       "AB": 338,
-      "remAB": 255,
+      "remAB": 253,
       "teamRemaining": 68,
       "trueTalent": 0.249,
       "projAVG": 0.252,
       "ci80": [
-        0.236,
+        0.235,
         0.272
       ],
       "pWinTitle": 0
@@ -6104,13 +6104,13 @@
       "currentAVG": 0.245,
       "H": 76,
       "AB": 310,
-      "remAB": 240,
+      "remAB": 237,
       "teamRemaining": 68,
       "trueTalent": 0.25,
       "projAVG": 0.247,
       "ci80": [
-        0.227,
-        0.265
+        0.229,
+        0.267
       ],
       "pWinTitle": 0
     },
@@ -6127,8 +6127,8 @@
       "trueTalent": 0.256,
       "projAVG": 0.247,
       "ci80": [
-        0.226,
-        0.271
+        0.225,
+        0.269
       ],
       "pWinTitle": 0
     },
@@ -6313,24 +6313,6 @@
       "pWinTitle": 0
     },
     {
-      "id": 607208,
-      "name": "Trea Turner",
-      "team": "PHI",
-      "pos": "SS",
-      "currentAVG": 0.239,
-      "H": 90,
-      "AB": 376,
-      "remAB": 281,
-      "teamRemaining": 68,
-      "trueTalent": 0.248,
-      "projAVG": 0.243,
-      "ci80": [
-        0.225,
-        0.26
-      ],
-      "pWinTitle": 0
-    },
-    {
       "id": 686217,
       "name": "Sal Frelick",
       "team": "MIL",
@@ -6345,6 +6327,24 @@
       "ci80": [
         0.223,
         0.263
+      ],
+      "pWinTitle": 0
+    },
+    {
+      "id": 607208,
+      "name": "Trea Turner",
+      "team": "PHI",
+      "pos": "SS",
+      "currentAVG": 0.239,
+      "H": 90,
+      "AB": 377,
+      "remAB": 279,
+      "teamRemaining": 68,
+      "trueTalent": 0.247,
+      "projAVG": 0.242,
+      "ci80": [
+        0.224,
+        0.261
       ],
       "pWinTitle": 0
     },
@@ -6716,13 +6716,13 @@
       "currentAVG": 0.22,
       "H": 72,
       "AB": 327,
-      "remAB": 250,
+      "remAB": 247,
       "teamRemaining": 68,
       "trueTalent": 0.234,
       "projAVG": 0.226,
       "ci80": [
-        0.208,
-        0.244
+        0.207,
+        0.246
       ],
       "pWinTitle": 0
     },
@@ -6968,13 +6968,13 @@
       "currentAVG": 0.212,
       "H": 66,
       "AB": 311,
-      "remAB": 233,
+      "remAB": 231,
       "teamRemaining": 69,
       "trueTalent": 0.216,
       "projAVG": 0.214,
       "ci80": [
-        0.199,
-        0.23
+        0.197,
+        0.231
       ],
       "pWinTitle": 0
     },
