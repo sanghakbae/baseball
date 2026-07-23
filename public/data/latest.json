@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-23T14:57:56.226Z",
+  "updatedAt": "2026-07-23T16:22:48.617Z",
   "season": 2026,
   "qualifiedCount": 146,
   "leagueMean": 0.257,
@@ -273,7 +273,7 @@
       "teamId": 144,
       "teamName": "Braves",
       "pos": "CF",
-      "G": 95,
+      "G": 96,
       "AB": 361,
       "PA": 381,
       "R": 49,
@@ -615,35 +615,6 @@
       "xBA": 0.261
     },
     {
-      "id": 665487,
-      "name": "Fernando Tatis Jr.",
-      "team": "SD",
-      "teamId": 135,
-      "teamName": "Padres",
-      "pos": "RF",
-      "G": 101,
-      "AB": 395,
-      "PA": 444,
-      "R": 52,
-      "H": 113,
-      "B2": 20,
-      "B3": 2,
-      "HR": 8,
-      "RBI": 46,
-      "SB": 25,
-      "BB": 39,
-      "SO": 89,
-      "AVG": 0.286,
-      "OBP": 0.352,
-      "SLG": 0.408,
-      "OPS": 0.76,
-      "rank": 22,
-      "careerAVG": 0.278,
-      "careerAB": 2998,
-      "careerHits": 833,
-      "xBA": 0.289
-    },
-    {
       "id": 682928,
       "name": "CJ Abrams",
       "team": "WSH",
@@ -666,11 +637,40 @@
       "OBP": 0.359,
       "SLG": 0.544,
       "OPS": 0.903,
-      "rank": 23,
+      "rank": 22,
       "careerAVG": 0.255,
       "careerAB": 2339,
       "careerHits": 596,
       "xBA": 0.262
+    },
+    {
+      "id": 665487,
+      "name": "Fernando Tatis Jr.",
+      "team": "SD",
+      "teamId": 135,
+      "teamName": "Padres",
+      "pos": "RF",
+      "G": 102,
+      "AB": 396,
+      "PA": 445,
+      "R": 52,
+      "H": 113,
+      "B2": 20,
+      "B3": 2,
+      "HR": 8,
+      "RBI": 46,
+      "SB": 25,
+      "BB": 39,
+      "SO": 90,
+      "AVG": 0.285,
+      "OBP": 0.351,
+      "SLG": 0.407,
+      "OPS": 0.758,
+      "rank": 23,
+      "careerAVG": 0.278,
+      "careerAB": 2999,
+      "careerHits": 833,
+      "xBA": 0.289
     },
     {
       "id": 689414,
@@ -1230,7 +1230,7 @@
       "teamId": 144,
       "teamName": "Braves",
       "pos": "C",
-      "G": 78,
+      "G": 79,
       "AB": 302,
       "PA": 348,
       "R": 56,
@@ -1462,7 +1462,7 @@
       "teamId": 144,
       "teamName": "Braves",
       "pos": "1B",
-      "G": 101,
+      "G": 102,
       "AB": 393,
       "PA": 444,
       "R": 68,
@@ -1636,7 +1636,7 @@
       "teamId": 144,
       "teamName": "Braves",
       "pos": "LF",
-      "G": 97,
+      "G": 98,
       "AB": 367,
       "PA": 398,
       "R": 47,
@@ -1752,7 +1752,7 @@
       "teamId": 144,
       "teamName": "Braves",
       "pos": "2B",
-      "G": 101,
+      "G": 102,
       "AB": 393,
       "PA": 439,
       "R": 64,
@@ -3753,7 +3753,7 @@
       "teamId": 135,
       "teamName": "Padres",
       "pos": "SS",
-      "G": 97,
+      "G": 98,
       "AB": 338,
       "PA": 389,
       "R": 41,
@@ -3811,7 +3811,7 @@
       "teamId": 135,
       "teamName": "Padres",
       "pos": "1B",
-      "G": 96,
+      "G": 97,
       "AB": 295,
       "PA": 339,
       "R": 38,
@@ -3869,7 +3869,7 @@
       "teamId": 144,
       "teamName": "Braves",
       "pos": "3B",
-      "G": 101,
+      "G": 102,
       "AB": 366,
       "PA": 410,
       "R": 43,
@@ -4101,11 +4101,11 @@
       "teamId": 135,
       "teamName": "Padres",
       "pos": "3B",
-      "G": 99,
-      "AB": 362,
-      "PA": 418,
+      "G": 100,
+      "AB": 363,
+      "PA": 419,
       "R": 50,
-      "H": 73,
+      "H": 74,
       "B2": 16,
       "B3": 0,
       "HR": 22,
@@ -4113,14 +4113,14 @@
       "SB": 2,
       "BB": 49,
       "SO": 91,
-      "AVG": 0.202,
-      "OBP": 0.293,
-      "SLG": 0.428,
-      "OPS": 0.721,
+      "AVG": 0.204,
+      "OBP": 0.294,
+      "SLG": 0.43,
+      "OPS": 0.724,
       "rank": 142,
       "careerAVG": 0.275,
-      "careerAB": 7786,
-      "careerHits": 2142,
+      "careerAB": 7787,
+      "careerHits": 2143,
       "xBA": 0.236
     },
     {
@@ -4257,7 +4257,7 @@
         0.31,
         0.344
       ],
-      "pWinTitle": 0.3635
+      "pWinTitle": 0.36365
     },
     {
       "id": 672640,
@@ -4293,7 +4293,7 @@
         0.3,
         0.336
       ],
-      "pWinTitle": 0.13895
+      "pWinTitle": 0.13885
     },
     {
       "id": 693304,
@@ -4329,7 +4329,7 @@
         0.288,
         0.322
       ],
-      "pWinTitle": 0.0322
+      "pWinTitle": 0.03225
     },
     {
       "id": 664983,
@@ -4375,15 +4375,15 @@
       "currentAVG": 0.296,
       "H": 107,
       "AB": 361,
-      "remAB": 232,
+      "remAB": 229,
       "teamRemaining": 61,
       "trueTalent": 0.293,
       "projAVG": 0.295,
       "ci80": [
-        0.277,
+        0.276,
         0.312
       ],
-      "pWinTitle": 0.0072
+      "pWinTitle": 0.0071
     },
     {
       "id": 687859,
@@ -4696,18 +4696,18 @@
       "name": "Fernando Tatis Jr.",
       "team": "SD",
       "pos": "RF",
-      "currentAVG": 0.286,
+      "currentAVG": 0.285,
       "H": 113,
-      "AB": 395,
-      "remAB": 235,
+      "AB": 396,
+      "remAB": 233,
       "teamRemaining": 60,
       "trueTalent": 0.285,
-      "projAVG": 0.286,
+      "projAVG": 0.285,
       "ci80": [
-        0.271,
-        0.302
+        0.267,
+        0.297
       ],
-      "pWinTitle": 0.00055
+      "pWinTitle": 0.00065
     },
     {
       "id": 660271,
@@ -4746,24 +4746,6 @@
       "pWinTitle": 0.00055
     },
     {
-      "id": 682928,
-      "name": "CJ Abrams",
-      "team": "WSH",
-      "pos": "SS",
-      "currentAVG": 0.286,
-      "H": 106,
-      "AB": 371,
-      "remAB": 221,
-      "teamRemaining": 59,
-      "trueTalent": 0.276,
-      "projAVG": 0.282,
-      "ci80": [
-        0.264,
-        0.296
-      ],
-      "pWinTitle": 0.0004
-    },
-    {
       "id": 671277,
       "name": "Luis García Jr.",
       "team": "WSH",
@@ -4798,6 +4780,24 @@
         0.3
       ],
       "pWinTitle": 0.00035
+    },
+    {
+      "id": 682928,
+      "name": "CJ Abrams",
+      "team": "WSH",
+      "pos": "SS",
+      "currentAVG": 0.286,
+      "H": 106,
+      "AB": 371,
+      "remAB": 221,
+      "teamRemaining": 59,
+      "trueTalent": 0.276,
+      "projAVG": 0.282,
+      "ci80": [
+        0.267,
+        0.299
+      ],
+      "pWinTitle": 0.0003
     },
     {
       "id": 668227,
@@ -4879,13 +4879,13 @@
       "currentAVG": 0.275,
       "H": 83,
       "AB": 302,
-      "remAB": 236,
+      "remAB": 233,
       "teamRemaining": 61,
       "trueTalent": 0.276,
       "projAVG": 0.275,
       "ci80": [
         0.258,
-        0.296
+        0.295
       ],
       "pWinTitle": 0.0002
     },
@@ -5203,13 +5203,13 @@
       "currentAVG": 0.27,
       "H": 106,
       "AB": 393,
-      "remAB": 237,
+      "remAB": 235,
       "teamRemaining": 61,
       "trueTalent": 0.264,
       "projAVG": 0.268,
       "ci80": [
-        0.254,
-        0.284
+        0.253,
+        0.285
       ],
       "pWinTitle": 0
     },
@@ -5257,7 +5257,7 @@
       "currentAVG": 0.264,
       "H": 97,
       "AB": 367,
-      "remAB": 231,
+      "remAB": 228,
       "teamRemaining": 61,
       "trueTalent": 0.264,
       "projAVG": 0.264,
@@ -5347,13 +5347,13 @@
       "currentAVG": 0.262,
       "H": 103,
       "AB": 393,
-      "remAB": 237,
+      "remAB": 235,
       "teamRemaining": 61,
       "trueTalent": 0.258,
       "projAVG": 0.261,
       "ci80": [
-        0.246,
-        0.276
+        0.245,
+        0.277
       ],
       "pWinTitle": 0
     },
@@ -6481,13 +6481,13 @@
       "currentAVG": 0.222,
       "H": 75,
       "AB": 338,
-      "remAB": 209,
+      "remAB": 207,
       "teamRemaining": 60,
       "trueTalent": 0.236,
       "projAVG": 0.227,
       "ci80": [
-        0.214,
-        0.245
+        0.213,
+        0.244
       ],
       "pWinTitle": 0
     },
@@ -6607,13 +6607,13 @@
       "currentAVG": 0.217,
       "H": 64,
       "AB": 295,
-      "remAB": 184,
+      "remAB": 182,
       "teamRemaining": 60,
       "trueTalent": 0.225,
       "projAVG": 0.22,
       "ci80": [
-        0.2,
-        0.238
+        0.199,
+        0.237
       ],
       "pWinTitle": 0
     },
@@ -6661,13 +6661,13 @@
       "currentAVG": 0.216,
       "H": 79,
       "AB": 366,
-      "remAB": 221,
+      "remAB": 219,
       "teamRemaining": 61,
       "trueTalent": 0.223,
       "projAVG": 0.218,
       "ci80": [
         0.203,
-        0.235
+        0.236
       ],
       "pWinTitle": 0
     },
@@ -6766,16 +6766,16 @@
       "name": "Manny Machado",
       "team": "SD",
       "pos": "3B",
-      "currentAVG": 0.202,
-      "H": 73,
-      "AB": 362,
-      "remAB": 219,
+      "currentAVG": 0.204,
+      "H": 74,
+      "AB": 363,
+      "remAB": 218,
       "teamRemaining": 60,
-      "trueTalent": 0.22,
-      "projAVG": 0.209,
+      "trueTalent": 0.221,
+      "projAVG": 0.21,
       "ci80": [
-        0.193,
-        0.225
+        0.194,
+        0.227
       ],
       "pWinTitle": 0
     },
