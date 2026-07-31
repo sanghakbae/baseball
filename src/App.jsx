@@ -131,7 +131,7 @@ export default function App() {
         // PC 대시보드: 1행(예측+랭킹), 2행(톱10·코스별·비교), 3행(응원)
         <div className="dashboard">
           <div className="dash-item d-predict"><Predict data={data} /></div>
-          <div className="dash-item d-rank"><Leaderboard players={data.players} season={data.season} /></div>
+          <div className="dash-item d-rank"><Leaderboard players={data.players} season={data.season} wide /></div>
           <div className="dash-item d-live"><LiveTop10 players={data.players} season={data.season} /></div>
           <div className="dash-item d-zone"><LeeZone players={data.players} season={data.season} /><LeeSeason players={data.players} season={data.season} /></div>
           <div className="dash-item d-compare"><Compare players={data.players} /></div>
@@ -346,7 +346,7 @@ const CHART_COLORS = ['#4aa8ff', '#34d399', '#f472b6', '#a78bfa', '#fb923c', '#2
 const FORM_GAMES = 10 // 최근 N경기
 
 // 최근 10경기 동안의 누적 타율 추이 (각 선수 gameLog 기반)
-function FormChart({ players, season, picks }) {
+function FormChart({ players, season, picks, wide = false }) {
   const tracked = useMemo(() => {
     if (picks) return picks.filter(Boolean)
     const lee = players.find(isLee)
@@ -396,8 +396,11 @@ function FormChart({ players, season, picks }) {
     return <div className="rank-chart empty-chart">최근 경기 데이터를 불러오지 못했습니다.</div>
   }
 
-  const W = 320, H = 120
-  const padL = 30, padR = 56, padT = 8, padB = 8
+  // PC는 폭이 넓어 320:120 비율을 그대로 쓰면 높이가 과하게 커진다 → 납작한 좌표계 사용
+  const W = wide ? 1000 : 320
+  const H = wide ? 150 : 120
+  const padL = Math.round(W * 0.094), padR = Math.round(W * 0.175)
+  const padT = 8, padB = 8
   const N = Math.min(FORM_GAMES, Math.max(...valid.map((s) => s.vals.length)))
   const allVals = valid.flatMap((s) => s.vals)
   let minV = Math.min(...allVals), maxV = Math.max(...allVals)
@@ -419,13 +422,13 @@ function FormChart({ players, season, picks }) {
     yReal: y(s.vals[s.vals.length - 1]),
   }))
   labels.sort((a, b) => a.yReal - b.yReal)
-  const GAP = 9
+  const GAP = wide ? 14 : 9 // 라벨 폰트가 커지면 최소 간격도 넓혀야 겹치지 않는다
   labels.forEach((l, i) => {
     l.yLab = i === 0 ? l.yReal : Math.max(l.yReal, labels[i - 1].yLab + GAP)
   })
 
   return (
-    <div className="rank-chart">
+    <div className={`rank-chart ${wide ? 'wide' : ''}`}>
       <svg viewBox={`0 0 ${W} ${H}`} width="100%" preserveAspectRatio="xMidYMid meet">
         {ticks.map((tv, i) => (
           <g key={i}>
@@ -441,27 +444,28 @@ function FormChart({ players, season, picks }) {
           const last = s.vals[s.vals.length - 1]
           return (
             <g key={s.id}>
-              <polyline points={pts} fill="none" stroke={color} strokeWidth={lee ? 2.4 : 1.4}
+              <polyline points={pts} fill="none" stroke={color}
+                strokeWidth={(lee ? 2.4 : 1.4) * (wide ? 1.5 : 1)}
                 strokeLinejoin="round" strokeLinecap="round" opacity={lee ? 1 : 0.85} />
-              <circle cx={x(N - 1)} cy={y(last)} r={lee ? 3 : 2.2} fill={color} />
+              <circle cx={x(N - 1)} cy={y(last)} r={(lee ? 3 : 2.2) * (wide ? 1.5 : 1)} fill={color} />
             </g>
           )
         })}
         {labels.map((l, i) => (
-          <text key={i} x={x(N - 1) + 5} y={l.yLab + 3} className="ch-name" fill={l.color}>{l.name}</text>
+          <text key={i} x={x(N - 1) + (wide ? 14 : 5)} y={l.yLab + 3} className="ch-name" fill={l.color}>{l.name}</text>
         ))}
       </svg>
     </div>
   )
 }
 
-function Leaderboard({ players, season, className = '' }) {
+function Leaderboard({ players, season, className = '', wide = false }) {
   const cols = STAT_KEYS.filter((s) => !['rank'].includes(s.key))
   return (
     <section className={`card-section ${className}`}>
       <h2 className="sec-title">현재 타율 랭킹</h2>
       <p className="sec-desc">최근 {FORM_GAMES}경기 누적 타율 추이 · 상위 6명</p>
-      <FormChart players={players} season={season} />
+      <FormChart players={players} season={season} wide={wide} />
       <div className="table-wrap">
         <table>
           <thead>

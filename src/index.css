@@ -229,6 +229,11 @@ html, body {
 .rank-chart.empty-chart { padding: 16px 12px; text-align: center; color: var(--muted); font-size: 12px; }
 .ch-axis { fill: var(--muted); font-size: 8px; }
 .ch-name { font-size: 8.5px; font-weight: 700; }
+/* 초광폭 모니터에서 종횡비 유지로 높이가 과하게 커지는 것 방지 */
+.rank-chart svg { display: block; max-height: 240px; margin: 0 auto; }
+/* PC용 납작한 좌표계(1000x150)는 축소율이 작아 폰트를 키워야 같은 크기로 보인다 */
+.rank-chart.wide .ch-axis { font-size: 11px; }
+.rank-chart.wide .ch-name { font-size: 12px; }
 
 /* ---- leaderboard table ---- */
 .table-wrap {
