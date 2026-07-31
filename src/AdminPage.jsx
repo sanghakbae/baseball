@@ -149,8 +149,8 @@ function Stats() {
 
           <h2 className="admin-sec">최근 방문 {agg.recent.length}건</h2>
           <div className="admin-table-wrap">
-            <table className="admin-table">
-              <thead><tr><th>시각</th><th>IP</th><th>지역</th><th>경로</th><th>유입</th></tr></thead>
+            <table className="admin-table recent">
+              <thead><tr><th>시각</th><th>IP</th><th>지역</th><th>유입</th></tr></thead>
               <tbody>
                 {agg.recent.map((v, i) => {
                   const d = tsDate(v.ts)
@@ -159,7 +159,6 @@ function Stats() {
                       <td>{d ? d.toLocaleString('ko-KR', { timeZone: 'Asia/Seoul', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }) : '-'}</td>
                       <td>{v.ip || '-'}</td>
                       <td>{[v.city, v.country].filter(Boolean).join(' / ') || '-'}</td>
-                      <td>{v.path || '-'}</td>
                       <td>{refHost(v.ref)}</td>
                     </tr>
                   )
@@ -224,29 +223,56 @@ function CheerAdmin() {
   )
 }
 
+const DONUT_COLORS = ['#4aa8ff', '#34d399', '#f472b6', '#a78bfa', '#fb923c', '#22d3ee', '#facc15', '#94a3b8']
+
+function Donut({ rows }) {
+  const total = rows.reduce((a, [, n]) => a + n, 0) || 1
+  const R = 16, CIRC = 2 * Math.PI * R
+  let acc = 0
+  return (
+    <svg className="donut" viewBox="0 0 44 44" width="112" height="112" role="img">
+      <circle cx="22" cy="22" r={R} fill="none" stroke="var(--border)" strokeWidth="8" />
+      <g transform="rotate(-90 22 22)">
+        {rows.map(([k, n], i) => {
+          const dash = (n / total) * CIRC
+          const seg = (
+            <circle key={k} cx="22" cy="22" r={R} fill="none"
+              stroke={DONUT_COLORS[i % DONUT_COLORS.length]} strokeWidth="8"
+              strokeDasharray={`${dash} ${CIRC - dash}`} strokeDashoffset={-acc} />
+          )
+          acc += dash
+          return seg
+        })}
+      </g>
+      <text x="22" y="22" textAnchor="middle" dominantBaseline="central" className="donut-c">{total}</text>
+    </svg>
+  )
+}
+
 function Block({ title, rows, label = '항목' }) {
   const total = rows.reduce((a, [, n]) => a + n, 0)
-  const max = Math.max(1, ...rows.map((r) => r[1]))
   return (
     <section className="admin-block">
       <h2 className="admin-sec">{title}</h2>
       {rows.length === 0 ? (
         <p className="admin-msg">데이터 없음</p>
       ) : (
-        <div className="admin-table-wrap">
-          <table className="admin-table">
-            <thead><tr><th>{label}</th><th className="ta-r">건수</th><th className="ta-r">비율</th><th className="adm-bar-th">그래프</th></tr></thead>
-            <tbody>
-              {rows.map(([k, n]) => (
-                <tr key={k}>
-                  <td>{k}</td>
-                  <td className="ta-r">{n}</td>
-                  <td className="ta-r ta-muted">{total ? Math.round((n / total) * 100) : 0}%</td>
-                  <td className="adm-bar-cell"><span className="adm-bar" style={{ width: `${(n / max) * 100}%` }} /></td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="block-body">
+          <Donut rows={rows} />
+          <div className="admin-table-wrap">
+            <table className="admin-table">
+              <thead><tr><th>{label}</th><th className="ta-r">건수</th><th className="ta-r">비율</th></tr></thead>
+              <tbody>
+                {rows.map(([k, n], i) => (
+                  <tr key={k}>
+                    <td><span className="dot" style={{ background: DONUT_COLORS[i % DONUT_COLORS.length] }} />{k}</td>
+                    <td className="ta-r">{n}</td>
+                    <td className="ta-r ta-muted">{total ? Math.round((n / total) * 100) : 0}%</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
     </section>

@@ -133,7 +133,7 @@ export default function App() {
           <div className="dash-item d-predict"><Predict data={data} /></div>
           <div className="dash-item d-rank"><Leaderboard players={data.players} season={data.season} /></div>
           <div className="dash-item d-live"><LiveTop10 players={data.players} season={data.season} /></div>
-          <div className="dash-item d-zone"><LeeZone players={data.players} season={data.season} /></div>
+          <div className="dash-item d-zone"><LeeZone players={data.players} season={data.season} /><LeeSeason players={data.players} season={data.season} /></div>
           <div className="dash-item d-compare"><Compare players={data.players} /></div>
           <div className="dash-item d-cheer"><CheerBoard /></div>
         </div>
@@ -156,7 +156,7 @@ export default function App() {
           {tab === 'board' && <Leaderboard players={data.players} season={data.season} />}
           {tab === 'live' && <LiveTop10 players={data.players} season={data.season} />}
           {tab === 'compare' && <Compare players={data.players} />}
-          {tab === 'zone' && <LeeZone players={data.players} season={data.season} />}
+          {tab === 'zone' && <><LeeZone players={data.players} season={data.season} /><LeeSeason players={data.players} season={data.season} /></>}
           {tab === 'cheer' && <CheerBoard />}
         </>
       )}
@@ -885,6 +885,94 @@ function heatRGB(t) {
 // 배경 밝기에 따라 가독성 좋은 글자색
 function textOn([r, g, b]) {
   return 0.299 * r + 0.587 * g + 0.114 * b > 150 ? '#0c1424' : '#f3f6fc'
+}
+
+// 이정후 시즌 전체 타율 추이 + 상대 팀별 성적 (gameLog 기반)
+function LeeSeason({ players, season }) {
+  const lee = players.find(isLee)
+  const id = lee?.id || 808982
+  const [d, setD] = useState(null)
+  const [status, setStatus] = useState('loading')
+
+  useEffect(() => {
+    let alive = true
+    setStatus('loading')
+    fetch(`https://statsapi.mlb.com/api/v1/people/${id}/stats?stats=gameLog&season=${season}&group=hitting&gameType=R`, { cache: 'no-store' })
+      .then((r) => r.json())
+      .then((data) => {
+        if (!alive) return
+        const splits = (data.stats?.[0]?.splits ?? []).slice().sort((a, b) => (a.date < b.date ? -1 : 1))
+        let h = 0, ab = 0
+        const trend = splits.map((s) => { h += s.stat.hits; ab += s.stat.atBats; return ab ? h / ab : 0 })
+        const om = {}
+        for (const s of splits) {
+          const name = s.opponent?.name || '?'
+          const o = om[name] || (om[name] = { ab: 0, h: 0, hr: 0, rbi: 0 })
+          o.ab += s.stat.atBats; o.h += s.stat.hits; o.hr += s.stat.homeRuns; o.rbi += s.stat.rbi
+        }
+        const byOpp = Object.entries(om).map(([opp, o]) => ({ opp, ...o, avg: o.ab ? o.h / o.ab : 0 }))
+          .filter((x) => x.ab >= 3).sort((a, b) => b.avg - a.avg)
+        setD({ trend, byOpp, seasonAvg: ab ? h / ab : 0 })
+        setStatus('ok')
+      })
+      .catch(() => alive && setStatus('error'))
+    return () => { alive = false }
+  }, [id, season])
+
+  if (status !== 'ok' || !d) {
+    return <section className="card-section"><p className="empty">{status === 'error' ? '데이터를 불러오지 못했습니다.' : '이정후 시즌 데이터 불러오는 중…'}</p></section>
+  }
+
+  const W = 320, H = 120, padL = 30, padR = 12, padT = 8, padB = 8
+  const n = d.trend.length
+  let mn = Math.min(...d.trend), mx = Math.max(...d.trend)
+  if (mx === mn) { mx += 0.005; mn -= 0.005 }
+  const pad = (mx - mn) * 0.12; mn -= pad; mx += pad
+  const x = (i) => padL + (n <= 1 ? 0 : (i / (n - 1)) * (W - padL - padR))
+  const y = (v) => padT + (1 - (v - mn) / (mx - mn)) * (H - padT - padB)
+  const fmtA = (v) => v.toFixed(3).replace(/^0/, '')
+  const pts = d.trend.map((v, i) => `${x(i)},${y(v)}`).join(' ')
+  const ticks = [mn + (mx - mn) * 0.1, (mn + mx) / 2, mx - (mx - mn) * 0.1]
+
+  return (
+    <>
+    <section className="card-section lee-sub">
+      <h2 className="sec-title">📈 이정후 시즌 타율 추이</h2>
+      <p className="sec-desc">{season} 시즌 경기별 누적 타율 · 현재 {fmtA(d.seasonAvg)}</p>
+      <div className="rank-chart">
+        <svg viewBox={`0 0 ${W} ${H}`} width="100%" preserveAspectRatio="xMidYMid meet">
+          {ticks.map((tv, i) => (
+            <g key={i}>
+              <line x1={padL} y1={y(tv)} x2={W - padR} y2={y(tv)} stroke="var(--border)" strokeWidth="0.5" />
+              <text x={padL - 4} y={y(tv) + 3} textAnchor="end" className="ch-axis">{fmtA(tv)}</text>
+            </g>
+          ))}
+          <polyline points={pts} fill="none" stroke="var(--lee)" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" />
+          {n > 0 && <circle cx={x(n - 1)} cy={y(d.trend[n - 1])} r="3" fill="var(--lee)" />}
+        </svg>
+      </div>
+    </section>
+
+    <section className="card-section lee-sub">
+      <h2 className="sec-title">⚔️ 상대 팀별 성적</h2>
+      <p className="sec-desc">타율 높은 순 · 타수 3 이상</p>
+      <div className="table-wrap">
+        <table className="opp-table">
+          <thead><tr><th>상대</th><th>타수</th><th>안타</th><th>홈런</th><th>타점</th><th>타율</th></tr></thead>
+          <tbody>
+            {d.byOpp.map((o) => (
+              <tr key={o.opp}>
+                <td className="opp-name">{abbr(o.opp)}</td>
+                <td>{o.ab}</td><td>{o.h}</td><td>{o.hr}</td><td>{o.rbi}</td>
+                <td className="opp-avg">{fmtA(o.avg)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+    </>
+  )
 }
 
 function LeeZone({ players, season }) {
