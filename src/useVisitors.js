@@ -123,13 +123,14 @@ export function useVisitors() {
     ;(async () => {
       try {
         const ref = doc(db, 'meta', 'visitors')
+        // await 전에 동기적으로 플래그를 세운다(StrictMode 이중 호출 시 중복 증가 방지)
         const shouldCount = !countedThisLoad
+        if (shouldCount) countedThisLoad = true
         // 증분 전에 서버 값을 먼저 읽는다(증분 후 읽으면 로컬 낙관값이 반환됨)
         const snap = await getDoc(ref)
         const v = snap.data()?.count
         if (alive && typeof v === 'number') setCount(v + (shouldCount ? 1 : 0))
         if (shouldCount) {
-          countedThisLoad = true
           setDoc(
             ref,
             { count: increment(1), updatedAt: new Date().toISOString() },

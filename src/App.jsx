@@ -672,6 +672,10 @@ function Compare({ players }) {
   if (!lee) {
     return <section className="card-section"><p className="empty">이정후 데이터를 찾을 수 없습니다.</p></section>
   }
+  // 이정후 외 규정타자가 아직 없으면 비교 대상이 없다(시즌 초 등)
+  if (!opponent) {
+    return <section className="card-section"><p className="empty">비교할 상대 선수가 아직 없습니다.</p></section>
+  }
 
   return (
     <section className="card-section">
@@ -902,25 +906,34 @@ function LeeSeason({ players, season }) {
       .then((data) => {
         if (!alive) return
         const splits = (data.stats?.[0]?.splits ?? []).slice().sort((a, b) => (a.date < b.date ? -1 : 1))
+        const num = (v) => (Number.isFinite(Number(v)) ? Number(v) : 0)
         let h = 0, ab = 0
-        const trend = splits.map((s) => { h += s.stat.hits; ab += s.stat.atBats; return ab ? h / ab : 0 })
+        const trend = splits.map((s) => {
+          h += num(s.stat?.hits); ab += num(s.stat?.atBats)
+          return ab ? h / ab : 0
+        })
         const om = {}
         for (const s of splits) {
           const name = s.opponent?.name || '?'
           const o = om[name] || (om[name] = { ab: 0, h: 0, hr: 0, rbi: 0 })
-          o.ab += s.stat.atBats; o.h += s.stat.hits; o.hr += s.stat.homeRuns; o.rbi += s.stat.rbi
+          o.ab += num(s.stat?.atBats); o.h += num(s.stat?.hits)
+          o.hr += num(s.stat?.homeRuns); o.rbi += num(s.stat?.rbi)
         }
         const byOpp = Object.entries(om).map(([opp, o]) => ({ opp, ...o, avg: o.ab ? o.h / o.ab : 0 }))
           .filter((x) => x.ab >= 3).sort((a, b) => b.avg - a.avg)
         setD({ trend, byOpp, seasonAvg: ab ? h / ab : 0 })
-        setStatus('ok')
+        // 경기 기록이 없으면(시즌 개막 전 등) 차트 축 계산이 NaN이 되므로 빈 상태로
+        setStatus(trend.length ? 'ok' : 'empty')
       })
       .catch(() => alive && setStatus('error'))
     return () => { alive = false }
   }, [id, season])
 
   if (status !== 'ok' || !d) {
-    return <section className="card-section"><p className="empty">{status === 'error' ? '데이터를 불러오지 못했습니다.' : '이정후 시즌 데이터 불러오는 중…'}</p></section>
+    const msg = status === 'error' ? '데이터를 불러오지 못했습니다.'
+      : status === 'empty' ? '아직 경기 기록이 없습니다.'
+      : '이정후 시즌 데이터 불러오는 중…'
+    return <section className="card-section lee-sub"><p className="empty">{msg}</p></section>
   }
 
   const W = 320, H = 120, padL = 30, padR = 12, padT = 8, padB = 8

@@ -103,7 +103,7 @@ export async function fetchXBA(season) {
   try {
     const url = `https://baseballsavant.mlb.com/leaderboard/expected_statistics?type=batter&year=${season}&min=q&csv=true`
     const text = await (await fetch(url, { cache: 'no-store' })).text()
-    const lines = text.trim().split('\n')
+    const lines = text.trim().split(/\r?\n/)
     const header = parseCsvLine(lines[0].replace(/^﻿/, ''))
     const idIdx = header.indexOf('player_id')
     const xbaIdx = header.indexOf('est_ba')
