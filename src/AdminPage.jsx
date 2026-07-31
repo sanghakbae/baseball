@@ -91,9 +91,10 @@ const refHost = (ref) => {
   try { return new URL(ref).hostname } catch { return ref }
 }
 const tsDate = (ts) => (ts?.toDate ? ts.toDate() : null)
+// 정렬용 ISO 날짜키(YYYY-MM-DD, 한국시간) — 문자열 정렬해도 날짜순 유지
 const dayKey = (ts) => {
   const d = tsDate(ts)
-  return d ? d.toLocaleDateString('ko-KR', { timeZone: 'Asia/Seoul' }) : '?'
+  return d ? d.toLocaleDateString('en-CA', { timeZone: 'Asia/Seoul' }) : '?'
 }
 
 function Stats() {
@@ -139,10 +140,12 @@ function Stats() {
             <div className="admin-card"><span className="ac-num">{agg.uniqIp.toLocaleString()}</span><span className="ac-lbl">고유 IP</span></div>
           </div>
 
-          <Block title="유입 경로" rows={agg.byRef} label="경로" />
-          <Block title="국가" rows={agg.byCountry} label="국가" />
-          <Block title="지역" rows={agg.byRegion} label="지역" />
-          <Block title="일자별 방문" rows={agg.byDay} label="날짜" />
+          <div className="admin-blocks">
+            <Block title="유입 경로" rows={agg.byRef} label="경로" />
+            <Block title="국가" rows={agg.byCountry} label="국가" />
+            <Block title="지역" rows={agg.byRegion} label="지역" />
+            <Block title="일자별 방문" rows={agg.byDay} label="날짜" />
+          </div>
 
           <h2 className="admin-sec">최근 방문 {agg.recent.length}건</h2>
           <div className="admin-table-wrap">
@@ -223,6 +226,7 @@ function CheerAdmin() {
 
 function Block({ title, rows, label = '항목' }) {
   const total = rows.reduce((a, [, n]) => a + n, 0)
+  const max = Math.max(1, ...rows.map((r) => r[1]))
   return (
     <section className="admin-block">
       <h2 className="admin-sec">{title}</h2>
@@ -231,13 +235,14 @@ function Block({ title, rows, label = '항목' }) {
       ) : (
         <div className="admin-table-wrap">
           <table className="admin-table">
-            <thead><tr><th>{label}</th><th className="ta-r">건수</th><th className="ta-r">비율</th></tr></thead>
+            <thead><tr><th>{label}</th><th className="ta-r">건수</th><th className="ta-r">비율</th><th className="adm-bar-th">그래프</th></tr></thead>
             <tbody>
               {rows.map(([k, n]) => (
                 <tr key={k}>
                   <td>{k}</td>
                   <td className="ta-r">{n}</td>
                   <td className="ta-r ta-muted">{total ? Math.round((n / total) * 100) : 0}%</td>
+                  <td className="adm-bar-cell"><span className="adm-bar" style={{ width: `${(n / max) * 100}%` }} /></td>
                 </tr>
               ))}
             </tbody>

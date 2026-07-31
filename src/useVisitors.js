@@ -47,8 +47,8 @@ async function notifyNewReferrer(geo) {
   }
 }
 
-// 이정후(SF) 경기가 진행 중이면 구글챗 알림 (경기당 1회)
-async function notifyLeeGameLive() {
+// 이정후(SF) 오늘 경기 알림 — 경기 전(예정) + 진행 중, 경기당 1회
+async function notifyLeeGame() {
   try {
     const today = new Date().toLocaleDateString('en-CA', { timeZone: 'America/New_York' })
     const sd = await (await fetch(
@@ -56,16 +56,24 @@ async function notifyLeeGameLive() {
       { cache: 'no-store' },
     )).json()
     const game = sd.dates?.[0]?.games?.[0]
-    if (!game || game.status?.abstractGameState !== 'Live') return
+    const state = game?.status?.abstractGameState
+    if (!game || (state !== 'Preview' && state !== 'Live')) return // 종료/취소 제외
     const alertDoc = doc(db, 'meta', 'leeGameAlert')
     const snap = await getDoc(alertDoc)
-    if (snap.data()?.gamePk === game.gamePk) return // 이미 알림
+    if (snap.data()?.gamePk === game.gamePk) return // 이 경기는 이미 알림
     await setDoc(alertDoc, { gamePk: game.gamePk }, { merge: true })
     const home = game.teams?.home?.team, away = game.teams?.away?.team
     const opp = home?.id === 137 ? away?.name : home?.name
-    const ls = game.linescore
-    const inn = ls?.currentInning ? ` (${ls.inningHalf || ''} ${ls.currentInning}회)` : ''
-    sendChat(`⚾ 이정후(SF) 경기 중! vs ${opp}${inn}\nbaseball.sanghak.kr`)
+    let msg
+    if (state === 'Preview') {
+      const t = new Date(game.gameDate).toLocaleTimeString('ko-KR', { timeZone: 'Asia/Seoul', hour: '2-digit', minute: '2-digit' })
+      msg = `⚾ 오늘 이정후(SF) 경기! vs ${opp} · ${t} 시작 예정\nbaseball.sanghak.kr`
+    } else {
+      const ls = game.linescore
+      const inn = ls?.currentInning ? ` (${ls.inningHalf || ''} ${ls.currentInning}회)` : ''
+      msg = `⚾ 이정후(SF) 경기 중! vs ${opp}${inn}\nbaseball.sanghak.kr`
+    }
+    sendChat(msg)
   } catch (e) {
     console.warn('경기 알림 실패:', e.message)
   }
@@ -100,7 +108,7 @@ async function logVisit() {
       ts: serverTimestamp(),
     })
     notifyNewReferrer(geo) // 새 유입처면 구글챗 알림
-    notifyLeeGameLive() // 이정후 경기 중이면 구글챗 알림
+    notifyLeeGame() // 이정후 경기 예정/진행 중이면 구글챗 알림
   } catch (e) {
     console.warn('방문 로그 실패:', e.message)
   }

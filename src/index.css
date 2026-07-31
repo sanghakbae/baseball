@@ -394,6 +394,13 @@ tbody tr.is-lee .sticky, tbody tr.is-lee .sticky2 { background: #2a2a1f; }
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }
+.admin-blocks { display: block; }
+/* PC: 관리자도 넓게 + 통계 블록 2열 */
+@media (min-width: 960px) {
+  .admin-wrap { max-width: 1120px; padding: 24px 28px 40px; }
+  .admin-nav { max-width: 1120px; }
+  .admin-blocks { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 20px; align-items: start; }
+}
 .admin-msg { color: var(--muted); text-align: center; padding: 40px; }
 .admin-login {
   max-width: 300px; margin: 80px auto 0;
@@ -466,6 +473,9 @@ tbody tr.is-lee .sticky, tbody tr.is-lee .sticky2 { background: #2a2a1f; }
 .admin-table th { background: var(--bg-soft); color: var(--muted); font-weight: 600; }
 .admin-table .ta-r { text-align: right; font-variant-numeric: tabular-nums; }
 .admin-table .ta-muted { color: var(--muted); }
+.admin-table .adm-bar-th { width: 34%; }
+.admin-table .adm-bar-cell { width: 34%; }
+.adm-bar { display: block; height: 9px; border-radius: 999px; min-width: 3px; background: linear-gradient(90deg, var(--opp), var(--win)); }
 .admin-block .admin-table td:first-child { width: 100%; }
 
 /* ---- 올스타 투표 모달 ---- */
