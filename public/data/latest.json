@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-07T04:21:26.889Z",
+  "updatedAt": "2026-08-07T06:02:43.404Z",
   "season": 2026,
   "qualifiedCount": 145,
   "leagueMean": 0.256,
@@ -2848,35 +2848,6 @@
       "xBA": 0.237
     },
     {
-      "id": 571448,
-      "name": "Nolan Arenado",
-      "team": "AZ",
-      "teamId": 109,
-      "teamName": "D-backs",
-      "pos": "3B",
-      "G": 109,
-      "AB": 372,
-      "PA": 421,
-      "R": 53,
-      "H": 90,
-      "B2": 20,
-      "B3": 0,
-      "HR": 16,
-      "RBI": 53,
-      "SB": 3,
-      "BB": 39,
-      "SO": 87,
-      "AVG": 0.242,
-      "OBP": 0.323,
-      "SLG": 0.425,
-      "OPS": 0.748,
-      "rank": 99,
-      "careerAVG": 0.28,
-      "careerAB": 7179,
-      "careerHits": 2011,
-      "xBA": 0.238
-    },
-    {
       "id": 672695,
       "name": "Geraldo Perdomo",
       "team": "AZ",
@@ -2899,7 +2870,7 @@
       "OBP": 0.356,
       "SLG": 0.364,
       "OPS": 0.72,
-      "rank": 100,
+      "rank": 99,
       "careerAVG": 0.251,
       "careerAB": 2204,
       "careerHits": 554,
@@ -2928,11 +2899,40 @@
       "OBP": 0.292,
       "SLG": 0.396,
       "OPS": 0.688,
-      "rank": 101,
+      "rank": 100,
       "careerAVG": 0.268,
       "careerAB": 1433,
       "careerHits": 384,
       "xBA": 0.253
+    },
+    {
+      "id": 571448,
+      "name": "Nolan Arenado",
+      "team": "AZ",
+      "teamId": 109,
+      "teamName": "D-backs",
+      "pos": "3B",
+      "G": 109,
+      "AB": 373,
+      "PA": 422,
+      "R": 53,
+      "H": 90,
+      "B2": 20,
+      "B3": 0,
+      "HR": 16,
+      "RBI": 53,
+      "SB": 3,
+      "BB": 39,
+      "SO": 88,
+      "AVG": 0.241,
+      "OBP": 0.322,
+      "SLG": 0.424,
+      "OPS": 0.746,
+      "rank": 101,
+      "careerAVG": 0.28,
+      "careerAB": 7180,
+      "careerHits": 2011,
+      "xBA": 0.238
     },
     {
       "id": 683737,
@@ -4228,7 +4228,7 @@
         0.312,
         0.343
       ],
-      "pWinTitle": 0.49045
+      "pWinTitle": 0.49035
     },
     {
       "id": 650333,
@@ -4246,7 +4246,7 @@
         0.31,
         0.339
       ],
-      "pWinTitle": 0.30055
+      "pWinTitle": 0.3007
     },
     {
       "id": 672640,
@@ -4264,7 +4264,7 @@
         0.302,
         0.329
       ],
-      "pWinTitle": 0.10165
+      "pWinTitle": 0.1016
     },
     {
       "id": 518692,
@@ -4300,7 +4300,7 @@
         0.292,
         0.321
       ],
-      "pWinTitle": 0.0258
+      "pWinTitle": 0.02585
     },
     {
       "id": 808982,
@@ -4444,7 +4444,7 @@
         0.272,
         0.302
       ],
-      "pWinTitle": 0.00125
+      "pWinTitle": 0.0012
     },
     {
       "id": 575929,
@@ -4886,8 +4886,8 @@
       "currentAVG": 0.28,
       "H": 125,
       "AB": 447,
-      "remAB": 184,
-      "teamRemaining": 47,
+      "remAB": 180,
+      "teamRemaining": 46,
       "trueTalent": 0.28,
       "projAVG": 0.28,
       "ci80": [
@@ -5696,8 +5696,8 @@
       "currentAVG": 0.248,
       "H": 110,
       "AB": 444,
-      "remAB": 190,
-      "teamRemaining": 47,
+      "remAB": 186,
+      "teamRemaining": 46,
       "trueTalent": 0.257,
       "projAVG": 0.251,
       "ci80": [
@@ -5840,8 +5840,8 @@
       "currentAVG": 0.245,
       "H": 103,
       "AB": 421,
-      "remAB": 177,
-      "teamRemaining": 47,
+      "remAB": 173,
+      "teamRemaining": 46,
       "trueTalent": 0.247,
       "projAVG": 0.245,
       "ci80": [
@@ -5923,24 +5923,6 @@
       "pWinTitle": 0
     },
     {
-      "id": 571448,
-      "name": "Nolan Arenado",
-      "team": "AZ",
-      "pos": "3B",
-      "currentAVG": 0.242,
-      "H": 90,
-      "AB": 372,
-      "remAB": 160,
-      "teamRemaining": 47,
-      "trueTalent": 0.247,
-      "projAVG": 0.243,
-      "ci80": [
-        0.229,
-        0.259
-      ],
-      "pWinTitle": 0
-    },
-    {
       "id": 672695,
       "name": "Geraldo Perdomo",
       "team": "AZ",
@@ -5948,13 +5930,13 @@
       "currentAVG": 0.242,
       "H": 97,
       "AB": 401,
-      "remAB": 168,
-      "teamRemaining": 47,
+      "remAB": 165,
+      "teamRemaining": 46,
       "trueTalent": 0.244,
       "projAVG": 0.243,
       "ci80": [
-        0.228,
-        0.257
+        0.23,
+        0.258
       ],
       "pWinTitle": 0
     },
@@ -5966,13 +5948,31 @@
       "currentAVG": 0.241,
       "H": 106,
       "AB": 439,
-      "remAB": 183,
-      "teamRemaining": 47,
+      "remAB": 179,
+      "teamRemaining": 46,
       "trueTalent": 0.247,
       "projAVG": 0.243,
       "ci80": [
-        0.232,
-        0.256
+        0.23,
+        0.257
+      ],
+      "pWinTitle": 0
+    },
+    {
+      "id": 571448,
+      "name": "Nolan Arenado",
+      "team": "AZ",
+      "pos": "3B",
+      "currentAVG": 0.241,
+      "H": 90,
+      "AB": 373,
+      "remAB": 157,
+      "teamRemaining": 46,
+      "trueTalent": 0.247,
+      "projAVG": 0.243,
+      "ci80": [
+        0.23,
+        0.257
       ],
       "pWinTitle": 0
     },
@@ -6380,8 +6380,8 @@
       "currentAVG": 0.227,
       "H": 86,
       "AB": 379,
-      "remAB": 162,
-      "teamRemaining": 47,
+      "remAB": 158,
+      "teamRemaining": 46,
       "trueTalent": 0.239,
       "projAVG": 0.23,
       "ci80": [
@@ -6668,12 +6668,12 @@
       "currentAVG": 0.212,
       "H": 68,
       "AB": 321,
-      "remAB": 141,
-      "teamRemaining": 47,
+      "remAB": 138,
+      "teamRemaining": 46,
       "trueTalent": 0.22,
       "projAVG": 0.214,
       "ci80": [
-        0.199,
+        0.198,
         0.229
       ],
       "pWinTitle": 0
@@ -6704,13 +6704,13 @@
       "currentAVG": 0.21,
       "H": 88,
       "AB": 419,
-      "remAB": 174,
-      "teamRemaining": 47,
+      "remAB": 171,
+      "teamRemaining": 46,
       "trueTalent": 0.224,
       "projAVG": 0.214,
       "ci80": [
-        0.201,
-        0.228
+        0.2,
+        0.227
       ],
       "pWinTitle": 0
     },
@@ -6825,7 +6825,7 @@
   ],
   "teamGP": {
     "108": 115,
-    "109": 115,
+    "109": 116,
     "110": 115,
     "111": 114,
     "112": 116,
@@ -6840,7 +6840,7 @@
     "121": 116,
     "133": 115,
     "134": 117,
-    "135": 115,
+    "135": 116,
     "136": 116,
     "137": 115,
     "138": 115,
