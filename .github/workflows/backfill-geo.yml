@@ -1,0 +1,39 @@
+name: Backfill Visit Geo
+
+# 수동 실행 전용 — 기존 visits 기록의 지역을 ipinfo 로 다시 조회해 교정한다
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: '변경 없이 미리보기만'
+        type: boolean
+        default: true
+      limit:
+        description: '처리할 최대 문서 수'
+        type: string
+        default: '5000'
+
+concurrency:
+  group: backfill-geo
+  cancel-in-progress: false
+
+jobs:
+  backfill:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Re-lookup visit locations
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          IPINFO_TOKEN: ${{ secrets.IPINFO_TOKEN }}
+          DRY_RUN: ${{ inputs.dry_run && '1' || '' }}
+          LIMIT: ${{ inputs.limit }}
+        run: node scripts/backfill-geo.mjs
