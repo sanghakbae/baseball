@@ -79,6 +79,29 @@ async function notifyLeeGame() {
   }
 }
 
+// ipinfo 는 국가코드(KR), geojs 는 국가명(South Korea)을 준다 → 통계 버킷이 갈라지지 않게 국가명으로 통일
+function countryName(v) {
+  if (!v) return null
+  if (v.length !== 2) return v // 이미 국가명
+  try { return new Intl.DisplayNames(['en'], { type: 'region' }).of(v) || v } catch { return v }
+}
+
+// IP 위치 조회. ipinfo(정확도 우선) → geojs(폴백) 순.
+async function lookupGeo(ip) {
+  try {
+    const r = await fetch(ip ? `https://ipinfo.io/${ip}/json` : 'https://ipinfo.io/json')
+    if (!r.ok) throw new Error(r.status) // 무토큰 한도 초과(429) 등 → 폴백
+    const g = await r.json()
+    if (g.error) throw new Error('ipinfo error')
+    // ipinfo 의 country 는 국가코드(KR) — 표기 통일을 위해 그대로 두고 city/region 을 쓴다
+    return { ip: ip || g.ip, city: g.city || null, region: g.region || null, country: countryName(g.country) }
+  } catch {
+    const url = ip ? `https://get.geojs.io/v1/ip/geo/${ip}.json` : 'https://get.geojs.io/v1/ip/geo.json'
+    const g = await (await fetch(url)).json()
+    return { ip: ip || g.ip, city: g.city || null, region: g.region || null, country: countryName(g.country) }
+  }
+}
+
 // 방문 로그(IP·위치·유입경로·UA)를 visits 컬렉션에 기록. 세션당 1회(쓰기 절감).
 async function logVisit() {
   try {
@@ -89,13 +112,10 @@ async function logVisit() {
     let geo = {}
     // 1) IPv4 먼저 확보 (실패해도 위치 조회는 계속)
     try { geo.ip = (await (await fetch('https://api4.ipify.org?format=json')).json()).ip } catch {}
-    // 2) 위치 조회 (geojs: CORS·무료). IPv4가 있으면 그 IP로, 없으면 접속 IP로
+    // 2) 위치 조회 — ipinfo 우선(한국 도시 정확도가 geojs보다 높음), 실패 시 geojs 폴백.
+    //    같은 IP를 geojs는 '화성시', ipinfo는 '서울'로 답하는 사례가 있어 순서를 이렇게 둔다.
     try {
-      const url = geo.ip
-        ? `https://get.geojs.io/v1/ip/geo/${geo.ip}.json`
-        : 'https://get.geojs.io/v1/ip/geo.json'
-      const g = await (await fetch(url)).json()
-      geo = { ip: geo.ip || g.ip, city: g.city, region: g.region, country: g.country }
+      geo = { ...geo, ...(await lookupGeo(geo.ip)) }
     } catch { /* 위치 실패 시 IP만 기록 */ }
     await addDoc(collection(db, 'visits'), {
       ip: geo.ip || 'unknown',
