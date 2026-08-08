@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth'
-import { collection, deleteDoc, doc, getDocs, limit, onSnapshot, orderBy, query } from 'firebase/firestore'
+import { collection, deleteDoc, doc, getDocs, limit, onSnapshot, orderBy, query, writeBatch } from 'firebase/firestore'
 import { auth, db } from './firebase.js'
 
 // 아이디 'totoriverce' → 내부 이메일로 매핑 (Firebase Auth는 이메일 기반)
@@ -97,20 +97,68 @@ const dayKey = (ts) => {
   return d ? d.toLocaleDateString('en-CA', { timeZone: 'Asia/Seoul' }) : '?'
 }
 
+// ipinfo 는 국가코드(KR), geojs 는 국가명(South Korea)을 준다 → 국가명으로 통일
+function countryName(v) {
+  if (!v) return null
+  if (v.length !== 2) return v
+  try { return new Intl.DisplayNames(['en'], { type: 'region' }).of(v) || v } catch { return v }
+}
+
 function Stats() {
   const [visits, setVisits] = useState(null)
   const [err, setErr] = useState('')
+  const [fix, setFix] = useState(null) // 지역 재조회 진행 상태
 
-  useEffect(() => {
-    (async () => {
+  const load = async () => {
+    try {
+      const snap = await getDocs(query(collection(db, 'visits'), orderBy('ts', 'desc'), limit(2000)))
+      setVisits(snap.docs.map((d) => ({ id: d.id, ...d.data() })))
+    } catch (e) {
+      setErr(e.code === 'permission-denied' ? '이 계정은 통계 조회 권한이 없습니다' : e.message)
+    }
+  }
+
+  useEffect(() => { load() }, [])
+
+  // 기존 기록의 지역을 ipinfo 로 다시 조회해 교정 (geojs 시절 오답 보정)
+  const refixGeo = async () => {
+    if (!visits) return
+    const ips = [...new Set(visits.map((v) => v.ip).filter((ip) => ip && ip !== 'unknown'))]
+    if (!window.confirm(`고유 IP ${ips.length}개의 지역을 다시 조회해 교정합니다.\n방문 시각·유입경로는 변경되지 않습니다. 진행할까요?`)) return
+
+    setFix({ done: 0, total: ips.length, updated: 0 })
+    const geoByIp = new Map()
+    for (let i = 0; i < ips.length; i++) {
       try {
-        const snap = await getDocs(query(collection(db, 'visits'), orderBy('ts', 'desc'), limit(2000)))
-        setVisits(snap.docs.map((d) => d.data()))
-      } catch (e) {
-        setErr(e.code === 'permission-denied' ? '이 계정은 통계 조회 권한이 없습니다' : e.message)
+        const r = await fetch(`https://ipinfo.io/${ips[i]}/json`)
+        if (r.ok) {
+          const g = await r.json()
+          if (!g.error && !g.bogon) {
+            geoByIp.set(ips[i], { city: g.city || null, region: g.region || null, country: countryName(g.country) })
+          }
+        }
+      } catch { /* 개별 실패는 건너뛴다 */ }
+      setFix((s) => ({ ...s, done: i + 1 }))
+      await new Promise((r) => setTimeout(r, 120)) // 무토큰 한도 보호
+    }
+
+    // 실제로 값이 달라진 문서만 수정
+    const targets = visits.filter((v) => {
+      const g = geoByIp.get(v.ip)
+      return g && (v.city !== g.city || v.region !== g.region || v.country !== g.country)
+    })
+    try {
+      for (let i = 0; i < targets.length; i += 400) {
+        const batch = writeBatch(db)
+        for (const v of targets.slice(i, i + 400)) batch.update(doc(db, 'visits', v.id), geoByIp.get(v.ip))
+        await batch.commit()
       }
-    })()
-  }, [])
+      setFix({ done: ips.length, total: ips.length, updated: targets.length, finished: true })
+      await load()
+    } catch (e) {
+      setFix({ finished: true, error: e.code === 'permission-denied' ? '규칙에 수정 권한이 없습니다(firestore.rules 배포 필요)' : e.message })
+    }
+  }
 
   const agg = useMemo(() => {
     if (!visits) return null
@@ -145,6 +193,17 @@ function Stats() {
             <Block title="국가" rows={agg.byCountry} label="국가" />
             <Block title="지역" rows={agg.byRegion} label="지역" />
             <Block title="일자별 방문" rows={agg.byDay} label="날짜" />
+          </div>
+
+          <div className="geo-fix">
+            <button className="geo-fix-btn" onClick={refixGeo} disabled={!!fix && !fix.finished}>
+              {fix && !fix.finished ? `조회 중… ${fix.done}/${fix.total}` : '📍 지역 재조회'}
+            </button>
+            <span className="geo-fix-msg">
+              {fix?.error ? `❌ ${fix.error}`
+                : fix?.finished ? `✅ ${fix.updated}건 교정 완료`
+                : '예전 기록의 지역을 ipinfo 로 다시 조회해 바로잡습니다'}
+            </span>
           </div>
 
           <h2 className="admin-sec">최근 방문 {agg.recent.length}건</h2>

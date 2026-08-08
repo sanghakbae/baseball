@@ -614,6 +614,15 @@ tbody tr.is-lee .sticky, tbody tr.is-lee .sticky2 { background: #2a2a1f; }
 }
 .pg.active { background: var(--opp); border-color: var(--opp); color: #06101f; }
 
+/* 관리자 — 지역 재조회 */
+.geo-fix { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 16px 0 4px; }
+.geo-fix-btn {
+  border: 1px solid var(--border); background: var(--card); color: var(--fg);
+  font-size: 12px; font-weight: 700; padding: 7px 12px; border-radius: 8px; cursor: pointer;
+}
+.geo-fix-btn:disabled { opacity: 0.6; cursor: default; }
+.geo-fix-msg { font-size: 11.5px; color: var(--muted); }
+
 /* 이정후 탭 하위 섹션 구분선 */
 .lee-sub { border-top: 1px solid var(--border); margin-top: 18px; padding-top: 16px; }
 

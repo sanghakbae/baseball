@@ -36,7 +36,14 @@ service cloud.firestore {
                        'totoriverce@gmail.com',
                        'totoriverce@baseball-93c5d.firebaseapp.com'
                      ];
-      allow update: if false;
+      // 지역 재조회 백필용 — 관리자가 city/region/country 만 고칠 수 있다
+      allow update: if request.auth != null
+                    && request.auth.token.email in [
+                         'totoriverce@gmail.com',
+                         'totoriverce@baseball-93c5d.firebaseapp.com'
+                       ]
+                    && request.resource.data.diff(resource.data)
+                         .affectedKeys().hasOnly(['city', 'region', 'country']);
     }
 
     // 익명 응원 게시판: 누구나 읽기, 생성 가능. 수정은 좋아요(likes)만 허용.
