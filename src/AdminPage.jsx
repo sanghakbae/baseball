@@ -97,6 +97,13 @@ const dayKey = (ts) => {
   return d ? d.toLocaleDateString('en-CA', { timeZone: 'Asia/Seoul' }) : '?'
 }
 
+// 응답 없는 요청 하나에 전체 진행이 멈추지 않도록 타임아웃을 건다
+async function fetchTimeout(url, ms = 8000) {
+  const ac = new AbortController()
+  const t = setTimeout(() => ac.abort(), ms)
+  try { return await fetch(url, { signal: ac.signal }) } finally { clearTimeout(t) }
+}
+
 // ipinfo 는 국가코드(KR), geojs 는 국가명(South Korea)을 준다 → 국가명으로 통일
 function countryName(v) {
   if (!v) return null
@@ -128,16 +135,18 @@ function Stats() {
 
     setFix({ done: 0, total: ips.length, updated: 0 })
     const geoByIp = new Map()
+    let rateLimited = false
     for (let i = 0; i < ips.length; i++) {
       try {
-        const r = await fetch(`https://ipinfo.io/${ips[i]}/json`)
+        const r = await fetchTimeout(`https://ipinfo.io/${ips[i]}/json`)
+        if (r.status === 429) { rateLimited = true; break } // 한도 초과 — 여기까지만 반영
         if (r.ok) {
           const g = await r.json()
           if (!g.error && !g.bogon) {
             geoByIp.set(ips[i], { city: g.city || null, region: g.region || null, country: countryName(g.country) })
           }
         }
-      } catch { /* 개별 실패는 건너뛴다 */ }
+      } catch { /* 타임아웃·개별 실패는 건너뛴다 */ }
       setFix((s) => ({ ...s, done: i + 1 }))
       await new Promise((r) => setTimeout(r, 120)) // 무토큰 한도 보호
     }
@@ -153,7 +162,7 @@ function Stats() {
         for (const v of targets.slice(i, i + 400)) batch.update(doc(db, 'visits', v.id), geoByIp.get(v.ip))
         await batch.commit()
       }
-      setFix({ done: ips.length, total: ips.length, updated: targets.length, finished: true })
+      setFix({ done: ips.length, total: ips.length, updated: targets.length, finished: true, rateLimited })
       await load()
     } catch (e) {
       setFix({ finished: true, error: e.code === 'permission-denied' ? '규칙에 수정 권한이 없습니다(firestore.rules 배포 필요)' : e.message })
@@ -201,7 +210,7 @@ function Stats() {
             </button>
             <span className="geo-fix-msg">
               {fix?.error ? `❌ ${fix.error}`
-                : fix?.finished ? `✅ ${fix.updated}건 교정 완료`
+                : fix?.finished ? `✅ ${fix.updated}건 교정 완료${fix.rateLimited ? ' (ipinfo 한도 초과로 일부만 — 내일 다시 실행하세요)' : ''}`
                 : '예전 기록의 지역을 ipinfo 로 다시 조회해 바로잡습니다'}
             </span>
           </div>

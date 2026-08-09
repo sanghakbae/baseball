@@ -26,7 +26,8 @@ function countryName(v) {
 
 async function lookupIpinfo(ip) {
   const url = `https://ipinfo.io/${ip}/json${IPINFO_TOKEN ? `?token=${IPINFO_TOKEN}` : ''}`
-  const r = await fetch(url)
+  // 응답 없는 요청 하나에 전체가 멈추지 않도록 타임아웃
+  const r = await fetch(url, { signal: AbortSignal.timeout(8000) })
   if (r.status === 429) throw new Error('RATE_LIMIT')
   if (!r.ok) throw new Error(`ipinfo ${r.status}`)
   const g = await r.json()
