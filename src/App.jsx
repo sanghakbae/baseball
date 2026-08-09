@@ -648,8 +648,8 @@ function startTimeLabel(gameDate) {
 }
 
 /* ---------- 이정후 비교 탭 ---------- */
-// (N위) 배지를 붙일 스탯 — 높을수록 좋은 항목 (AVG는 '타율 순위' 행과 중복이라 제외)
-const RANKED_STATS = ['R', 'H', 'B2', 'B3', 'HR', 'RBI', 'SB', 'BB', 'OBP', 'SLG', 'OPS']
+// (N위) 배지를 붙일 스탯 — 'rank'(타율 순위)는 그 자체가 순위라 제외하고 나머지 전부
+const RANKED_STATS = STAT_KEYS.map((s) => s.key).filter((k) => k !== 'rank')
 
 function Compare({ players }) {
   const lee = players.find(isLee)
@@ -660,9 +660,20 @@ function Compare({ players }) {
   const ranks = useMemo(() => {
     const map = {}
     for (const key of RANKED_STATS) {
-      const sorted = [...players].sort((x, y) => (y[key] ?? -Infinity) - (x[key] ?? -Infinity))
+      // 삼진(SO)만 적을수록 좋으므로 오름차순, 나머지는 내림차순
+      const asc = !HIGHER_IS_BETTER.includes(key)
+      const sorted = [...players].sort((x, y) => {
+        const vx = x[key], vy = y[key]
+        if (vx == null) return 1
+        if (vy == null) return -1
+        return asc ? vx - vy : vy - vx
+      })
       const m = {}
-      sorted.forEach((p, i) => { m[p.id] = i + 1 })
+      // 동률은 같은 순위로 (공동 3위 다음은 5위)
+      sorted.forEach((p, i) => {
+        const prev = sorted[i - 1]
+        m[p.id] = prev && prev[key] === p[key] ? m[prev.id] : i + 1
+      })
       map[key] = m
     }
     return map
@@ -1115,7 +1126,9 @@ function StatRow({ s, a, b, aRank, bRank }) {
     : s.key === 'SO'
       ? (a < b ? 'left' : b < a ? 'right' : 'tie')
       : 'none'
-  const badge = (rank) => (rank && rank <= 10 ? <small className="stat-rk">({rank}위)</small> : null)
+  // 모든 스탯에 순위 표시. 10위 이내는 강조해 눈에 띄게 한다.
+  const badge = (rank) =>
+    rank ? <small className={`stat-rk ${rank <= 10 ? 'top' : ''}`}>({rank}위)</small> : null
   return (
     <div className="stat-row">
       <span className={`val ${compare === 'left' ? 'win' : ''}`}>{fmt(s.key, a)}{badge(aRank)}</span>
