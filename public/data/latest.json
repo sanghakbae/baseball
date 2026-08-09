@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-09T15:18:40.568Z",
+  "updatedAt": "2026-08-09T16:18:17.764Z",
   "season": 2026,
   "qualifiedCount": 142,
   "leagueMean": 0.257,
@@ -418,7 +418,7 @@
       "teamId": 120,
       "teamName": "Nationals",
       "pos": "SS",
-      "G": 115,
+      "G": 116,
       "AB": 434,
       "PA": 493,
       "R": 73,
@@ -1050,35 +1050,6 @@
       "xBA": 0.291
     },
     {
-      "id": 682829,
-      "name": "Elly De La Cruz",
-      "team": "CIN",
-      "teamId": 113,
-      "teamName": "Reds",
-      "pos": "SS",
-      "G": 97,
-      "AB": 383,
-      "PA": 435,
-      "R": 66,
-      "H": 105,
-      "B2": 18,
-      "B3": 5,
-      "HR": 20,
-      "RBI": 54,
-      "SB": 21,
-      "BB": 48,
-      "SO": 116,
-      "AVG": 0.274,
-      "OBP": 0.356,
-      "SLG": 0.504,
-      "OPS": 0.86,
-      "rank": 37,
-      "careerAVG": 0.259,
-      "careerAB": 2018,
-      "careerHits": 522,
-      "xBA": 0.274
-    },
-    {
       "id": 803011,
       "name": "Sam Antonacci",
       "team": "CWS",
@@ -1101,7 +1072,7 @@
       "OBP": 0.361,
       "SLG": 0.404,
       "OPS": 0.765,
-      "rank": 38,
+      "rank": 37,
       "careerAVG": 0.274,
       "careerAB": 332,
       "careerHits": 91,
@@ -1130,7 +1101,7 @@
       "OBP": 0.335,
       "SLG": 0.472,
       "OPS": 0.807,
-      "rank": 39,
+      "rank": 38,
       "careerAVG": 0.273,
       "careerAB": 1420,
       "careerHits": 387,
@@ -1159,11 +1130,40 @@
       "OBP": 0.35,
       "SLG": 0.404,
       "OPS": 0.754,
-      "rank": 40,
+      "rank": 39,
       "careerAVG": 0.263,
       "careerAB": 866,
       "careerHits": 228,
       "xBA": 0.236
+    },
+    {
+      "id": 682829,
+      "name": "Elly De La Cruz",
+      "team": "CIN",
+      "teamId": 113,
+      "teamName": "Reds",
+      "pos": "SS",
+      "G": 98,
+      "AB": 384,
+      "PA": 436,
+      "R": 66,
+      "H": 105,
+      "B2": 18,
+      "B3": 5,
+      "HR": 20,
+      "RBI": 54,
+      "SB": 21,
+      "BB": 48,
+      "SO": 117,
+      "AVG": 0.273,
+      "OBP": 0.356,
+      "SLG": 0.503,
+      "OPS": 0.859,
+      "rank": 40,
+      "careerAVG": 0.259,
+      "careerAB": 2019,
+      "careerHits": 522,
+      "xBA": 0.274
     },
     {
       "id": 694384,
@@ -2129,7 +2129,7 @@
       "teamId": 113,
       "teamName": "Reds",
       "pos": "1B",
-      "G": 116,
+      "G": 117,
       "AB": 440,
       "PA": 502,
       "R": 64,
@@ -2651,7 +2651,7 @@
       "teamId": 120,
       "teamName": "Nationals",
       "pos": "LF",
-      "G": 117,
+      "G": 118,
       "AB": 446,
       "PA": 484,
       "R": 60,
@@ -3376,7 +3376,7 @@
       "teamId": 120,
       "teamName": "Nationals",
       "pos": "2B",
-      "G": 110,
+      "G": 111,
       "AB": 336,
       "PA": 388,
       "R": 46,
@@ -3463,7 +3463,7 @@
       "teamId": 113,
       "teamName": "Reds",
       "pos": "LF",
-      "G": 88,
+      "G": 89,
       "AB": 311,
       "PA": 369,
       "R": 45,
@@ -4141,7 +4141,7 @@
         0.311,
         0.338
       ],
-      "pWinTitle": 0.41215
+      "pWinTitle": 0.41225
     },
     {
       "id": 650333,
@@ -4159,7 +4159,7 @@
         0.308,
         0.337
       ],
-      "pWinTitle": 0.32595
+      "pWinTitle": 0.3259
     },
     {
       "id": 672640,
@@ -4177,7 +4177,7 @@
         0.302,
         0.329
       ],
-      "pWinTitle": 0.11345
+      "pWinTitle": 0.1134
     },
     {
       "id": 693304,
@@ -4195,7 +4195,7 @@
         0.293,
         0.323
       ],
-      "pWinTitle": 0.0366
+      "pWinTitle": 0.03665
     },
     {
       "id": 672515,
@@ -4213,7 +4213,7 @@
         0.284,
         0.318
       ],
-      "pWinTitle": 0.0293
+      "pWinTitle": 0.0294
     },
     {
       "id": 518692,
@@ -4267,7 +4267,7 @@
         0.285,
         0.315
       ],
-      "pWinTitle": 0.0119
+      "pWinTitle": 0.01185
     },
     {
       "id": 681198,
@@ -4393,7 +4393,7 @@
         0.273,
         0.304
       ],
-      "pWinTitle": 0.001
+      "pWinTitle": 0.00105
     },
     {
       "id": 805808,
@@ -4504,42 +4504,6 @@
       "pWinTitle": 0.0003
     },
     {
-      "id": 803011,
-      "name": "Sam Antonacci",
-      "team": "CWS",
-      "pos": "LF",
-      "currentAVG": 0.274,
-      "H": 91,
-      "AB": 332,
-      "remAB": 159,
-      "teamRemaining": 46,
-      "trueTalent": 0.275,
-      "projAVG": 0.274,
-      "ci80": [
-        0.259,
-        0.291
-      ],
-      "pWinTitle": 0.00025
-    },
-    {
-      "id": 694192,
-      "name": "Jackson Chourio",
-      "team": "MIL",
-      "pos": "LF",
-      "currentAVG": 0.274,
-      "H": 94,
-      "AB": 343,
-      "remAB": 186,
-      "teamRemaining": 45,
-      "trueTalent": 0.27,
-      "projAVG": 0.273,
-      "ci80": [
-        0.255,
-        0.291
-      ],
-      "pWinTitle": 0.0002
-    },
-    {
       "id": 682928,
       "name": "CJ Abrams",
       "team": "WSH",
@@ -4547,7 +4511,7 @@
       "currentAVG": 0.288,
       "H": 125,
       "AB": 434,
-      "remAB": 162,
+      "remAB": 161,
       "teamRemaining": 43,
       "trueTalent": 0.279,
       "projAVG": 0.285,
@@ -4555,7 +4519,7 @@
         0.272,
         0.299
       ],
-      "pWinTitle": 0.00015
+      "pWinTitle": 0.0002
     },
     {
       "id": 671277,
@@ -4648,6 +4612,42 @@
       "pWinTitle": 0.0001
     },
     {
+      "id": 803011,
+      "name": "Sam Antonacci",
+      "team": "CWS",
+      "pos": "LF",
+      "currentAVG": 0.274,
+      "H": 91,
+      "AB": 332,
+      "remAB": 159,
+      "teamRemaining": 46,
+      "trueTalent": 0.275,
+      "projAVG": 0.274,
+      "ci80": [
+        0.259,
+        0.291
+      ],
+      "pWinTitle": 0.0001
+    },
+    {
+      "id": 694192,
+      "name": "Jackson Chourio",
+      "team": "MIL",
+      "pos": "LF",
+      "currentAVG": 0.274,
+      "H": 94,
+      "AB": 343,
+      "remAB": 186,
+      "teamRemaining": 45,
+      "trueTalent": 0.27,
+      "projAVG": 0.273,
+      "ci80": [
+        0.257,
+        0.289
+      ],
+      "pWinTitle": 0.0001
+    },
+    {
       "id": 676475,
       "name": "Alec Burleson",
       "team": "STL",
@@ -4716,6 +4716,24 @@
       "ci80": [
         0.265,
         0.293
+      ],
+      "pWinTitle": 0.00005
+    },
+    {
+      "id": 805367,
+      "name": "Chase Meidroth",
+      "team": "CWS",
+      "pos": "2B",
+      "currentAVG": 0.274,
+      "H": 114,
+      "AB": 416,
+      "remAB": 169,
+      "teamRemaining": 46,
+      "trueTalent": 0.266,
+      "projAVG": 0.272,
+      "ci80": [
+        0.258,
+        0.287
       ],
       "pWinTitle": 0.00005
     },
@@ -4814,16 +4832,16 @@
       "name": "Elly De La Cruz",
       "team": "CIN",
       "pos": "SS",
-      "currentAVG": 0.274,
+      "currentAVG": 0.273,
       "H": 105,
-      "AB": 383,
-      "remAB": 182,
+      "AB": 384,
+      "remAB": 180,
       "teamRemaining": 46,
-      "trueTalent": 0.272,
+      "trueTalent": 0.271,
       "projAVG": 0.273,
       "ci80": [
-        0.258,
-        0.288
+        0.259,
+        0.289
       ],
       "pWinTitle": 0
     },
@@ -4860,24 +4878,6 @@
       "ci80": [
         0.26,
         0.289
-      ],
-      "pWinTitle": 0
-    },
-    {
-      "id": 805367,
-      "name": "Chase Meidroth",
-      "team": "CWS",
-      "pos": "2B",
-      "currentAVG": 0.274,
-      "H": 114,
-      "AB": 416,
-      "remAB": 169,
-      "teamRemaining": 46,
-      "trueTalent": 0.266,
-      "projAVG": 0.272,
-      "ci80": [
-        0.258,
-        0.287
       ],
       "pWinTitle": 0
     },
@@ -5447,7 +5447,7 @@
       "currentAVG": 0.255,
       "H": 112,
       "AB": 440,
-      "remAB": 174,
+      "remAB": 173,
       "teamRemaining": 46,
       "trueTalent": 0.253,
       "projAVG": 0.254,
@@ -5789,13 +5789,13 @@
       "currentAVG": 0.244,
       "H": 109,
       "AB": 446,
-      "remAB": 164,
+      "remAB": 163,
       "teamRemaining": 43,
       "trueTalent": 0.248,
       "projAVG": 0.245,
       "ci80": [
-        0.231,
-        0.259
+        0.232,
+        0.258
       ],
       "pWinTitle": 0
     },
@@ -6221,13 +6221,13 @@
       "currentAVG": 0.229,
       "H": 77,
       "AB": 336,
-      "remAB": 131,
+      "remAB": 130,
       "teamRemaining": 43,
       "trueTalent": 0.229,
       "projAVG": 0.229,
       "ci80": [
-        0.214,
-        0.244
+        0.215,
+        0.242
       ],
       "pWinTitle": 0
     },
@@ -6257,13 +6257,13 @@
       "currentAVG": 0.225,
       "H": 70,
       "AB": 311,
-      "remAB": 163,
+      "remAB": 161,
       "teamRemaining": 46,
       "trueTalent": 0.23,
       "projAVG": 0.227,
       "ci80": [
-        0.209,
-        0.245
+        0.21,
+        0.244
       ],
       "pWinTitle": 0
     },
