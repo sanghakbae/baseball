@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-12T16:42:58.008Z",
+  "updatedAt": "2026-08-12T17:47:32.882Z",
   "season": 2026,
   "qualifiedCount": 142,
   "leagueMean": 0.257,
@@ -1665,7 +1665,7 @@
       "teamId": 142,
       "teamName": "Twins",
       "pos": "2B",
-      "G": 112,
+      "G": 113,
       "AB": 374,
       "PA": 441,
       "R": 56,
@@ -1978,6 +1978,35 @@
       "xBA": 0.233
     },
     {
+      "id": 624413,
+      "name": "Pete Alonso",
+      "team": "BAL",
+      "teamId": 110,
+      "teamName": "Orioles",
+      "pos": "1B",
+      "G": 121,
+      "AB": 450,
+      "PA": 521,
+      "R": 73,
+      "H": 116,
+      "B2": 22,
+      "B3": 0,
+      "HR": 26,
+      "RBI": 77,
+      "SB": 5,
+      "BB": 60,
+      "SO": 127,
+      "AVG": 0.258,
+      "OBP": 0.351,
+      "SLG": 0.48,
+      "OPS": 0.831,
+      "rank": 69,
+      "careerAVG": 0.253,
+      "careerAB": 4213,
+      "careerHits": 1067,
+      "xBA": 0.277
+    },
+    {
       "id": 677594,
       "name": "Julio Rodríguez",
       "team": "SEA",
@@ -2000,40 +2029,11 @@
       "OBP": 0.321,
       "SLG": 0.421,
       "OPS": 0.742,
-      "rank": 69,
+      "rank": 70,
       "careerAVG": 0.272,
       "careerAB": 2809,
       "careerHits": 763,
       "xBA": 0.278
-    },
-    {
-      "id": 624413,
-      "name": "Pete Alonso",
-      "team": "BAL",
-      "teamId": 110,
-      "teamName": "Orioles",
-      "pos": "1B",
-      "G": 120,
-      "AB": 449,
-      "PA": 520,
-      "R": 73,
-      "H": 115,
-      "B2": 22,
-      "B3": 0,
-      "HR": 26,
-      "RBI": 77,
-      "SB": 5,
-      "BB": 60,
-      "SO": 127,
-      "AVG": 0.256,
-      "OBP": 0.35,
-      "SLG": 0.479,
-      "OPS": 0.829,
-      "rank": 70,
-      "careerAVG": 0.253,
-      "careerAB": 4212,
-      "careerHits": 1066,
-      "xBA": 0.277
     },
     {
       "id": 670623,
@@ -2419,7 +2419,7 @@
       "teamId": 142,
       "teamName": "Twins",
       "pos": "DH",
-      "G": 116,
+      "G": 117,
       "AB": 427,
       "PA": 470,
       "R": 59,
@@ -2738,7 +2738,7 @@
       "teamId": 142,
       "teamName": "Twins",
       "pos": "3B",
-      "G": 115,
+      "G": 116,
       "AB": 425,
       "PA": 462,
       "R": 52,
@@ -3376,7 +3376,7 @@
       "teamId": 142,
       "teamName": "Twins",
       "pos": "1B",
-      "G": 105,
+      "G": 106,
       "AB": 388,
       "PA": 424,
       "R": 54,
@@ -3782,22 +3782,22 @@
       "teamId": 110,
       "teamName": "Orioles",
       "pos": "SS",
-      "G": 119,
+      "G": 120,
       "AB": 482,
-      "PA": 540,
-      "R": 70,
+      "PA": 541,
+      "R": 71,
       "H": 104,
       "B2": 20,
       "B3": 4,
       "HR": 19,
       "RBI": 49,
       "SB": 9,
-      "BB": 47,
+      "BB": 48,
       "SO": 123,
       "AVG": 0.216,
-      "OBP": 0.296,
+      "OBP": 0.298,
       "SLG": 0.392,
-      "OPS": 0.688,
+      "OPS": 0.69,
       "rank": 131,
       "careerAVG": 0.259,
       "careerAB": 2365,
@@ -5159,13 +5159,13 @@
       "currentAVG": 0.265,
       "H": 99,
       "AB": 374,
-      "remAB": 137,
+      "remAB": 136,
       "teamRemaining": 41,
       "trueTalent": 0.261,
       "projAVG": 0.264,
       "ci80": [
         0.249,
-        0.28
+        0.278
       ],
       "pWinTitle": 0
     },
@@ -5332,6 +5332,24 @@
       "pWinTitle": 0
     },
     {
+      "id": 624413,
+      "name": "Pete Alonso",
+      "team": "BAL",
+      "pos": "1B",
+      "currentAVG": 0.258,
+      "H": 116,
+      "AB": 450,
+      "remAB": 156,
+      "teamRemaining": 42,
+      "trueTalent": 0.26,
+      "projAVG": 0.258,
+      "ci80": [
+        0.248,
+        0.271
+      ],
+      "pWinTitle": 0
+    },
+    {
       "id": 677594,
       "name": "Julio Rodríguez",
       "team": "SEA",
@@ -5345,7 +5363,7 @@
       "projAVG": 0.258,
       "ci80": [
         0.246,
-        0.272
+        0.273
       ],
       "pWinTitle": 0
     },
@@ -5364,24 +5382,6 @@
       "ci80": [
         0.244,
         0.272
-      ],
-      "pWinTitle": 0
-    },
-    {
-      "id": 624413,
-      "name": "Pete Alonso",
-      "team": "BAL",
-      "pos": "1B",
-      "currentAVG": 0.256,
-      "H": 115,
-      "AB": 449,
-      "remAB": 157,
-      "teamRemaining": 42,
-      "trueTalent": 0.259,
-      "projAVG": 0.257,
-      "ci80": [
-        0.246,
-        0.271
       ],
       "pWinTitle": 0
     },
@@ -5591,12 +5591,12 @@
       "currentAVG": 0.251,
       "H": 107,
       "AB": 427,
-      "remAB": 151,
+      "remAB": 150,
       "teamRemaining": 41,
       "trueTalent": 0.251,
       "projAVG": 0.251,
       "ci80": [
-        0.239,
+        0.237,
         0.265
       ],
       "pWinTitle": 0
@@ -5879,7 +5879,7 @@
       "currentAVG": 0.245,
       "H": 104,
       "AB": 425,
-      "remAB": 152,
+      "remAB": 150,
       "teamRemaining": 41,
       "trueTalent": 0.24,
       "projAVG": 0.244,
@@ -6221,12 +6221,12 @@
       "currentAVG": 0.229,
       "H": 89,
       "AB": 388,
-      "remAB": 152,
+      "remAB": 150,
       "teamRemaining": 41,
       "trueTalent": 0.231,
       "projAVG": 0.23,
       "ci80": [
-        0.215,
+        0.216,
         0.243
       ],
       "pWinTitle": 0
@@ -6473,13 +6473,13 @@
       "currentAVG": 0.216,
       "H": 104,
       "AB": 482,
-      "remAB": 170,
+      "remAB": 169,
       "teamRemaining": 42,
       "trueTalent": 0.225,
       "projAVG": 0.218,
       "ci80": [
         0.206,
-        0.232
+        0.23
       ],
       "pWinTitle": 0
     },
