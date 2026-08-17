@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-17T21:13:38.046Z",
+  "updatedAt": "2026-08-17T22:11:10.809Z",
   "season": 2026,
   "qualifiedCount": 143,
   "leagueMean": 0.256,
@@ -70,7 +70,7 @@
       "teamId": 139,
       "teamName": "Rays",
       "pos": "LF",
-      "G": 115,
+      "G": 116,
       "AB": 430,
       "PA": 464,
       "R": 49,
@@ -186,7 +186,7 @@
       "teamId": 139,
       "teamName": "Rays",
       "pos": "DH",
-      "G": 118,
+      "G": 119,
       "AB": 467,
       "PA": 525,
       "R": 68,
@@ -534,7 +534,7 @@
       "teamId": 139,
       "teamName": "Rays",
       "pos": "1B",
-      "G": 120,
+      "G": 121,
       "AB": 453,
       "PA": 526,
       "R": 58,
@@ -592,7 +592,7 @@
       "teamId": 139,
       "teamName": "Rays",
       "pos": "C",
-      "G": 111,
+      "G": 112,
       "AB": 384,
       "PA": 449,
       "R": 59,
@@ -1085,7 +1085,7 @@
       "teamId": 139,
       "teamName": "Rays",
       "pos": "3B",
-      "G": 123,
+      "G": 124,
       "AB": 468,
       "PA": 538,
       "R": 77,
@@ -1485,35 +1485,6 @@
       "xBA": 0.273
     },
     {
-      "id": 624413,
-      "name": "Pete Alonso",
-      "team": "BAL",
-      "teamId": 110,
-      "teamName": "Orioles",
-      "pos": "1B",
-      "G": 124,
-      "AB": 463,
-      "PA": 538,
-      "R": 76,
-      "H": 123,
-      "B2": 23,
-      "B3": 0,
-      "HR": 27,
-      "RBI": 80,
-      "SB": 5,
-      "BB": 63,
-      "SO": 129,
-      "AVG": 0.266,
-      "OBP": 0.361,
-      "SLG": 0.49,
-      "OPS": 0.851,
-      "rank": 52,
-      "careerAVG": 0.254,
-      "careerAB": 4226,
-      "careerHits": 1074,
-      "xBA": 0.283
-    },
-    {
       "id": 695578,
       "name": "James Wood",
       "team": "WSH",
@@ -1536,11 +1507,40 @@
       "OBP": 0.393,
       "SLG": 0.535,
       "OPS": 0.928,
-      "rank": 53,
+      "rank": 52,
       "careerAVG": 0.261,
       "careerAB": 1330,
       "careerHits": 347,
       "xBA": 0.275
+    },
+    {
+      "id": 624413,
+      "name": "Pete Alonso",
+      "team": "BAL",
+      "teamId": 110,
+      "teamName": "Orioles",
+      "pos": "1B",
+      "G": 125,
+      "AB": 464,
+      "PA": 539,
+      "R": 76,
+      "H": 123,
+      "B2": 23,
+      "B3": 0,
+      "HR": 27,
+      "RBI": 80,
+      "SB": 5,
+      "BB": 63,
+      "SO": 129,
+      "AVG": 0.265,
+      "OBP": 0.36,
+      "SLG": 0.489,
+      "OPS": 0.849,
+      "rank": 53,
+      "careerAVG": 0.254,
+      "careerAB": 4227,
+      "careerHits": 1074,
+      "xBA": 0.283
     },
     {
       "id": 681082,
@@ -3695,7 +3695,7 @@
       "teamId": 110,
       "teamName": "Orioles",
       "pos": "SS",
-      "G": 123,
+      "G": 124,
       "AB": 496,
       "PA": 558,
       "R": 75,
@@ -4072,7 +4072,7 @@
       "teamId": 139,
       "teamName": "Rays",
       "pos": "CF",
-      "G": 106,
+      "G": 107,
       "AB": 355,
       "PA": 405,
       "R": 46,
@@ -4170,7 +4170,7 @@
         0.307,
         0.333
       ],
-      "pWinTitle": 0.47185
+      "pWinTitle": 0.4736
     },
     {
       "id": 650333,
@@ -4188,7 +4188,7 @@
         0.3,
         0.327
       ],
-      "pWinTitle": 0.20165
+      "pWinTitle": 0.2019
     },
     {
       "id": 672515,
@@ -4206,7 +4206,7 @@
         0.291,
         0.325
       ],
-      "pWinTitle": 0.09185
+      "pWinTitle": 0.09245
     },
     {
       "id": 802415,
@@ -4216,15 +4216,15 @@
       "currentAVG": 0.309,
       "H": 133,
       "AB": 430,
-      "remAB": 146,
+      "remAB": 145,
       "teamRemaining": 39,
       "trueTalent": 0.299,
       "projAVG": 0.307,
       "ci80": [
-        0.295,
-        0.321
+        0.296,
+        0.322
       ],
-      "pWinTitle": 0.0731
+      "pWinTitle": 0.07225
     },
     {
       "id": 672640,
@@ -4242,7 +4242,7 @@
         0.294,
         0.318
       ],
-      "pWinTitle": 0.05295
+      "pWinTitle": 0.0527
     },
     {
       "id": 693304,
@@ -4260,7 +4260,7 @@
         0.292,
         0.32
       ],
-      "pWinTitle": 0.04775
+      "pWinTitle": 0.04655
     },
     {
       "id": 650490,
@@ -4270,15 +4270,15 @@
       "currentAVG": 0.302,
       "H": 141,
       "AB": 467,
-      "remAB": 154,
+      "remAB": 153,
       "teamRemaining": 39,
       "trueTalent": 0.298,
       "projAVG": 0.301,
       "ci80": [
         0.287,
-        0.314
+        0.313
       ],
-      "pWinTitle": 0.02295
+      "pWinTitle": 0.02275
     },
     {
       "id": 518692,
@@ -4296,7 +4296,7 @@
         0.286,
         0.311
       ],
-      "pWinTitle": 0.0132
+      "pWinTitle": 0.01305
     },
     {
       "id": 664983,
@@ -4314,7 +4314,7 @@
         0.28,
         0.306
       ],
-      "pWinTitle": 0.00755
+      "pWinTitle": 0.00745
     },
     {
       "id": 673962,
@@ -4332,7 +4332,7 @@
         0.276,
         0.308
       ],
-      "pWinTitle": 0.007
+      "pWinTitle": 0.00705
     },
     {
       "id": 808982,
@@ -4404,7 +4404,7 @@
         0.279,
         0.302
       ],
-      "pWinTitle": 0.00125
+      "pWinTitle": 0.0013
     },
     {
       "id": 671739,
@@ -4422,7 +4422,7 @@
         0.275,
         0.301
       ],
-      "pWinTitle": 0.00085
+      "pWinTitle": 0.0008
     },
     {
       "id": 677951,
@@ -4443,6 +4443,24 @@
       "pWinTitle": 0.00045
     },
     {
+      "id": 689414,
+      "name": "Liam Hicks",
+      "team": "TB",
+      "pos": "C",
+      "currentAVG": 0.284,
+      "H": 109,
+      "AB": 384,
+      "remAB": 134,
+      "teamRemaining": 39,
+      "trueTalent": 0.275,
+      "projAVG": 0.282,
+      "ci80": [
+        0.266,
+        0.295
+      ],
+      "pWinTitle": 0.0004
+    },
+    {
       "id": 691023,
       "name": "Jordan Walker",
       "team": "STL",
@@ -4457,24 +4475,6 @@
       "ci80": [
         0.273,
         0.297
-      ],
-      "pWinTitle": 0.0003
-    },
-    {
-      "id": 689414,
-      "name": "Liam Hicks",
-      "team": "TB",
-      "pos": "C",
-      "currentAVG": 0.284,
-      "H": 109,
-      "AB": 384,
-      "remAB": 135,
-      "teamRemaining": 39,
-      "trueTalent": 0.275,
-      "projAVG": 0.282,
-      "ci80": [
-        0.266,
-        0.295
       ],
       "pWinTitle": 0.0003
     },
@@ -4504,13 +4504,13 @@
       "currentAVG": 0.285,
       "H": 129,
       "AB": 453,
-      "remAB": 147,
+      "remAB": 146,
       "teamRemaining": 39,
       "trueTalent": 0.28,
       "projAVG": 0.284,
       "ci80": [
         0.27,
-        0.298
+        0.297
       ],
       "pWinTitle": 0.0002
     },
@@ -4846,13 +4846,13 @@
       "currentAVG": 0.274,
       "H": 128,
       "AB": 468,
-      "remAB": 148,
+      "remAB": 147,
       "teamRemaining": 39,
       "trueTalent": 0.272,
       "projAVG": 0.273,
       "ci80": [
-        0.263,
-        0.284
+        0.262,
+        0.285
       ],
       "pWinTitle": 0
     },
@@ -5055,24 +5055,6 @@
       "pWinTitle": 0
     },
     {
-      "id": 624413,
-      "name": "Pete Alonso",
-      "team": "BAL",
-      "pos": "1B",
-      "currentAVG": 0.266,
-      "H": 123,
-      "AB": 463,
-      "remAB": 142,
-      "teamRemaining": 38,
-      "trueTalent": 0.267,
-      "projAVG": 0.266,
-      "ci80": [
-        0.255,
-        0.279
-      ],
-      "pWinTitle": 0
-    },
-    {
       "id": 695578,
       "name": "James Wood",
       "team": "WSH",
@@ -5085,8 +5067,8 @@
       "trueTalent": 0.266,
       "projAVG": 0.266,
       "ci80": [
-        0.252,
-        0.278
+        0.254,
+        0.28
       ],
       "pWinTitle": 0
     },
@@ -5101,6 +5083,24 @@
       "remAB": 123,
       "teamRemaining": 37,
       "trueTalent": 0.262,
+      "projAVG": 0.265,
+      "ci80": [
+        0.253,
+        0.278
+      ],
+      "pWinTitle": 0
+    },
+    {
+      "id": 624413,
+      "name": "Pete Alonso",
+      "team": "BAL",
+      "pos": "1B",
+      "currentAVG": 0.265,
+      "H": 123,
+      "AB": 464,
+      "remAB": 141,
+      "teamRemaining": 38,
+      "trueTalent": 0.267,
       "projAVG": 0.265,
       "ci80": [
         0.253,
@@ -6430,7 +6430,7 @@
       "currentAVG": 0.22,
       "H": 109,
       "AB": 496,
-      "remAB": 153,
+      "remAB": 152,
       "teamRemaining": 38,
       "trueTalent": 0.228,
       "projAVG": 0.222,
@@ -6700,13 +6700,13 @@
       "currentAVG": 0.208,
       "H": 74,
       "AB": 355,
-      "remAB": 131,
+      "remAB": 129,
       "teamRemaining": 39,
       "trueTalent": 0.209,
       "projAVG": 0.209,
       "ci80": [
-        0.195,
-        0.222
+        0.194,
+        0.221
       ],
       "pWinTitle": 0
     },
