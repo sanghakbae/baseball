@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-17T20:12:43.416Z",
+  "updatedAt": "2026-08-17T21:13:38.046Z",
   "season": 2026,
   "qualifiedCount": 143,
   "leagueMean": 0.256,
@@ -2471,35 +2471,6 @@
       "xBA": 0.252
     },
     {
-      "id": 671056,
-      "name": "Iván Herrera",
-      "team": "STL",
-      "teamId": 138,
-      "teamName": "Cardinals",
-      "pos": "DH",
-      "G": 124,
-      "AB": 463,
-      "PA": 553,
-      "R": 77,
-      "H": 115,
-      "B2": 23,
-      "B3": 1,
-      "HR": 13,
-      "RBI": 52,
-      "SB": 7,
-      "BB": 59,
-      "SO": 95,
-      "AVG": 0.248,
-      "OBP": 0.363,
-      "SLG": 0.387,
-      "OPS": 0.75,
-      "rank": 86,
-      "careerAVG": 0.27,
-      "careerAB": 1135,
-      "careerHits": 307,
-      "xBA": 0.252
-    },
-    {
       "id": 682998,
       "name": "Corbin Carroll",
       "team": "AZ",
@@ -2522,11 +2493,40 @@
       "OBP": 0.344,
       "SLG": 0.49,
       "OPS": 0.834,
-      "rank": 87,
+      "rank": 86,
       "careerAVG": 0.256,
       "careerAB": 2277,
       "careerHits": 583,
       "xBA": 0.249
+    },
+    {
+      "id": 671056,
+      "name": "Iván Herrera",
+      "team": "STL",
+      "teamId": 138,
+      "teamName": "Cardinals",
+      "pos": "DH",
+      "G": 124,
+      "AB": 464,
+      "PA": 554,
+      "R": 77,
+      "H": 115,
+      "B2": 23,
+      "B3": 1,
+      "HR": 13,
+      "RBI": 52,
+      "SB": 7,
+      "BB": 59,
+      "SO": 95,
+      "AVG": 0.248,
+      "OBP": 0.363,
+      "SLG": 0.386,
+      "OPS": 0.749,
+      "rank": 87,
+      "careerAVG": 0.27,
+      "careerAB": 1136,
+      "careerHits": 307,
+      "xBA": 0.252
     },
     {
       "id": 607208,
@@ -4170,7 +4170,7 @@
         0.307,
         0.333
       ],
-      "pWinTitle": 0.4717
+      "pWinTitle": 0.47185
     },
     {
       "id": 650333,
@@ -4224,7 +4224,7 @@
         0.295,
         0.321
       ],
-      "pWinTitle": 0.07305
+      "pWinTitle": 0.0731
     },
     {
       "id": 672640,
@@ -4242,7 +4242,7 @@
         0.294,
         0.318
       ],
-      "pWinTitle": 0.05285
+      "pWinTitle": 0.05295
     },
     {
       "id": 693304,
@@ -4260,7 +4260,7 @@
         0.292,
         0.32
       ],
-      "pWinTitle": 0.0478
+      "pWinTitle": 0.04775
     },
     {
       "id": 650490,
@@ -4278,7 +4278,7 @@
         0.287,
         0.314
       ],
-      "pWinTitle": 0.0229
+      "pWinTitle": 0.02295
     },
     {
       "id": 518692,
@@ -4296,7 +4296,7 @@
         0.286,
         0.311
       ],
-      "pWinTitle": 0.01325
+      "pWinTitle": 0.0132
     },
     {
       "id": 664983,
@@ -4314,7 +4314,7 @@
         0.28,
         0.306
       ],
-      "pWinTitle": 0.0075
+      "pWinTitle": 0.00755
     },
     {
       "id": 673962,
@@ -4371,24 +4371,6 @@
       "pWinTitle": 0.0018
     },
     {
-      "id": 676475,
-      "name": "Alec Burleson",
-      "team": "STL",
-      "pos": "1B",
-      "currentAVG": 0.29,
-      "H": 137,
-      "AB": 472,
-      "remAB": 145,
-      "teamRemaining": 38,
-      "trueTalent": 0.29,
-      "projAVG": 0.29,
-      "ci80": [
-        0.279,
-        0.301
-      ],
-      "pWinTitle": 0.0015
-    },
-    {
       "id": 660271,
       "name": "Shohei Ohtani",
       "team": "LAD",
@@ -4405,6 +4387,24 @@
         0.301
       ],
       "pWinTitle": 0.00145
+    },
+    {
+      "id": 676475,
+      "name": "Alec Burleson",
+      "team": "STL",
+      "pos": "1B",
+      "currentAVG": 0.29,
+      "H": 137,
+      "AB": 472,
+      "remAB": 141,
+      "teamRemaining": 37,
+      "trueTalent": 0.29,
+      "projAVG": 0.29,
+      "ci80": [
+        0.279,
+        0.302
+      ],
+      "pWinTitle": 0.00125
     },
     {
       "id": 671739,
@@ -4450,15 +4450,15 @@
       "currentAVG": 0.286,
       "H": 134,
       "AB": 469,
-      "remAB": 147,
-      "teamRemaining": 38,
+      "remAB": 143,
+      "teamRemaining": 37,
       "trueTalent": 0.28,
       "projAVG": 0.284,
       "ci80": [
         0.273,
-        0.299
+        0.297
       ],
-      "pWinTitle": 0.00035
+      "pWinTitle": 0.0003
     },
     {
       "id": 689414,
@@ -5350,8 +5350,8 @@
       "currentAVG": 0.259,
       "H": 107,
       "AB": 413,
-      "remAB": 153,
-      "teamRemaining": 39,
+      "remAB": 149,
+      "teamRemaining": 38,
       "trueTalent": 0.26,
       "projAVG": 0.259,
       "ci80": [
@@ -5404,12 +5404,12 @@
       "currentAVG": 0.258,
       "H": 122,
       "AB": 472,
-      "remAB": 148,
-      "teamRemaining": 39,
+      "remAB": 145,
+      "teamRemaining": 38,
       "trueTalent": 0.257,
       "projAVG": 0.258,
       "ci80": [
-        0.245,
+        0.246,
         0.271
       ],
       "pWinTitle": 0
@@ -5667,24 +5667,6 @@
       "pWinTitle": 0
     },
     {
-      "id": 671056,
-      "name": "Iván Herrera",
-      "team": "STL",
-      "pos": "DH",
-      "currentAVG": 0.248,
-      "H": 115,
-      "AB": 463,
-      "remAB": 142,
-      "teamRemaining": 38,
-      "trueTalent": 0.252,
-      "projAVG": 0.249,
-      "ci80": [
-        0.238,
-        0.261
-      ],
-      "pWinTitle": 0
-    },
-    {
       "id": 682998,
       "name": "Corbin Carroll",
       "team": "AZ",
@@ -5698,6 +5680,24 @@
       "projAVG": 0.249,
       "ci80": [
         0.237,
+        0.261
+      ],
+      "pWinTitle": 0
+    },
+    {
+      "id": 671056,
+      "name": "Iván Herrera",
+      "team": "STL",
+      "pos": "DH",
+      "currentAVG": 0.248,
+      "H": 115,
+      "AB": 464,
+      "remAB": 138,
+      "teamRemaining": 37,
+      "trueTalent": 0.251,
+      "projAVG": 0.249,
+      "ci80": [
+        0.238,
         0.261
       ],
       "pWinTitle": 0
@@ -5962,8 +5962,8 @@
       "currentAVG": 0.242,
       "H": 111,
       "AB": 459,
-      "remAB": 147,
-      "teamRemaining": 38,
+      "remAB": 143,
+      "teamRemaining": 37,
       "trueTalent": 0.244,
       "projAVG": 0.242,
       "ci80": [
@@ -6088,13 +6088,13 @@
       "currentAVG": 0.238,
       "H": 81,
       "AB": 340,
-      "remAB": 135,
-      "teamRemaining": 39,
+      "remAB": 132,
+      "teamRemaining": 38,
       "trueTalent": 0.241,
       "projAVG": 0.239,
       "ci80": [
         0.225,
-        0.255
+        0.254
       ],
       "pWinTitle": 0
     },
@@ -6106,13 +6106,13 @@
       "currentAVG": 0.236,
       "H": 99,
       "AB": 419,
-      "remAB": 136,
-      "teamRemaining": 38,
+      "remAB": 133,
+      "teamRemaining": 37,
       "trueTalent": 0.241,
       "projAVG": 0.237,
       "ci80": [
         0.225,
-        0.249
+        0.248
       ],
       "pWinTitle": 0
     },
@@ -6484,12 +6484,12 @@
       "currentAVG": 0.217,
       "H": 73,
       "AB": 337,
-      "remAB": 137,
-      "teamRemaining": 39,
+      "remAB": 133,
+      "teamRemaining": 38,
       "trueTalent": 0.222,
       "projAVG": 0.218,
       "ci80": [
-        0.2,
+        0.202,
         0.234
       ],
       "pWinTitle": 0
@@ -6735,7 +6735,7 @@
     "110": 124,
     "111": 124,
     "112": 125,
-    "113": 123,
+    "113": 124,
     "114": 125,
     "115": 124,
     "116": 124,
@@ -6749,7 +6749,7 @@
     "135": 125,
     "136": 125,
     "137": 124,
-    "138": 124,
+    "138": 125,
     "139": 123,
     "140": 125,
     "141": 126,
