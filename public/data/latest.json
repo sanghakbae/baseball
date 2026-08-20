@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-20T03:36:01.589Z",
+  "updatedAt": "2026-08-20T04:23:28.053Z",
   "season": 2026,
   "qualifiedCount": 140,
   "leagueMean": 0.257,
@@ -217,25 +217,54 @@
       "pos": "1B",
       "G": 124,
       "AB": 468,
-      "PA": 531,
+      "PA": 532,
       "R": 62,
       "H": 142,
       "B2": 30,
       "B3": 1,
       "HR": 15,
-      "RBI": 60,
+      "RBI": 61,
       "SB": 6,
       "BB": 55,
       "SO": 87,
       "AVG": 0.303,
-      "OBP": 0.377,
+      "OBP": 0.376,
       "SLG": 0.468,
-      "OPS": 0.845,
+      "OPS": 0.844,
       "rank": 8,
       "careerAVG": 0.3,
       "careerAB": 8582,
       "careerHits": 2573,
       "xBA": 0.3
+    },
+    {
+      "id": 664983,
+      "name": "Jake McCarthy",
+      "team": "COL",
+      "teamId": 115,
+      "teamName": "Rockies",
+      "pos": "LF",
+      "G": 112,
+      "AB": 404,
+      "PA": 439,
+      "R": 62,
+      "H": 119,
+      "B2": 26,
+      "B3": 7,
+      "HR": 13,
+      "RBI": 68,
+      "SB": 22,
+      "BB": 22,
+      "SO": 75,
+      "AVG": 0.295,
+      "OBP": 0.334,
+      "SLG": 0.49,
+      "OPS": 0.824,
+      "rank": 9,
+      "careerAVG": 0.268,
+      "careerAB": 1708,
+      "careerHits": 458,
+      "xBA": 0.274
     },
     {
       "id": 808982,
@@ -260,7 +289,7 @@
       "OBP": 0.329,
       "SLG": 0.435,
       "OPS": 0.764,
-      "rank": 9,
+      "rank": 10,
       "careerAVG": 0.276,
       "careerAB": 1144,
       "careerHits": 316,
@@ -289,7 +318,7 @@
       "OBP": 0.361,
       "SLG": 0.441,
       "OPS": 0.802,
-      "rank": 10,
+      "rank": 11,
       "careerAVG": 0.264,
       "careerAB": 1590,
       "careerHits": 419,
@@ -303,8 +332,8 @@
       "teamName": "Rockies",
       "pos": "1B",
       "G": 123,
-      "AB": 437,
-      "PA": 496,
+      "AB": 438,
+      "PA": 497,
       "R": 54,
       "H": 128,
       "B2": 25,
@@ -314,44 +343,15 @@
       "SB": 0,
       "BB": 48,
       "SO": 71,
-      "AVG": 0.293,
-      "OBP": 0.373,
-      "SLG": 0.449,
-      "OPS": 0.822,
-      "rank": 11,
-      "careerAVG": 0.293,
-      "careerAB": 437,
+      "AVG": 0.292,
+      "OBP": 0.372,
+      "SLG": 0.447,
+      "OPS": 0.819,
+      "rank": 12,
+      "careerAVG": 0.292,
+      "careerAB": 438,
       "careerHits": 128,
       "xBA": 0.255
-    },
-    {
-      "id": 664983,
-      "name": "Jake McCarthy",
-      "team": "COL",
-      "teamId": 115,
-      "teamName": "Rockies",
-      "pos": "LF",
-      "G": 112,
-      "AB": 403,
-      "PA": 438,
-      "R": 62,
-      "H": 118,
-      "B2": 26,
-      "B3": 7,
-      "HR": 13,
-      "RBI": 68,
-      "SB": 22,
-      "BB": 22,
-      "SO": 75,
-      "AVG": 0.293,
-      "OBP": 0.333,
-      "SLG": 0.489,
-      "OPS": 0.822,
-      "rank": 12,
-      "careerAVG": 0.268,
-      "careerAB": 1707,
-      "careerHits": 457,
-      "xBA": 0.274
     },
     {
       "id": 671739,
@@ -1146,7 +1146,7 @@
       "G": 127,
       "AB": 492,
       "PA": 548,
-      "R": 71,
+      "R": 72,
       "H": 134,
       "B2": 25,
       "B3": 2,
@@ -1456,35 +1456,6 @@
       "xBA": 0.275
     },
     {
-      "id": 650489,
-      "name": "Willi Castro",
-      "team": "COL",
-      "teamId": 115,
-      "teamName": "Rockies",
-      "pos": "2B",
-      "G": 109,
-      "AB": 385,
-      "PA": 429,
-      "R": 60,
-      "H": 102,
-      "B2": 18,
-      "B3": 1,
-      "HR": 14,
-      "RBI": 52,
-      "SB": 9,
-      "BB": 37,
-      "SO": 115,
-      "AVG": 0.265,
-      "OBP": 0.336,
-      "SLG": 0.426,
-      "OPS": 0.762,
-      "rank": 51,
-      "careerAVG": 0.247,
-      "careerAB": 2710,
-      "careerHits": 670,
-      "xBA": 0.234
-    },
-    {
       "id": 691720,
       "name": "Kyle Karros",
       "team": "COL",
@@ -1507,11 +1478,40 @@
       "OBP": 0.361,
       "SLG": 0.424,
       "OPS": 0.785,
-      "rank": 52,
+      "rank": 51,
       "careerAVG": 0.254,
       "careerAB": 477,
       "careerHits": 121,
       "xBA": 0.256
+    },
+    {
+      "id": 650489,
+      "name": "Willi Castro",
+      "team": "COL",
+      "teamId": 115,
+      "teamName": "Rockies",
+      "pos": "2B",
+      "G": 109,
+      "AB": 386,
+      "PA": 430,
+      "R": 60,
+      "H": 102,
+      "B2": 18,
+      "B3": 1,
+      "HR": 14,
+      "RBI": 52,
+      "SB": 9,
+      "BB": 37,
+      "SO": 116,
+      "AVG": 0.264,
+      "OBP": 0.335,
+      "SLG": 0.425,
+      "OPS": 0.76,
+      "rank": 52,
+      "careerAVG": 0.247,
+      "careerAB": 2711,
+      "careerHits": 670,
+      "xBA": 0.234
     },
     {
       "id": 680757,
@@ -3232,8 +3232,8 @@
       "teamName": "Dodgers",
       "pos": "RF",
       "G": 120,
-      "AB": 426,
-      "PA": 492,
+      "AB": 427,
+      "PA": 493,
       "R": 68,
       "H": 99,
       "B2": 19,
@@ -3245,11 +3245,11 @@
       "SO": 92,
       "AVG": 0.232,
       "OBP": 0.327,
-      "SLG": 0.369,
-      "OPS": 0.696,
+      "SLG": 0.368,
+      "OPS": 0.695,
       "rank": 112,
       "careerAVG": 0.267,
-      "careerAB": 3167,
+      "careerAB": 3168,
       "careerHits": 847,
       "xBA": 0.255
     },
@@ -4083,7 +4083,7 @@
         0.306,
         0.33
       ],
-      "pWinTitle": 0.3396
+      "pWinTitle": 0.3398
     },
     {
       "id": 670541,
@@ -4101,7 +4101,7 @@
         0.305,
         0.329
       ],
-      "pWinTitle": 0.30835
+      "pWinTitle": 0.3072
     },
     {
       "id": 693304,
@@ -4119,7 +4119,7 @@
         0.296,
         0.32
       ],
-      "pWinTitle": 0.0751
+      "pWinTitle": 0.07565
     },
     {
       "id": 672515,
@@ -4137,7 +4137,7 @@
         0.291,
         0.321
       ],
-      "pWinTitle": 0.0722
+      "pWinTitle": 0.0724
     },
     {
       "id": 802415,
@@ -4155,7 +4155,7 @@
         0.292,
         0.322
       ],
-      "pWinTitle": 0.0649
+      "pWinTitle": 0.0646
     },
     {
       "id": 672640,
@@ -4173,7 +4173,7 @@
         0.295,
         0.318
       ],
-      "pWinTitle": 0.04715
+      "pWinTitle": 0.04745
     },
     {
       "id": 650490,
@@ -4191,7 +4191,7 @@
         0.294,
         0.317
       ],
-      "pWinTitle": 0.0425
+      "pWinTitle": 0.04245
     },
     {
       "id": 518692,
@@ -4201,15 +4201,15 @@
       "currentAVG": 0.303,
       "H": 142,
       "AB": 468,
-      "remAB": 132,
-      "teamRemaining": 35,
+      "remAB": 128,
+      "teamRemaining": 34,
       "trueTalent": 0.302,
       "projAVG": 0.303,
       "ci80": [
         0.29,
         0.315
       ],
-      "pWinTitle": 0.0272
+      "pWinTitle": 0.0275
     },
     {
       "id": 673962,
@@ -4224,10 +4224,28 @@
       "trueTalent": 0.287,
       "projAVG": 0.292,
       "ci80": [
-        0.276,
+        0.278,
         0.307
       ],
-      "pWinTitle": 0.00765
+      "pWinTitle": 0.00695
+    },
+    {
+      "id": 664983,
+      "name": "Jake McCarthy",
+      "team": "COL",
+      "pos": "LF",
+      "currentAVG": 0.295,
+      "H": 119,
+      "AB": 404,
+      "remAB": 126,
+      "teamRemaining": 35,
+      "trueTalent": 0.287,
+      "projAVG": 0.293,
+      "ci80": [
+        0.279,
+        0.308
+      ],
+      "pWinTitle": 0.00435
     },
     {
       "id": 808982,
@@ -4242,46 +4260,10 @@
       "trueTalent": 0.29,
       "projAVG": 0.293,
       "ci80": [
-        0.281,
-        0.307
-      ],
-      "pWinTitle": 0.0039
-    },
-    {
-      "id": 664983,
-      "name": "Jake McCarthy",
-      "team": "COL",
-      "pos": "LF",
-      "currentAVG": 0.293,
-      "H": 118,
-      "AB": 403,
-      "remAB": 130,
-      "teamRemaining": 36,
-      "trueTalent": 0.285,
-      "projAVG": 0.291,
-      "ci80": [
-        0.276,
-        0.304
-      ],
-      "pWinTitle": 0.0038
-    },
-    {
-      "id": 681198,
-      "name": "TJ Rumfield",
-      "team": "COL",
-      "pos": "1B",
-      "currentAVG": 0.293,
-      "H": 128,
-      "AB": 437,
-      "remAB": 128,
-      "teamRemaining": 36,
-      "trueTalent": 0.285,
-      "projAVG": 0.291,
-      "ci80": [
         0.28,
-        0.304
+        0.306
       ],
-      "pWinTitle": 0.0019
+      "pWinTitle": 0.00425
     },
     {
       "id": 660271,
@@ -4291,15 +4273,33 @@
       "currentAVG": 0.291,
       "H": 133,
       "AB": 457,
-      "remAB": 131,
-      "teamRemaining": 35,
+      "remAB": 127,
+      "teamRemaining": 34,
       "trueTalent": 0.291,
+      "projAVG": 0.291,
+      "ci80": [
+        0.277,
+        0.303
+      ],
+      "pWinTitle": 0.0019
+    },
+    {
+      "id": 681198,
+      "name": "TJ Rumfield",
+      "team": "COL",
+      "pos": "1B",
+      "currentAVG": 0.292,
+      "H": 128,
+      "AB": 438,
+      "remAB": 125,
+      "teamRemaining": 35,
+      "trueTalent": 0.285,
       "projAVG": 0.291,
       "ci80": [
         0.277,
         0.304
       ],
-      "pWinTitle": 0.0018
+      "pWinTitle": 0.00155
     },
     {
       "id": 671739,
@@ -4317,7 +4317,7 @@
         0.277,
         0.304
       ],
-      "pWinTitle": 0.0013
+      "pWinTitle": 0.00125
     },
     {
       "id": 800050,
@@ -4335,7 +4335,7 @@
         0.271,
         0.299
       ],
-      "pWinTitle": 0.0007
+      "pWinTitle": 0.00075
     },
     {
       "id": 676475,
@@ -4389,7 +4389,7 @@
         0.269,
         0.296
       ],
-      "pWinTitle": 0.00035
+      "pWinTitle": 0.0003
     },
     {
       "id": 677951,
@@ -4410,6 +4410,24 @@
       "pWinTitle": 0.0002
     },
     {
+      "id": 691023,
+      "name": "Jordan Walker",
+      "team": "STL",
+      "pos": "RF",
+      "currentAVG": 0.288,
+      "H": 139,
+      "AB": 482,
+      "remAB": 132,
+      "teamRemaining": 34,
+      "trueTalent": 0.282,
+      "projAVG": 0.287,
+      "ci80": [
+        0.275,
+        0.3
+      ],
+      "pWinTitle": 0.00015
+    },
+    {
       "id": 575929,
       "name": "Willson Contreras",
       "team": "BOS",
@@ -4426,24 +4444,6 @@
         0.297
       ],
       "pWinTitle": 0.00015
-    },
-    {
-      "id": 691023,
-      "name": "Jordan Walker",
-      "team": "STL",
-      "pos": "RF",
-      "currentAVG": 0.288,
-      "H": 139,
-      "AB": 482,
-      "remAB": 132,
-      "teamRemaining": 34,
-      "trueTalent": 0.282,
-      "projAVG": 0.287,
-      "ci80": [
-        0.275,
-        0.3
-      ],
-      "pWinTitle": 0.0001
     },
     {
       "id": 666018,
@@ -4777,13 +4777,13 @@
       "currentAVG": 0.272,
       "H": 134,
       "AB": 492,
-      "remAB": 136,
-      "teamRemaining": 35,
+      "remAB": 132,
+      "teamRemaining": 34,
       "trueTalent": 0.271,
       "projAVG": 0.272,
       "ci80": [
         0.261,
-        0.283
+        0.284
       ],
       "pWinTitle": 0
     },
@@ -5011,12 +5011,12 @@
       "currentAVG": 0.265,
       "H": 90,
       "AB": 340,
-      "remAB": 109,
-      "teamRemaining": 36,
+      "remAB": 106,
+      "teamRemaining": 35,
       "trueTalent": 0.261,
       "projAVG": 0.264,
       "ci80": [
-        0.252,
+        0.251,
         0.278
       ],
       "pWinTitle": 0
@@ -5058,24 +5058,6 @@
       "pWinTitle": 0
     },
     {
-      "id": 650489,
-      "name": "Willi Castro",
-      "team": "COL",
-      "pos": "2B",
-      "currentAVG": 0.265,
-      "H": 102,
-      "AB": 385,
-      "remAB": 127,
-      "teamRemaining": 36,
-      "trueTalent": 0.256,
-      "projAVG": 0.263,
-      "ci80": [
-        0.25,
-        0.277
-      ],
-      "pWinTitle": 0
-    },
-    {
       "id": 669127,
       "name": "Shea Langeliers",
       "team": "ATH",
@@ -5090,6 +5072,24 @@
       "ci80": [
         0.247,
         0.276
+      ],
+      "pWinTitle": 0
+    },
+    {
+      "id": 650489,
+      "name": "Willi Castro",
+      "team": "COL",
+      "pos": "2B",
+      "currentAVG": 0.264,
+      "H": 102,
+      "AB": 386,
+      "remAB": 124,
+      "teamRemaining": 35,
+      "trueTalent": 0.256,
+      "projAVG": 0.262,
+      "ci80": [
+        0.251,
+        0.275
       ],
       "pWinTitle": 0
     },
@@ -5533,12 +5533,12 @@
       "currentAVG": 0.251,
       "H": 97,
       "AB": 386,
-      "remAB": 114,
-      "teamRemaining": 35,
+      "remAB": 111,
+      "teamRemaining": 34,
       "trueTalent": 0.246,
       "projAVG": 0.25,
       "ci80": [
-        0.238,
+        0.237,
         0.264
       ],
       "pWinTitle": 0
@@ -5551,13 +5551,13 @@
       "currentAVG": 0.251,
       "H": 104,
       "AB": 414,
-      "remAB": 134,
-      "teamRemaining": 36,
+      "remAB": 131,
+      "teamRemaining": 35,
       "trueTalent": 0.247,
       "projAVG": 0.25,
       "ci80": [
         0.239,
-        0.263
+        0.262
       ],
       "pWinTitle": 0
     },
@@ -6054,13 +6054,13 @@
       "pos": "RF",
       "currentAVG": 0.232,
       "H": 99,
-      "AB": 426,
-      "remAB": 124,
-      "teamRemaining": 35,
+      "AB": 427,
+      "remAB": 121,
+      "teamRemaining": 34,
       "trueTalent": 0.241,
       "projAVG": 0.234,
       "ci80": [
-        0.222,
+        0.223,
         0.245
       ],
       "pWinTitle": 0
@@ -6577,12 +6577,12 @@
       "currentAVG": 0.205,
       "H": 79,
       "AB": 386,
-      "remAB": 119,
-      "teamRemaining": 36,
+      "remAB": 115,
+      "teamRemaining": 35,
       "trueTalent": 0.214,
       "projAVG": 0.207,
       "ci80": [
-        0.192,
+        0.194,
         0.22
       ],
       "pWinTitle": 0
@@ -6596,11 +6596,11 @@
     "112": 128,
     "113": 127,
     "114": 127,
-    "115": 126,
+    "115": 127,
     "116": 127,
     "117": 127,
     "118": 128,
-    "119": 127,
+    "119": 128,
     "120": 128,
     "121": 128,
     "133": 127,
