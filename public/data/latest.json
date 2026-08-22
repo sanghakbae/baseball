@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-22T05:15:37.798Z",
+  "updatedAt": "2026-08-22T06:17:27.331Z",
   "season": 2026,
   "qualifiedCount": 137,
   "leagueMean": 0.257,
@@ -71,8 +71,8 @@
       "teamName": "Pirates",
       "pos": "3B",
       "G": 121,
-      "AB": 455,
-      "PA": 498,
+      "AB": 456,
+      "PA": 499,
       "R": 66,
       "H": 142,
       "B2": 22,
@@ -81,14 +81,14 @@
       "RBI": 55,
       "SB": 5,
       "BB": 33,
-      "SO": 82,
-      "AVG": 0.312,
+      "SO": 83,
+      "AVG": 0.311,
       "OBP": 0.369,
       "SLG": 0.404,
       "OPS": 0.773,
       "rank": 3,
       "careerAVG": 0.276,
-      "careerAB": 1310,
+      "careerAB": 1311,
       "careerHits": 362,
       "xBA": 0.283
     },
@@ -3225,35 +3225,6 @@
       "xBA": 0.202
     },
     {
-      "id": 663656,
-      "name": "Kyle Tucker",
-      "team": "LAD",
-      "teamId": 119,
-      "teamName": "Dodgers",
-      "pos": "RF",
-      "G": 121,
-      "AB": 430,
-      "PA": 497,
-      "R": 68,
-      "H": 99,
-      "B2": 19,
-      "B3": 3,
-      "HR": 11,
-      "RBI": 55,
-      "SB": 7,
-      "BB": 60,
-      "SO": 92,
-      "AVG": 0.23,
-      "OBP": 0.326,
-      "SLG": 0.365,
-      "OPS": 0.691,
-      "rank": 112,
-      "careerAVG": 0.267,
-      "careerAB": 3171,
-      "careerHits": 847,
-      "xBA": 0.256
-    },
-    {
       "id": 672960,
       "name": "Kazuma Okamoto",
       "team": "TOR",
@@ -3276,11 +3247,40 @@
       "OBP": 0.301,
       "SLG": 0.438,
       "OPS": 0.739,
-      "rank": 113,
+      "rank": 112,
       "careerAVG": 0.23,
       "careerAB": 461,
       "careerHits": 106,
       "xBA": 0.217
+    },
+    {
+      "id": 663656,
+      "name": "Kyle Tucker",
+      "team": "LAD",
+      "teamId": 119,
+      "teamName": "Dodgers",
+      "pos": "RF",
+      "G": 121,
+      "AB": 431,
+      "PA": 498,
+      "R": 68,
+      "H": 99,
+      "B2": 19,
+      "B3": 3,
+      "HR": 11,
+      "RBI": 55,
+      "SB": 7,
+      "BB": 60,
+      "SO": 92,
+      "AVG": 0.23,
+      "OBP": 0.325,
+      "SLG": 0.364,
+      "OPS": 0.689,
+      "rank": 113,
+      "careerAVG": 0.267,
+      "careerAB": 3172,
+      "careerHits": 847,
+      "xBA": 0.256
     },
     {
       "id": 662139,
@@ -3996,7 +3996,7 @@
         0.308,
         0.331
       ],
-      "pWinTitle": 0.3813
+      "pWinTitle": 0.3892
     },
     {
       "id": 650333,
@@ -4014,25 +4014,7 @@
         0.309,
         0.333
       ],
-      "pWinTitle": 0.375
-    },
-    {
-      "id": 693304,
-      "name": "Nick Gonzales",
-      "team": "PIT",
-      "pos": "3B",
-      "currentAVG": 0.312,
-      "H": 142,
-      "AB": 455,
-      "remAB": 124,
-      "teamRemaining": 33,
-      "trueTalent": 0.302,
-      "projAVG": 0.31,
-      "ci80": [
-        0.299,
-        0.323
-      ],
-      "pWinTitle": 0.07585
+      "pWinTitle": 0.3782
     },
     {
       "id": 672515,
@@ -4050,7 +4032,25 @@
         0.292,
         0.322
       ],
-      "pWinTitle": 0.06365
+      "pWinTitle": 0.0646
+    },
+    {
+      "id": 693304,
+      "name": "Nick Gonzales",
+      "team": "PIT",
+      "pos": "3B",
+      "currentAVG": 0.311,
+      "H": 142,
+      "AB": 456,
+      "remAB": 121,
+      "teamRemaining": 32,
+      "trueTalent": 0.302,
+      "projAVG": 0.309,
+      "ci80": [
+        0.298,
+        0.321
+      ],
+      "pWinTitle": 0.06185
     },
     {
       "id": 802415,
@@ -4068,7 +4068,7 @@
         0.295,
         0.318
       ],
-      "pWinTitle": 0.03855
+      "pWinTitle": 0.04035
     },
     {
       "id": 672640,
@@ -4086,7 +4086,7 @@
         0.294,
         0.318
       ],
-      "pWinTitle": 0.0275
+      "pWinTitle": 0.02825
     },
     {
       "id": 650490,
@@ -4104,7 +4104,7 @@
         0.292,
         0.315
       ],
-      "pWinTitle": 0.02305
+      "pWinTitle": 0.0231
     },
     {
       "id": 518692,
@@ -4114,15 +4114,15 @@
       "currentAVG": 0.3,
       "H": 142,
       "AB": 473,
-      "remAB": 129,
-      "teamRemaining": 34,
+      "remAB": 125,
+      "teamRemaining": 33,
       "trueTalent": 0.3,
       "projAVG": 0.3,
       "ci80": [
         0.289,
-        0.312
+        0.313
       ],
-      "pWinTitle": 0.01005
+      "pWinTitle": 0.0094
     },
     {
       "id": 660271,
@@ -4132,15 +4132,15 @@
       "currentAVG": 0.291,
       "H": 134,
       "AB": 460,
-      "remAB": 127,
-      "teamRemaining": 34,
+      "remAB": 123,
+      "teamRemaining": 33,
       "trueTalent": 0.291,
       "projAVG": 0.291,
       "ci80": [
         0.278,
-        0.303
+        0.304
       ],
-      "pWinTitle": 0.0009
+      "pWinTitle": 0.0008
     },
     {
       "id": 671739,
@@ -4176,7 +4176,7 @@
         0.28,
         0.304
       ],
-      "pWinTitle": 0.0006
+      "pWinTitle": 0.0007
     },
     {
       "id": 664983,
@@ -4618,8 +4618,8 @@
       "currentAVG": 0.272,
       "H": 134,
       "AB": 493,
-      "remAB": 131,
-      "teamRemaining": 34,
+      "remAB": 127,
+      "teamRemaining": 33,
       "trueTalent": 0.271,
       "projAVG": 0.272,
       "ci80": [
@@ -5014,12 +5014,12 @@
       "currentAVG": 0.263,
       "H": 126,
       "AB": 479,
-      "remAB": 122,
-      "teamRemaining": 33,
+      "remAB": 118,
+      "teamRemaining": 32,
       "trueTalent": 0.261,
       "projAVG": 0.263,
       "ci80": [
-        0.251,
+        0.253,
         0.275
       ],
       "pWinTitle": 0
@@ -5320,8 +5320,8 @@
       "currentAVG": 0.254,
       "H": 122,
       "AB": 480,
-      "remAB": 131,
-      "teamRemaining": 33,
+      "remAB": 127,
+      "teamRemaining": 32,
       "trueTalent": 0.251,
       "projAVG": 0.254,
       "ci80": [
@@ -5374,12 +5374,12 @@
       "currentAVG": 0.252,
       "H": 98,
       "AB": 389,
-      "remAB": 111,
-      "teamRemaining": 34,
+      "remAB": 108,
+      "teamRemaining": 33,
       "trueTalent": 0.247,
       "projAVG": 0.251,
       "ci80": [
-        0.238,
+        0.239,
         0.264
       ],
       "pWinTitle": 0
@@ -5967,14 +5967,14 @@
       "pos": "RF",
       "currentAVG": 0.23,
       "H": 99,
-      "AB": 430,
-      "remAB": 121,
-      "teamRemaining": 34,
+      "AB": 431,
+      "remAB": 118,
+      "teamRemaining": 33,
       "trueTalent": 0.24,
       "projAVG": 0.232,
       "ci80": [
         0.22,
-        0.245
+        0.244
       ],
       "pWinTitle": 0
     },
@@ -6009,7 +6009,7 @@
       "trueTalent": 0.229,
       "projAVG": 0.23,
       "ci80": [
-        0.219,
+        0.218,
         0.24
       ],
       "pWinTitle": 0
@@ -6459,11 +6459,11 @@
     "116": 128,
     "117": 129,
     "118": 130,
-    "119": 128,
+    "119": 129,
     "120": 130,
     "121": 129,
     "133": 129,
-    "134": 129,
+    "134": 130,
     "135": 129,
     "136": 129,
     "137": 128,
