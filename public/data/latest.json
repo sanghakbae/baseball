@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-22T17:09:42.655Z",
+  "updatedAt": "2026-08-22T18:10:50.904Z",
   "season": 2026,
   "qualifiedCount": 137,
   "leagueMean": 0.257,
@@ -592,9 +592,9 @@
       "teamId": 141,
       "teamName": "Blue Jays",
       "pos": "2B",
-      "G": 126,
-      "AB": 481,
-      "PA": 506,
+      "G": 127,
+      "AB": 482,
+      "PA": 507,
       "R": 54,
       "H": 137,
       "B2": 28,
@@ -604,13 +604,13 @@
       "SB": 5,
       "BB": 18,
       "SO": 49,
-      "AVG": 0.285,
+      "AVG": 0.284,
       "OBP": 0.31,
-      "SLG": 0.403,
-      "OPS": 0.713,
+      "SLG": 0.402,
+      "OPS": 0.712,
       "rank": 21,
       "careerAVG": 0.267,
-      "careerAB": 1794,
+      "careerAB": 1795,
       "careerHits": 479,
       "xBA": 0.252
     },
@@ -824,9 +824,9 @@
       "teamId": 147,
       "teamName": "Yankees",
       "pos": "1B",
-      "G": 119,
-      "AB": 413,
-      "PA": 434,
+      "G": 120,
+      "AB": 414,
+      "PA": 435,
       "R": 53,
       "H": 115,
       "B2": 23,
@@ -835,14 +835,14 @@
       "RBI": 80,
       "SB": 4,
       "BB": 19,
-      "SO": 73,
+      "SO": 74,
       "AVG": 0.278,
-      "OBP": 0.309,
-      "SLG": 0.54,
-      "OPS": 0.849,
+      "OBP": 0.308,
+      "SLG": 0.539,
+      "OPS": 0.847,
       "rank": 29,
       "careerAVG": 0.268,
-      "careerAB": 2578,
+      "careerAB": 2579,
       "careerHits": 691,
       "xBA": 0.285
     },
@@ -1688,35 +1688,6 @@
       "xBA": 0.3
     },
     {
-      "id": 665489,
-      "name": "Vladimir Guerrero Jr.",
-      "team": "TOR",
-      "teamId": 141,
-      "teamName": "Blue Jays",
-      "pos": "1B",
-      "G": 115,
-      "AB": 430,
-      "PA": 486,
-      "R": 61,
-      "H": 113,
-      "B2": 19,
-      "B3": 0,
-      "HR": 7,
-      "RBI": 46,
-      "SB": 7,
-      "BB": 47,
-      "SO": 65,
-      "AVG": 0.263,
-      "OBP": 0.337,
-      "SLG": 0.356,
-      "OPS": 0.693,
-      "rank": 59,
-      "careerAVG": 0.286,
-      "careerAB": 4164,
-      "careerHits": 1190,
-      "xBA": 0.282
-    },
-    {
       "id": 670623,
       "name": "Isaac Paredes",
       "team": "HOU",
@@ -1739,11 +1710,40 @@
       "OBP": 0.356,
       "SLG": 0.426,
       "OPS": 0.782,
-      "rank": 60,
+      "rank": 59,
       "careerAVG": 0.241,
       "careerAB": 2361,
       "careerHits": 570,
       "xBA": 0.251
+    },
+    {
+      "id": 665489,
+      "name": "Vladimir Guerrero Jr.",
+      "team": "TOR",
+      "teamId": 141,
+      "teamName": "Blue Jays",
+      "pos": "1B",
+      "G": 116,
+      "AB": 431,
+      "PA": 487,
+      "R": 62,
+      "H": 113,
+      "B2": 19,
+      "B3": 0,
+      "HR": 7,
+      "RBI": 46,
+      "SB": 7,
+      "BB": 47,
+      "SO": 65,
+      "AVG": 0.262,
+      "OBP": 0.337,
+      "SLG": 0.355,
+      "OPS": 0.692,
+      "rank": 60,
+      "careerAVG": 0.286,
+      "careerAB": 4165,
+      "careerHits": 1190,
+      "xBA": 0.282
     },
     {
       "id": 668930,
@@ -2390,9 +2390,9 @@
       "teamId": 147,
       "teamName": "Yankees",
       "pos": "DH",
-      "G": 123,
-      "AB": 457,
-      "PA": 527,
+      "G": 124,
+      "AB": 458,
+      "PA": 528,
       "R": 78,
       "H": 114,
       "B2": 20,
@@ -2404,11 +2404,11 @@
       "SO": 132,
       "AVG": 0.249,
       "OBP": 0.345,
-      "SLG": 0.53,
-      "OPS": 0.875,
+      "SLG": 0.528,
+      "OPS": 0.873,
       "rank": 83,
-      "careerAVG": 0.241,
-      "careerAB": 1076,
+      "careerAVG": 0.24,
+      "careerAB": 1077,
       "careerHits": 259,
       "xBA": 0.261
     },
@@ -3022,6 +3022,35 @@
       "xBA": 0.258
     },
     {
+      "id": 543807,
+      "name": "George Springer",
+      "team": "TOR",
+      "teamId": 141,
+      "teamName": "Blue Jays",
+      "pos": "DH",
+      "G": 99,
+      "AB": 363,
+      "PA": 411,
+      "R": 45,
+      "H": 86,
+      "B2": 15,
+      "B3": 2,
+      "HR": 12,
+      "RBI": 41,
+      "SB": 10,
+      "BB": 40,
+      "SO": 77,
+      "AVG": 0.237,
+      "OBP": 0.316,
+      "SLG": 0.388,
+      "OPS": 0.704,
+      "rank": 105,
+      "careerAVG": 0.265,
+      "careerAB": 5918,
+      "careerHits": 1566,
+      "xBA": 0.229
+    },
+    {
       "id": 665019,
       "name": "Kody Clemens",
       "team": "MIN",
@@ -3044,7 +3073,7 @@
       "OBP": 0.293,
       "SLG": 0.469,
       "OPS": 0.762,
-      "rank": 105,
+      "rank": 106,
       "careerAVG": 0.217,
       "careerAB": 1132,
       "careerHits": 246,
@@ -3073,7 +3102,7 @@
       "OBP": 0.379,
       "SLG": 0.43,
       "OPS": 0.809,
-      "rank": 106,
+      "rank": 107,
       "careerAVG": 0.29,
       "careerAB": 6365,
       "careerHits": 1848,
@@ -3102,7 +3131,7 @@
       "OBP": 0.336,
       "SLG": 0.377,
       "OPS": 0.713,
-      "rank": 107,
+      "rank": 108,
       "careerAVG": 0.277,
       "careerAB": 6323,
       "careerHits": 1751,
@@ -3131,40 +3160,11 @@
       "OBP": 0.295,
       "SLG": 0.416,
       "OPS": 0.711,
-      "rank": 108,
+      "rank": 109,
       "careerAVG": 0.245,
       "careerAB": 2036,
       "careerHits": 498,
       "xBA": 0.23
-    },
-    {
-      "id": 543807,
-      "name": "George Springer",
-      "team": "TOR",
-      "teamId": 141,
-      "teamName": "Blue Jays",
-      "pos": "DH",
-      "G": 98,
-      "AB": 362,
-      "PA": 410,
-      "R": 45,
-      "H": 85,
-      "B2": 15,
-      "B3": 2,
-      "HR": 12,
-      "RBI": 40,
-      "SB": 10,
-      "BB": 40,
-      "SO": 77,
-      "AVG": 0.235,
-      "OBP": 0.314,
-      "SLG": 0.387,
-      "OPS": 0.701,
-      "rank": 109,
-      "careerAVG": 0.264,
-      "careerAB": 5917,
-      "careerHits": 1565,
-      "xBA": 0.229
     },
     {
       "id": 572233,
@@ -3225,35 +3225,6 @@
       "xBA": 0.203
     },
     {
-      "id": 672960,
-      "name": "Kazuma Okamoto",
-      "team": "TOR",
-      "teamId": 141,
-      "teamName": "Blue Jays",
-      "pos": "3B",
-      "G": 125,
-      "AB": 461,
-      "PA": 511,
-      "R": 67,
-      "H": 106,
-      "B2": 18,
-      "B3": 0,
-      "HR": 26,
-      "RBI": 74,
-      "SB": 1,
-      "BB": 42,
-      "SO": 155,
-      "AVG": 0.23,
-      "OBP": 0.301,
-      "SLG": 0.438,
-      "OPS": 0.739,
-      "rank": 112,
-      "careerAVG": 0.23,
-      "careerAB": 461,
-      "careerHits": 106,
-      "xBA": 0.218
-    },
-    {
       "id": 663656,
       "name": "Kyle Tucker",
       "team": "LAD",
@@ -3276,11 +3247,40 @@
       "OBP": 0.325,
       "SLG": 0.364,
       "OPS": 0.689,
-      "rank": 113,
+      "rank": 112,
       "careerAVG": 0.267,
       "careerAB": 3172,
       "careerHits": 847,
       "xBA": 0.255
+    },
+    {
+      "id": 672960,
+      "name": "Kazuma Okamoto",
+      "team": "TOR",
+      "teamId": 141,
+      "teamName": "Blue Jays",
+      "pos": "3B",
+      "G": 126,
+      "AB": 462,
+      "PA": 512,
+      "R": 67,
+      "H": 106,
+      "B2": 18,
+      "B3": 0,
+      "HR": 26,
+      "RBI": 74,
+      "SB": 1,
+      "BB": 42,
+      "SO": 156,
+      "AVG": 0.229,
+      "OBP": 0.301,
+      "SLG": 0.437,
+      "OPS": 0.738,
+      "rank": 113,
+      "careerAVG": 0.229,
+      "careerAB": 462,
+      "careerHits": 106,
+      "xBA": 0.218
     },
     {
       "id": 662139,
@@ -3463,22 +3463,22 @@
       "teamId": 147,
       "teamName": "Yankees",
       "pos": "CF",
-      "G": 108,
+      "G": 109,
       "AB": 376,
-      "PA": 433,
+      "PA": 434,
       "R": 62,
       "H": 84,
       "B2": 19,
       "B3": 2,
       "HR": 17,
       "RBI": 54,
-      "SB": 8,
-      "BB": 53,
+      "SB": 9,
+      "BB": 54,
       "SO": 76,
       "AVG": 0.223,
-      "OBP": 0.317,
+      "OBP": 0.319,
       "SLG": 0.42,
-      "OPS": 0.737,
+      "OPS": 0.739,
       "rank": 120,
       "careerAVG": 0.218,
       "careerAB": 2802,
@@ -3811,7 +3811,7 @@
       "teamId": 147,
       "teamName": "Yankees",
       "pos": "2B",
-      "G": 119,
+      "G": 120,
       "AB": 415,
       "PA": 466,
       "R": 58,
@@ -3996,7 +3996,7 @@
         0.308,
         0.331
       ],
-      "pWinTitle": 0.3895
+      "pWinTitle": 0.38985
     },
     {
       "id": 650333,
@@ -4014,7 +4014,7 @@
         0.309,
         0.333
       ],
-      "pWinTitle": 0.3799
+      "pWinTitle": 0.3795
     },
     {
       "id": 672515,
@@ -4032,7 +4032,7 @@
         0.292,
         0.322
       ],
-      "pWinTitle": 0.0656
+      "pWinTitle": 0.0657
     },
     {
       "id": 693304,
@@ -4050,7 +4050,7 @@
         0.298,
         0.321
       ],
-      "pWinTitle": 0.0615
+      "pWinTitle": 0.06145
     },
     {
       "id": 802415,
@@ -4068,7 +4068,7 @@
         0.295,
         0.318
       ],
-      "pWinTitle": 0.0392
+      "pWinTitle": 0.03925
     },
     {
       "id": 672640,
@@ -4086,7 +4086,7 @@
         0.294,
         0.318
       ],
-      "pWinTitle": 0.02765
+      "pWinTitle": 0.0275
     },
     {
       "id": 650490,
@@ -4104,7 +4104,7 @@
         0.292,
         0.315
       ],
-      "pWinTitle": 0.0225
+      "pWinTitle": 0.0227
     },
     {
       "id": 518692,
@@ -4122,7 +4122,7 @@
         0.289,
         0.313
       ],
-      "pWinTitle": 0.00925
+      "pWinTitle": 0.00915
     },
     {
       "id": 660271,
@@ -4327,15 +4327,15 @@
       "name": "Ernie Clement",
       "team": "TOR",
       "pos": "2B",
-      "currentAVG": 0.285,
+      "currentAVG": 0.284,
       "H": 137,
-      "AB": 481,
-      "remAB": 122,
+      "AB": 482,
+      "remAB": 121,
       "teamRemaining": 32,
       "trueTalent": 0.277,
       "projAVG": 0.283,
       "ci80": [
-        0.272,
+        0.27,
         0.295
       ],
       "pWinTitle": 0.00005
@@ -4473,8 +4473,8 @@
       "pos": "1B",
       "currentAVG": 0.278,
       "H": 115,
-      "AB": 413,
-      "remAB": 118,
+      "AB": 414,
+      "remAB": 117,
       "teamRemaining": 34,
       "trueTalent": 0.278,
       "projAVG": 0.278,
@@ -4975,16 +4975,16 @@
       "name": "Vladimir Guerrero Jr.",
       "team": "TOR",
       "pos": "1B",
-      "currentAVG": 0.263,
+      "currentAVG": 0.262,
       "H": 113,
-      "AB": 430,
-      "remAB": 120,
+      "AB": 431,
+      "remAB": 119,
       "teamRemaining": 32,
       "trueTalent": 0.269,
       "projAVG": 0.264,
       "ci80": [
         0.253,
-        0.275
+        0.276
       ],
       "pWinTitle": 0
     },
@@ -5074,7 +5074,7 @@
       "projAVG": 0.261,
       "ci80": [
         0.25,
-        0.273
+        0.272
       ],
       "pWinTitle": 0
     },
@@ -5439,24 +5439,6 @@
       "pWinTitle": 0
     },
     {
-      "id": 700250,
-      "name": "Ben Rice",
-      "team": "NYY",
-      "pos": "DH",
-      "currentAVG": 0.249,
-      "H": 114,
-      "AB": 457,
-      "remAB": 126,
-      "teamRemaining": 34,
-      "trueTalent": 0.25,
-      "projAVG": 0.25,
-      "ci80": [
-        0.238,
-        0.261
-      ],
-      "pWinTitle": 0
-    },
-    {
       "id": 645277,
       "name": "Ozzie Albies",
       "team": "ATL",
@@ -5470,6 +5452,24 @@
       "projAVG": 0.249,
       "ci80": [
         0.239,
+        0.26
+      ],
+      "pWinTitle": 0
+    },
+    {
+      "id": 700250,
+      "name": "Ben Rice",
+      "team": "NYY",
+      "pos": "DH",
+      "currentAVG": 0.249,
+      "H": 114,
+      "AB": 458,
+      "remAB": 126,
+      "teamRemaining": 34,
+      "trueTalent": 0.25,
+      "projAVG": 0.249,
+      "ci80": [
+        0.238,
         0.26
       ],
       "pWinTitle": 0
@@ -5847,8 +5847,8 @@
       "trueTalent": 0.251,
       "projAVG": 0.239,
       "ci80": [
-        0.224,
-        0.253
+        0.226,
+        0.251
       ],
       "pWinTitle": 0
     },
@@ -5889,6 +5889,24 @@
       "pWinTitle": 0
     },
     {
+      "id": 543807,
+      "name": "George Springer",
+      "team": "TOR",
+      "pos": "DH",
+      "currentAVG": 0.237,
+      "H": 86,
+      "AB": 363,
+      "remAB": 117,
+      "teamRemaining": 32,
+      "trueTalent": 0.24,
+      "projAVG": 0.238,
+      "ci80": [
+        0.225,
+        0.252
+      ],
+      "pWinTitle": 0
+    },
+    {
       "id": 665019,
       "name": "Kody Clemens",
       "team": "MIN",
@@ -5901,25 +5919,7 @@
       "trueTalent": 0.237,
       "projAVG": 0.237,
       "ci80": [
-        0.226,
-        0.248
-      ],
-      "pWinTitle": 0
-    },
-    {
-      "id": 543807,
-      "name": "George Springer",
-      "team": "TOR",
-      "pos": "DH",
-      "currentAVG": 0.235,
-      "H": 85,
-      "AB": 362,
-      "remAB": 118,
-      "teamRemaining": 32,
-      "trueTalent": 0.238,
-      "projAVG": 0.236,
-      "ci80": [
-        0.223,
+        0.224,
         0.25
       ],
       "pWinTitle": 0
@@ -5938,7 +5938,7 @@
       "projAVG": 0.235,
       "ci80": [
         0.224,
-        0.245
+        0.246
       ],
       "pWinTitle": 0
     },
@@ -5973,7 +5973,7 @@
       "trueTalent": 0.239,
       "projAVG": 0.232,
       "ci80": [
-        0.22,
+        0.219,
         0.244
       ],
       "pWinTitle": 0
@@ -6001,15 +6001,15 @@
       "name": "Kazuma Okamoto",
       "team": "TOR",
       "pos": "3B",
-      "currentAVG": 0.23,
+      "currentAVG": 0.229,
       "H": 106,
-      "AB": 461,
-      "remAB": 118,
+      "AB": 462,
+      "remAB": 117,
       "teamRemaining": 32,
-      "trueTalent": 0.229,
-      "projAVG": 0.23,
+      "trueTalent": 0.228,
+      "projAVG": 0.229,
       "ci80": [
-        0.218,
+        0.219,
         0.24
       ],
       "pWinTitle": 0
@@ -6112,12 +6112,12 @@
       "currentAVG": 0.223,
       "H": 84,
       "AB": 376,
-      "remAB": 118,
+      "remAB": 117,
       "teamRemaining": 34,
       "trueTalent": 0.228,
       "projAVG": 0.224,
       "ci80": [
-        0.213,
+        0.211,
         0.239
       ],
       "pWinTitle": 0
@@ -6346,13 +6346,13 @@
       "currentAVG": 0.214,
       "H": 89,
       "AB": 415,
-      "remAB": 119,
+      "remAB": 118,
       "teamRemaining": 34,
       "trueTalent": 0.218,
       "projAVG": 0.215,
       "ci80": [
-        0.204,
-        0.227
+        0.205,
+        0.225
       ],
       "pWinTitle": 0
     },
