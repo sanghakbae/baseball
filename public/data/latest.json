@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-25T05:21:22.274Z",
+  "updatedAt": "2026-08-25T06:22:18.767Z",
   "season": 2026,
   "qualifiedCount": 137,
   "leagueMean": 0.257,
@@ -93,6 +93,35 @@
       "xBA": 0.257
     },
     {
+      "id": 693304,
+      "name": "Nick Gonzales",
+      "team": "PIT",
+      "teamId": 134,
+      "teamName": "Pirates",
+      "pos": "3B",
+      "G": 124,
+      "AB": 468,
+      "PA": 513,
+      "R": 66,
+      "H": 144,
+      "B2": 22,
+      "B3": 1,
+      "HR": 6,
+      "RBI": 56,
+      "SB": 7,
+      "BB": 34,
+      "SO": 85,
+      "AVG": 0.308,
+      "OBP": 0.366,
+      "SLG": 0.397,
+      "OPS": 0.763,
+      "rank": 4,
+      "careerAVG": 0.275,
+      "careerAB": 1323,
+      "careerHits": 364,
+      "xBA": 0.282
+    },
+    {
       "id": 672640,
       "name": "Otto Lopez",
       "team": "MIA",
@@ -115,40 +144,11 @@
       "OBP": 0.344,
       "SLG": 0.446,
       "OPS": 0.79,
-      "rank": 4,
+      "rank": 5,
       "careerAVG": 0.277,
       "careerAB": 1468,
       "careerHits": 406,
       "xBA": 0.283
-    },
-    {
-      "id": 693304,
-      "name": "Nick Gonzales",
-      "team": "PIT",
-      "teamId": 134,
-      "teamName": "Pirates",
-      "pos": "3B",
-      "G": 124,
-      "AB": 467,
-      "PA": 512,
-      "R": 66,
-      "H": 143,
-      "B2": 22,
-      "B3": 1,
-      "HR": 6,
-      "RBI": 55,
-      "SB": 7,
-      "BB": 34,
-      "SO": 85,
-      "AVG": 0.306,
-      "OBP": 0.365,
-      "SLG": 0.396,
-      "OPS": 0.761,
-      "rank": 5,
-      "careerAVG": 0.275,
-      "careerAB": 1322,
-      "careerHits": 363,
-      "xBA": 0.282
     },
     {
       "id": 650490,
@@ -485,7 +485,7 @@
       "B3": 2,
       "HR": 17,
       "RBI": 67,
-      "SB": 29,
+      "SB": 30,
       "BB": 54,
       "SO": 106,
       "AVG": 0.287,
@@ -1753,8 +1753,8 @@
       "teamName": "Pirates",
       "pos": "LF",
       "G": 133,
-      "AB": 490,
-      "PA": 578,
+      "AB": 491,
+      "PA": 579,
       "R": 88,
       "H": 128,
       "B2": 31,
@@ -1770,7 +1770,7 @@
       "OPS": 0.794,
       "rank": 61,
       "careerAVG": 0.27,
-      "careerAB": 4050,
+      "careerAB": 4051,
       "careerHits": 1094,
       "xBA": 0.247
     },
@@ -2993,35 +2993,6 @@
       "xBA": 0.251
     },
     {
-      "id": 701538,
-      "name": "Jackson Merrill",
-      "team": "SD",
-      "teamId": 135,
-      "teamName": "Padres",
-      "pos": "CF",
-      "G": 129,
-      "AB": 499,
-      "PA": 540,
-      "R": 67,
-      "H": 119,
-      "B2": 20,
-      "B3": 2,
-      "HR": 21,
-      "RBI": 66,
-      "SB": 24,
-      "BB": 34,
-      "SO": 133,
-      "AVG": 0.238,
-      "OBP": 0.289,
-      "SLG": 0.413,
-      "OPS": 0.702,
-      "rank": 104,
-      "careerAVG": 0.266,
-      "careerAB": 1493,
-      "careerHits": 397,
-      "xBA": 0.257
-    },
-    {
       "id": 691026,
       "name": "Masyn Winn",
       "team": "STL",
@@ -3044,11 +3015,40 @@
       "OBP": 0.314,
       "SLG": 0.326,
       "OPS": 0.64,
-      "rank": 105,
+      "rank": 104,
       "careerAVG": 0.248,
       "careerAB": 1632,
       "careerHits": 405,
       "xBA": 0.248
+    },
+    {
+      "id": 701538,
+      "name": "Jackson Merrill",
+      "team": "SD",
+      "teamId": 135,
+      "teamName": "Padres",
+      "pos": "CF",
+      "G": 129,
+      "AB": 500,
+      "PA": 541,
+      "R": 67,
+      "H": 119,
+      "B2": 20,
+      "B3": 2,
+      "HR": 21,
+      "RBI": 66,
+      "SB": 24,
+      "BB": 34,
+      "SO": 134,
+      "AVG": 0.238,
+      "OBP": 0.288,
+      "SLG": 0.412,
+      "OPS": 0.7,
+      "rank": 105,
+      "careerAVG": 0.266,
+      "careerAB": 1494,
+      "careerHits": 397,
+      "xBA": 0.257
     },
     {
       "id": 687263,
@@ -3696,8 +3696,8 @@
       "teamName": "Padres",
       "pos": "SS",
       "G": 125,
-      "AB": 426,
-      "PA": 497,
+      "AB": 427,
+      "PA": 498,
       "R": 50,
       "H": 93,
       "B2": 13,
@@ -3708,12 +3708,12 @@
       "BB": 62,
       "SO": 88,
       "AVG": 0.218,
-      "OBP": 0.32,
+      "OBP": 0.319,
       "SLG": 0.326,
-      "OPS": 0.646,
+      "OPS": 0.645,
       "rank": 128,
       "careerAVG": 0.283,
-      "careerAB": 6775,
+      "careerAB": 6776,
       "careerHits": 1915,
       "xBA": 0.245
     },
@@ -3784,20 +3784,20 @@
       "pos": "3B",
       "G": 129,
       "AB": 479,
-      "PA": 550,
+      "PA": 551,
       "R": 65,
       "H": 103,
       "B2": 20,
       "B3": 0,
       "HR": 24,
       "RBI": 72,
-      "SB": 2,
-      "BB": 62,
+      "SB": 3,
+      "BB": 63,
       "SO": 119,
       "AVG": 0.215,
-      "OBP": 0.302,
+      "OBP": 0.304,
       "SLG": 0.407,
-      "OPS": 0.709,
+      "OPS": 0.711,
       "rank": 131,
       "careerAVG": 0.275,
       "careerAB": 7903,
@@ -3996,7 +3996,7 @@
         0.309,
         0.332
       ],
-      "pWinTitle": 0.4098
+      "pWinTitle": 0.4069
     },
     {
       "id": 670541,
@@ -4014,7 +4014,7 @@
         0.307,
         0.329
       ],
-      "pWinTitle": 0.3808
+      "pWinTitle": 0.3779
     },
     {
       "id": 802415,
@@ -4032,25 +4032,43 @@
         0.299,
         0.322
       ],
-      "pWinTitle": 0.0773
+      "pWinTitle": 0.07635
     },
     {
       "id": 693304,
       "name": "Nick Gonzales",
       "team": "PIT",
       "pos": "3B",
-      "currentAVG": 0.306,
-      "H": 143,
-      "AB": 467,
-      "remAB": 113,
-      "teamRemaining": 30,
-      "trueTalent": 0.298,
-      "projAVG": 0.305,
+      "currentAVG": 0.308,
+      "H": 144,
+      "AB": 468,
+      "remAB": 109,
+      "teamRemaining": 29,
+      "trueTalent": 0.299,
+      "projAVG": 0.306,
       "ci80": [
         0.295,
-        0.316
+        0.317
       ],
-      "pWinTitle": 0.0306
+      "pWinTitle": 0.0382
+    },
+    {
+      "id": 672640,
+      "name": "Otto Lopez",
+      "team": "MIA",
+      "pos": "SS",
+      "currentAVG": 0.307,
+      "H": 157,
+      "AB": 511,
+      "remAB": 120,
+      "teamRemaining": 30,
+      "trueTalent": 0.299,
+      "projAVG": 0.306,
+      "ci80": [
+        0.296,
+        0.317
+      ],
+      "pWinTitle": 0.03005
     },
     {
       "id": 672515,
@@ -4068,25 +4086,7 @@
         0.289,
         0.314
       ],
-      "pWinTitle": 0.0291
-    },
-    {
-      "id": 672640,
-      "name": "Otto Lopez",
-      "team": "MIA",
-      "pos": "SS",
-      "currentAVG": 0.307,
-      "H": 157,
-      "AB": 511,
-      "remAB": 120,
-      "teamRemaining": 30,
-      "trueTalent": 0.299,
-      "projAVG": 0.306,
-      "ci80": [
-        0.295,
-        0.315
-      ],
-      "pWinTitle": 0.0289
+      "pWinTitle": 0.0284
     },
     {
       "id": 650490,
@@ -4104,7 +4104,7 @@
         0.293,
         0.316
       ],
-      "pWinTitle": 0.02485
+      "pWinTitle": 0.02445
     },
     {
       "id": 518692,
@@ -4122,7 +4122,7 @@
         0.291,
         0.313
       ],
-      "pWinTitle": 0.0138
+      "pWinTitle": 0.0131
     },
     {
       "id": 664983,
@@ -4140,7 +4140,7 @@
         0.281,
         0.305
       ],
-      "pWinTitle": 0.0016
+      "pWinTitle": 0.00155
     },
     {
       "id": 671739,
@@ -4158,25 +4158,7 @@
         0.282,
         0.304
       ],
-      "pWinTitle": 0.0009
-    },
-    {
-      "id": 800050,
-      "name": "Chase DeLauter",
-      "team": "CLE",
-      "pos": "RF",
-      "currentAVG": 0.288,
-      "H": 119,
-      "AB": 413,
-      "remAB": 113,
-      "teamRemaining": 30,
-      "trueTalent": 0.284,
-      "projAVG": 0.287,
-      "ci80": [
-        0.276,
-        0.3
-      ],
-      "pWinTitle": 0.0005
+      "pWinTitle": 0.00085
     },
     {
       "id": 677951,
@@ -4193,6 +4175,24 @@
       "ci80": [
         0.275,
         0.299
+      ],
+      "pWinTitle": 0.0005
+    },
+    {
+      "id": 800050,
+      "name": "Chase DeLauter",
+      "team": "CLE",
+      "pos": "RF",
+      "currentAVG": 0.288,
+      "H": 119,
+      "AB": 413,
+      "remAB": 113,
+      "teamRemaining": 30,
+      "trueTalent": 0.284,
+      "projAVG": 0.287,
+      "ci80": [
+        0.276,
+        0.3
       ],
       "pWinTitle": 0.00045
     },
@@ -4230,24 +4230,6 @@
         0.281,
         0.302
       ],
-      "pWinTitle": 0.00025
-    },
-    {
-      "id": 665487,
-      "name": "Fernando Tatis Jr.",
-      "team": "SD",
-      "pos": "RF",
-      "currentAVG": 0.287,
-      "H": 146,
-      "AB": 508,
-      "remAB": 121,
-      "teamRemaining": 31,
-      "trueTalent": 0.288,
-      "projAVG": 0.287,
-      "ci80": [
-        0.277,
-        0.299
-      ],
       "pWinTitle": 0.0002
     },
     {
@@ -4265,6 +4247,24 @@
       "ci80": [
         0.276,
         0.3
+      ],
+      "pWinTitle": 0.00015
+    },
+    {
+      "id": 665487,
+      "name": "Fernando Tatis Jr.",
+      "team": "SD",
+      "pos": "RF",
+      "currentAVG": 0.287,
+      "H": 146,
+      "AB": 508,
+      "remAB": 117,
+      "teamRemaining": 30,
+      "trueTalent": 0.288,
+      "projAVG": 0.287,
+      "ci80": [
+        0.277,
+        0.299
       ],
       "pWinTitle": 0.00015
     },
@@ -5067,13 +5067,13 @@
       "pos": "LF",
       "currentAVG": 0.261,
       "H": 128,
-      "AB": 490,
-      "remAB": 111,
-      "teamRemaining": 30,
+      "AB": 491,
+      "remAB": 107,
+      "teamRemaining": 29,
       "trueTalent": 0.26,
       "projAVG": 0.261,
       "ci80": [
-        0.25,
+        0.249,
         0.273
       ],
       "pWinTitle": 0
@@ -5338,8 +5338,8 @@
       "currentAVG": 0.252,
       "H": 123,
       "AB": 488,
-      "remAB": 119,
-      "teamRemaining": 30,
+      "remAB": 115,
+      "teamRemaining": 29,
       "trueTalent": 0.25,
       "projAVG": 0.252,
       "ci80": [
@@ -5799,24 +5799,6 @@
       "pWinTitle": 0
     },
     {
-      "id": 701538,
-      "name": "Jackson Merrill",
-      "team": "SD",
-      "pos": "CF",
-      "currentAVG": 0.238,
-      "H": 119,
-      "AB": 499,
-      "remAB": 120,
-      "teamRemaining": 31,
-      "trueTalent": 0.245,
-      "projAVG": 0.24,
-      "ci80": [
-        0.231,
-        0.249
-      ],
-      "pWinTitle": 0
-    },
-    {
       "id": 683953,
       "name": "Travis Bazzana",
       "team": "CLE",
@@ -5866,7 +5848,25 @@
       "projAVG": 0.239,
       "ci80": [
         0.229,
-        0.251
+        0.249
+      ],
+      "pWinTitle": 0
+    },
+    {
+      "id": 701538,
+      "name": "Jackson Merrill",
+      "team": "SD",
+      "pos": "CF",
+      "currentAVG": 0.238,
+      "H": 119,
+      "AB": 500,
+      "remAB": 116,
+      "teamRemaining": 30,
+      "trueTalent": 0.244,
+      "projAVG": 0.239,
+      "ci80": [
+        0.229,
+        0.25
       ],
       "pWinTitle": 0
     },
@@ -6195,24 +6195,6 @@
       "pWinTitle": 0
     },
     {
-      "id": 593428,
-      "name": "Xander Bogaerts",
-      "team": "SD",
-      "pos": "SS",
-      "currentAVG": 0.218,
-      "H": 93,
-      "AB": 426,
-      "remAB": 106,
-      "teamRemaining": 31,
-      "trueTalent": 0.232,
-      "projAVG": 0.221,
-      "ci80": [
-        0.211,
-        0.231
-      ],
-      "pWinTitle": 0
-    },
-    {
       "id": 665862,
       "name": "Jazz Chisholm Jr.",
       "team": "NYY",
@@ -6267,6 +6249,24 @@
       "pWinTitle": 0
     },
     {
+      "id": 593428,
+      "name": "Xander Bogaerts",
+      "team": "SD",
+      "pos": "SS",
+      "currentAVG": 0.218,
+      "H": 93,
+      "AB": 427,
+      "remAB": 102,
+      "teamRemaining": 30,
+      "trueTalent": 0.232,
+      "projAVG": 0.22,
+      "ci80": [
+        0.21,
+        0.231
+      ],
+      "pWinTitle": 0
+    },
+    {
       "id": 695600,
       "name": "Carter Jensen",
       "team": "KC",
@@ -6281,24 +6281,6 @@
       "ci80": [
         0.208,
         0.23
-      ],
-      "pWinTitle": 0
-    },
-    {
-      "id": 592518,
-      "name": "Manny Machado",
-      "team": "SD",
-      "pos": "3B",
-      "currentAVG": 0.215,
-      "H": 103,
-      "AB": 479,
-      "remAB": 115,
-      "teamRemaining": 31,
-      "trueTalent": 0.228,
-      "projAVG": 0.218,
-      "ci80": [
-        0.207,
-        0.227
       ],
       "pWinTitle": 0
     },
@@ -6334,6 +6316,24 @@
       "projAVG": 0.217,
       "ci80": [
         0.206,
+        0.227
+      ],
+      "pWinTitle": 0
+    },
+    {
+      "id": 592518,
+      "name": "Manny Machado",
+      "team": "SD",
+      "pos": "3B",
+      "currentAVG": 0.215,
+      "H": 103,
+      "AB": 479,
+      "remAB": 111,
+      "teamRemaining": 30,
+      "trueTalent": 0.228,
+      "projAVG": 0.217,
+      "ci80": [
+        0.208,
         0.227
       ],
       "pWinTitle": 0
@@ -6463,8 +6463,8 @@
     "120": 133,
     "121": 131,
     "133": 132,
-    "134": 132,
-    "135": 131,
+    "134": 133,
+    "135": 132,
     "136": 132,
     "137": 131,
     "138": 132,
