@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-25T15:30:48.273Z",
+  "updatedAt": "2026-08-25T16:21:52.938Z",
   "season": 2026,
   "qualifiedCount": 137,
   "leagueMean": 0.257,
@@ -74,7 +74,7 @@
       "AB": 462,
       "PA": 497,
       "R": 50,
-      "H": 144,
+      "H": 143,
       "B2": 13,
       "B3": 6,
       "HR": 0,
@@ -82,14 +82,14 @@
       "SB": 35,
       "BB": 22,
       "SO": 42,
-      "AVG": 0.312,
-      "OBP": 0.339,
-      "SLG": 0.366,
-      "OPS": 0.705,
+      "AVG": 0.31,
+      "OBP": 0.337,
+      "SLG": 0.364,
+      "OPS": 0.701,
       "rank": 3,
-      "careerAVG": 0.304,
+      "careerAVG": 0.303,
       "careerAB": 876,
-      "careerHits": 266,
+      "careerHits": 265,
       "xBA": 0.257
     },
     {
@@ -325,6 +325,35 @@
       "xBA": 0.297
     },
     {
+      "id": 677951,
+      "name": "Bobby Witt Jr.",
+      "team": "KC",
+      "teamId": 118,
+      "teamName": "Royals",
+      "pos": "SS",
+      "G": 113,
+      "AB": 442,
+      "PA": 499,
+      "R": 71,
+      "H": 128,
+      "B2": 26,
+      "B3": 1,
+      "HR": 16,
+      "RBI": 48,
+      "SB": 35,
+      "BB": 52,
+      "SO": 88,
+      "AVG": 0.29,
+      "OBP": 0.365,
+      "SLG": 0.462,
+      "OPS": 0.827,
+      "rank": 12,
+      "careerAVG": 0.29,
+      "careerAB": 2933,
+      "careerHits": 850,
+      "xBA": 0.305
+    },
+    {
       "id": 678882,
       "name": "Ceddanne Rafaela",
       "team": "BOS",
@@ -347,40 +376,11 @@
       "OBP": 0.326,
       "SLG": 0.461,
       "OPS": 0.787,
-      "rank": 12,
+      "rank": 13,
       "careerAVG": 0.26,
       "careerAB": 1672,
       "careerHits": 434,
       "xBA": 0.25
-    },
-    {
-      "id": 691023,
-      "name": "Jordan Walker",
-      "team": "STL",
-      "teamId": 138,
-      "teamName": "Cardinals",
-      "pos": "RF",
-      "G": 128,
-      "AB": 499,
-      "PA": 548,
-      "R": 82,
-      "H": 144,
-      "B2": 28,
-      "B3": 0,
-      "HR": 27,
-      "RBI": 96,
-      "SB": 18,
-      "BB": 42,
-      "SO": 132,
-      "AVG": 0.289,
-      "OBP": 0.347,
-      "SLG": 0.507,
-      "OPS": 0.854,
-      "rank": 13,
-      "careerAVG": 0.257,
-      "careerAB": 1446,
-      "careerHits": 371,
-      "xBA": 0.274
     },
     {
       "id": 808982,
@@ -499,35 +499,6 @@
       "xBA": 0.297
     },
     {
-      "id": 677951,
-      "name": "Bobby Witt Jr.",
-      "team": "KC",
-      "teamId": 118,
-      "teamName": "Royals",
-      "pos": "SS",
-      "G": 113,
-      "AB": 442,
-      "PA": 499,
-      "R": 71,
-      "H": 127,
-      "B2": 26,
-      "B3": 1,
-      "HR": 16,
-      "RBI": 48,
-      "SB": 35,
-      "BB": 52,
-      "SO": 88,
-      "AVG": 0.287,
-      "OBP": 0.363,
-      "SLG": 0.459,
-      "OPS": 0.822,
-      "rank": 18,
-      "careerAVG": 0.289,
-      "careerAB": 2933,
-      "careerHits": 849,
-      "xBA": 0.305
-    },
-    {
       "id": 681198,
       "name": "TJ Rumfield",
       "team": "COL",
@@ -550,11 +521,40 @@
       "OBP": 0.37,
       "SLG": 0.439,
       "OPS": 0.809,
-      "rank": 19,
+      "rank": 18,
       "careerAVG": 0.287,
       "careerAB": 449,
       "careerHits": 129,
       "xBA": 0.254
+    },
+    {
+      "id": 691023,
+      "name": "Jordan Walker",
+      "team": "STL",
+      "teamId": 138,
+      "teamName": "Cardinals",
+      "pos": "RF",
+      "G": 128,
+      "AB": 499,
+      "PA": 548,
+      "R": 82,
+      "H": 143,
+      "B2": 28,
+      "B3": 0,
+      "HR": 27,
+      "RBI": 96,
+      "SB": 18,
+      "BB": 42,
+      "SO": 132,
+      "AVG": 0.287,
+      "OBP": 0.345,
+      "SLG": 0.505,
+      "OPS": 0.85,
+      "rank": 19,
+      "careerAVG": 0.256,
+      "careerAB": 1446,
+      "careerHits": 370,
+      "xBA": 0.274
     },
     {
       "id": 669364,
@@ -3996,7 +3996,7 @@
         0.309,
         0.332
       ],
-      "pWinTitle": 0.4071
+      "pWinTitle": 0.41675
     },
     {
       "id": 670541,
@@ -4014,25 +4014,25 @@
         0.307,
         0.329
       ],
-      "pWinTitle": 0.37825
+      "pWinTitle": 0.38695
     },
     {
       "id": 802415,
       "name": "Chandler Simpson",
       "team": "TB",
       "pos": "LF",
-      "currentAVG": 0.312,
-      "H": 144,
+      "currentAVG": 0.31,
+      "H": 143,
       "AB": 462,
       "remAB": 116,
       "teamRemaining": 31,
-      "trueTalent": 0.301,
-      "projAVG": 0.309,
+      "trueTalent": 0.299,
+      "projAVG": 0.307,
       "ci80": [
-        0.299,
-        0.322
+        0.296,
+        0.318
       ],
-      "pWinTitle": 0.07645
+      "pWinTitle": 0.0506
     },
     {
       "id": 693304,
@@ -4050,7 +4050,7 @@
         0.295,
         0.317
       ],
-      "pWinTitle": 0.0378
+      "pWinTitle": 0.0397
     },
     {
       "id": 672640,
@@ -4068,7 +4068,7 @@
         0.296,
         0.317
       ],
-      "pWinTitle": 0.0301
+      "pWinTitle": 0.0319
     },
     {
       "id": 672515,
@@ -4086,7 +4086,7 @@
         0.289,
         0.314
       ],
-      "pWinTitle": 0.02785
+      "pWinTitle": 0.02885
     },
     {
       "id": 650490,
@@ -4104,7 +4104,7 @@
         0.293,
         0.316
       ],
-      "pWinTitle": 0.02455
+      "pWinTitle": 0.02585
     },
     {
       "id": 518692,
@@ -4122,7 +4122,7 @@
         0.291,
         0.313
       ],
-      "pWinTitle": 0.01315
+      "pWinTitle": 0.01375
     },
     {
       "id": 664983,
@@ -4140,7 +4140,7 @@
         0.281,
         0.305
       ],
-      "pWinTitle": 0.0016
+      "pWinTitle": 0.0018
     },
     {
       "id": 671739,
@@ -4158,25 +4158,25 @@
         0.282,
         0.304
       ],
-      "pWinTitle": 0.00085
+      "pWinTitle": 0.0009
     },
     {
       "id": 677951,
       "name": "Bobby Witt Jr.",
       "team": "KC",
       "pos": "SS",
-      "currentAVG": 0.287,
-      "H": 127,
+      "currentAVG": 0.29,
+      "H": 128,
       "AB": 442,
       "remAB": 117,
       "teamRemaining": 30,
-      "trueTalent": 0.29,
-      "projAVG": 0.288,
+      "trueTalent": 0.292,
+      "projAVG": 0.29,
       "ci80": [
-        0.275,
-        0.299
+        0.277,
+        0.302
       ],
-      "pWinTitle": 0.0005
+      "pWinTitle": 0.0009
     },
     {
       "id": 800050,
@@ -4194,7 +4194,7 @@
         0.276,
         0.3
       ],
-      "pWinTitle": 0.00045
+      "pWinTitle": 0.0005
     },
     {
       "id": 660271,
@@ -4230,7 +4230,7 @@
         0.281,
         0.302
       ],
-      "pWinTitle": 0.0002
+      "pWinTitle": 0.0003
     },
     {
       "id": 808982,
@@ -4287,20 +4287,20 @@
       "pWinTitle": 0.00015
     },
     {
-      "id": 691023,
-      "name": "Jordan Walker",
-      "team": "STL",
-      "pos": "RF",
+      "id": 678882,
+      "name": "Ceddanne Rafaela",
+      "team": "BOS",
+      "pos": "CF",
       "currentAVG": 0.289,
       "H": 144,
       "AB": 499,
-      "remAB": 117,
-      "teamRemaining": 30,
-      "trueTalent": 0.282,
+      "remAB": 123,
+      "teamRemaining": 31,
+      "trueTalent": 0.279,
       "projAVG": 0.287,
       "ci80": [
-        0.278,
-        0.299
+        0.277,
+        0.297
       ],
       "pWinTitle": 0.0001
     },
@@ -4317,10 +4317,28 @@
       "trueTalent": 0.281,
       "projAVG": 0.286,
       "ci80": [
-        0.275,
-        0.299
+        0.274,
+        0.297
       ],
       "pWinTitle": 0.0001
+    },
+    {
+      "id": 691023,
+      "name": "Jordan Walker",
+      "team": "STL",
+      "pos": "RF",
+      "currentAVG": 0.287,
+      "H": 143,
+      "AB": 499,
+      "remAB": 117,
+      "teamRemaining": 30,
+      "trueTalent": 0.281,
+      "projAVG": 0.285,
+      "ci80": [
+        0.274,
+        0.297
+      ],
+      "pWinTitle": 0.00005
     },
     {
       "id": 689414,
@@ -4359,22 +4377,22 @@
       "pWinTitle": 0.00005
     },
     {
-      "id": 678882,
-      "name": "Ceddanne Rafaela",
-      "team": "BOS",
-      "pos": "CF",
-      "currentAVG": 0.289,
-      "H": 144,
-      "AB": 499,
-      "remAB": 123,
+      "id": 669477,
+      "name": "Casey Schmitt",
+      "team": "SF",
+      "pos": "LF",
+      "currentAVG": 0.271,
+      "H": 105,
+      "AB": 387,
+      "remAB": 122,
       "teamRemaining": 31,
-      "trueTalent": 0.279,
-      "projAVG": 0.287,
+      "trueTalent": 0.27,
+      "projAVG": 0.271,
       "ci80": [
-        0.275,
-        0.297
+        0.259,
+        0.285
       ],
-      "pWinTitle": 0
+      "pWinTitle": 0.00005
     },
     {
       "id": 676391,
@@ -4679,24 +4697,6 @@
       "ci80": [
         0.26,
         0.282
-      ],
-      "pWinTitle": 0
-    },
-    {
-      "id": 669477,
-      "name": "Casey Schmitt",
-      "team": "SF",
-      "pos": "LF",
-      "currentAVG": 0.271,
-      "H": 105,
-      "AB": 387,
-      "remAB": 122,
-      "teamRemaining": 31,
-      "trueTalent": 0.27,
-      "projAVG": 0.271,
-      "ci80": [
-        0.259,
-        0.285
       ],
       "pWinTitle": 0
     },
