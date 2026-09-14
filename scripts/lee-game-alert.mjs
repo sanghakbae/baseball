@@ -2,7 +2,7 @@
 /**
  * 이정후(SF) 경기 예정 알림 — GitHub Actions에서 12시간마다 실행.
  *
- * 사이트 방문과 무관하게 경기 전에 구글챗으로 알린다.
+ * 사이트 방문과 무관하게 경기 전에 웹훅으로 알린다.
  * (클라이언트 useVisitors.js 알림은 방문자가 있어야만 동작하므로 이 스크립트가 주 경로다)
  *
  * 중복 방지: Firestore meta/leeGameAlert 문서를 클라이언트와 공유한다.
@@ -17,7 +17,7 @@ const LOOKAHEAD_HOURS = 14
 const PROJECT_ID = process.env.FIREBASE_PROJECT_ID || 'baseball-93c5d'
 const API_KEY = process.env.FIREBASE_API_KEY || 'AIzaSyDQ6_sGVnwGrFXLNkwuWyoCWhCsEHpln24'
 const CHAT_WEBHOOK = process.env.CHAT_WEBHOOK
-  || 'https://chat.googleapis.com/v1/spaces/AAQABNK83oQ/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=uoZajVQKj1mKD_qmfHR6TE0Za72-Ukw-t8ZQfDjG7aU'
+  || 'https://webhook-alert.totoriverce.workers.dev/w/5061a4048eda4a32b5f2d9cba5b2fee8131ea169d20545b7bb15f7cf22217364'
 
 const DOC_URL = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents/meta/leeGameAlert?key=${API_KEY}`
 
@@ -87,13 +87,14 @@ async function writeAlertState(gamePk, alerted) {
   if (!r.ok) throw new Error(`Firestore 쓰기 실패: ${r.status} ${await r.text()}`)
 }
 
+// 서버(Actions)에서는 CORS 제약이 없어 JSON 그대로 보낸다
 async function sendChat(text) {
   const r = await fetch(CHAT_WEBHOOK, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ text }),
   })
-  if (!r.ok) throw new Error(`구글챗 전송 실패: ${r.status} ${await r.text()}`)
+  if (!r.ok) throw new Error(`웹훅 전송 실패: ${r.status} ${await r.text()}`)
 }
 
 /** 최신 스냅샷에서 이정후 타율·순위 (없으면 생략) */

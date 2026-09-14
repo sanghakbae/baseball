@@ -5,13 +5,16 @@ import { db } from './firebase.js'
 // 페이지 로드(새로고침)당 1회만 증가. 모듈 플래그로 StrictMode 중복 호출 방지.
 let countedThisLoad = false
 const VISIT_SESSION_KEY = 'baseball-visit-logged'
-// 구글챗 웹훅 (새 유입처 알림)
-const CHAT_WEBHOOK = 'https://chat.googleapis.com/v1/spaces/AAQABNK83oQ/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=uoZajVQKj1mKD_qmfHR6TE0Za72-Ukw-t8ZQfDjG7aU'
+// 알림 웹훅 (새 유입처 · 경기 알림)
+const CHAT_WEBHOOK = 'https://webhook-alert.totoriverce.workers.dev/w/5061a4048eda4a32b5f2d9cba5b2fee8131ea169d20545b7bb15f7cf22217364'
 const INTERNAL_HOSTS = ['baseball.sanghak.kr', 'localhost', '127.0.0.1']
 
+// 웹훅이 이 사이트 오리진을 CORS 허용 목록에 두지 않아 preflight 가 막힌다.
+// text/plain 단순요청 + no-cors 로 보내면 응답은 못 읽어도 전송은 정상 처리된다.
 const sendChat = (text) =>
   fetch(CHAT_WEBHOOK, {
-    method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ text }),
+    method: 'POST', mode: 'no-cors',
+    headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify({ text }),
   }).catch(() => {})
 
 // 유입 출처 판단: ?from= / utm_source 우선(referrer보다 정확), 없으면 referrer 호스트
@@ -30,7 +33,7 @@ function visitSource() {
   } catch { return null }
 }
 
-// 기존에 없던 유입처면 구글챗으로 알림 (출처별 1회)
+// 기존에 없던 유입처면 웹훅으로 알림 (출처별 1회)
 async function notifyNewReferrer(geo) {
   const source = visitSource()
   if (!source) return
@@ -127,8 +130,8 @@ async function logVisit() {
       path: location.pathname + location.search,
       ts: serverTimestamp(),
     })
-    notifyNewReferrer(geo) // 새 유입처면 구글챗 알림
-    notifyLeeGame() // 이정후 경기 예정/진행 중이면 구글챗 알림
+    notifyNewReferrer(geo) // 새 유입처면 웹훅 알림
+    notifyLeeGame() // 이정후 경기 예정/진행 중이면 웹훅 알림
   } catch (e) {
     console.warn('방문 로그 실패:', e.message)
   }
