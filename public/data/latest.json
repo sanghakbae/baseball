@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-14T19:39:12.128Z",
+  "updatedAt": "2026-09-14T22:48:43.261Z",
   "season": 2026,
   "qualifiedCount": 137,
   "leagueMean": 0.256,
@@ -360,7 +360,7 @@
       "teamId": 114,
       "teamName": "Guardians",
       "pos": "RF",
-      "G": 124,
+      "G": 125,
       "AB": 461,
       "PA": 518,
       "R": 57,
@@ -476,7 +476,7 @@
       "teamId": 113,
       "teamName": "Reds",
       "pos": "SS",
-      "G": 130,
+      "G": 131,
       "AB": 514,
       "PA": 581,
       "R": 91,
@@ -766,7 +766,7 @@
       "teamId": 114,
       "teamName": "Guardians",
       "pos": "LF",
-      "G": 140,
+      "G": 141,
       "AB": 500,
       "PA": 587,
       "R": 75,
@@ -1195,13 +1195,42 @@
       "xBA": 0.245
     },
     {
+      "id": 803011,
+      "name": "Sam Antonacci",
+      "team": "CWS",
+      "teamId": 145,
+      "teamName": "White Sox",
+      "pos": "LF",
+      "G": 130,
+      "AB": 444,
+      "PA": 517,
+      "R": 74,
+      "H": 120,
+      "B2": 23,
+      "B3": 4,
+      "HR": 8,
+      "RBI": 44,
+      "SB": 17,
+      "BB": 42,
+      "SO": 80,
+      "AVG": 0.27,
+      "OBP": 0.368,
+      "SLG": 0.394,
+      "OPS": 0.762,
+      "rank": 42,
+      "careerAVG": 0.27,
+      "careerAB": 444,
+      "careerHits": 120,
+      "xBA": 0.274
+    },
+    {
       "id": 701398,
       "name": "Sal Stewart",
       "team": "CIN",
       "teamId": 113,
       "teamName": "Reds",
       "pos": "1B",
-      "G": 149,
+      "G": 150,
       "AB": 571,
       "PA": 645,
       "R": 82,
@@ -1217,7 +1246,7 @@
       "OBP": 0.34,
       "SLG": 0.476,
       "OPS": 0.816,
-      "rank": 42,
+      "rank": 43,
       "careerAVG": 0.268,
       "careerAB": 626,
       "careerHits": 168,
@@ -1246,7 +1275,7 @@
       "OBP": 0.394,
       "SLG": 0.498,
       "OPS": 0.892,
-      "rank": 43,
+      "rank": 44,
       "careerAVG": 0.223,
       "careerAB": 2146,
       "careerHits": 479,
@@ -1275,40 +1304,11 @@
       "OBP": 0.363,
       "SLG": 0.499,
       "OPS": 0.862,
-      "rank": 44,
+      "rank": 45,
       "careerAVG": 0.255,
       "careerAB": 4324,
       "careerHits": 1102,
       "xBA": 0.284
-    },
-    {
-      "id": 803011,
-      "name": "Sam Antonacci",
-      "team": "CWS",
-      "teamId": 145,
-      "teamName": "White Sox",
-      "pos": "LF",
-      "G": 129,
-      "AB": 443,
-      "PA": 516,
-      "R": 74,
-      "H": 119,
-      "B2": 23,
-      "B3": 4,
-      "HR": 8,
-      "RBI": 44,
-      "SB": 17,
-      "BB": 42,
-      "SO": 80,
-      "AVG": 0.269,
-      "OBP": 0.366,
-      "SLG": 0.393,
-      "OPS": 0.759,
-      "rank": 45,
-      "careerAVG": 0.269,
-      "careerAB": 443,
-      "careerHits": 119,
-      "xBA": 0.274
     },
     {
       "id": 673548,
@@ -1520,7 +1520,7 @@
       "teamId": 145,
       "teamName": "White Sox",
       "pos": "2B",
-      "G": 143,
+      "G": 144,
       "AB": 525,
       "PA": 599,
       "R": 80,
@@ -2013,7 +2013,7 @@
       "teamId": 119,
       "teamName": "Dodgers",
       "pos": "3B",
-      "G": 137,
+      "G": 138,
       "AB": 448,
       "PA": 517,
       "R": 76,
@@ -2181,35 +2181,6 @@
       "xBA": 0.266
     },
     {
-      "id": 605141,
-      "name": "Mookie Betts",
-      "team": "LAD",
-      "teamId": 119,
-      "teamName": "Dodgers",
-      "pos": "SS",
-      "G": 111,
-      "AB": 432,
-      "PA": 475,
-      "R": 63,
-      "H": 108,
-      "B2": 20,
-      "B3": 0,
-      "HR": 20,
-      "RBI": 62,
-      "SB": 2,
-      "BB": 40,
-      "SO": 53,
-      "AVG": 0.25,
-      "OBP": 0.316,
-      "SLG": 0.435,
-      "OPS": 0.751,
-      "rank": 76,
-      "careerAVG": 0.288,
-      "careerAB": 6515,
-      "careerHits": 1875,
-      "xBA": 0.276
-    },
-    {
       "id": 702332,
       "name": "Caleb Durbin",
       "team": "BOS",
@@ -2232,7 +2203,7 @@
       "OBP": 0.332,
       "SLG": 0.386,
       "OPS": 0.718,
-      "rank": 77,
+      "rank": 76,
       "careerAVG": 0.253,
       "careerAB": 917,
       "careerHits": 232,
@@ -2261,7 +2232,7 @@
       "OBP": 0.318,
       "SLG": 0.441,
       "OPS": 0.759,
-      "rank": 78,
+      "rank": 77,
       "careerAVG": 0.278,
       "careerAB": 5046,
       "careerHits": 1401,
@@ -2290,7 +2261,7 @@
       "OBP": 0.312,
       "SLG": 0.393,
       "OPS": 0.705,
-      "rank": 79,
+      "rank": 78,
       "careerAVG": 0.239,
       "careerAB": 763,
       "careerHits": 182,
@@ -2319,11 +2290,40 @@
       "OBP": 0.323,
       "SLG": 0.508,
       "OPS": 0.831,
-      "rank": 80,
+      "rank": 79,
       "careerAVG": 0.256,
       "careerAB": 5077,
       "careerHits": 1300,
       "xBA": 0.248
+    },
+    {
+      "id": 605141,
+      "name": "Mookie Betts",
+      "team": "LAD",
+      "teamId": 119,
+      "teamName": "Dodgers",
+      "pos": "SS",
+      "G": 112,
+      "AB": 433,
+      "PA": 476,
+      "R": 63,
+      "H": 108,
+      "B2": 20,
+      "B3": 0,
+      "HR": 20,
+      "RBI": 62,
+      "SB": 2,
+      "BB": 40,
+      "SO": 53,
+      "AVG": 0.249,
+      "OBP": 0.315,
+      "SLG": 0.434,
+      "OPS": 0.749,
+      "rank": 80,
+      "careerAVG": 0.288,
+      "careerAB": 6516,
+      "careerHits": 1875,
+      "xBA": 0.276
     },
     {
       "id": 683953,
@@ -2332,7 +2332,7 @@
       "teamId": 114,
       "teamName": "Guardians",
       "pos": "2B",
-      "G": 112,
+      "G": 113,
       "AB": 405,
       "PA": 471,
       "R": 50,
@@ -2442,35 +2442,6 @@
       "xBA": 0.262
     },
     {
-      "id": 678246,
-      "name": "Miguel Vargas",
-      "team": "CWS",
-      "teamId": 145,
-      "teamName": "White Sox",
-      "pos": "3B",
-      "G": 147,
-      "AB": 547,
-      "PA": 648,
-      "R": 96,
-      "H": 135,
-      "B2": 30,
-      "B3": 1,
-      "HR": 30,
-      "RBI": 79,
-      "SB": 18,
-      "BB": 88,
-      "SO": 118,
-      "AVG": 0.247,
-      "OBP": 0.355,
-      "SLG": 0.47,
-      "OPS": 0.825,
-      "rank": 85,
-      "careerAVG": 0.219,
-      "careerAB": 1560,
-      "careerHits": 342,
-      "xBA": 0.266
-    },
-    {
       "id": 686797,
       "name": "Brooks Lee",
       "team": "MIN",
@@ -2493,11 +2464,40 @@
       "OBP": 0.296,
       "SLG": 0.43,
       "OPS": 0.726,
-      "rank": 86,
+      "rank": 85,
       "careerAVG": 0.239,
       "careerAB": 1194,
       "careerHits": 285,
       "xBA": 0.225
+    },
+    {
+      "id": 678246,
+      "name": "Miguel Vargas",
+      "team": "CWS",
+      "teamId": 145,
+      "teamName": "White Sox",
+      "pos": "3B",
+      "G": 148,
+      "AB": 548,
+      "PA": 649,
+      "R": 96,
+      "H": 135,
+      "B2": 30,
+      "B3": 1,
+      "HR": 30,
+      "RBI": 79,
+      "SB": 18,
+      "BB": 88,
+      "SO": 118,
+      "AVG": 0.246,
+      "OBP": 0.355,
+      "SLG": 0.469,
+      "OPS": 0.824,
+      "rank": 86,
+      "careerAVG": 0.219,
+      "careerAB": 1561,
+      "careerHits": 342,
+      "xBA": 0.266
     },
     {
       "id": 677587,
@@ -2506,7 +2506,7 @@
       "teamId": 114,
       "teamName": "Guardians",
       "pos": "SS",
-      "G": 143,
+      "G": 144,
       "AB": 500,
       "PA": 554,
       "R": 58,
@@ -2970,7 +2970,7 @@
       "teamId": 114,
       "teamName": "Guardians",
       "pos": "RF",
-      "G": 147,
+      "G": 148,
       "AB": 557,
       "PA": 608,
       "R": 63,
@@ -3289,7 +3289,7 @@
       "teamId": 114,
       "teamName": "Guardians",
       "pos": "3B",
-      "G": 114,
+      "G": 115,
       "AB": 427,
       "PA": 494,
       "R": 64,
@@ -3347,7 +3347,7 @@
       "teamId": 119,
       "teamName": "Dodgers",
       "pos": "RF",
-      "G": 141,
+      "G": 142,
       "AB": 496,
       "PA": 576,
       "R": 79,
@@ -3753,7 +3753,7 @@
       "teamId": 113,
       "teamName": "Reds",
       "pos": "LF",
-      "G": 121,
+      "G": 122,
       "AB": 427,
       "PA": 502,
       "R": 56,
@@ -3840,7 +3840,7 @@
       "teamId": 145,
       "teamName": "White Sox",
       "pos": "SS",
-      "G": 141,
+      "G": 142,
       "AB": 529,
       "PA": 595,
       "R": 67,
@@ -3869,9 +3869,9 @@
       "teamId": 145,
       "teamName": "White Sox",
       "pos": "1B",
-      "G": 114,
-      "AB": 408,
-      "PA": 496,
+      "G": 115,
+      "AB": 409,
+      "PA": 497,
       "R": 75,
       "H": 84,
       "B2": 14,
@@ -3880,14 +3880,14 @@
       "RBI": 65,
       "SB": 1,
       "BB": 84,
-      "SO": 174,
-      "AVG": 0.206,
-      "OBP": 0.345,
-      "SLG": 0.468,
-      "OPS": 0.813,
+      "SO": 175,
+      "AVG": 0.205,
+      "OBP": 0.344,
+      "SLG": 0.467,
+      "OPS": 0.811,
       "rank": 134,
-      "careerAVG": 0.206,
-      "careerAB": 408,
+      "careerAVG": 0.205,
+      "careerAB": 409,
       "careerHits": 84,
       "xBA": 0.201
     },
@@ -3996,7 +3996,7 @@
         0.307,
         0.32
       ],
-      "pWinTitle": 0.49465
+      "pWinTitle": 0.4953
     },
     {
       "id": 670541,
@@ -4032,7 +4032,7 @@
         0.303,
         0.316
       ],
-      "pWinTitle": 0.15735
+      "pWinTitle": 0.1571
     },
     {
       "id": 802415,
@@ -4050,7 +4050,7 @@
         0.296,
         0.312
       ],
-      "pWinTitle": 0.04435
+      "pWinTitle": 0.04425
     },
     {
       "id": 693304,
@@ -4068,7 +4068,7 @@
         0.298,
         0.31
       ],
-      "pWinTitle": 0.0407
+      "pWinTitle": 0.0406
     },
     {
       "id": 672515,
@@ -4086,7 +4086,7 @@
         0.292,
         0.309
       ],
-      "pWinTitle": 0.02195
+      "pWinTitle": 0.02185
     },
     {
       "id": 650490,
@@ -4104,7 +4104,7 @@
         0.294,
         0.308
       ],
-      "pWinTitle": 0.0131
+      "pWinTitle": 0.01315
     },
     {
       "id": 681198,
@@ -4140,7 +4140,7 @@
         0.287,
         0.302
       ],
-      "pWinTitle": 0.00085
+      "pWinTitle": 0.0008
     },
     {
       "id": 694192,
@@ -4186,15 +4186,15 @@
       "currentAVG": 0.291,
       "H": 134,
       "AB": 461,
-      "remAB": 45,
+      "remAB": 44,
       "teamRemaining": 12,
       "trueTalent": 0.287,
       "projAVG": 0.29,
       "ci80": [
         0.283,
-        0.298
+        0.299
       ],
-      "pWinTitle": 0.0002
+      "pWinTitle": 0.0001
     },
     {
       "id": 671739,
@@ -4719,6 +4719,24 @@
       "pWinTitle": 0
     },
     {
+      "id": 803011,
+      "name": "Sam Antonacci",
+      "team": "CWS",
+      "pos": "LF",
+      "currentAVG": 0.27,
+      "H": 120,
+      "AB": 444,
+      "remAB": 44,
+      "teamRemaining": 13,
+      "trueTalent": 0.27,
+      "projAVG": 0.27,
+      "ci80": [
+        0.262,
+        0.279
+      ],
+      "pWinTitle": 0
+    },
+    {
       "id": 701398,
       "name": "Sal Stewart",
       "team": "CIN",
@@ -4726,13 +4744,13 @@
       "currentAVG": 0.27,
       "H": 154,
       "AB": 571,
-      "remAB": 50,
+      "remAB": 49,
       "teamRemaining": 13,
       "trueTalent": 0.268,
       "projAVG": 0.27,
       "ci80": [
-        0.262,
-        0.275
+        0.263,
+        0.276
       ],
       "pWinTitle": 0
     },
@@ -4767,26 +4785,8 @@
       "trueTalent": 0.27,
       "projAVG": 0.269,
       "ci80": [
-        0.262,
+        0.264,
         0.276
-      ],
-      "pWinTitle": 0
-    },
-    {
-      "id": 803011,
-      "name": "Sam Antonacci",
-      "team": "CWS",
-      "pos": "LF",
-      "currentAVG": 0.269,
-      "H": 119,
-      "AB": 443,
-      "remAB": 45,
-      "teamRemaining": 13,
-      "trueTalent": 0.269,
-      "projAVG": 0.269,
-      "ci80": [
-        0.262,
-        0.277
       ],
       "pWinTitle": 0
     },
@@ -4924,13 +4924,13 @@
       "currentAVG": 0.267,
       "H": 140,
       "AB": 525,
-      "remAB": 48,
+      "remAB": 47,
       "teamRemaining": 13,
       "trueTalent": 0.261,
       "projAVG": 0.266,
       "ci80": [
         0.26,
-        0.274
+        0.273
       ],
       "pWinTitle": 0
     },
@@ -5230,12 +5230,12 @@
       "currentAVG": 0.254,
       "H": 114,
       "AB": 448,
-      "remAB": 43,
+      "remAB": 42,
       "teamRemaining": 13,
       "trueTalent": 0.249,
       "projAVG": 0.254,
       "ci80": [
-        0.248,
+        0.247,
         0.261
       ],
       "pWinTitle": 0
@@ -5331,24 +5331,6 @@
       "pWinTitle": 0
     },
     {
-      "id": 605141,
-      "name": "Mookie Betts",
-      "team": "LAD",
-      "pos": "SS",
-      "currentAVG": 0.25,
-      "H": 108,
-      "AB": 432,
-      "remAB": 51,
-      "teamRemaining": 13,
-      "trueTalent": 0.26,
-      "projAVG": 0.251,
-      "ci80": [
-        0.242,
-        0.259
-      ],
-      "pWinTitle": 0
-    },
-    {
       "id": 606466,
       "name": "Ketel Marte",
       "team": "AZ",
@@ -5362,7 +5344,7 @@
       "projAVG": 0.251,
       "ci80": [
         0.243,
-        0.257
+        0.259
       ],
       "pWinTitle": 0
     },
@@ -5380,7 +5362,7 @@
       "projAVG": 0.25,
       "ci80": [
         0.242,
-        0.258
+        0.256
       ],
       "pWinTitle": 0
     },
@@ -5398,7 +5380,7 @@
       "projAVG": 0.25,
       "ci80": [
         0.244,
-        0.256
+        0.257
       ],
       "pWinTitle": 0
     },
@@ -5415,8 +5397,26 @@
       "trueTalent": 0.25,
       "projAVG": 0.25,
       "ci80": [
+        0.244,
+        0.255
+      ],
+      "pWinTitle": 0
+    },
+    {
+      "id": 605141,
+      "name": "Mookie Betts",
+      "team": "LAD",
+      "pos": "SS",
+      "currentAVG": 0.249,
+      "H": 108,
+      "AB": 433,
+      "remAB": 50,
+      "teamRemaining": 13,
+      "trueTalent": 0.259,
+      "projAVG": 0.25,
+      "ci80": [
         0.242,
-        0.257
+        0.259
       ],
       "pWinTitle": 0
     },
@@ -5493,24 +5493,6 @@
       "pWinTitle": 0
     },
     {
-      "id": 678246,
-      "name": "Miguel Vargas",
-      "team": "CWS",
-      "pos": "3B",
-      "currentAVG": 0.247,
-      "H": 135,
-      "AB": 547,
-      "remAB": 48,
-      "teamRemaining": 13,
-      "trueTalent": 0.247,
-      "projAVG": 0.247,
-      "ci80": [
-        0.24,
-        0.252
-      ],
-      "pWinTitle": 0
-    },
-    {
       "id": 686797,
       "name": "Brooks Lee",
       "team": "MIN",
@@ -5521,6 +5503,24 @@
       "remAB": 49,
       "teamRemaining": 13,
       "trueTalent": 0.243,
+      "projAVG": 0.246,
+      "ci80": [
+        0.24,
+        0.253
+      ],
+      "pWinTitle": 0
+    },
+    {
+      "id": 678246,
+      "name": "Miguel Vargas",
+      "team": "CWS",
+      "pos": "3B",
+      "currentAVG": 0.246,
+      "H": 135,
+      "AB": 548,
+      "remAB": 48,
+      "teamRemaining": 13,
+      "trueTalent": 0.246,
       "projAVG": 0.246,
       "ci80": [
         0.24,
@@ -6058,13 +6058,13 @@
       "currentAVG": 0.226,
       "H": 112,
       "AB": 496,
-      "remAB": 46,
+      "remAB": 45,
       "teamRemaining": 13,
       "trueTalent": 0.235,
       "projAVG": 0.227,
       "ci80": [
         0.22,
-        0.234
+        0.233
       ],
       "pWinTitle": 0
     },
@@ -6364,13 +6364,13 @@
       "currentAVG": 0.206,
       "H": 109,
       "AB": 529,
-      "remAB": 49,
+      "remAB": 48,
       "teamRemaining": 13,
       "trueTalent": 0.208,
       "projAVG": 0.206,
       "ci80": [
         0.199,
-        0.213
+        0.211
       ],
       "pWinTitle": 0
     },
@@ -6379,16 +6379,16 @@
       "name": "Munetaka Murakami",
       "team": "CWS",
       "pos": "1B",
-      "currentAVG": 0.206,
+      "currentAVG": 0.205,
       "H": 84,
-      "AB": 408,
-      "remAB": 47,
+      "AB": 409,
+      "remAB": 46,
       "teamRemaining": 13,
       "trueTalent": 0.207,
       "projAVG": 0.206,
       "ci80": [
         0.198,
-        0.215
+        0.213
       ],
       "pWinTitle": 0
     },
