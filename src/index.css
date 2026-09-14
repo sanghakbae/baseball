@@ -50,6 +50,7 @@ html, body {
   margin: 0 auto;
   height: 100%;
   height: 100dvh;
+  height: var(--app-h, 100dvh); /* 실제 뷰포트 높이(main.jsx 에서 동기화) */
   overflow-y: auto; /* 내용이 넘칠 때만 페이지 내부에서 스크롤 */
   overscroll-behavior-y: contain; /* 가장자리 바운스 차단 */
   -webkit-overflow-scrolling: touch;
@@ -63,6 +64,7 @@ html, body {
   display: flex; align-items: center; justify-content: center;
   min-height: 70vh;
   min-height: 70dvh;
+  min-height: calc(var(--app-h, 100dvh) * 0.7);
   color: var(--muted); font-size: 15px;
 }
 
