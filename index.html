@@ -35,6 +35,16 @@
   </head>
   <body>
     <div id="root"></div>
+    <!-- beforeinstallprompt 는 React 마운트 전에 발생하는 경우가 많아 여기서 미리 붙잡아 둔다.
+         (앱이 로딩 화면을 먼저 그리는 동안 이벤트가 지나가 버려 설치 버튼이 안 뜨던 문제) -->
+    <script>
+      window.__installPrompt = null
+      window.addEventListener('beforeinstallprompt', function (e) {
+        e.preventDefault()
+        window.__installPrompt = e
+        window.dispatchEvent(new Event('installprompt-ready'))
+      })
+    </script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

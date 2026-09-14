@@ -678,7 +678,7 @@ tbody tr.is-lee .sticky, tbody tr.is-lee .sticky2 { background: #2a2a1f; }
 /* ---- WAR 순위 탭 ---- */
 .war-cats { display: flex; gap: 6px; flex-wrap: wrap; margin: 8px 0 10px; }
 .war-table th.war-sorted, .war-table td.war-sorted { background: rgba(74, 168, 255, 0.1); font-weight: 700; }
-.war-table td.war-sorted { color: var(--fg); }
+.war-table td.war-sorted { color: var(--text); }
 .war-table tr.war-gap td { text-align: center; color: var(--muted); padding: 2px; letter-spacing: 3px; }
 .war-note { font-size: 10.5px; color: var(--muted); margin: 8px 2px 0; line-height: 1.5; }
 /* 순위 배지가 붙으면 열이 길어지므로 여백을 조금 줄인다 */
@@ -687,7 +687,7 @@ tbody tr.is-lee .sticky, tbody tr.is-lee .sticky2 { background: #2a2a1f; }
 /* 관리자 — 지역 재조회 */
 .geo-fix { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 16px 0 4px; }
 .geo-fix-btn {
-  border: 1px solid var(--border); background: var(--card); color: var(--fg);
+  border: 1px solid var(--border); background: var(--card); color: var(--text);
   font-size: 12px; font-weight: 700; padding: 7px 12px; border-radius: 8px; cursor: pointer;
 }
 .geo-fix-btn:disabled { opacity: 0.6; cursor: default; }

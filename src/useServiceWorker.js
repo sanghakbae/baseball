@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 /**
  * 서비스워커 등록 + 업데이트 감지.
@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react'
  */
 export function useServiceWorker() {
   const [waiting, setWaiting] = useState(null) // 교체 대기 중인 새 워커
+  const accepted = useRef(false) // 사용자가 업데이트를 수락했는지 (새로고침 여부 판단)
 
   useEffect(() => {
     if (!import.meta.env.PROD || !('serviceWorker' in navigator)) return
@@ -16,9 +17,14 @@ export function useServiceWorker() {
     let reg
     let reloading = false
 
-    // 새 워커가 제어권을 가져간 직후 1회만 새로고침 (무한 새로고침 방지)
+    // controllerchange 는 두 경우에 발생한다.
+    //  (1) 최초 설치 — activate 의 clients.claim() 이 이 페이지를 붙잡을 때
+    //  (2) 사용자가 업데이트를 수락해 대기 워커가 교체될 때
+    // (1)에서 새로고침하면 첫 방문자가 영문 모를 새로고침을 겪는다. 그렇다고 마운트 시점의
+    // controller 유무로 판단하면, 최초 방문 페이지는 그 값이 false 로 굳어 이후 정당한
+    // 업데이트까지 막힌다. 그래서 '사용자가 수락했는지'를 직접 신호로 쓴다.
     const onControllerChange = () => {
-      if (reloading) return
+      if (!accepted.current || reloading) return
       reloading = true
       window.location.reload()
     }
@@ -52,7 +58,11 @@ export function useServiceWorker() {
   }, [])
 
   // 수락 → 대기 워커 교체 → controllerchange 에서 새로고침
-  const applyUpdate = () => waiting?.postMessage({ type: 'SKIP_WAITING' })
+  const applyUpdate = () => {
+    if (!waiting) return
+    accepted.current = true
+    waiting.postMessage({ type: 'SKIP_WAITING' })
+  }
 
   return { updateReady: !!waiting, applyUpdate }
 }

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useStats } from './useStats.js'
 import { useVisitors } from './useVisitors.js'
 import { useCheers } from './useCheers.js'
@@ -292,13 +292,14 @@ function InstallHint() {
   const [dismissed, setDismissed] = useState(() => {
     try { return localStorage.getItem(INSTALL_DISMISS_KEY) === '1' } catch { return false }
   })
-  const [deferred, setDeferred] = useState(null) // Android Chrome 설치 프롬프트
+  // index.html 에서 미리 붙잡아 둔 이벤트가 있으면 그것을 쓰고, 아직이면 신호를 기다린다
+  const [deferred, setDeferred] = useState(() => window.__installPrompt || null)
   const [guide, setGuide] = useState(false)
 
   useEffect(() => {
-    const onPrompt = (e) => { e.preventDefault(); setDeferred(e) }
-    window.addEventListener('beforeinstallprompt', onPrompt)
-    return () => window.removeEventListener('beforeinstallprompt', onPrompt)
+    const pick = () => setDeferred(window.__installPrompt || null)
+    window.addEventListener('installprompt-ready', pick)
+    return () => window.removeEventListener('installprompt-ready', pick)
   }, [])
 
   if (dismissed || isStandalone()) return null
@@ -312,6 +313,7 @@ function InstallHint() {
     if (!deferred) return
     deferred.prompt()
     try { await deferred.userChoice } catch {}
+    window.__installPrompt = null // 프롬프트는 1회용
     setDeferred(null)
     close()
   }
@@ -1221,17 +1223,18 @@ function rankMap(splits, key, asc = false) {
 
 function WarBoard({ season }) {
   const [cat, setCat] = useState('total')
-  const [cache, setCache] = useState({}) // group → splits[]
+  const [cache, setCache] = useState({}) // group → { all, qualified }
+  const fetched = useRef({}) // 조회 완료한 group (이펙트 재실행 방지용)
   const [status, setStatus] = useState('loading')
 
   const active = WAR_CATS.find((c) => c.id === cat)
   const group = active.group
-  const cols = active.cols.map((k) => COL[k])
+  const cols = useMemo(() => active.cols.map((k) => COL[k]), [active])
 
   // 누적 지표(WAR·타격런 등)는 전체 풀, 비율 지표(wRC+·FIP)는 규정 충족자 풀에서 순위를 낸다.
   // 전체 풀에는 소수 이닝/타석 선수가 섞여 비율 지표 순위가 왜곡되기 때문.
   useEffect(() => {
-    if (cache[group]) { setStatus('ok'); return }
+    if (fetched.current[group]) { setStatus('ok'); return }
     let alive = true
     setStatus('loading')
     const url = (pool) =>
@@ -1244,14 +1247,18 @@ function WarBoard({ season }) {
       .then(([allJson, qualJson]) => {
         if (!alive) return
         const all = allJson.stats?.[0]?.splits ?? []
+        if (!all.length) { setStatus('error'); return } // 빈 응답은 캐시하지 않는다(재조회 가능)
         // 규정 충족 조회가 실패하면 전체 풀로 폴백(순위가 없는 것보다는 낫다)
         const qualified = qualJson?.stats?.[0]?.splits ?? all
+        fetched.current[group] = true
         setCache((c) => ({ ...c, [group]: { all, qualified } }))
-        setStatus(all.length ? 'ok' : 'error')
+        setStatus('ok')
       })
       .catch(() => { if (alive) setStatus('error') })
     return () => { alive = false }
-  }, [group, season, cache])
+    // cache 를 의존성에 두면 setCache 로 이펙트가 재실행되어 error 상태가 ok 로 덮인다.
+    // 조회 완료 여부는 리렌더를 유발하지 않는 ref 로 따로 기억한다.
+  }, [group, season])
 
   const { rows, leeRow, ranks, total, qualTotal } = useMemo(() => {
     const { all: pool = [], qualified = [] } = cache[group] ?? {}
