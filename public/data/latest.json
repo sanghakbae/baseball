@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-14T01:56:13.860Z",
+  "updatedAt": "2026-09-14T07:20:25.667Z",
   "season": 2026,
   "qualifiedCount": 137,
   "leagueMean": 0.256,
@@ -876,35 +876,6 @@
       "xBA": 0.261
     },
     {
-      "id": 808982,
-      "name": "Jung Hoo Lee",
-      "team": "SF",
-      "teamId": 137,
-      "teamName": "Giants",
-      "pos": "RF",
-      "G": 137,
-      "AB": 517,
-      "PA": 555,
-      "R": 63,
-      "H": 143,
-      "B2": 29,
-      "B3": 4,
-      "HR": 9,
-      "RBI": 55,
-      "SB": 12,
-      "BB": 27,
-      "SO": 55,
-      "AVG": 0.277,
-      "OBP": 0.319,
-      "SLG": 0.4,
-      "OPS": 0.719,
-      "rank": 31,
-      "careerAVG": 0.27,
-      "careerAB": 1222,
-      "careerHits": 330,
-      "xBA": 0.289
-    },
-    {
       "id": 686948,
       "name": "Drake Baldwin",
       "team": "ATL",
@@ -927,11 +898,40 @@
       "OBP": 0.351,
       "SLG": 0.449,
       "OPS": 0.8,
-      "rank": 32,
+      "rank": 31,
       "careerAVG": 0.275,
       "careerAB": 908,
       "careerHits": 250,
       "xBA": 0.274
+    },
+    {
+      "id": 808982,
+      "name": "Jung Hoo Lee",
+      "team": "SF",
+      "teamId": 137,
+      "teamName": "Giants",
+      "pos": "RF",
+      "G": 137,
+      "AB": 518,
+      "PA": 556,
+      "R": 63,
+      "H": 143,
+      "B2": 29,
+      "B3": 4,
+      "HR": 9,
+      "RBI": 55,
+      "SB": 12,
+      "BB": 27,
+      "SO": 55,
+      "AVG": 0.276,
+      "OBP": 0.318,
+      "SLG": 0.4,
+      "OPS": 0.718,
+      "rank": 32,
+      "careerAVG": 0.27,
+      "careerAB": 1223,
+      "careerHits": 330,
+      "xBA": 0.289
     },
     {
       "id": 668227,
@@ -4222,8 +4222,8 @@
       "currentAVG": 0.289,
       "H": 167,
       "AB": 577,
-      "remAB": 55,
-      "teamRemaining": 14,
+      "remAB": 51,
+      "teamRemaining": 13,
       "trueTalent": 0.289,
       "projAVG": 0.289,
       "ci80": [
@@ -4485,24 +4485,6 @@
       "pWinTitle": 0
     },
     {
-      "id": 808982,
-      "name": "Jung Hoo Lee",
-      "team": "SF",
-      "pos": "RF",
-      "currentAVG": 0.277,
-      "H": 143,
-      "AB": 517,
-      "remAB": 49,
-      "teamRemaining": 13,
-      "trueTalent": 0.277,
-      "projAVG": 0.277,
-      "ci80": [
-        0.269,
-        0.284
-      ],
-      "pWinTitle": 0
-    },
-    {
       "id": 575929,
       "name": "Willson Contreras",
       "team": "BOS",
@@ -4553,6 +4535,24 @@
       "ci80": [
         0.269,
         0.283
+      ],
+      "pWinTitle": 0
+    },
+    {
+      "id": 808982,
+      "name": "Jung Hoo Lee",
+      "team": "SF",
+      "pos": "RF",
+      "currentAVG": 0.276,
+      "H": 143,
+      "AB": 518,
+      "remAB": 45,
+      "teamRemaining": 12,
+      "trueTalent": 0.277,
+      "projAVG": 0.276,
+      "ci80": [
+        0.27,
+        0.284
       ],
       "pWinTitle": 0
     },
@@ -5176,8 +5176,8 @@
       "currentAVG": 0.258,
       "H": 144,
       "AB": 558,
-      "remAB": 49,
-      "teamRemaining": 13,
+      "remAB": 45,
+      "teamRemaining": 12,
       "trueTalent": 0.257,
       "projAVG": 0.258,
       "ci80": [
@@ -5464,12 +5464,12 @@
       "currentAVG": 0.248,
       "H": 140,
       "AB": 565,
-      "remAB": 54,
-      "teamRemaining": 14,
+      "remAB": 50,
+      "teamRemaining": 13,
       "trueTalent": 0.253,
       "projAVG": 0.248,
       "ci80": [
-        0.241,
+        0.242,
         0.255
       ],
       "pWinTitle": 0
@@ -6004,13 +6004,13 @@
       "currentAVG": 0.23,
       "H": 107,
       "AB": 465,
-      "remAB": 50,
-      "teamRemaining": 13,
+      "remAB": 46,
+      "teamRemaining": 12,
       "trueTalent": 0.231,
       "projAVG": 0.23,
       "ci80": [
         0.223,
-        0.239
+        0.237
       ],
       "pWinTitle": 0
     },
@@ -6166,8 +6166,8 @@
       "currentAVG": 0.222,
       "H": 108,
       "AB": 486,
-      "remAB": 48,
-      "teamRemaining": 14,
+      "remAB": 44,
+      "teamRemaining": 13,
       "trueTalent": 0.234,
       "projAVG": 0.223,
       "ci80": [
@@ -6220,8 +6220,8 @@
       "currentAVG": 0.221,
       "H": 119,
       "AB": 538,
-      "remAB": 52,
-      "teamRemaining": 14,
+      "remAB": 48,
+      "teamRemaining": 13,
       "trueTalent": 0.232,
       "projAVG": 0.222,
       "ci80": [
@@ -6464,9 +6464,9 @@
     "121": 149,
     "133": 150,
     "134": 150,
-    "135": 148,
+    "135": 149,
     "136": 150,
-    "137": 149,
+    "137": 150,
     "138": 150,
     "139": 149,
     "140": 150,
