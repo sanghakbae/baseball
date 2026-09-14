@@ -3,6 +3,7 @@ import { useStats } from './useStats.js'
 import { useVisitors } from './useVisitors.js'
 import { useCheers } from './useCheers.js'
 import { useVote } from './useVote.js'
+import { useServiceWorker } from './useServiceWorker.js'
 import { STAT_KEYS, HIGHER_IS_BETTER } from './data.js'
 
 const avg3 = (v) => (v == null ? '—' : v.toFixed(3).replace(/^0/, ''))
@@ -128,6 +129,7 @@ export default function App() {
         <ShareButton />
       </header>
 
+      <UpdateToast />
       <InstallHint />
 
       {isDesktop ? (
@@ -175,6 +177,90 @@ export default function App() {
   )
 }
 
+/* ---------- 업데이트 알림 ---------- */
+function UpdateToast() {
+  const { updateReady, applyUpdate } = useServiceWorker()
+  const [hidden, setHidden] = useState(false)
+  if (!updateReady || hidden) return null
+  return (
+    <div className="update-toast" role="status">
+      <span className="update-dot" />
+      <span className="update-text">새 버전이 있습니다</span>
+      <button className="update-btn" onClick={applyUpdate}>새로고침</button>
+      <button className="update-x" onClick={() => setHidden(true)} aria-label="나중에">✕</button>
+    </div>
+  )
+}
+
+/* ---------- 설치 가이드 ---------- */
+// 플랫폼마다 설치 경로가 완전히 달라 안내를 분리한다
+function installSteps() {
+  const ua = navigator.userAgent
+  const ios = isIOS()
+  if (ios) {
+    // iOS 는 Safari 에서만 홈 화면 추가가 제대로 동작한다
+    const safari = /safari/i.test(ua) && !/crios|fxios|edgios|opios/i.test(ua)
+    if (!safari) {
+      return {
+        title: 'Safari 에서 열어주세요',
+        note: 'iPhone 은 Safari 에서만 홈 화면 추가가 정상 동작합니다.',
+        steps: [
+          '이 페이지 주소를 복사합니다',
+          'Safari 를 열고 주소를 붙여넣어 접속합니다',
+          '아래 iPhone 안내대로 진행합니다',
+        ],
+      }
+    }
+    return {
+      title: 'iPhone · Safari',
+      steps: [
+        <>화면 하단 가운데의 <b>공유</b> <ShareGlyph /> 버튼을 누릅니다</>,
+        <>메뉴를 아래로 내려 <b>홈 화면에 추가</b> 를 선택합니다</>,
+        <>오른쪽 위 <b>추가</b> 를 누르면 완료됩니다</>,
+      ],
+    }
+  }
+  if (/android/i.test(ua)) {
+    return {
+      title: 'Android · Chrome',
+      steps: [
+        <>오른쪽 위 <b>⋮</b> 메뉴를 누릅니다</>,
+        <><b>앱 설치</b> 또는 <b>홈 화면에 추가</b> 를 선택합니다</>,
+        <><b>설치</b> 를 누르면 완료됩니다</>,
+      ],
+    }
+  }
+  return {
+    title: 'PC · Chrome / Edge',
+    steps: [
+      <>주소창 오른쪽의 <b>설치</b> 아이콘을 누릅니다</>,
+      <>안 보이면 <b>⋮</b> 메뉴 → <b>앱</b> → <b>이 사이트 설치</b></>,
+      <><b>설치</b> 를 누르면 완료됩니다</>,
+    ],
+  }
+}
+
+function InstallGuide({ onClose }) {
+  const { title, steps, note } = installSteps()
+  return (
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal install-guide" onClick={(e) => e.stopPropagation()}>
+        <img className="guide-icon" src="/apple-touch-icon.png" alt="" width="56" height="56" />
+        <h2 className="modal-title">홈 화면에 추가하기</h2>
+        <p className="modal-desc">
+          주소창 없이 전체화면으로 열리고, 오프라인에서도 마지막 화면을 볼 수 있습니다.
+        </p>
+        <div className="guide-plat">{title}</div>
+        <ol className="guide-steps">
+          {steps.map((s, i) => <li key={i}>{s}</li>)}
+        </ol>
+        {note && <p className="guide-note">{note}</p>}
+        <button className="modal-btn" onClick={onClose}>확인</button>
+      </div>
+    </div>
+  )
+}
+
 /* ---------- 홈 화면 추가 / 앱 설치 안내 ---------- */
 const INSTALL_DISMISS_KEY = 'baseball-install-dismissed'
 
@@ -182,10 +268,13 @@ const INSTALL_DISMISS_KEY = 'baseball-install-dismissed'
 const isStandalone = () =>
   window.matchMedia?.('(display-mode: standalone)').matches || window.navigator.standalone === true
 
-const isIOS = () =>
-  /iphone|ipad|ipod/i.test(navigator.userAgent)
-  // iPadOS 13+ 는 UA 가 Mac 으로 보이므로 터치 지원으로 판별
-  || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
+const isIOS = () => {
+  const ua = navigator.userAgent
+  if (/android/i.test(ua)) return false // 안드로이드가 먼저 배제되어야 한다
+  return /iphone|ipad|ipod/i.test(ua)
+    // iPadOS 13+ 는 UA 가 Mac 으로 보이므로 터치 지원 여부로 판별한다
+    || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
+}
 
 // iOS 공유 아이콘(네모+위쪽 화살표) — 폰트에 의존하지 않도록 SVG 로 그린다
 function ShareGlyph() {
@@ -204,6 +293,7 @@ function InstallHint() {
     try { return localStorage.getItem(INSTALL_DISMISS_KEY) === '1' } catch { return false }
   })
   const [deferred, setDeferred] = useState(null) // Android Chrome 설치 프롬프트
+  const [guide, setGuide] = useState(false)
 
   useEffect(() => {
     const onPrompt = (e) => { e.preventDefault(); setDeferred(e) }
@@ -212,9 +302,6 @@ function InstallHint() {
   }, [])
 
   if (dismissed || isStandalone()) return null
-  const ios = isIOS()
-  // iOS 가 아니고 설치 프롬프트도 없으면 보여줄 것이 없다(이미 설치했거나 미지원 브라우저)
-  if (!ios && !deferred) return null
 
   const close = () => {
     try { localStorage.setItem(INSTALL_DISMISS_KEY, '1') } catch {}
@@ -234,14 +321,13 @@ function InstallHint() {
       <img className="install-icon" src="/apple-touch-icon.png" alt="" width="34" height="34" />
       <div className="install-body">
         <b>앱처럼 쓰기</b>
-        {ios ? (
-          <span>하단 공유 <ShareGlyph /> → <b>홈 화면에 추가</b> 를 누르면 주소창 없이 전체화면으로 열립니다</span>
-        ) : (
-          <span>홈 화면에 추가하면 주소창 없이 전체화면으로 열립니다</span>
-        )}
+        <span>홈 화면에 추가하면 주소창 없이 전체화면으로 열립니다</span>
       </div>
-      {!ios && deferred && <button className="install-btn" onClick={install}>설치</button>}
+      {deferred
+        ? <button className="install-btn" onClick={install}>설치</button>
+        : <button className="install-btn" onClick={() => setGuide(true)}>설치 방법</button>}
       <button className="install-x" onClick={close} aria-label="닫기">✕</button>
+      {guide && <InstallGuide onClose={() => setGuide(false)} />}
     </div>
   )
 }
@@ -1085,28 +1171,34 @@ function LeeSeason({ players, season }) {
 //  - pitching: war, fip, xfip, eraMinus, rar
 const WAR_TOP = 100
 
-// 카테고리별 정렬 기준. asc=true 면 값이 낮을수록 상위(FIP·ERA-)
-const WAR_CATS = [
-  { id: 'total', label: '종합', group: 'hitting', sort: 'war' },
-  { id: 'batting', label: '타격', group: 'hitting', sort: 'batting' },
-  { id: 'baseRunning', label: '주루', group: 'hitting', sort: 'baseRunning' },
-  { id: 'fielding', label: '수비', group: 'hitting', sort: 'fielding' },
-  { id: 'pitching', label: '투구', group: 'pitching', sort: 'war' },
-]
+// 표에 쓸 수 있는 열 정의. rate=true 는 비율 지표(규정 충족자 기준으로 순위 산정),
+// asc=true 는 값이 낮을수록 상위(FIP·ERA-).
+const COL = {
+  war: { key: 'war', label: 'WAR', fmt: (v) => n1(v) },
+  batting: { key: 'batting', label: '타격', fmt: (v) => signed(v) },
+  baseRunning: { key: 'baseRunning', label: '주루', fmt: (v) => signed(v) },
+  fielding: { key: 'fielding', label: '수비', fmt: (v) => signed(v) },
+  wRcPlus: { key: 'wRcPlus', label: 'wRC+', fmt: (v) => n0(v), rate: true },
+  spd: { key: 'spd', label: '스피드', fmt: (v) => n1(v), rate: true },
+  positional: { key: 'positional', label: '포지션조정', fmt: (v) => signed(v) },
+  rar: { key: 'rar', label: 'RAR', fmt: (v) => n1(v) },
+  fip: { key: 'fip', label: 'FIP', fmt: (v) => n2(v), asc: true, rate: true },
+  eraMinus: { key: 'eraMinus', label: 'ERA-', fmt: (v) => n0(v), asc: true, rate: true },
+}
 
-// 표에 보여줄 열 — 각 열마다 자체 순위를 함께 계산한다
-const HIT_COLS = [
-  { key: 'war', label: 'WAR', fmt: (v) => n1(v) },
-  { key: 'batting', label: '타격', fmt: (v) => signed(v) },
-  { key: 'baseRunning', label: '주루', fmt: (v) => signed(v) },
-  { key: 'fielding', label: '수비', fmt: (v) => signed(v) },
-  { key: 'wRcPlus', label: 'wRC+', fmt: (v) => n0(v), rate: true },
-]
-const PIT_COLS = [
-  { key: 'war', label: 'WAR', fmt: (v) => n1(v) },
-  { key: 'rar', label: 'RAR', fmt: (v) => n1(v) },
-  { key: 'fip', label: 'FIP', fmt: (v) => n2(v), asc: true, rate: true },
-  { key: 'eraMinus', label: 'ERA-', fmt: (v) => n0(v), asc: true, rate: true },
+// 종합만 전 구성요소를 보여주고, 나머지는 해당 부문 지표만 보여준다.
+// (타격 탭에 주루·수비가 섞여 나오면 무엇을 보는 표인지 흐려진다)
+const WAR_CATS = [
+  { id: 'total', label: '종합', group: 'hitting', sort: 'war',
+    cols: ['war', 'batting', 'baseRunning', 'fielding', 'wRcPlus'] },
+  { id: 'batting', label: '타격', group: 'hitting', sort: 'batting',
+    cols: ['war', 'batting', 'wRcPlus'] },
+  { id: 'baseRunning', label: '주루', group: 'hitting', sort: 'baseRunning',
+    cols: ['war', 'baseRunning', 'spd'] },
+  { id: 'fielding', label: '수비', group: 'hitting', sort: 'fielding',
+    cols: ['war', 'fielding', 'positional'] },
+  { id: 'pitching', label: '투구', group: 'pitching', sort: 'war',
+    cols: ['war', 'rar', 'fip', 'eraMinus'] },
 ]
 
 const n1 = (v) => (v == null || Number.isNaN(+v) ? '—' : (+v).toFixed(1))
@@ -1134,7 +1226,7 @@ function WarBoard({ season }) {
 
   const active = WAR_CATS.find((c) => c.id === cat)
   const group = active.group
-  const cols = group === 'pitching' ? PIT_COLS : HIT_COLS
+  const cols = active.cols.map((k) => COL[k])
 
   // 누적 지표(WAR·타격런 등)는 전체 풀, 비율 지표(wRC+·FIP)는 규정 충족자 풀에서 순위를 낸다.
   // 전체 풀에는 소수 이닝/타석 선수가 섞여 비율 지표 순위가 왜곡되기 때문.
@@ -1248,7 +1340,7 @@ function WarBoard({ season }) {
       </div>
       <p className="war-note">
         괄호 안은 해당 지표 단독 순위 · 누적 지표(WAR·타격·주루·수비·RAR)는 전체 {total}명 기준,
-        비율 지표({isPit ? 'FIP·ERA-' : 'wRC+'})는 규정 충족 {qualTotal}명 기준 ·
+        비율 지표({cols.filter((c) => c.rate).map((c) => c.label).join('·') || '없음'})는 규정 충족 {qualTotal}명 기준 ·
         FIP·ERA-는 낮을수록 상위 · 규정 미달 선수는 비율 지표 순위가 표시되지 않습니다
       </p>
     </section>

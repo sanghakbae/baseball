@@ -8,7 +8,7 @@
  *   - /assets/*: 캐시 우선 (Vite 가 파일명에 해시를 박으므로 내용이 바뀌면 이름도 바뀐다)
  *   - /data/latest.json: 네트워크 우선 → 실패 시 캐시 (오프라인에선 마지막 데이터라도 보여준다)
  */
-const VERSION = 'v1'
+const VERSION = '__BUILD__' // 빌드 시 scripts/stamp-sw.mjs 가 자산 해시로 치환
 const CACHE = `baseball-${VERSION}`
 const OFFLINE_URL = '/index.html'
 
@@ -16,7 +16,8 @@ self.addEventListener('install', (e) => {
   e.waitUntil(
     caches.open(CACHE).then((c) => c.addAll([OFFLINE_URL, '/manifest.webmanifest'])).catch(() => {}),
   )
-  self.skipWaiting() // 새 워커를 대기시키지 않고 바로 교체
+  // 여기서 skipWaiting 하지 않는다. 사용자가 조작 중인 화면이 예고 없이 새로고침되기 때문.
+  // 대기 상태로 두고, 앱이 '업데이트 있음'을 안내한 뒤 사용자가 수락하면 아래 메시지로 교체한다.
 })
 
 self.addEventListener('activate', (e) => {
@@ -76,4 +77,9 @@ self.addEventListener('fetch', (e) => {
     e.respondWith(cacheFirst(request))
     return
   }
+})
+
+// 앱에서 사용자가 업데이트를 수락하면 호출된다
+self.addEventListener('message', (e) => {
+  if (e.data?.type === 'SKIP_WAITING') self.skipWaiting()
 })
