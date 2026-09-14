@@ -1027,13 +1027,13 @@ const HIT_COLS = [
   { key: 'batting', label: '타격', fmt: (v) => signed(v) },
   { key: 'baseRunning', label: '주루', fmt: (v) => signed(v) },
   { key: 'fielding', label: '수비', fmt: (v) => signed(v) },
-  { key: 'wRcPlus', label: 'wRC+', fmt: (v) => n0(v) },
+  { key: 'wRcPlus', label: 'wRC+', fmt: (v) => n0(v), rate: true },
 ]
 const PIT_COLS = [
   { key: 'war', label: 'WAR', fmt: (v) => n1(v) },
   { key: 'rar', label: 'RAR', fmt: (v) => n1(v) },
-  { key: 'fip', label: 'FIP', fmt: (v) => n2(v), asc: true },
-  { key: 'eraMinus', label: 'ERA-', fmt: (v) => n0(v), asc: true },
+  { key: 'fip', label: 'FIP', fmt: (v) => n2(v), asc: true, rate: true },
+  { key: 'eraMinus', label: 'ERA-', fmt: (v) => n0(v), asc: true, rate: true },
 ]
 
 const n1 = (v) => (v == null || Number.isNaN(+v) ? '—' : (+v).toFixed(1))
@@ -1063,38 +1063,44 @@ function WarBoard({ season }) {
   const group = active.group
   const cols = group === 'pitching' ? PIT_COLS : HIT_COLS
 
+  // 누적 지표(WAR·타격런 등)는 전체 풀, 비율 지표(wRC+·FIP)는 규정 충족자 풀에서 순위를 낸다.
+  // 전체 풀에는 소수 이닝/타석 선수가 섞여 비율 지표 순위가 왜곡되기 때문.
   useEffect(() => {
     if (cache[group]) { setStatus('ok'); return }
     let alive = true
     setStatus('loading')
-    fetch(
+    const url = (pool) =>
       `https://statsapi.mlb.com/api/v1/stats?stats=sabermetrics&group=${group}`
-      + `&season=${season}&sportId=1&limit=800&playerPool=All`,
-    )
-      .then((r) => r.json())
-      .then((j) => {
+      + `&season=${season}&sportId=1&limit=800&playerPool=${pool}`
+    Promise.all([
+      fetch(url('All')).then((r) => r.json()),
+      fetch(url('Qualified')).then((r) => r.json()).catch(() => null),
+    ])
+      .then(([allJson, qualJson]) => {
         if (!alive) return
-        const splits = j.stats?.[0]?.splits ?? []
-        setCache((c) => ({ ...c, [group]: splits }))
-        setStatus(splits.length ? 'ok' : 'error')
+        const all = allJson.stats?.[0]?.splits ?? []
+        // 규정 충족 조회가 실패하면 전체 풀로 폴백(순위가 없는 것보다는 낫다)
+        const qualified = qualJson?.stats?.[0]?.splits ?? all
+        setCache((c) => ({ ...c, [group]: { all, qualified } }))
+        setStatus(all.length ? 'ok' : 'error')
       })
       .catch(() => { if (alive) setStatus('error') })
     return () => { alive = false }
   }, [group, season, cache])
 
-  const { rows, leeRow, ranks, total } = useMemo(() => {
-    const splits = cache[group] ?? []
-    // 표시할 모든 열에 대해 순위 맵을 미리 계산 (각각의 순위를 배지로 보여주기 위함)
+  const { rows, leeRow, ranks, total, qualTotal } = useMemo(() => {
+    const { all: pool = [], qualified = [] } = cache[group] ?? {}
+    // 열마다 순위 맵을 미리 계산 — 비율 지표는 규정 충족자 풀에서
     const rk = {}
-    for (const c of cols) rk[c.key] = rankMap(splits, c.key, c.asc)
-    if (!rk[active.sort]) rk[active.sort] = rankMap(splits, active.sort, active.asc)
+    for (const c of cols) rk[c.key] = rankMap(c.rate ? qualified : pool, c.key, c.asc)
+    if (!rk[active.sort]) rk[active.sort] = rankMap(pool, active.sort, active.asc)
 
     const key = active.sort
-    const sorted = [...splits]
+    const sorted = [...pool]
       .filter((s) => s.stat?.[key] != null)
       .sort((a, b) => (active.asc ? a.stat[key] - b.stat[key] : b.stat[key] - a.stat[key]))
 
-    const all = sorted.map((s) => ({
+    const listed = sorted.map((s) => ({
       rank: rk[key][s.player.id],
       id: s.player.id,
       name: s.player.fullName,
@@ -1102,12 +1108,13 @@ function WarBoard({ season }) {
       pos: s.position?.abbreviation,
       st: s.stat,
     }))
-    const lee = all.find((r) => isLee({ name: r.name }))
+    const lee = listed.find((r) => isLee({ name: r.name }))
     return {
-      rows: all.slice(0, WAR_TOP),
+      rows: listed.slice(0, WAR_TOP),
       leeRow: lee && lee.rank > WAR_TOP ? lee : null,
       ranks: rk,
-      total: all.length,
+      total: listed.length,
+      qualTotal: qualified.length,
     }
   }, [cache, group, active, cols])
 
@@ -1167,8 +1174,9 @@ function WarBoard({ season }) {
         </table>
       </div>
       <p className="war-note">
-        괄호 안은 해당 지표 단독 순위(전체 {total}명 기준) · FIP·ERA-는 낮을수록 상위 ·
-        wRC+·FIP 같은 비율 지표는 출장이 적은 선수도 함께 집계되어 순위가 낮게 보일 수 있습니다
+        괄호 안은 해당 지표 단독 순위 · 누적 지표(WAR·타격·주루·수비·RAR)는 전체 {total}명 기준,
+        비율 지표({isPit ? 'FIP·ERA-' : 'wRC+'})는 규정 충족 {qualTotal}명 기준 ·
+        FIP·ERA-는 낮을수록 상위 · 규정 미달 선수는 비율 지표 순위가 표시되지 않습니다
       </p>
     </section>
   )
