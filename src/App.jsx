@@ -54,6 +54,7 @@ const TABS = [
   { id: 'live', label: '🔴 Live' },
   { id: 'compare', label: '⚔️ 비교' },
   { id: 'zone', label: '🎯 이정후' },
+  { id: 'war', label: '🏆 WAR' },
   { id: 'cheer', label: '📣 응원' },
 ]
 const TAB_KEY = 'baseball-tab'
@@ -135,6 +136,7 @@ export default function App() {
           <div className="dash-item d-live"><LiveTop10 players={data.players} season={data.season} /></div>
           <div className="dash-item d-zone"><LeeZone players={data.players} season={data.season} /><LeeSeason players={data.players} season={data.season} /></div>
           <div className="dash-item d-compare"><Compare players={data.players} /></div>
+          <div className="dash-item d-war"><WarBoard season={data.season} /></div>
           <div className="dash-item d-cheer"><CheerBoard /></div>
         </div>
       ) : (
@@ -157,6 +159,7 @@ export default function App() {
           {tab === 'live' && <LiveTop10 players={data.players} season={data.season} />}
           {tab === 'compare' && <Compare players={data.players} />}
           {tab === 'zone' && <><LeeZone players={data.players} season={data.season} /><LeeSeason players={data.players} season={data.season} /></>}
+          {tab === 'war' && <WarBoard season={data.season} />}
           {tab === 'cheer' && <CheerBoard />}
         </>
       )}
@@ -1000,6 +1003,195 @@ function LeeSeason({ players, season }) {
       </div>
     </section>
     </>
+  )
+}
+
+/* ---------- WAR 순위 탭 ---------- */
+// MLB Stats API sabermetrics(FanGraphs 계열). WAR = 타격 + 주루 + 수비 + 포지션조정 + 리그조정 + 대체수준
+//  - hitting: war, batting, baseRunning, fielding, positional, replacement, wRcPlus, woba, spd
+//  - pitching: war, fip, xfip, eraMinus, rar
+const WAR_TOP = 100
+
+// 카테고리별 정렬 기준. asc=true 면 값이 낮을수록 상위(FIP·ERA-)
+const WAR_CATS = [
+  { id: 'total', label: '종합', group: 'hitting', sort: 'war' },
+  { id: 'batting', label: '타격', group: 'hitting', sort: 'batting' },
+  { id: 'baseRunning', label: '주루', group: 'hitting', sort: 'baseRunning' },
+  { id: 'fielding', label: '수비', group: 'hitting', sort: 'fielding' },
+  { id: 'pitching', label: '투구', group: 'pitching', sort: 'war' },
+]
+
+// 표에 보여줄 열 — 각 열마다 자체 순위를 함께 계산한다
+const HIT_COLS = [
+  { key: 'war', label: 'WAR', fmt: (v) => n1(v) },
+  { key: 'batting', label: '타격', fmt: (v) => signed(v) },
+  { key: 'baseRunning', label: '주루', fmt: (v) => signed(v) },
+  { key: 'fielding', label: '수비', fmt: (v) => signed(v) },
+  { key: 'wRcPlus', label: 'wRC+', fmt: (v) => n0(v) },
+]
+const PIT_COLS = [
+  { key: 'war', label: 'WAR', fmt: (v) => n1(v) },
+  { key: 'rar', label: 'RAR', fmt: (v) => n1(v) },
+  { key: 'fip', label: 'FIP', fmt: (v) => n2(v), asc: true },
+  { key: 'eraMinus', label: 'ERA-', fmt: (v) => n0(v), asc: true },
+]
+
+const n1 = (v) => (v == null || Number.isNaN(+v) ? '—' : (+v).toFixed(1))
+const n2 = (v) => (v == null || Number.isNaN(+v) ? '—' : (+v).toFixed(2))
+const n0 = (v) => (v == null || Number.isNaN(+v) ? '—' : String(Math.round(+v)))
+// 런(run) 지표는 0 기준 ± 이므로 부호를 붙여야 읽힌다
+const signed = (v) => (v == null || Number.isNaN(+v) ? '—' : `${+v > 0 ? '+' : ''}${(+v).toFixed(1)}`)
+
+// 값 배열로 선수ID → 공동순위 맵 만들기
+function rankMap(splits, key, asc = false) {
+  const valid = splits.filter((s) => s.stat?.[key] != null)
+  const sorted = [...valid].sort((a, b) => (asc ? a.stat[key] - b.stat[key] : b.stat[key] - a.stat[key]))
+  const m = {}
+  sorted.forEach((s, i) => {
+    const prev = sorted[i - 1]
+    m[s.player.id] = prev && prev.stat[key] === s.stat[key] ? m[prev.player.id] : i + 1
+  })
+  return m
+}
+
+function WarBoard({ season }) {
+  const [cat, setCat] = useState('total')
+  const [cache, setCache] = useState({}) // group → splits[]
+  const [status, setStatus] = useState('loading')
+
+  const active = WAR_CATS.find((c) => c.id === cat)
+  const group = active.group
+  const cols = group === 'pitching' ? PIT_COLS : HIT_COLS
+
+  useEffect(() => {
+    if (cache[group]) { setStatus('ok'); return }
+    let alive = true
+    setStatus('loading')
+    fetch(
+      `https://statsapi.mlb.com/api/v1/stats?stats=sabermetrics&group=${group}`
+      + `&season=${season}&sportId=1&limit=800&playerPool=All`,
+    )
+      .then((r) => r.json())
+      .then((j) => {
+        if (!alive) return
+        const splits = j.stats?.[0]?.splits ?? []
+        setCache((c) => ({ ...c, [group]: splits }))
+        setStatus(splits.length ? 'ok' : 'error')
+      })
+      .catch(() => { if (alive) setStatus('error') })
+    return () => { alive = false }
+  }, [group, season, cache])
+
+  const { rows, leeRow, ranks, total } = useMemo(() => {
+    const splits = cache[group] ?? []
+    // 표시할 모든 열에 대해 순위 맵을 미리 계산 (각각의 순위를 배지로 보여주기 위함)
+    const rk = {}
+    for (const c of cols) rk[c.key] = rankMap(splits, c.key, c.asc)
+    if (!rk[active.sort]) rk[active.sort] = rankMap(splits, active.sort, active.asc)
+
+    const key = active.sort
+    const sorted = [...splits]
+      .filter((s) => s.stat?.[key] != null)
+      .sort((a, b) => (active.asc ? a.stat[key] - b.stat[key] : b.stat[key] - a.stat[key]))
+
+    const all = sorted.map((s) => ({
+      rank: rk[key][s.player.id],
+      id: s.player.id,
+      name: s.player.fullName,
+      team: s.team?.name,
+      pos: s.position?.abbreviation,
+      st: s.stat,
+    }))
+    const lee = all.find((r) => isLee({ name: r.name }))
+    return {
+      rows: all.slice(0, WAR_TOP),
+      leeRow: lee && lee.rank > WAR_TOP ? lee : null,
+      ranks: rk,
+      total: all.length,
+    }
+  }, [cache, group, active, cols])
+
+  if (status === 'loading') {
+    return <section className="card-section"><p className="empty">WAR 데이터 불러오는 중…</p></section>
+  }
+  if (status === 'error') {
+    return <section className="card-section"><p className="empty">WAR 데이터를 불러오지 못했습니다.</p></section>
+  }
+
+  const isPit = group === 'pitching'
+  const desc = {
+    total: '타자 종합 WAR — 타격·주루·수비·포지션 조정을 모두 합산',
+    batting: '타격으로 만든 득점 기여(런)',
+    baseRunning: '주루로 만든 득점 기여(런)',
+    fielding: '수비로 막은 실점 기여(런)',
+    pitching: '투수 WAR',
+  }[cat]
+
+  return (
+    <section className="card-section">
+      <h2 className="sec-title">🏆 WAR 순위 TOP {WAR_TOP}</h2>
+      <p className="sec-desc">{season} 시즌 · {desc} 기준 · 전체 {total}명 중</p>
+
+      <div className="war-cats">
+        {WAR_CATS.map((c) => (
+          <button key={c.id} className={`chip ${c.id === cat ? 'active' : ''}`} onClick={() => setCat(c.id)}>
+            {c.label}
+          </button>
+        ))}
+      </div>
+
+      <div className="table-wrap">
+        <table className="war-table">
+          <thead>
+            <tr>
+              <th className="sticky">#</th>
+              <th className="sticky2">선수</th>
+              <th>팀</th>
+              {!isPit && <th>POS</th>}
+              {cols.map((c) => (
+                <th key={c.key} className={c.key === active.sort ? 'war-sorted' : ''}>{c.label}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((r) => (
+              <WarRow key={r.id} r={r} cols={cols} ranks={ranks} isPit={isPit} sortKey={active.sort} />
+            ))}
+            {leeRow && (
+              <>
+                <tr className="war-gap"><td colSpan={cols.length + (isPit ? 3 : 4)}>⋯</td></tr>
+                <WarRow r={leeRow} cols={cols} ranks={ranks} isPit={isPit} sortKey={active.sort} />
+              </>
+            )}
+          </tbody>
+        </table>
+      </div>
+      <p className="war-note">
+        괄호 안은 해당 지표 단독 순위(전체 {total}명 기준) · FIP·ERA-는 낮을수록 상위 ·
+        wRC+·FIP 같은 비율 지표는 출장이 적은 선수도 함께 집계되어 순위가 낮게 보일 수 있습니다
+      </p>
+    </section>
+  )
+}
+
+function WarRow({ r, cols, ranks, isPit, sortKey }) {
+  const lee = isLee({ name: r.name })
+  return (
+    <tr className={lee ? 'is-lee' : ''}>
+      <td className="sticky">{r.rank}</td>
+      <td className="sticky2"><strong>{r.name}</strong></td>
+      <td>{abbr(r.team)}</td>
+      {!isPit && <td>{r.pos || '—'}</td>}
+      {cols.map((c) => {
+        const rank = ranks[c.key]?.[r.id]
+        return (
+          <td key={c.key} className={c.key === sortKey ? 'war-sorted' : ''}>
+            {c.fmt(r.st[c.key])}
+            {rank ? <small className={`stat-rk ${rank <= 10 ? 'top' : ''}`}>({rank})</small> : null}
+          </td>
+        )
+      })}
+    </tr>
   )
 }
 

@@ -93,6 +93,7 @@ html, body {
 .d-live    { grid-area: 3 / 1 / 4 / 2; }
 .d-zone    { grid-area: 3 / 2 / 4 / 3; }
 .d-compare { grid-area: 3 / 3 / 4 / 4; }
+.d-war     { grid-area: 4 / 1 / 5 / 4; } /* WAR 표는 열이 많아 전폭 사용 */
 /* 랭킹 그래프: 패널 폭 100% 반응형 */
 .d-rank .rank-chart { max-width: none; width: 100%; }
 .d-rank .table-wrap, .d-rank table { width: 100%; }
@@ -615,6 +616,16 @@ tbody tr.is-lee .sticky, tbody tr.is-lee .sticky2 { background: #2a2a1f; }
   color: var(--muted); font-size: 12px; font-weight: 600; border-radius: 4px; cursor: pointer;
 }
 .pg.active { background: var(--opp); border-color: var(--opp); color: #06101f; }
+
+
+/* ---- WAR 순위 탭 ---- */
+.war-cats { display: flex; gap: 6px; flex-wrap: wrap; margin: 8px 0 10px; }
+.war-table th.war-sorted, .war-table td.war-sorted { background: rgba(74, 168, 255, 0.1); font-weight: 700; }
+.war-table td.war-sorted { color: var(--fg); }
+.war-table tr.war-gap td { text-align: center; color: var(--muted); padding: 2px; letter-spacing: 3px; }
+.war-note { font-size: 10.5px; color: var(--muted); margin: 8px 2px 0; line-height: 1.5; }
+/* 순위 배지가 붙으면 열이 길어지므로 여백을 조금 줄인다 */
+.war-table th, .war-table td { padding: 5px 5px; }
 
 /* 관리자 — 지역 재조회 */
 .geo-fix { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 16px 0 4px; }
