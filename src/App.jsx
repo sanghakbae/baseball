@@ -1244,12 +1244,14 @@ const WAR_CATS = [
   // 종합은 타자 WAR + 투수 WAR 합산. 투수도 포함되고, 이도류는 양쪽이 더해진다.
   { id: 'total', label: '종합', group: 'combined', sort: 'war',
     cols: ['war', 'warBat', 'warPit', 'batting', 'fielding'] },
+  // 정렬 기준 지표를 맨 앞에 둔다. WAR 이 앞에 오면 그 값이 오르내려
+  // 정렬이 안 된 것처럼 보인다(모바일은 가로 스크롤이라 첫 열만 보이기도 한다).
   { id: 'batting', label: '타격', group: 'hitting', sort: 'batting',
-    cols: ['war', 'batting', 'wRcPlus'] },
+    cols: ['batting', 'wRcPlus', 'war'] },
   { id: 'baseRunning', label: '주루', group: 'hitting', sort: 'baseRunning',
-    cols: ['war', 'baseRunning', 'spd'] },
+    cols: ['baseRunning', 'spd', 'war'] },
   { id: 'fielding', label: '수비', group: 'hitting', sort: 'fielding',
-    cols: ['war', 'fielding', 'positional'] },
+    cols: ['fielding', 'positional', 'war'] },
   { id: 'pitching', label: '투구', group: 'pitching', sort: 'war',
     cols: ['war', 'rar', 'fip', 'eraMinus'] },
 ]
