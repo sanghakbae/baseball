@@ -128,6 +128,8 @@ export default function App() {
         <ShareButton />
       </header>
 
+      <InstallHint />
+
       {isDesktop ? (
         // PC 대시보드: 1행(예측+랭킹), 2행(톱10·코스별·비교), 3행(응원)
         <div className="dashboard">
@@ -169,6 +171,77 @@ export default function App() {
       </div>
 
       <AllStarModal />
+    </div>
+  )
+}
+
+/* ---------- 홈 화면 추가 / 앱 설치 안내 ---------- */
+const INSTALL_DISMISS_KEY = 'baseball-install-dismissed'
+
+// 이미 홈 화면에서 실행 중인지 (iOS 는 navigator.standalone, 그 외는 display-mode)
+const isStandalone = () =>
+  window.matchMedia?.('(display-mode: standalone)').matches || window.navigator.standalone === true
+
+const isIOS = () =>
+  /iphone|ipad|ipod/i.test(navigator.userAgent)
+  // iPadOS 13+ 는 UA 가 Mac 으로 보이므로 터치 지원으로 판별
+  || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
+
+// iOS 공유 아이콘(네모+위쪽 화살표) — 폰트에 의존하지 않도록 SVG 로 그린다
+function ShareGlyph() {
+  return (
+    <svg className="ios-share" viewBox="0 0 24 24" width="13" height="13" aria-label="공유" role="img">
+      <path d="M12 3v12M12 3l-3.5 3.5M12 3l3.5 3.5" fill="none" stroke="currentColor"
+        strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M7 10H5.5A1.5 1.5 0 0 0 4 11.5v8A1.5 1.5 0 0 0 5.5 21h13a1.5 1.5 0 0 0 1.5-1.5v-8A1.5 1.5 0 0 0 18.5 10H17"
+        fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  )
+}
+
+function InstallHint() {
+  const [dismissed, setDismissed] = useState(() => {
+    try { return localStorage.getItem(INSTALL_DISMISS_KEY) === '1' } catch { return false }
+  })
+  const [deferred, setDeferred] = useState(null) // Android Chrome 설치 프롬프트
+
+  useEffect(() => {
+    const onPrompt = (e) => { e.preventDefault(); setDeferred(e) }
+    window.addEventListener('beforeinstallprompt', onPrompt)
+    return () => window.removeEventListener('beforeinstallprompt', onPrompt)
+  }, [])
+
+  if (dismissed || isStandalone()) return null
+  const ios = isIOS()
+  // iOS 가 아니고 설치 프롬프트도 없으면 보여줄 것이 없다(이미 설치했거나 미지원 브라우저)
+  if (!ios && !deferred) return null
+
+  const close = () => {
+    try { localStorage.setItem(INSTALL_DISMISS_KEY, '1') } catch {}
+    setDismissed(true)
+  }
+
+  const install = async () => {
+    if (!deferred) return
+    deferred.prompt()
+    try { await deferred.userChoice } catch {}
+    setDeferred(null)
+    close()
+  }
+
+  return (
+    <div className="install-hint">
+      <img className="install-icon" src="/apple-touch-icon.png" alt="" width="34" height="34" />
+      <div className="install-body">
+        <b>앱처럼 쓰기</b>
+        {ios ? (
+          <span>하단 공유 <ShareGlyph /> → <b>홈 화면에 추가</b> 를 누르면 주소창 없이 전체화면으로 열립니다</span>
+        ) : (
+          <span>홈 화면에 추가하면 주소창 없이 전체화면으로 열립니다</span>
+        )}
+      </div>
+      {!ios && deferred && <button className="install-btn" onClick={install}>설치</button>}
+      <button className="install-x" onClick={close} aria-label="닫기">✕</button>
     </div>
   )
 }
