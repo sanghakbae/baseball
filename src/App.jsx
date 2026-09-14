@@ -118,6 +118,10 @@ export default function App() {
         <button className="theme-btn" onClick={toggleTheme} title="테마 전환">
           {theme === 'dark' ? '☀️' : '🌙'}
         </button>
+        <div className="hero-actions">
+          <button className="hero-admin" title="관리자" onClick={() => { window.location.hash = 'admin' }}>🔧</button>
+          <ShareButton />
+        </div>
         <h1>2026년 누가 <span className="hl">타격왕</span>이 될까?</h1>
         <p className="updated">
           <span className={`live-dot ${live ? 'on' : ''} ${refreshing ? 'pulse' : ''}`} />
@@ -126,7 +130,6 @@ export default function App() {
           {' · '}규정타석 {data.qualifiedCount}명
         </p>
         <div className="hero-meta"><Visitors /></div>
-        <ShareButton />
       </header>
 
       <UpdateToast />
@@ -167,10 +170,6 @@ export default function App() {
           {tab === 'cheer' && <CheerBoard />}
         </>
       )}
-
-      <div className="admin-access">
-        <button onClick={() => { window.location.hash = 'admin' }}>🔧 관리자</button>
-      </div>
 
       <AllStarModal />
     </div>
@@ -1177,6 +1176,8 @@ const WAR_TOP = 100
 // asc=true 는 값이 낮을수록 상위(FIP·ERA-).
 const COL = {
   war: { key: 'war', label: 'WAR', fmt: (v) => n1(v) },
+  warBat: { key: 'warBat', label: '타자', fmt: (v) => n1(v) },
+  warPit: { key: 'warPit', label: '투수', fmt: (v) => n1(v) },
   batting: { key: 'batting', label: '타격', fmt: (v) => signed(v) },
   baseRunning: { key: 'baseRunning', label: '주루', fmt: (v) => signed(v) },
   fielding: { key: 'fielding', label: '수비', fmt: (v) => signed(v) },
@@ -1191,8 +1192,9 @@ const COL = {
 // 종합만 전 구성요소를 보여주고, 나머지는 해당 부문 지표만 보여준다.
 // (타격 탭에 주루·수비가 섞여 나오면 무엇을 보는 표인지 흐려진다)
 const WAR_CATS = [
-  { id: 'total', label: '종합', group: 'hitting', sort: 'war',
-    cols: ['war', 'batting', 'baseRunning', 'fielding', 'wRcPlus'] },
+  // 종합은 타자 WAR + 투수 WAR 합산. 투수도 포함되고, 이도류는 양쪽이 더해진다.
+  { id: 'total', label: '종합', group: 'combined', sort: 'war',
+    cols: ['war', 'warBat', 'warPit', 'batting', 'fielding'] },
   { id: 'batting', label: '타격', group: 'hitting', sort: 'batting',
     cols: ['war', 'batting', 'wRcPlus'] },
   { id: 'baseRunning', label: '주루', group: 'hitting', sort: 'baseRunning',
@@ -1223,48 +1225,71 @@ function rankMap(splits, key, asc = false) {
 
 function WarBoard({ season }) {
   const [cat, setCat] = useState('total')
-  const [cache, setCache] = useState({}) // group → { all, qualified }
-  const fetched = useRef({}) // 조회 완료한 group (이펙트 재실행 방지용)
+  const [pools, setPools] = useState(null) // { hitting: splits[], pitching: splits[] }
   const [status, setStatus] = useState('loading')
 
   const active = WAR_CATS.find((c) => c.id === cat)
-  const group = active.group
   const cols = useMemo(() => active.cols.map((k) => COL[k]), [active])
 
-  // 누적 지표(WAR·타격런 등)는 전체 풀, 비율 지표(wRC+·FIP)는 규정 충족자 풀에서 순위를 낸다.
-  // 전체 풀에는 소수 이닝/타석 선수가 섞여 비율 지표 순위가 왜곡되기 때문.
+  // 타자·투수 풀을 한 번에 받아 둔다. 종합은 두 풀을 합산해야 하므로 어차피 둘 다 필요하다.
   useEffect(() => {
-    if (fetched.current[group]) { setStatus('ok'); return }
     let alive = true
     setStatus('loading')
-    const url = (pool) =>
-      `https://statsapi.mlb.com/api/v1/stats?stats=sabermetrics&group=${group}`
-      + `&season=${season}&sportId=1&limit=800&playerPool=${pool}`
+    const url = (g) =>
+      `https://statsapi.mlb.com/api/v1/stats?stats=sabermetrics&group=${g}`
+      + `&season=${season}&sportId=1&limit=1500&playerPool=All`
     Promise.all([
-      fetch(url('All')).then((r) => r.json()),
-      fetch(url('Qualified')).then((r) => r.json()).catch(() => null),
+      fetch(url('hitting')).then((r) => r.json()),
+      fetch(url('pitching')).then((r) => r.json()),
     ])
-      .then(([allJson, qualJson]) => {
+      .then(([h, p]) => {
         if (!alive) return
-        const all = allJson.stats?.[0]?.splits ?? []
-        if (!all.length) { setStatus('error'); return } // 빈 응답은 캐시하지 않는다(재조회 가능)
-        // 규정 충족 조회가 실패하면 전체 풀로 폴백(순위가 없는 것보다는 낫다)
-        const qualified = qualJson?.stats?.[0]?.splits ?? all
-        fetched.current[group] = true
-        setCache((c) => ({ ...c, [group]: { all, qualified } }))
+        const hitting = h.stats?.[0]?.splits ?? []
+        const pitching = p.stats?.[0]?.splits ?? []
+        if (!hitting.length && !pitching.length) { setStatus('error'); return }
+        setPools({ hitting, pitching })
         setStatus('ok')
       })
       .catch(() => { if (alive) setStatus('error') })
     return () => { alive = false }
-    // cache 를 의존성에 두면 setCache 로 이펙트가 재실행되어 error 상태가 ok 로 덮인다.
-    // 조회 완료 여부는 리렌더를 유발하지 않는 ref 로 따로 기억한다.
-  }, [group, season])
+  }, [season])
 
-  const { rows, leeRow, ranks, total, qualTotal } = useMemo(() => {
-    const { all: pool = [], qualified = [] } = cache[group] ?? {}
-    // 열마다 순위 맵을 미리 계산 — 비율 지표는 규정 충족자 풀에서
+  // 종합: 선수 단위로 타자 WAR + 투수 WAR 를 더한다(이도류는 둘 다 합산된다).
+  // 투수도 종합 순위에 포함되어야 하므로 두 풀의 합집합을 만든다.
+  const combined = useMemo(() => {
+    if (!pools) return []
+    const by = new Map()
+    const take = (s) => {
+      let e = by.get(s.player.id)
+      if (!e) {
+        e = { player: s.player, team: s.team, position: s.position, stat: {} }
+        by.set(s.player.id, e)
+      }
+      return e
+    }
+    for (const s of pools.hitting) {
+      const e = take(s)
+      Object.assign(e.stat, s.stat)          // 타격·주루·수비·wRC+ 등
+      e.stat.warBat = s.stat.war
+    }
+    for (const s of pools.pitching) {
+      const e = take(s)
+      e.stat.warPit = s.stat.war
+      // 투수 전용 지표는 타자 지표와 키가 겹치지 않는다
+      e.stat.fip = s.stat.fip; e.stat.eraMinus = s.stat.eraMinus; e.stat.rar = s.stat.rar
+      if (!e.position) e.position = s.position
+    }
+    for (const e of by.values()) e.stat.war = (e.stat.warBat || 0) + (e.stat.warPit || 0)
+    return [...by.values()]
+  }, [pools])
+
+  const poolFor = (g) => (g === 'combined' ? combined : pools?.[g] ?? [])
+
+  const { rows, leeRow, ranks, total } = useMemo(() => {
+    const pool = poolFor(active.group)
+    // 열마다 순위 맵을 미리 계산 (규정 충족 여부와 무관하게 전체 풀 기준)
     const rk = {}
-    for (const c of cols) rk[c.key] = rankMap(c.rate ? qualified : pool, c.key, c.asc)
+    for (const c of cols) rk[c.key] = rankMap(pool, c.key, c.asc)
     if (!rk[active.sort]) rk[active.sort] = rankMap(pool, active.sort, active.asc)
 
     const key = active.sort
@@ -1286,20 +1311,12 @@ function WarBoard({ season }) {
       leeRow: lee && lee.rank > WAR_TOP ? lee : null,
       ranks: rk,
       total: listed.length,
-      qualTotal: qualified.length,
     }
-  }, [cache, group, active, cols])
+  }, [pools, combined, active, cols])
 
-  if (status === 'loading') {
-    return <section className="card-section"><p className="empty">WAR 데이터 불러오는 중…</p></section>
-  }
-  if (status === 'error') {
-    return <section className="card-section"><p className="empty">WAR 데이터를 불러오지 못했습니다.</p></section>
-  }
-
-  const isPit = group === 'pitching'
+  const isPit = active.group === 'pitching'
   const desc = {
-    total: '타자 종합 WAR — 타격·주루·수비·포지션 조정을 모두 합산',
+    total: '타자 WAR + 투수 WAR 합산 (투수 포함, 이도류는 양쪽 합산)',
     batting: '타격으로 만든 득점 기여(런)',
     baseRunning: '주루로 만든 득점 기여(런)',
     fielding: '수비로 막은 실점 기여(런)',
@@ -1319,6 +1336,12 @@ function WarBoard({ season }) {
         ))}
       </div>
 
+      {status !== 'ok' ? (
+        <p className="empty">
+          {status === 'loading' ? 'WAR 데이터 불러오는 중…' : 'WAR 데이터를 불러오지 못했습니다.'}
+        </p>
+      ) : (
+      <>
       <div className="table-wrap">
         <table className="war-table">
           <thead>
@@ -1346,10 +1369,14 @@ function WarBoard({ season }) {
         </table>
       </div>
       <p className="war-note">
-        괄호 안은 해당 지표 단독 순위 · 누적 지표(WAR·타격·주루·수비·RAR)는 전체 {total}명 기준,
-        비율 지표({cols.filter((c) => c.rate).map((c) => c.label).join('·') || '없음'})는 규정 충족 {qualTotal}명 기준 ·
-        FIP·ERA-는 낮을수록 상위 · 규정 미달 선수는 비율 지표 순위가 표시되지 않습니다
+        출처: MLB Stats API 세이버메트릭스 — 투수 WAR 를 FIP 기반으로 계산하는 <b>fWAR 계열</b>입니다.
+        실점 기반인 bWAR(Baseball-Reference)와는 값이 다를 수 있습니다(특히 투수·수비형 선수).
+        <br />
+        괄호 안은 해당 지표 단독 순위 · 규정 충족 여부와 무관하게 전체 {total}명 기준 ·
+        FIP·ERA-는 낮을수록 상위 · 출장이 적은 선수도 포함되므로 비율 지표는 표본이 작은 순위가 섞일 수 있습니다
       </p>
+      </>
+      )}
     </section>
   )
 }
