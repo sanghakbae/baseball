@@ -1172,8 +1172,7 @@ function LeeSeason({ players, season }) {
 //  - pitching: war, fip, xfip, eraMinus, rar
 const WAR_TOP = 100
 
-// 표에 쓸 수 있는 열 정의. rate=true 는 비율 지표(규정 충족자 기준으로 순위 산정),
-// asc=true 는 값이 낮을수록 상위(FIP·ERA-).
+// 표에 쓸 수 있는 열 정의. asc=true 는 값이 낮을수록 상위(FIP·ERA-).
 const COL = {
   war: { key: 'war', label: 'WAR', fmt: (v) => n1(v) },
   warBat: { key: 'warBat', label: '타자', fmt: (v) => n1(v) },
@@ -1181,12 +1180,12 @@ const COL = {
   batting: { key: 'batting', label: '타격', fmt: (v) => signed(v) },
   baseRunning: { key: 'baseRunning', label: '주루', fmt: (v) => signed(v) },
   fielding: { key: 'fielding', label: '수비', fmt: (v) => signed(v) },
-  wRcPlus: { key: 'wRcPlus', label: 'wRC+', fmt: (v) => n0(v), rate: true },
-  spd: { key: 'spd', label: '스피드', fmt: (v) => n1(v), rate: true },
+  wRcPlus: { key: 'wRcPlus', label: 'wRC+', fmt: (v) => n0(v) },
+  spd: { key: 'spd', label: '스피드', fmt: (v) => n1(v) },
   positional: { key: 'positional', label: '포지션조정', fmt: (v) => signed(v) },
   rar: { key: 'rar', label: 'RAR', fmt: (v) => n1(v) },
-  fip: { key: 'fip', label: 'FIP', fmt: (v) => n2(v), asc: true, rate: true },
-  eraMinus: { key: 'eraMinus', label: 'ERA-', fmt: (v) => n0(v), asc: true, rate: true },
+  fip: { key: 'fip', label: 'FIP', fmt: (v) => n2(v), asc: true },
+  eraMinus: { key: 'eraMinus', label: 'ERA-', fmt: (v) => n0(v), asc: true },
 }
 
 // 종합만 전 구성요소를 보여주고, 나머지는 해당 부문 지표만 보여준다.
@@ -1246,7 +1245,8 @@ function WarBoard({ season }) {
         if (!alive) return
         const hitting = h.stats?.[0]?.splits ?? []
         const pitching = p.stats?.[0]?.splits ?? []
-        if (!hitting.length && !pitching.length) { setStatus('error'); return }
+        // 한쪽만 비어도 종합 합산이 성립하지 않으므로 오류로 처리한다
+        if (!hitting.length || !pitching.length) { setStatus('error'); return }
         setPools({ hitting, pitching })
         setStatus('ok')
       })
@@ -1275,8 +1275,10 @@ function WarBoard({ season }) {
     for (const s of pools.pitching) {
       const e = take(s)
       e.stat.warPit = s.stat.war
-      // 투수 전용 지표는 타자 지표와 키가 겹치지 않는다
-      e.stat.fip = s.stat.fip; e.stat.eraMinus = s.stat.eraMinus; e.stat.rar = s.stat.rar
+      // rar 은 타자 쪽에도 있는 키라 그대로 대입하면 덮어쓴다. 투수 값은 접두사로 분리해 보관한다.
+      e.stat.pitFip = s.stat.fip
+      e.stat.pitEraMinus = s.stat.eraMinus
+      e.stat.pitRar = s.stat.rar
       if (!e.position) e.position = s.position
     }
     for (const e of by.values()) e.stat.war = (e.stat.warBat || 0) + (e.stat.warPit || 0)
@@ -1326,7 +1328,9 @@ function WarBoard({ season }) {
   return (
     <section className="card-section">
       <h2 className="sec-title">🏆 WAR 순위 TOP {WAR_TOP}</h2>
-      <p className="sec-desc">{season} 시즌 · {desc} 기준 · 전체 {total}명 중</p>
+      <p className="sec-desc">
+        {season} 시즌 · {desc}{status === 'ok' ? ` 기준 · 전체 ${total}명 중` : ''}
+      </p>
 
       <div className="war-cats">
         {WAR_CATS.map((c) => (
