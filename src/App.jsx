@@ -133,6 +133,7 @@ export default function App() {
       </header>
 
       <UpdateToast />
+      <DebugViewport />
       <InstallHint />
 
       {isDesktop ? (
@@ -172,6 +173,55 @@ export default function App() {
       )}
 
       <AllStarModal />
+    </div>
+  )
+}
+
+/* ---------- 레이아웃 진단 (?debug=1 일 때만) ---------- */
+// iOS safe-area 는 데스크톱 브라우저에서 재현되지 않아, 실제 기기 값을 눈으로 확인하기 위한 도구.
+function DebugViewport() {
+  const [on] = useState(() => new URLSearchParams(location.search).get('debug') === '1')
+  const [v, setV] = useState(null)
+
+  useEffect(() => {
+    if (!on) return
+    const read = () => {
+      const cs = getComputedStyle(document.documentElement)
+      const probe = document.createElement('div')
+      probe.style.cssText = 'position:fixed;bottom:0;left:0;height:env(safe-area-inset-bottom);width:1px'
+      document.body.appendChild(probe)
+      const safeB = probe.getBoundingClientRect().height
+      probe.remove()
+      const nav = document.querySelector('.tabs')?.getBoundingClientRect()
+      setV({
+        innerH: window.innerHeight,
+        visualH: Math.round(window.visualViewport?.height ?? 0),
+        screenH: window.screen.height,
+        dvh: parseFloat(cs.getPropertyValue('--probe-dvh')) || 0,
+        safeB: Math.round(safeB),
+        navTop: nav ? Math.round(nav.top) : null,
+        navBottom: nav ? Math.round(nav.bottom) : null,
+        navH: nav ? Math.round(nav.height) : null,
+        gap: nav ? Math.round(window.innerHeight - nav.bottom) : null,
+        standalone: window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true,
+      })
+    }
+    read()
+    window.addEventListener('resize', read)
+    window.visualViewport?.addEventListener('resize', read)
+    return () => {
+      window.removeEventListener('resize', read)
+      window.visualViewport?.removeEventListener('resize', read)
+    }
+  }, [on])
+
+  if (!on || !v) return null
+  return (
+    <div className="dbg-vp">
+      innerH {v.innerH} · visualH {v.visualH} · screenH {v.screenH}<br />
+      safe-bottom {v.safeB} · standalone {String(v.standalone)}<br />
+      nav top {v.navTop} / bottom {v.navBottom} / h {v.navH}<br />
+      <b>탭바 아래 남은 높이: {v.gap}</b>
     </div>
   )
 }

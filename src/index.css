@@ -626,6 +626,15 @@ tbody tr.is-lee .sticky, tbody tr.is-lee .sticky2 { background: #2a2a1f; }
 
 
 
+/* ---- 레이아웃 진단 오버레이 (?debug=1) ---- */
+.dbg-vp {
+  position: fixed; left: 8px; right: 8px; bottom: 4px; z-index: 999;
+  background: rgba(0,0,0,0.86); color: #7CFF9B; border: 1px solid #7CFF9B;
+  border-radius: 8px; padding: 8px 10px; font: 700 11px/1.5 ui-monospace, Menlo, monospace;
+  pointer-events: none;
+}
+.dbg-vp b { color: #FFD166; }
+
 /* ---- 업데이트 알림 ---- */
 .update-toast {
   position: fixed; left: 50%; transform: translateX(-50%);
