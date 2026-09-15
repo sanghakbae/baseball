@@ -189,7 +189,6 @@ function DebugViewport() {
   useEffect(() => {
     if (!on) return
     const read = () => {
-      const cs = getComputedStyle(document.documentElement)
       const probe = document.createElement('div')
       probe.style.cssText = 'position:fixed;bottom:0;left:0;height:env(safe-area-inset-bottom);width:1px'
       document.body.appendChild(probe)
@@ -200,7 +199,6 @@ function DebugViewport() {
         innerH: window.innerHeight,
         visualH: Math.round(window.visualViewport?.height ?? 0),
         screenH: window.screen.height,
-        dvh: parseFloat(cs.getPropertyValue('--probe-dvh')) || 0,
         safeB: Math.round(safeB),
         navTop: nav ? Math.round(nav.top) : null,
         navBottom: nav ? Math.round(nav.bottom) : null,

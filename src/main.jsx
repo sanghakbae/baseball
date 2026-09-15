@@ -18,17 +18,18 @@ function Root() {
 }
 
 
-// 실제 뷰포트 높이를 --app-h 로 반영한다.
-// 100dvh 는 iOS 홈 화면 앱(standalone)에서 기기·설치 시점에 따라 실제 표시 영역과 어긋나는 경우가 있어,
-// visualViewport 가 알려주는 값을 우선 사용하고 회전·리사이즈 때마다 갱신한다.
+// 실제 뷰포트 높이를 --app-h 로 반영한다(회전·창 크기 변경에 대응).
+//
+// visualViewport.height 를 쓰면 안 된다: 모바일 소프트 키보드가 열릴 때 함께 줄어들어
+// (응원 게시판 입력 등) 페이지가 화면 절반으로 접히고 하단 탭바 정렬이 깨진다.
+// window.innerHeight 는 레이아웃 뷰포트라 키보드·핀치줌에 영향받지 않는다.
 function syncViewportHeight() {
-  const h = Math.round(window.visualViewport?.height ?? window.innerHeight)
+  const h = Math.round(window.innerHeight)
   if (h > 0) document.documentElement.style.setProperty('--app-h', `${h}px`)
 }
 syncViewportHeight()
 window.addEventListener('resize', syncViewportHeight)
 window.addEventListener('orientationchange', syncViewportHeight)
-window.visualViewport?.addEventListener('resize', syncViewportHeight)
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
