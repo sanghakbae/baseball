@@ -102,6 +102,22 @@ html, body {
 .d-rank .rank-chart { max-width: none; width: 100%; }
 .d-rank .table-wrap, .d-rank table { width: 100%; }
 
+
+/* ---- PC 대시보드 정리 ----
+   한 화면에 훑어보는 게 목적인데 WAR(TOP100)·이정후 패널이 수천 px 로 늘어나
+   페이지가 5화면 넘게 길어졌다. 긴 표는 패널 안에서 스크롤시켜 높이를 고정한다.
+   표의 thead 는 이미 sticky 라 스크롤해도 헤더가 남는다. */
+.page--wide .d-war .table-wrap { max-height: 560px; overflow-y: auto; }
+.page--wide .d-zone .table-wrap { max-height: 320px; overflow-y: auto; }
+.page--wide .d-rank .table-wrap { max-height: 420px; overflow-y: auto; }
+.page--wide .d-live .live-list { max-height: 480px; overflow-y: auto; }
+
+/* 업데이트 알림이 화면 가운데 하단에 떠 응원 게시판 입력창을 가렸다 → 우측 하단으로 */
+.page--wide .update-toast { left: auto; right: 24px; transform: none; width: auto; max-width: 340px; }
+
+/* 광고 배너는 가운데 정렬하고 폭을 제한(전폭 띠는 상단을 과하게 차지한다) */
+.page--wide .cpang { max-width: 728px; margin-left: auto; margin-right: auto; }
+
 /* 라이트 테마 — 하드코딩 배경 보정 */
 :root[data-theme="light"] .page {
   background: radial-gradient(600px 340px at 50% -8%, #dbe5f6 0%, var(--bg) 55%);
@@ -639,7 +655,7 @@ tbody tr.is-lee .sticky, tbody tr.is-lee .sticky2 { background: var(--lee-row); 
 
 
 /* ---- 쿠팡 파트너스 배너 ---- */
-.cpang { margin: 18px 0 4px; }
+.cpang { margin: 10px 0 4px; } /* 제목 바로 아래 — 위쪽 여백을 줄여 콘텐츠를 덜 밀어낸다 */
 .cpang-box { min-height: 0; display: flex; justify-content: center; overflow: hidden; }
 .cpang-box iframe { max-width: 100%; border: 0; }
 .cpang-note { font-size: 9.5px; color: var(--muted); text-align: center; margin: 6px 2px 0; line-height: 1.45; opacity: 0.8; }

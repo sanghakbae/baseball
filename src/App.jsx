@@ -133,6 +133,8 @@ export default function App() {
         <div className="hero-meta"><Visitors /></div>
       </header>
 
+      <CoupangBanner />
+
       <UpdateToast />
       <DebugViewport />
       <InstallHint />
@@ -172,8 +174,6 @@ export default function App() {
           {tab === 'cheer' && <CheerBoard />}
         </>
       )}
-
-      <CoupangBanner />
 
       <AllStarModal />
     </div>
@@ -355,6 +355,9 @@ function InstallHint() {
   }, [])
 
   if (dismissed || isStandalone()) return null
+  // iOS 는 설치 프롬프트가 없어 안내가 필요하지만, 그 외 환경에서 실제 설치 프롬프트도 없으면
+  // 보여줄 실익이 없다(PC 대시보드 상단만 차지한다).
+  if (!isIOS() && !deferred) return null
 
   const close = () => {
     try { localStorage.setItem(INSTALL_DISMISS_KEY, '1') } catch {}
