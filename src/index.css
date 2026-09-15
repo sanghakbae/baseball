@@ -9,6 +9,7 @@
   --opp: #4aa8ff;
   --win: #34d399;
   --nav-h: 44px;
+  --lee-row: #2a2a1f; /* 이정후 행 고정 열 배경(불투명이어야 스크롤 내용을 가린다) */
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Apple SD Gothic Neo',
     'Malgun Gothic', system-ui, sans-serif;
 }
@@ -24,6 +25,7 @@
   --lee: #b07d09;
   --opp: #1f6fd0;
   --win: #149b66;
+  --lee-row: #fbf3da;
 }
 
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -263,7 +265,7 @@ tbody tr.is-lee strong { color: var(--lee); }
 .sticky { position: sticky; left: 0; z-index: 2; background: var(--card); padding-left: 8px; padding-right: 4px; }
 .sticky2 { position: sticky; left: 26px; z-index: 2; background: var(--card); text-align: left; }
 thead .sticky, thead .sticky2 { z-index: 3; background: var(--bg-soft); }
-tbody tr.is-lee .sticky, tbody tr.is-lee .sticky2 { background: #2a2a1f; }
+tbody tr.is-lee .sticky, tbody tr.is-lee .sticky2 { background: var(--lee-row); }
 .td-team { display: block; font-size: 9px; color: var(--muted); font-weight: 400; }
 
 /* ---- compare ---- */
@@ -282,7 +284,14 @@ tbody tr.is-lee .sticky, tbody tr.is-lee .sticky2 { background: #2a2a1f; }
   cursor: pointer;
   transition: all 0.15s ease;
 }
-.chip.active { border-color: var(--opp); box-shadow: 0 0 0 2px rgba(74, 168, 255, 0.3); background: #1c2b46; }
+/* 배경을 하드코딩하면 라이트 테마에서 어두운 글자가 어두운 배경에 얹혀 안 보인다.
+   반투명 강조색을 깔아 두 테마 모두에서 글자색(--text)이 대비를 유지하게 한다. */
+.chip.active {
+  border-color: var(--opp);
+  box-shadow: 0 0 0 2px rgba(74, 168, 255, 0.3);
+  background: rgba(74, 168, 255, 0.16);
+  color: var(--text);
+}
 .chip-rank { font-size: 9px; color: var(--muted); }
 .chip-name {
   font-weight: 600; font-size: 10.5px; line-height: 1.2; text-align: center;
