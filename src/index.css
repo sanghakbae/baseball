@@ -628,6 +628,13 @@ tbody tr.is-lee .sticky, tbody tr.is-lee .sticky2 { background: #2a2a1f; }
 
 
 
+
+/* ---- 쿠팡 파트너스 배너 ---- */
+.cpang { margin: 18px 0 4px; }
+.cpang-box { min-height: 0; display: flex; justify-content: center; overflow: hidden; }
+.cpang-box iframe { max-width: 100%; border: 0; }
+.cpang-note { font-size: 9.5px; color: var(--muted); text-align: center; margin: 6px 2px 0; line-height: 1.45; opacity: 0.8; }
+
 /* ---- 레이아웃 진단 오버레이 (?debug=1) ---- */
 .dbg-vp {
   position: fixed; left: 8px; right: 8px; bottom: 4px; z-index: 999;

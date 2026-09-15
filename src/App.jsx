@@ -4,6 +4,7 @@ import { useVisitors } from './useVisitors.js'
 import { useCheers } from './useCheers.js'
 import { useVote } from './useVote.js'
 import { useServiceWorker } from './useServiceWorker.js'
+import CoupangBanner from './CoupangBanner.jsx'
 import { STAT_KEYS, HIGHER_IS_BETTER } from './data.js'
 
 const avg3 = (v) => (v == null ? '—' : v.toFixed(3).replace(/^0/, ''))
@@ -171,6 +172,8 @@ export default function App() {
           {tab === 'cheer' && <CheerBoard />}
         </>
       )}
+
+      <CoupangBanner />
 
       <AllStarModal />
     </div>
